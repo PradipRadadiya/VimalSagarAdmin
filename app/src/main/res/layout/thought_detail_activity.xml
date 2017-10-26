@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/detailinfo_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar_information"
+        layout="@layout/toolbar_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10sp">
+
+
+            <TextView
+                android:id="@+id/ttitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Title :"
+                android:textColor="@color/lable"
+                android:textSize="18sp"
+
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/txt_titles"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:ellipsize="end"
+                android:padding="8sp" />
+
+            <TextView
+                android:id="@+id/tdescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Description :"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/lable"
+                android:textSize="18sp"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/txt_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8sp"
+
+                />
+
+            <TextView
+                android:id="@+id/tdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date :"
+                android:textColor="@color/lable"
+                android:textSize="18sp"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/txt_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:lines="1"
+                android:ellipsize="end"
+                android:padding="8sp" />
+
+            <LinearLayout
+                android:layout_marginTop="10sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tlike"
+                    android:layout_width="0sp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Like :"
+                    android:textColor="@color/lable"
+                    android:textSize="18sp"
+
+
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+
+                    android:id="@+id/detaillike"
+                    android:layout_width="0sp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="@color/color3"
+                    android:textSize="20sp"
+
+                    tools:ignore="HardcodedText" />
+
+                <Button
+                    android:id="@+id/infolike"
+                    android:layout_width="0sp"
+                    android:layout_height="30sp"
+                    android:layout_weight="1"
+                    android:background="@color/background"
+                    android:text="View"
+                    android:textColor="@color/colorPrimaryDark"
+                    tools:ignore="HardcodedText" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_marginTop="10sp">
+
+                <TextView
+                    android:id="@+id/tcomment"
+                    android:layout_width="0sp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Comment:"
+                    android:textColor="@color/lable"
+                    android:textSize="18sp"
+
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/detailcomment"
+                    android:layout_width="0sp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="@color/color3"
+                    android:textSize="20sp"
+
+                    tools:ignore="HardcodedText" />
+
+                <Button
+                    android:id="@+id/infocomment"
+                    android:layout_width="0sp"
+                    android:layout_height="30sp"
+                    android:layout_weight="1"
+                    android:background="@color/background"
+                    android:text="View"
+                    android:textColor="@color/colorPrimaryDark"
+                    tools:ignore="HardcodedText" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="right"
+                android:padding="10sp"
+                tools:ignore="RtlHardcoded">
+                <TextView
+                    android:id="@+id/txt_views"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5sp"
+                    android:gravity="right"
+                    android:text="10120"
+                    android:textSize="16sp"
+                    tools:ignore="HardcodedText,InconsistentLayout,RtlHardcoded" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5sp"
+                    android:gravity="right"
+                    android:text="Views"
+                    android:textSize="16sp"
+                    tools:ignore="HardcodedText,RtlHardcoded" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15sp"
+                android:gravity="right"
+                android:orientation="horizontal"
+                tools:ignore="RtlHardcoded">
+
+                <Button
+                    android:id="@+id/btn_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40sp"
+                    android:background="@color/colorPrimaryDark"
+                    android:text="Edit"
+                    android:textColor="@color/white"
+                    tools:ignore="ButtonStyle,HardcodedText" />
+
+                <Button
+                    android:id="@+id/btn_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40sp"
+                    android:layout_marginLeft="5sp"
+                    android:background="@color/colorPrimaryDark"
+                    android:text="Delete"
+                    android:textColor="@color/white"
+                    tools:ignore="ButtonStyle,HardcodedText,RtlHardcoded" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

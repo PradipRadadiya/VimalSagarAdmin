@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<com.alexandrius.accordionswipelayout.library.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="2sp"
+    android:layout_marginLeft="2sp"
+    android:layout_marginRight="2sp"
+    android:layout_marginTop="2sp"
+
+    >
+
+
+    <LinearLayout
+        android:id="@+id/lin_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/corner_round_item"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txt_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10sp"
+                android:text="Guru Purnima"
+                android:textColor="@color/lable"
+                android:textSize="16sp"
+                tools:ignore="HardcodedText" />
+
+            <CheckBox
+                android:id="@+id/delete_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                tools:ignore="RtlHardcoded" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/txt_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5sp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:padding="10sp"
+            android:text="The three types used by an asynchronous task are the following.The three types used by an asynchronous task are the following.The three types used by an asynchronous task are the following"
+            android:textSize="15sp"
+
+            tools:ignore="HardcodedText,RtlHardcoded" />
+
+        <TextView
+            android:id="@+id/txt_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5sp"
+            android:gravity="right"
+            android:text="15/02/2017"
+            android:textSize="12sp"
+            android:ellipsize="end"
+            android:lines="1"
+            tools:ignore="HardcodedText,RtlHardcoded" />
+
+        <TextView
+            android:id="@+id/txt_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5sp"
+            android:ellipsize="end"
+            android:lines="1"
+            android:gravity="right"
+            android:text="Ahmedabad,Gujrat,India"
+            android:maxLength="25"
+            android:textSize="12sp"
+            tools:ignore="HardcodedText,RtlHardcoded" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:orientation="horizontal"
+            tools:ignore="RtlHardcoded">
+
+            <TextView
+                android:id="@+id/txt_views"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5sp"
+                android:gravity="right"
+                android:text="10120"
+                android:textSize="12sp"
+                tools:ignore="HardcodedText,InconsistentLayout,RtlHardcoded" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5sp"
+                android:gravity="right"
+                android:text="Views"
+                android:textSize="12sp"
+                android:ellipsize="end"
+                android:lines="1"
+                tools:ignore="HardcodedText,RtlHardcoded" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txt_edit"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:layout_weight="1"
+                android:background="@drawable/approve"
+                android:gravity="center"
+                android:padding="8sp"
+                android:text="Edit"
+                android:textColor="@color/white"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/txt_delete"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:layout_weight="1"
+                android:background="@drawable/reject"
+                android:gravity="center"
+                android:padding="8sp"
+                android:text="Delete"
+                android:textColor="@color/white"
+                tools:ignore="HardcodedText" />
+        </LinearLayout>
+    </LinearLayout>
+</com.alexandrius.accordionswipelayout.library.SwipeLayout>

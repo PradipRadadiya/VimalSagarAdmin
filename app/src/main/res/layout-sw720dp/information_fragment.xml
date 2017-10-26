@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:orientation="vertical"
+    tools:ignore="Overdraw">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/tablet10allfragmenttextview"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:text="@string/information" />
+
+        <ImageView
+            android:id="@+id/delete_info"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@drawable/ic_deletes"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/txt_addnew"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3.5"
+            android:background="@drawable/add_new_round"
+            android:gravity="center"
+            android:padding="3sp"
+            android:text="Add New"
+            android:textColor="@color/white"
+            style="@style/tablet10_textview"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2sp"
+        android:background="@color/colorPrimary"
+        tools:ignore="SmallSp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_information"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            >
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView_information"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/img_nodata"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/nodataavi"
+            android:scaleType="fitXY"
+            android:layout_centerInParent="true"
+            tools:ignore="ContentDescription" />
+
+
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<com.alexandrius.accordionswipelayout.library.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipe"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="2sp"
+    android:layout_marginLeft="2sp"
+    android:layout_marginRight="2sp"
+    android:layout_marginTop="2sp">
+
+    <LinearLayout
+
+        android:id="@+id/lin_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/corner_round_item"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="10sp"
+
+        >
+
+        <TextView
+            android:id="@+id/txt_name"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:padding="8sp"
+            android:text="Guru Purnima"
+            android:textColor="@color/lable"
+            style="@style/tablet10_textview"
+            tools:ignore="HardcodedText" />
+
+
+        <ImageView
+            android:id="@+id/img_edit"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:src="@drawable/ic_border_color"
+            android:background="@color/green"
+            android:padding="5sp"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/img_delete"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:src="@drawable/ic_delete"
+            android:background="@color/color3"
+            android:layout_marginLeft="5sp"
+            android:padding="5sp"
+            tools:ignore="ContentDescription,RtlHardcoded" />
+
+
+    </LinearLayout>
+
+
+</com.alexandrius.accordionswipelayout.library.SwipeLayout>

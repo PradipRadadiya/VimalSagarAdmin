@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/detailinfo_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar_information"
+        layout="@layout/toolbar_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10sp">
+
+
+            <TextView
+                android:id="@+id/ttitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Question :"
+                android:textColor="@color/lable"
+                android:textSize="18sp"
+
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/txt_titles"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8sp" />
+
+            <FrameLayout
+                android:id="@+id/frameLayout_progressbar_yes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20sp"
+
+                >
+
+                <ProgressBar
+                    android:id="@+id/progress_yes"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="33sp"
+                    android:progress="0"
+                    android:progressDrawable="@drawable/op_progressbar_yes" />
+
+                <TextView
+                    android:id="@+id/txtYes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5sp"
+                    android:text="0.0% Yes"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    tools:ignore="HardcodedText,RtlHardcoded" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frameLayout_progressbar_no"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                >
+
+                <ProgressBar
+                    android:id="@+id/progres_no"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="33sp"
+                    android:progress="0"
+                    android:progressDrawable="@drawable/op_progressbar_no" />
+
+                <TextView
+                    android:id="@+id/txtNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5sp"
+                    android:text="0.0% No"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    tools:ignore="HardcodedText,RtlHardcoded" />
+
+            </FrameLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15sp"
+                android:gravity="right"
+                android:orientation="horizontal"
+                tools:ignore="RtlHardcoded">
+
+                <Button
+                    android:id="@+id/btn_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40sp"
+                    android:background="@color/colorPrimaryDark"
+                    android:text="Edit"
+                    android:textColor="@color/white"
+                    tools:ignore="ButtonStyle,HardcodedText" />
+
+                <Button
+                    android:id="@+id/btn_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40sp"
+                    android:layout_marginLeft="5sp"
+                    android:background="@color/colorPrimaryDark"
+                    android:text="Delete"
+                    android:textColor="@color/white"
+                    tools:ignore="ButtonStyle,HardcodedText,RtlHardcoded" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

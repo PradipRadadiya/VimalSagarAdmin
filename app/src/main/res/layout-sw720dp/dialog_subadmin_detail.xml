@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bg"
+    android:orientation="vertical"
+    android:layout_marginLeft="15sp"
+    android:layout_marginRight="15sp"
+    tools:ignore="Overdraw">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5sp"
+        android:background="@drawable/corner_round_item"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10sp"
+            android:text="ID:"
+            android:textColor="@color/lable"
+            style="@style/tablet10_textview"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/txt_id"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10sp"
+            android:text="26"
+            style="@style/tablet10_textview"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5sp"
+        android:background="@drawable/corner_round_item"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10sp"
+            android:text="Name:"
+            android:textColor="@color/lable"
+            style="@style/tablet10_textview"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/txt_name"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10sp"
+            android:text="26"
+            style="@style/tablet10_textview"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5sp"
+        android:background="@drawable/corner_round_item"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/customTextView"
+            style="@style/tablet10_textview"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10sp"
+            android:text="Email:"
+            android:textColor="@color/lable"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/txt_email"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10sp"
+            android:text="26"
+            style="@style/tablet10_textview"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5sp"
+        android:background="@drawable/corner_round_item"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10sp"
+            android:text="Mobile:"
+            android:textColor="@color/lable"
+            style="@style/tablet10_textview"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/txt_mobile"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10sp"
+            android:text="26"
+            style="@style/tablet10_textview"
+
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5sp"
+        android:background="@drawable/corner_round_item"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10sp"
+            android:text="Username:"
+            android:textColor="@color/lable"
+            style="@style/tablet10_textview"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/txt_usename"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10sp"
+            android:text="26"
+            style="@style/tablet10_textview"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5sp"
+        android:background="@drawable/corner_round_item"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10sp"
+            android:text="Password:"
+            android:textColor="@color/lable"
+            style="@style/tablet10_textview"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/txt_password"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10sp"
+            android:text="26"
+            style="@style/tablet10_textview"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5sp"
+        android:background="@drawable/corner_round_item"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10sp"
+            android:text="LastUpdated:"
+            android:textColor="@color/lable"
+            style="@style/tablet10_textview"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/last_update"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10sp"
+            android:text="26"
+            style="@style/tablet10_textview"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5sp"
+        android:background="@drawable/corner_round_item"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10sp"
+            android:text="Role:"
+            android:textColor="@color/lable"
+            style="@style/tablet10_textview"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/txt_role"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10sp"
+            android:text="26"
+            style="@style/tablet10_textview"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
+
+</LinearLayout>

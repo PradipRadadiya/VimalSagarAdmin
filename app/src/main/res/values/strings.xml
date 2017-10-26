@@ -1,0 +1,62 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Nayi Soach</string>
+    <!--<string name="title_activity_main2">Aacharya Vimalsagarsooriji</string>-->
+    <string name="title_activity_main2">Nayi Soch Nayi Disha</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="edit" tools:ignore="UnusedResources">Edit</string>
+    <string name="trash" tools:ignore="UnusedResources">Delete</string>
+    <string name="progressmsg">Please wait…</string>
+    <string name="internet">Internet Not Connected.</string>
+
+    <!--Navigation Item-->
+    <string name="user">User</string>
+    <string name="users">User Detail</string>
+    <string name="home">Home</string>
+    <string name="information">Information</string>
+    <string name="adminlist">Sub Admin List</string>
+    <string name="event">Event</string>
+    <string name="audio">Audio</string>
+    <string name="video">Video</string>
+    <string name="thought">Thought</string>
+    <string name="gallaery">Gallery</string>
+    <string name="question">Q &amp; A</string>
+    <string name="competition">Competition</string>
+    <string name="Opinionpoll">Opinion Poll</string>
+    <string name="bypeople">By People</string>
+    <string name="setting">Setting</string>
+
+    <!-- Strings related to login -->
+
+    <!--Information-->
+    <string name="infotitle">Please enter title.</string>
+    <string name="infodes">Please enter description.</string>
+    <string name="infoaddress">Please enter location.</string>
+    <string name="selectdate">Please select date.</string>
+    <string name="selecttime">Please select time.</string>
+    <string name="eventdate" tools:ignore="UnusedResources">Please enter date.</string>
+    <string name="addaudio">Please enter audio name.</string>
+    <string name="addaudiophoto">Please upload image.</string>
+    <string name="uploadcategoryimage">Please upload image.</string>
+    <string name="uploadcategoryimagegal">Please upload image.</string>
+    <string name="uploadaudio">Please upload audio.</string>
+    <string name="addaudiocategory">Please enter audio category.</string>
+    <string name="addvideocategory">Please upload video category image.</string>
+    <string name="videoenter">Please enter video name.</string>
+    <string name="videoimage">Please upload image.</string>
+    <string name="videoupload">Please upload video.</string>
+    <string name="videocatimage">Please upload image.</string>
+    <string name="thoughttitle">Please enter thought title.</string>
+    <string name="thoughtdes">Please enter thought description.</string>
+    <string name="questionreply">Please enter reply question.</string>
+    <string name="competitioncategory">Please enter competition category.</string>
+    <string name="competitioncategoryimage">Please upload image.</string>
+    <string name="opinionpollquestion">Please enter opinion question.</string>
+    <string name="questionerror">Please enter question.</string>
+
+
+    <string name="sendnotification">Send Notification</string>
+
+</resources>

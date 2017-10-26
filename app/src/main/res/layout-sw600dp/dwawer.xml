@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EEEEEE"
+    android:orientation="vertical"
+    tools:ignore="Overdraw">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="15sp"
+        android:paddingTop="15sp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher"
+            tools:ignore="ContentDescription" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10sp"
+        android:text="@string/title_activity_main2"
+        android:textColor="#5B5B5B"
+        android:textSize="32sp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/lin_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10sp"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_action_user"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    style="@style/tablet7TextviewStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/user"
+
+
+                    />
+            </LinearLayout>
+
+            <View
+                style="@style/ViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="1sp"
+                tools:ignore="SmallSp" />
+
+            <LinearLayout
+                android:id="@+id/lin_home"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10sp"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_action_home"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    style="@style/tablet7TextviewStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/home"
+
+                    />
+            </LinearLayout>
+
+            <View
+                style="@style/ViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="1sp"
+                tools:ignore="SmallSp" />
+
+            <LinearLayout
+                android:id="@+id/lin_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10sp"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_action_info"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    style="@style/tablet7TextviewStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/information"
+
+                    />
+            </LinearLayout>
+
+            <View
+                style="@style/ViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="1sp"
+                tools:ignore="SmallSp" />
+
+            <LinearLayout
+                android:id="@+id/lin_event"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10sp"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_action_event"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    style="@style/tablet7TextviewStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/event"
+
+                    />
+            </LinearLayout>
+
+            <View
+                style="@style/ViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="1sp"
+                tools:ignore="SmallSp" />
+
+            <LinearLayout
+                android:id="@+id/lin_audio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10sp"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_action_music"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    style="@style/tablet7TextviewStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/audio"
+
+                    />
+            </LinearLayout>
+
+            <View
+                style="@style/ViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="1sp"
+                tools:ignore="SmallSp" />
+
+            <LinearLayout
+                android:id="@+id/lin_video"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10sp"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_action_video"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    style="@style/tablet7TextviewStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/video"
+
+                    />
+            </LinearLayout>
+
+            <View
+                style="@style/ViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="1sp"
+                tools:ignore="SmallSp" />
+
+            <LinearLayout
+                android:id="@+id/lin_thought"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10sp"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_action_edit"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    style="@style/tablet7TextviewStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/thought"
+
+                    />
+            </LinearLayout>
+
+            <View
+                style="@style/ViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="1sp"
+                tools:ignore="SmallSp" />
+
+            <LinearLayout
+                android:id="@+id/lin_gallery"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10sp"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_action_picture"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    style="@style/tablet7TextviewStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/gallaery"
+
+                    />
+            </LinearLayout>
+
+            <View
+                style="@style/ViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="1sp"
+                tools:ignore="SmallSp" />
+
+            <LinearLayout
+                android:id="@+id/lin_qa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10sp"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_action_help"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    style="@style/tablet7TextviewStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/question"
+
+                    />
+            </LinearLayout>
+
+            <View
+                style="@style/ViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="1sp"
+                tools:ignore="SmallSp" />
+
+            <LinearLayout
+                android:id="@+id/lin_comp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10sp"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_action_paste"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    style="@style/tablet7TextviewStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/competition"
+
+                    />
+            </LinearLayout>
+
+            <View
+                style="@style/ViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="1sp"
+                tools:ignore="SmallSp" />
+
+            <LinearLayout
+                android:id="@+id/lin_op"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10sp"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_action_opinion"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    style="@style/tablet7TextviewStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/Opinionpoll"
+
+                    />
+            </LinearLayout>
+
+            <View
+                style="@style/ViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="1sp"
+                tools:ignore="SmallSp" />
+
+            <LinearLayout
+                android:id="@+id/lin_bypeople"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10sp"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_action_users"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    style="@style/tablet7TextviewStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/bypeople"
+
+                    />
+            </LinearLayout>
+
+            <View
+                style="@style/ViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="1sp"
+                tools:ignore="SmallSp" />
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

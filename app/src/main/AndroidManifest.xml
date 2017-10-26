@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.grapes_pradip.vimalsagaradmin">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <application
+        android:allowBackup="true"
+        android:fullBackupContent="@xml/backup_descriptor"
+        android:hardwareAccelerated="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/push_notification"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity
+            android:name=".activities.splash.Splash_Activity3"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.splash.Splash_Activity2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.splash.Splash_Activity1"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.MainActivity"
+            android:label="@string/title_activity_main2"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="mainactivity_click" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.information.InfomationDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
+        <intent-filter>
+            <action android:name="information_comment_click" />
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+
+        <activity
+            android:name=".activities.information.EditInformationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.information.AddInformationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.admin.AddSubAdminActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.admin.EditAdminActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.admin.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.event.AddEventActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+
+        <activity
+            android:name=".activities.event.EventDetailActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait">
+
+            <intent-filter>
+                <action android:name="event_comment_click" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
+        <activity
+            android:name=".activities.event.EditEventActivity"
+            android:screenOrientation="portrait">
+
+
+        </activity>
+        <activity
+            android:name=".activities.audio.AddAudioCategoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.audio.EditAudioCategoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.audio.AllAudioActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.audio.AudioDetailActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="audio_comment_click" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+        </activity>
+        <activity
+            android:name=".activities.audio.AddAudioActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.audio.EditAudioActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.video.AddVideoCategoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.video.EditVideoCategoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.video.AllVideoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.video.AddVideoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.video.VideoDetailActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="video_comment_click" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.video.EditVideoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.thought.AddThoughtActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.thought.EditThoughtActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.thought.ThoughtDetailActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="thought_comment_click" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.question.QuestionDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.opinionpoll.AddOpinionPollActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.opinionpoll.OpinionPollDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.opinionpoll.OpinionPollEditActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.bypeople.ByPeopleDetailActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="bypeople_comment_click" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activities.competition.AddCompetitionCategoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.competition.EditCompetitionCategoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.competition.AllCompetionQuestionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.gallery.AddGalleryCategoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.gallery.EditGalleryCategoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.gallery.AllGalleryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.gallery.ImageViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.competition.AddComptitionQuestion"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.competition.AllQuestionOptionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.competition.EditCompetitionQuestionActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activities.SettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.competition.AllQuestionAnswerActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="competition_item_click" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activities.admin.UserDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.gallery.SlidingGalleryImage"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activities.VideoFullActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="landscape" />
+
+        <activity
+            android:name=".activities.bypeople.ByPeopleActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="bypeople_click" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activities.admin.UserActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="user_click" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activities.opinionpoll.OpinionPollActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="opinionPoll_click" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+        </activity>
+
+        <activity
+            android:name=".activities.question.QuestionAnswerActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="question_click" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activities.video.VideoFullActivity"
+            android:configChanges="orientation|screenSize" />
+
+        <!--Comment list-->
+        <activity
+            android:name=".activities.audio.CommentListAudio"
+            android:screenOrientation="portrait" />
+
+
+        <activity
+            android:name=".activities.bypeople.CommentListByPeople"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activities.event.CommentListEvent"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activities.information.CommentListInformation"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activities.thought.CommentListThought"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activities.video.CommentListVideo"
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".activities.AudioPlayActivity" />
+
+        <receiver
+            android:name=".util.NetworkChangeReceiver"
+            android:label="NetworkChangeReceiver">
+            <intent-filter>
+                <action
+                    android:name="android.net.conn.CONNECTIVITY_CHANGE"
+                    tools:ignore="BatteryLife" />
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+
+            </intent-filter>
+        </receiver>
+
+
+        <!-- Firebase Notifications -->
+        <service
+            android:name=".fcm.MyFirebaseMessagingService"
+            tools:ignore="ExportedService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".fcm.MyFirebaseInstanceIDService"
+            tools:ignore="ExportedService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <!-- ./Firebase Notifications -->
+
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@mipmap/ic_launcher" />
+        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+
+    </application>
+
+</manifest>

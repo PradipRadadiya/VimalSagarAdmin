@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <integer-array name="rightColors" tools:ignore="UnusedResources">
+        <item>@color/color1</item>
+        <item>@color/color2</item>
+    </integer-array>
+
+    <integer-array name="rightTextColors" tools:ignore="UnusedResources">
+        <item>@color/textColor1</item>
+        <item>@color/textColor2</item>
+    </integer-array>
+
+    <integer-array name="rightDrawables" tools:ignore="UnusedResources">
+        <item>@drawable/ic_edit</item>
+        <item>@drawable/ic_trash</item>
+    </integer-array>
+
+    <integer-array name="rightDrawableColors" tools:ignore="UnusedResources">
+        <item>@color/textColor1</item>
+        <item>@color/textColor2</item>
+        <item>@color/textColor3</item>
+    </integer-array>
+
+
+    <string-array name="rightTexts" tools:ignore="UnusedResources">
+        <item>@string/edit</item>
+        <item>@string/trash</item>
+    </string-array>
+
+</resources>

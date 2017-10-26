@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="IconDuplicates">
+        <ignore path="src/main/res/drawable/icon.png" />
+        <ignore path="src/main/res/mipmap-xhdpi/ic_launcher.png" />
+    </issue>
+    <issue id="IconLocation">
+        <ignore path="src/main/res/drawable/bg_player_dark.png" />
+        <ignore path="src/main/res/drawable/bg_player_white.png" />
+        <ignore path="src/main/res/drawable/ic_next_black.png" />
+        <ignore path="src/main/res/drawable/ic_next_white.png" />
+        <ignore path="src/main/res/drawable/ic_notification_default_black.png" />
+        <ignore path="src/main/res/drawable/ic_notification_default_white.png" />
+        <ignore path="src/main/res/drawable/ic_pause_black.png" />
+        <ignore path="src/main/res/drawable/ic_pause_white.png" />
+        <ignore path="src/main/res/drawable/ic_play_black.png" />
+        <ignore path="src/main/res/drawable/ic_play_white.png" />
+        <ignore path="src/main/res/drawable/ic_previous_black.png" />
+        <ignore path="src/main/res/drawable/ic_previous_white.png" />
+        <ignore path="src/main/res/drawable/icon.png" />
+    </issue>
+</lint>

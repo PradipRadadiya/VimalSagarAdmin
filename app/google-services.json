@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "290689272007",
+    "firebase_url": "https://vimalsagaradmin.firebaseio.com",
+    "project_id": "vimalsagaradmin",
+    "storage_bucket": "vimalsagaradmin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:290689272007:android:939f2553ec7762ef",
+        "android_client_info": {
+          "package_name": "com.example.grapes_pradip.vimalsagaradmin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "290689272007-e8ucsv41pfmvfafsjq762sb1e366rgfp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.grapes_pradip.vimalsagaradmin",
+            "certificate_hash": "d3a76475fdd342697344d68e5ba1581bf5f69c95"
+          }
+        },
+        {
+          "client_id": "290689272007-75i690o23cf2cobcsn363p73lhp668tr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo6O5F229Pj6mj_Re3oFwjmtspHwtfg-0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "290689272007-75i690o23cf2cobcsn363p73lhp668tr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

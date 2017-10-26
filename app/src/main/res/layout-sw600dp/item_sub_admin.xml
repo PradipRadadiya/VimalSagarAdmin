@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.alexandrius.accordionswipelayout.library.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="2sp"
+    android:layout_marginLeft="2sp"
+    android:layout_marginRight="2sp"
+    android:layout_marginTop="2sp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/corner_round_item"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txt_usename"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10sp"
+            android:text="Guru Purnima"
+            android:textColor="@color/lable"
+            style="@style/tablet7_textview"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/txt_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8sp"
+            android:textSize="24sp"
+            tools:ignore="RtlHardcoded" />
+
+        <TextView
+            android:id="@+id/txt_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5sp"
+            android:layout_marginTop="2sp"
+            android:gravity="right"
+            android:text="15/02/2017"
+            android:textSize="12sp"
+            tools:ignore="HardcodedText,RtlHardcoded" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txt_edit"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Edit"
+                android:background="@drawable/approve"
+                android:textColor="@color/white"
+                android:padding="10sp"
+                android:gravity="center"
+                style="@style/tablet7_textview"
+                android:layout_margin="10sp"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/txt_delete"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Delete"
+                android:background="@drawable/reject"
+                android:textColor="@color/white"
+                android:padding="10sp"
+                style="@style/tablet7_textview"
+                android:gravity="center"
+                android:layout_margin="10sp"
+                tools:ignore="HardcodedText" />
+        </LinearLayout>
+
+    </LinearLayout>
+</com.alexandrius.accordionswipelayout.library.SwipeLayout>

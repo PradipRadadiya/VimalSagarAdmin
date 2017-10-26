@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.grapes_pradip.testdemo.MainActivity">
+    <item
+        android:id="@+id/viewadmin"
+        android:orderInCategory="100"
+        android:title="Delete"
+        app:showAsAction="never"
+        tools:ignore="HardcodedText" />
+    <item
+        android:id="@+id/changepwd"
+        android:orderInCategory="100"
+        android:title="View"
+        app:showAsAction="never"
+        tools:ignore="HardcodedText" />
+
+
+</menu>
