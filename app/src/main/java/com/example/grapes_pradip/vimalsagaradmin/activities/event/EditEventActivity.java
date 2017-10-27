@@ -46,7 +46,6 @@ import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
 import com.example.grapes_pradip.vimalsagaradmin.common.JsonParser;
 import com.example.grapes_pradip.vimalsagaradmin.model.PhotoAudioVideoItem;
 import com.example.grapes_pradip.vimalsagaradmin.model.event.EventImage;
-import com.example.grapes_pradip.vimalsagaradmin.util.ImageCompression;
 import com.example.grapes_pradip.vimalsagaradmin.util.MarshMallowPermission;
 import com.squareup.picasso.Picasso;
 
@@ -623,7 +622,7 @@ public class EditEventActivity extends AppCompatActivity implements View.OnClick
                         outFile.flush();
                         outFile.close();
 
-                        getEventImages.add(new EventImage("img", "eid", picturePath, thumbnail, false));
+                        getEventImages.add(new EventImage("img", "eid", picturePath, bitmap, false));
                         photoAdapter = new PhotoAdapter(EditEventActivity.this, getEventImages);
                         recyclerView_photos.setAdapter(photoAdapter);
                         recyclerView_photos.setVisibility(View.VISIBLE);
