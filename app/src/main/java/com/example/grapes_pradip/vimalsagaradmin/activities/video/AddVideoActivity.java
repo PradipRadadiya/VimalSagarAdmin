@@ -30,6 +30,7 @@ import android.widget.Toast;
 
 import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
+import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
 import com.example.grapes_pradip.vimalsagaradmin.util.MarshMallowPermission;
 
@@ -321,14 +322,21 @@ public class AddVideoActivity extends AppCompatActivity implements View.OnClickL
                     img_category_icon.setVisibility(View.VISIBLE);
                     img_category_icon.setImageBitmap(bitmap);
                     picturePath = android.os.Environment
-                            .getExternalStorageDirectory()
+                            .getExternalStorageDirectory() + "/VimalsagarjiImage"
                             + File.separator;
+
+
 //                            + "Phoenix" + File.separator + "default";
 
                     f.delete();
                     OutputStream outFile = null;
-                    File file = new File(picturePath, String.valueOf(System.currentTimeMillis()) + ".jpg");
-                    picturePath = picturePath + String.valueOf(System.currentTimeMillis()) + ".jpg";
+
+                    File root = android.os.Environment.getExternalStorageDirectory();
+                    File dir = new File(root.getAbsolutePath() + "/VimalsagarjiImage" + File.separator);
+                    dir.mkdirs();
+                    String pic = CommonMethod.getRandomString(30);
+                    File file = new File(dir, String.valueOf(pic + ".jpg"));
+                    picturePath = picturePath + String.valueOf(pic) + ".jpg";
                     try {
                         outFile = new FileOutputStream(file);
                         bitmap.compress(Bitmap.CompressFormat.JPEG, 40, outFile);

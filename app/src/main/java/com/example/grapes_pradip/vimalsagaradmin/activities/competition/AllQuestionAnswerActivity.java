@@ -56,9 +56,7 @@ public class AllQuestionAnswerActivity extends AppCompatActivity implements View
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_question_answer_activity);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        Intent intent = getIntent();
-        qid = intent.getStringExtra("QID");
-        question = intent.getStringExtra("Question");
+
         linearLayoutManager = new LinearLayoutManager(AllQuestionAnswerActivity.this);
         findID();
         idClick();
@@ -164,7 +162,12 @@ public class AllQuestionAnswerActivity extends AppCompatActivity implements View
     public void onResume() {
         super.onResume();
         // put your code here...
-
+        Intent intent = getIntent();
+        qid = intent.getStringExtra("QID");
+        question = intent.getStringExtra("Question");
+        editText_question.setText(question);
+        Log.e("qid","---------------"+qid);
+        Log.e("Question","---------------------"+question);
         answerItems=new ArrayList<>();
         if (CommonMethod.isInternetConnected(AllQuestionAnswerActivity.this)) {
             new GetAllAnswer().execute();

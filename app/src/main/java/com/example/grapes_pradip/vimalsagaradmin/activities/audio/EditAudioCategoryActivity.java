@@ -67,7 +67,7 @@ public class EditAudioCategoryActivity extends AppCompatActivity implements View
     private ImageView img_category_icon;
     private Button btn_add;
     private Intent intent;
-    private String picturePath=null;
+    private String picturePath = null;
     private boolean flag = false;
     private Bitmap thumbnail;
     private String cid;
@@ -101,12 +101,11 @@ public class EditAudioCategoryActivity extends AppCompatActivity implements View
                 if (TextUtils.isEmpty(e_title.getText().toString())) {
                     e_title.setError(getResources().getString(R.string.addaudiocategory));
                     e_title.requestFocus();
-                }  else {
+                } else {
                     if (CommonMethod.isInternetConnected(EditAudioCategoryActivity.this)) {
                         new UpdateAudioCategory().execute();
-                    }
-                    else {
-                        Toast.makeText(EditAudioCategoryActivity.this,R.string.internet,Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(EditAudioCategoryActivity.this, R.string.internet, Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -119,8 +118,8 @@ public class EditAudioCategoryActivity extends AppCompatActivity implements View
     private void setContent() {
         e_title.setText(name);
         img_category_icon.setVisibility(View.VISIBLE);
-        Log.e("image path","-------------"+CommonURL.ImagePath + CommonAPI_Name.audiocategory + photo);
-        Picasso.with(EditAudioCategoryActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.audiocategory + photo.replaceAll(" ","%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).into(img_category_icon);
+        Log.e("image path", "-------------" + CommonURL.ImagePath + CommonAPI_Name.audiocategory + photo);
+        Picasso.with(EditAudioCategoryActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.audiocategory + photo.replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).into(img_category_icon);
 
         if (CommonMethod.isInternetConnected(EditAudioCategoryActivity.this)) {
 //            new AddInformation().execute(e_title.getText().toString(), e_description.getText().toString(), e_date.getText().toString(), e_address.getText().toString());
@@ -157,9 +156,10 @@ public class EditAudioCategoryActivity extends AppCompatActivity implements View
     }
 
     private void checkPermissionImage() {
-            selectImage();
+        selectImage();
 
     }
+
     private void selectImage() {
         final CharSequence[] options = {"Take Photo", "Choose from Gallery", "Cancel"};
 
@@ -200,7 +200,6 @@ public class EditAudioCategoryActivity extends AppCompatActivity implements View
                     }
 
 
-
                 } else if (options[item].equals("Choose from Gallery"))
 
                 {
@@ -219,9 +218,6 @@ public class EditAudioCategoryActivity extends AppCompatActivity implements View
                     }
 
 
-
-
-
                 } else if (options[item].equals("Cancel")) {
 
                     dialog.dismiss();
@@ -236,6 +232,7 @@ public class EditAudioCategoryActivity extends AppCompatActivity implements View
 
 
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -253,16 +250,15 @@ public class EditAudioCategoryActivity extends AppCompatActivity implements View
                 int columnIndex = c.getColumnIndex(filePath[0]);
                 picturePath = c.getString(columnIndex);
                 c.close();
-                String imagepath = picturePath.substring(picturePath.lastIndexOf("/")+1);
+                String imagepath = picturePath.substring(picturePath.lastIndexOf("/") + 1);
                 Log.e("result", "--------------" + imagepath);
-                txt_photo.setText("Selected photo : "+imagepath);
+                txt_photo.setText("Selected photo : " + imagepath);
                 //Log.w("path of image from gallery......******************.........", picturePath + "");
                 thumbnail = (BitmapFactory.decodeFile(picturePath));
                 //Log.w("path of image from gallery......******************.........", picturePath + "");
                 img_category_icon.setVisibility(View.VISIBLE);
                 img_category_icon.setImageBitmap(thumbnail);
-            }
-            else if (requestCode == 2) {
+            } else if (requestCode == 2) {
                 flag = true;
 
                 File f = new File(Environment.getExternalStorageDirectory().toString());
@@ -283,34 +279,50 @@ public class EditAudioCategoryActivity extends AppCompatActivity implements View
                     img_category_icon.setVisibility(View.VISIBLE);
                     img_category_icon.setImageBitmap(bitmap);
                     picturePath = android.os.Environment
-                            .getExternalStorageDirectory()
+                            .getExternalStorageDirectory() + "/VimalsagarjiImage"
                             + File.separator;
+
+
 //                            + "Phoenix" + File.separator + "default";
 
                     f.delete();
                     OutputStream outFile = null;
-                    File file = new File(picturePath, String.valueOf(System.currentTimeMillis()) + ".jpg");
-                    picturePath=picturePath+String.valueOf(System.currentTimeMillis()) + ".jpg";
-                    try {
-                        outFile = new FileOutputStream(file);
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 40, outFile);
-                        outFile.flush();
-                        outFile.close();
-                        String imagepath = picturePath.substring(picturePath.lastIndexOf("/")+1);
-                        Log.e("result", "--------------" + imagepath);
-                        txt_photo.setText("Selected photo : "+imagepath);
 
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    File root = android.os.Environment.getExternalStorageDirectory();
+                    File dir = new File(root.getAbsolutePath() + "/VimalsagarjiImage" + File.separator);
+                    dir.mkdirs();
+                    String pic = CommonMethod.getRandomString(30);
+                    File file = new File(dir, String.valueOf(pic + ".jpg"));
+
+                    if (file.exists()) {
+
+                        Toast.makeText(this, "This name photo already exists.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        picturePath = picturePath + String.valueOf(pic) + ".jpg";
+                        try {
+                            outFile = new FileOutputStream(file);
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 40, outFile);
+                            outFile.flush();
+                            outFile.close();
+                            String imagepath = picturePath.substring(picturePath.lastIndexOf("/") + 1);
+                            Log.e("result", "--------------" + imagepath);
+                            txt_photo.setText("Selected photo : " + imagepath);
+
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+//                            Toast.makeText(this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
+
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
 
 
                 //Log.w("path of image from gallery......******************.........", picturePath + "");
@@ -359,15 +371,15 @@ public class EditAudioCategoryActivity extends AppCompatActivity implements View
 
 
                 multipartEntity.addPart("cid", new StringBody(cid));
-                Log.e("cid","----------------"+cid);
+                Log.e("cid", "----------------" + cid);
                 multipartEntity.addPart("Name", new StringBody(title));
-                Log.e("title","----------------"+title);
+                Log.e("title", "----------------" + title);
                 multipartEntity.addPart("hiddenphoto", new StringBody(photo));
-                Log.e("photo","----------------"+photo);
+                Log.e("photo", "----------------" + photo);
 
 
                 if (picturePath == null) {
-                    Log.e("if click","-----------");
+                    Log.e("if click", "-----------");
                 } else {
                     File file1 = new File(picturePath);
                     FileBody fileBody1 = new FileBody(file1);
