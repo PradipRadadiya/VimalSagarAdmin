@@ -78,7 +78,7 @@ public class AddVideoActivity extends AppCompatActivity implements View.OnClickL
     private String categoryname;
     private MarshMallowPermission permission;
     private Switch notificationswitch;
-    String notify="0";
+    String notify = "0";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -107,17 +107,17 @@ public class AddVideoActivity extends AppCompatActivity implements View.OnClickL
         btn_add = (Button) findViewById(R.id.btn_add);
         txt_header.setText("Add Video");
         edit_category_name.setText(categoryname);
-        notificationswitch= (Switch) findViewById(R.id.notificationswitch);
+        notificationswitch = (Switch) findViewById(R.id.notificationswitch);
 
         notificationswitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    Log.e("checked","----------------------"+isChecked);
-                    notify="0";
-                }else{
-                    Log.e("checked","----------------------"+isChecked);
-                    notify="1";
+                if (isChecked) {
+                    Log.e("checked", "----------------------" + isChecked);
+                    notify = "0";
+                } else {
+                    Log.e("checked", "----------------------" + isChecked);
+                    notify = "1";
                 }
             }
         });
@@ -224,9 +224,6 @@ public class AddVideoActivity extends AppCompatActivity implements View.OnClickL
                     }
 
 
-
-
-
                 } else if (options[item].equals("Choose from Gallery"))
 
                 {
@@ -243,10 +240,6 @@ public class AddVideoActivity extends AppCompatActivity implements View.OnClickL
                             startActivityForResult(intent, 1);
                         }
                     }
-
-
-
-
 
 
                 } else if (options[item].equals("Cancel")) {

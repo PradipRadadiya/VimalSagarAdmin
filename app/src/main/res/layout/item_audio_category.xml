@@ -17,19 +17,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@drawable/corner_round_item">
-        <TextView
-            android:id="@+id/txt_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10sp"
-            android:layout_weight="7"
-            android:padding="10sp"
-            android:text="Guru Purnima"
-            android:lines="1"
-            android:ellipsize="end"
-            android:textColor="@color/lable"
-            android:textSize="16sp"
-            tools:ignore="HardcodedText,RtlHardcoded" />
 
         <LinearLayout
             android:id="@+id/lin_item"
@@ -40,13 +27,28 @@
 
             <ImageView
                 android:id="@+id/img_audio_category"
-                android:layout_width="match_parent"
-                android:layout_height="150sp"
+                android:layout_width="0sp"
+                android:layout_height="75sp"
                 android:layout_weight="3"
                 android:padding="5sp"
-                android:scaleType="centerCrop"
+                android:scaleType="fitXY"
                 android:src="@drawable/logo"
                 tools:ignore="ContentDescription" />
+            />
+            <TextView
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_title"
+                android:layout_marginLeft="10sp"
+                android:layout_weight="7"
+                android:padding="10sp"
+                android:text="Guru Purnima"
+                android:lines="1"
+                android:ellipsize="end"
+                android:textColor="@color/lable"
+                android:textSize="16sp"
+                tools:ignore="HardcodedText,RtlHardcoded" />
+
 
 
             <CheckBox

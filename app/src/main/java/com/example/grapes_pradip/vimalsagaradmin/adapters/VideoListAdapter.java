@@ -52,7 +52,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
 //        Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.eventimage + itemArrayList.get(position).replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).into(holder.img_item);
 //        Picasso.with(activity).load(CommonURL.VideoPath + CommonAPI_Name.eventvideo + photoAudioVideoItem.getUrl().replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).into(holder.img_item);
         Log.e("video", "---------------" + CommonURL.VideoPath + CommonAPI_Name.eventvideo + photoAudioVideoItem.getUrl().replaceAll(" ", "%20"));
-        holder.txt_videoname.setText(photoAudioVideoItem.getName());
+        holder.txt_videoname.setText(photoAudioVideoItem.getUrl());
         holder.img_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

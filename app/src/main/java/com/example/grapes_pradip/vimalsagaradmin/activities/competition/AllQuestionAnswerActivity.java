@@ -81,9 +81,11 @@ public class AllQuestionAnswerActivity extends AppCompatActivity implements View
         editText_question.setText(question);
         img_nodata = (ImageView) findViewById(R.id.img_nodata);
     }
+
     private void idClick() {
         img_back.setOnClickListener(this);
     }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -97,6 +99,7 @@ public class AllQuestionAnswerActivity extends AppCompatActivity implements View
 
     public class GetAllAnswer extends AsyncTask<String, Void, String> {
         String responseJSON = "";
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -142,6 +145,7 @@ public class AllQuestionAnswerActivity extends AppCompatActivity implements View
 
             if (progressDialog != null) {
                 progressDialog.dismiss();
+//                new GetQuestion().execute();
             }
             if (recyclerView_all_answer != null) {
                 recyclerAllAnswerAdapter = new RecyclerAllAnswerAdapter(AllQuestionAnswerActivity.this, answerItems);
@@ -149,11 +153,50 @@ public class AllQuestionAnswerActivity extends AppCompatActivity implements View
                     recyclerView_all_answer.setVisibility(View.VISIBLE);
                     img_nodata.setVisibility(View.GONE);
                     recyclerView_all_answer.setAdapter(recyclerAllAnswerAdapter);
+
                 } else {
                     img_nodata.setVisibility(View.VISIBLE);
                     recyclerView_all_answer.setVisibility(View.GONE);
                 }
             }
+
+        }
+    }
+
+    public class GetQuestion extends AsyncTask<String, Void, String> {
+        String responseJSON = "";
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = new ProgressDialog(AllQuestionAnswerActivity.this);
+            progressDialog.setMessage(getResources().getString(R.string.progressmsg));
+            progressDialog.show();
+//            progressDialog.setCancelable(false);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            responseJSON = JsonParser.getStringResponse("http://eonion.in/vimalsagarji/competition/getquestionbyid/?qid=" + qid);
+            return responseJSON;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            Log.e("response", "---------------------" + s);
+            try {
+                JSONObject jsonObject = new JSONObject(s);
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            if (progressDialog != null) {
+                progressDialog.dismiss();
+            }
+
 
         }
     }
@@ -166,20 +209,17 @@ public class AllQuestionAnswerActivity extends AppCompatActivity implements View
         qid = intent.getStringExtra("QID");
         question = intent.getStringExtra("Question");
         editText_question.setText(question);
-        Log.e("qid","---------------"+qid);
-        Log.e("Question","---------------------"+question);
-        answerItems=new ArrayList<>();
+        Log.e("qid", "---------------" + qid);
+        Log.e("Question", "---------------------" + question);
+        answerItems = new ArrayList<>();
         if (CommonMethod.isInternetConnected(AllQuestionAnswerActivity.this)) {
             new GetAllAnswer().execute();
-        }
-        else {
-            Toast.makeText(AllQuestionAnswerActivity.this,R.string.internet,Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(AllQuestionAnswerActivity.this, R.string.internet, Toast.LENGTH_SHORT).show();
         }
 
 
     }
-
-
 
 
 }

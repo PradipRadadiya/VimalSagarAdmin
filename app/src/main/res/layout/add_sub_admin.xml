@@ -29,8 +29,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10sp"
-                android:paddingBottom="20sp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingBottom="20sp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -56,8 +56,8 @@
                 </LinearLayout>
 
                 <EditText
-                    style="@style/edittext"
                     android:id="@+id/entername"
+                    style="@style/edittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5sp"
@@ -132,8 +132,8 @@
                 </LinearLayout>
 
                 <EditText
-                    style="@style/edittext"
                     android:id="@+id/emobile"
+                    style="@style/edittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5sp"
@@ -171,8 +171,8 @@
                 </LinearLayout>
 
                 <EditText
-                    style="@style/edittext"
                     android:id="@+id/eusername"
+                    style="@style/edittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5sp"
@@ -209,8 +209,8 @@
 
 
                 <EditText
-                    style="@style/edittext"
                     android:id="@+id/epassword"
+                    style="@style/edittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5sp"

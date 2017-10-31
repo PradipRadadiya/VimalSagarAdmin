@@ -10,6 +10,7 @@ public class CommentList {
     private String date;
     private String name;
 
+
     public CommentList(String comment, String isApproved, String userID, String informationID, String iD, String date, String name) {
         this.comment = comment;
         this.isApproved = isApproved;

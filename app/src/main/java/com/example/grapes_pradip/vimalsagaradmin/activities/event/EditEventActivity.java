@@ -527,8 +527,6 @@ public class EditEventActivity extends AppCompatActivity implements View.OnClick
                 thumbnail = (BitmapFactory.decodeFile(picturePath));
 
 
-
-
                 getEventImages.add(new EventImage("img", "eid", picturePath, thumbnail, false));
                 photoAdapter = new PhotoAdapter(EditEventActivity.this, getEventImages);
                 recyclerView_photos.setAdapter(photoAdapter);
@@ -979,7 +977,7 @@ public class EditEventActivity extends AppCompatActivity implements View.OnClick
             Log.e("audio", "---------------" + itemArrayList.get(position));
             final PhotoAudioVideoItem photoAudioVideoItem = itemArrayList.get(position);
 //        Picasso.with(activity).load(CommonURL.AudioPath + CommonAPI_Name.eventaudio + photoAudioVideoItem.getUrl().replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).into(holder.img_item);
-            holder.txt_audioname.setText(photoAudioVideoItem.getName());
+            holder.txt_audioname.setText(photoAudioVideoItem.getUrl());
             holder.img_item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -1096,7 +1094,7 @@ public class EditEventActivity extends AppCompatActivity implements View.OnClick
 //        Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.eventimage + itemArrayList.get(position).replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).into(holder.img_item);
 //        Picasso.with(activity).load(CommonURL.VideoPath + CommonAPI_Name.eventvideo + photoAudioVideoItem.getUrl().replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).into(holder.img_item);
             Log.e("video", "---------------" + CommonURL.VideoPath + CommonAPI_Name.eventvideo + photoAudioVideoItem.getUrl().replaceAll(" ", "%20"));
-            holder.txt_videoname.setText(photoAudioVideoItem.getName());
+            holder.txt_videoname.setText(photoAudioVideoItem.getUrl());
             holder.img_item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -1276,7 +1274,6 @@ public class EditEventActivity extends AppCompatActivity implements View.OnClick
 
                 }
             });
-
 
         }
 

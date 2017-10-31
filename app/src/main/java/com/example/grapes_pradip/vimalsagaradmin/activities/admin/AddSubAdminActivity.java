@@ -199,7 +199,6 @@ public class AddSubAdminActivity extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
             return responseJSON;
         }
 

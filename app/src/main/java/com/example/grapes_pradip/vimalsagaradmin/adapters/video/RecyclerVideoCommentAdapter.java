@@ -73,6 +73,7 @@ public class RecyclerVideoCommentAdapter extends RecyclerView.Adapter<RecyclerVi
                 @Override
                 public void onClick(View v) {
                     if (CommonMethod.isInternetConnected(activity)) {
+                        commentList.setIsApproved("R");
                         itemArrayList.remove(holder.getAdapterPosition());
                         id = commentList.getID();
 //                        new RejectPost().execute();
@@ -94,6 +95,7 @@ public class RecyclerVideoCommentAdapter extends RecyclerView.Adapter<RecyclerVi
                 public void onClick(View v) {
                     if (CommonMethod.isInternetConnected(activity)) {
                         id = commentList.getID();
+                        commentList.setIsApproved("1");
                         new ApprovePost().execute();
                         holder.lin_approve.setVisibility(View.GONE);
                         holder.lin_delete.setVisibility(View.GONE);
@@ -108,6 +110,7 @@ public class RecyclerVideoCommentAdapter extends RecyclerView.Adapter<RecyclerVi
 //                        itemArrayList.remove(holder.getAdapterPosition());
                         itemArrayList.remove(holder.getAdapterPosition());
                         id = commentList.getID();
+                        commentList.setIsApproved("R");
                         new RejectPost().execute();
                         holder.lin_approve.setVisibility(View.GONE);
                         holder.lin_delete.setVisibility(View.GONE);

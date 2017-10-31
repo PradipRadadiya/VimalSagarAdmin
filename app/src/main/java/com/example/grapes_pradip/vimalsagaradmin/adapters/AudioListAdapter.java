@@ -48,7 +48,7 @@ public class AudioListAdapter extends RecyclerView.Adapter<AudioListAdapter.View
         Log.e("audio", "---------------" + itemArrayList.get(position));
         final PhotoAudioVideoItem photoAudioVideoItem = itemArrayList.get(position);
 //        Picasso.with(activity).load(CommonURL.AudioPath + CommonAPI_Name.eventaudio + photoAudioVideoItem.getUrl().replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).into(holder.img_item);
-        holder.txt_audioname.setText(photoAudioVideoItem.getName());
+        holder.txt_audioname.setText(photoAudioVideoItem.getUrl());
         holder.img_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -48,12 +48,13 @@
         <activity
             android:name=".activities.information.InfomationDetailActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait">
 
-        <intent-filter>
-            <action android:name="information_comment_click" />
-            <category android:name="android.intent.category.DEFAULT" />
-        </intent-filter>
+            <intent-filter>
+                <action android:name="information_comment_click" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".activities.information.EditInformationActivity"
@@ -214,6 +215,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.competition.AllQuestionAnswerActivity"
+            android:clearTaskOnLaunch="true"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="competition_item_click" />

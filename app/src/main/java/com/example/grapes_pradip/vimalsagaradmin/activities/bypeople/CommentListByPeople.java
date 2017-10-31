@@ -16,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.grapes_pradip.vimalsagaradmin.R;
-import com.example.grapes_pradip.vimalsagaradmin.activities.audio.CommentListAudio;
 import com.example.grapes_pradip.vimalsagaradmin.adapters.bypeople.RecyclerByPeopleCommentAdapter;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
@@ -267,6 +266,11 @@ public class CommentListByPeople extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             try {
+                progressDialog.dismiss();
+                edit_comment.setText("");
+                commentLists = new ArrayList<>();
+                new CommentList().execute();
+                Toast.makeText(CommentListByPeople.this, "Comment added successfully.", Toast.LENGTH_SHORT).show();
                 JSONObject jsonObject = new JSONObject(s);
                 if (jsonObject.getString("status").equalsIgnoreCase("success")) {
                     if (CommonMethod.isInternetConnected(CommentListByPeople.this)) {
