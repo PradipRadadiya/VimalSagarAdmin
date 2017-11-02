@@ -60,7 +60,7 @@ public class RecyclerGalleryCategoryAdapter extends RecyclerView.Adapter<Recycle
 
         final GalleryCategoryItem galleryCategoryItem = itemArrayList.get(i);
         holder.txt_title.setText(galleryCategoryItem.getName());
-        Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.gallerycategory + galleryCategoryItem.getCategoryIcon().replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).into(holder.img_audio_category);
+        Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.gallerycategory + galleryCategoryItem.getCategoryIcon().replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(holder.img_audio_category);
         ((SwipeLayout) holder.itemView).setItemState(SwipeLayout.ITEM_STATE_COLLAPSED, true);
         holder.check_delete.setChecked(galleryCategoryItem.isSelected() ? true : false);
         holder.txt_edit.setOnClickListener(new View.OnClickListener() {

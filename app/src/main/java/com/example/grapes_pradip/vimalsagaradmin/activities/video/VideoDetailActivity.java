@@ -170,7 +170,7 @@ public class VideoDetailActivity extends AppCompatActivity implements View.OnCli
         txt_date.setText(date);
         txt_views.setText(view);
 
-        Picasso.with(VideoDetailActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.videoimage + photo.replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).into(img_photo);
+        Picasso.with(VideoDetailActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.videoimage + photo.replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(img_photo);
 
         Log.e("image path","------------------"+CommonURL.ImagePath + CommonAPI_Name.videoimage + photo.replaceAll(" ", "%20"));
         Log.e("video url", "-------------" + CommonURL.VideoPath + CommonAPI_Name.videos + video);

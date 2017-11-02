@@ -194,7 +194,7 @@ public class ByPeopleDetailActivity extends AppCompatActivity implements View.On
             txt_img.setVisibility(View.GONE);
             img_photo.setVisibility(View.GONE);
         } else {
-            Picasso.with(ByPeopleDetailActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.bypeopleimage + photo.replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).into(img_photo);
+            Picasso.with(ByPeopleDetailActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.bypeopleimage + photo.replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(img_photo);
         }
         if (video.equalsIgnoreCase("")) {
 //            videoPlayerStandard.setVisibility(View.GONE);

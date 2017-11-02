@@ -62,7 +62,7 @@ public class RecyclerAudioAllAdapter extends RecyclerView.Adapter<RecyclerAudioA
         holder.txt_title.setText(audioItem.getAudioname());
         holder.txt_date.setText(audioItem.getDate());
         holder.txt_views.setText(audioItem.getView());
-        Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.audioimage + audioItem.getPhoto().replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).into(holder.img_audio_category);
+        Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.audioimage + audioItem.getPhoto().replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(holder.img_audio_category);
         holder.check_delete.setChecked(audioItem.isSelected() ? true : false);
 
         ((SwipeLayout) holder.itemView).setItemState(SwipeLayout.ITEM_STATE_COLLAPSED, true);

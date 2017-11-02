@@ -156,7 +156,6 @@
                 android:background="@drawable/edittext_round"
                 android:inputType="text"
                 android:clickable="true"
-                android:editable="false"
                 android:padding="10sp"
                 tools:ignore="TextFields" />
 
@@ -193,7 +192,6 @@
                 android:inputType="text"
                 android:padding="10sp"
                 android:clickable="true"
-                android:editable="false"
                 android:enabled="false"
                 tools:ignore="TextFields" />
 

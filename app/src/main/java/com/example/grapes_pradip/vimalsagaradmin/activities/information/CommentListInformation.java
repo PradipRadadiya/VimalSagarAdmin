@@ -16,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.grapes_pradip.vimalsagaradmin.R;
-import com.example.grapes_pradip.vimalsagaradmin.activities.audio.CommentListAudio;
 import com.example.grapes_pradip.vimalsagaradmin.adapters.information.RecyclerCommentAdapter;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
@@ -58,7 +57,6 @@ public class CommentListInformation extends AppCompatActivity {
     private String audioname;
     private String cid;
     private String categoryname;
-    private String action_click;
     RecyclerCommentAdapter recyclerCommentAdapter;
 
     ArrayList<com.example.grapes_pradip.vimalsagaradmin.model.information.CommentList> commentLists=new ArrayList<>();
@@ -69,7 +67,7 @@ public class CommentListInformation extends AppCompatActivity {
         setContentView(R.layout.dialog_comment_list);
         Intent intent = getIntent();
         aid = intent.getStringExtra("info_id");
-        action_click = intent.getStringExtra("click_action");
+        String action_click = intent.getStringExtra("click_action");
 
         linearLayoutManager = new LinearLayoutManager(CommentListInformation.this);
         recyclerView_comments = (RecyclerView) findViewById(R.id.recyclerView_comments);

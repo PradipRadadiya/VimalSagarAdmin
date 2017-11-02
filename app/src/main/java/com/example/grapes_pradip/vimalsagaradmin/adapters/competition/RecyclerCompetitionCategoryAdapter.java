@@ -60,7 +60,7 @@ public class RecyclerCompetitionCategoryAdapter extends RecyclerView.Adapter<Rec
 
         final CompetitionItem competitionItem = itemArrayList.get(i);
         holder.txt_title.setText(competitionItem.getName());
-        Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.competitioncategory + competitionItem.getCategoryIcon().replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).into(holder.img_audio_category);
+        Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.competitioncategory + competitionItem.getCategoryIcon().replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(holder.img_audio_category);
         ((SwipeLayout) holder.itemView).setItemState(SwipeLayout.ITEM_STATE_COLLAPSED, true);
         holder.check_delete.setChecked(competitionItem.isSelected() ? true : false);
 

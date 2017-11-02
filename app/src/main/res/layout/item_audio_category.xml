@@ -34,7 +34,7 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/logo"
                 tools:ignore="ContentDescription" />
-            />
+
             <TextView
                 android:layout_width="0sp"
                 android:layout_height="wrap_content"

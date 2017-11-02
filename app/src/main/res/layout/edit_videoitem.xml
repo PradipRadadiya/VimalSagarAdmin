@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="150dp"
     android:orientation="vertical"
@@ -12,7 +13,8 @@
         android:layout_alignParentRight="true"
         android:layout_gravity="center"
         android:padding="10dp"
-        android:src="@drawable/ic_cancel" />
+        android:src="@drawable/ic_cancel"
+        tools:ignore="RtlHardcoded" />
 
     <ImageView
         android:id="@+id/img_item"
@@ -39,6 +41,7 @@
         android:layout_marginTop="5dp"
         android:gravity="center"
         android:lines="2"
-        android:text="gfgfgf" />
+        android:text="gfgfgf"
+        tools:ignore="HardcodedText" />
 
 </LinearLayout>

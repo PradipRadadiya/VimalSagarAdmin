@@ -56,8 +56,6 @@ public class CommentListAudio extends AppCompatActivity {
     private String aid;
     private String audioname;
     private String cid;
-    private String categoryname;
-    private String action_click;
     RecyclerAudioCommentAdapter recyclerCommentAdapter;
 
     ArrayList<com.example.grapes_pradip.vimalsagaradmin.model.information.CommentList> commentLists=new ArrayList<>();
@@ -68,8 +66,8 @@ public class CommentListAudio extends AppCompatActivity {
         setContentView(R.layout.dialog_comment_list);
         Intent intent = getIntent();
         aid = intent.getStringExtra("aid");
-        categoryname = intent.getStringExtra("categoryname");
-        action_click = intent.getStringExtra("click_action");
+        String categoryname = intent.getStringExtra("categoryname");
+        String action_click = intent.getStringExtra("click_action");
 
         linearLayoutManager = new LinearLayoutManager(CommentListAudio.this);
         recyclerView_comments = (RecyclerView) findViewById(R.id.recyclerView_comments);

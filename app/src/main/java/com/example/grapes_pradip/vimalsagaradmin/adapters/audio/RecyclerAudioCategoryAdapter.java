@@ -64,7 +64,7 @@ public class RecyclerAudioCategoryAdapter extends RecyclerView.Adapter<RecyclerA
         if (audioCategoryItem.getCategoryicon().equalsIgnoreCase("")) {
             Picasso.with(activity).load(R.drawable.noimageavailable);
         } else {
-            Picasso.with(activity).load(path).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).into(holder.img_audio_category);
+            Picasso.with(activity).load(path).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(holder.img_audio_category);
         }
 
         ((SwipeLayout) holder.itemView).setItemState(SwipeLayout.ITEM_STATE_COLLAPSED, true);

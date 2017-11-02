@@ -57,7 +57,6 @@ public class CommentListEvent extends AppCompatActivity {
     private String audioname;
     private String cid;
     private String categoryname;
-    private String action_click;
     RecyclerEventCommentAdapter recyclerCommentAdapter;
 
     ArrayList<com.example.grapes_pradip.vimalsagaradmin.model.information.CommentList> commentLists=new ArrayList<>();
@@ -68,7 +67,7 @@ public class CommentListEvent extends AppCompatActivity {
         setContentView(R.layout.dialog_comment_list);
         Intent intent = getIntent();
         aid = intent.getStringExtra("event_id");
-        action_click = intent.getStringExtra("click_action");
+        String action_click = intent.getStringExtra("click_action");
 
         linearLayoutManager = new LinearLayoutManager(CommentListEvent.this);
         recyclerView_comments = (RecyclerView) findViewById(R.id.recyclerView_comments);

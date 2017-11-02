@@ -136,7 +136,7 @@ public class EditAudioActivity extends AppCompatActivity implements View.OnClick
         edit_audio_name.setText(audioname);
         edit_category_name.setText(categoryname);
         Log.e("image", "-------------------" + CommonURL.ImagePath + CommonAPI_Name.audioimage + photo.replaceAll(" ", "%20"));
-        Picasso.with(EditAudioActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.audioimage + photo.replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).into(img_category_icon);
+        Picasso.with(EditAudioActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.audioimage + photo.replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(img_category_icon);
         if (CommonMethod.isInternetConnected(EditAudioActivity.this)) {
 //            new AddInformation().execute(e_title.getText().toString(), e_description.getText().toString(), e_date.getText().toString(), e_address.getText().toString());
         }

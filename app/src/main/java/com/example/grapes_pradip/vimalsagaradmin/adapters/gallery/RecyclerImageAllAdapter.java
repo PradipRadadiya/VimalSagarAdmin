@@ -48,7 +48,7 @@ public class RecyclerImageAllAdapter extends RecyclerView.Adapter<RecyclerImageA
     public void onBindViewHolder(final ViewHolder holder, final int i) {
 
         final AllImageItem imageItem = itemArrayList.get(i);
-        Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.Gallery + imageItem.getPhoto().replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).into(holder.img_photos);
+        Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.Gallery + imageItem.getPhoto().replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(holder.img_photos);
         holder.check_image.setChecked(imageItem.isSelected() ? true : false);
         holder.img_photos.setOnClickListener(new View.OnClickListener() {
             @Override

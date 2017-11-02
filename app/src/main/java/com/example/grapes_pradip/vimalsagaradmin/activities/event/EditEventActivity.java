@@ -287,7 +287,7 @@ public class EditEventActivity extends AppCompatActivity implements View.OnClick
             edit_videolink.setText(videoLink);
 
             Log.e("image", "---------------" + CommonURL.ImagePath + CommonAPI_Name.eventimage + photo);
-            Picasso.with(EditEventActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.eventimage + photo).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).into(img_category_icon);
+            Picasso.with(EditEventActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.eventimage + photo).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(img_category_icon);
 //            new AddInformation().execute(e_title.getText().toString(), e_description.getText().toString(), e_date.getText().toString(), e_address.getText().toString());
         }
     }
@@ -1214,7 +1214,7 @@ public class EditEventActivity extends AppCompatActivity implements View.OnClick
 
             } else {
                 Log.e("images", "---------------" + itemArrayList.get(position));
-                Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.eventimage + eventImage.getPhoto().replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).into(holder.img_item);
+                Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.eventimage + eventImage.getPhoto().replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(holder.img_item);
 
 
               /*  holder.img_item.setOnClickListener(new View.OnClickListener() {

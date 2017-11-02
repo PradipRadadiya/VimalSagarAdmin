@@ -1,5 +1,6 @@
 package com.example.grapes_pradip.vimalsagaradmin.adapters;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -41,11 +42,12 @@ public class PhotoAudioVideoAdapter extends RecyclerView.Adapter<PhotoAudioVideo
         return new ViewHolder(v);
     }
 
+    @SuppressLint("RecyclerView")
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
         Log.e("images", "---------------" + CommonURL.ImagePath + CommonAPI_Name.eventimage + itemArrayList.get(position));
-        Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.eventimage + itemArrayList.get(position).replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).into(holder.img_item);
+        Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.eventimage + itemArrayList.get(position).replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(holder.img_item);
         holder.img_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

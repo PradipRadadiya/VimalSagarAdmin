@@ -155,11 +155,10 @@
                 android:layout_marginTop="5sp"
                 android:background="@drawable/edittext_round"
                 android:clickable="true"
-                android:editable="false"
                 android:hint="Select Date"
                 android:inputType="text"
                 android:padding="10sp"
-                tools:ignore="TextFields" />
+                tools:ignore="HardcodedText,TextFields" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -194,9 +193,8 @@
                 android:inputType="text"
                 android:hint="Select Time"
                 android:clickable="true"
-                android:editable="false"
                 android:padding="10sp"
-                tools:ignore="TextFields" />
+                tools:ignore="HardcodedText,TextFields" />
 
             <LinearLayout
                 android:layout_width="match_parent"

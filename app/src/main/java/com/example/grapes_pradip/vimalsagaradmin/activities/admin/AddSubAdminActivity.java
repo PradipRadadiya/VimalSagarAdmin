@@ -44,6 +44,7 @@ public class AddSubAdminActivity extends AppCompatActivity {
     private EditText emobile;
     private EditText eusername;
     private EditText epassword;
+    private EditText ecpassword;
     private Button register;
     private ProgressDialog progressDialog;
     private TextView txt_header;
@@ -65,6 +66,7 @@ public class AddSubAdminActivity extends AppCompatActivity {
         emobile = (EditText) findViewById(R.id.emobile);
         eusername = (EditText) findViewById(R.id.eusername);
         epassword = (EditText) findViewById(R.id.epassword);
+        ecpassword = (EditText) findViewById(R.id.ecpassword);
         register = (Button) findViewById(R.id.register);
         txt_header = (TextView) findViewById(R.id.txt_header);
         img_back = (ImageView) findViewById(R.id.img_back);
@@ -99,6 +101,14 @@ public class AddSubAdminActivity extends AppCompatActivity {
                 } else if (TextUtils.isEmpty(epassword.getText().toString())) {
                     epassword.setError("Please enter password.");
                     epassword.requestFocus();
+
+                } else if (TextUtils.isEmpty(ecpassword.getText().toString())) {
+                    ecpassword.setError("Please enter confirm password.");
+                    ecpassword.requestFocus();
+
+                }else if (!epassword.getText().toString().equalsIgnoreCase(ecpassword.getText().toString())) {
+                    ecpassword.setError("Confirm password not same.");
+                    ecpassword.requestFocus();
 
                 } else {
                     if (CommonMethod.isInternetConnected(AddSubAdminActivity.this)) {

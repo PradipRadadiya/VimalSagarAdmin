@@ -62,7 +62,7 @@ public class RecyclerVideoAllAdapter extends RecyclerView.Adapter<RecyclerVideoA
         holder.txt_title.setText(videoItem.getAudioname());
         holder.txt_date.setText(videoItem.getDate());
         holder.txt_views.setText(videoItem.getView());
-        Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.videoimage + videoItem.getPhoto().replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).into(holder.img_audio_category);
+        Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.videoimage + videoItem.getPhoto().replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(holder.img_audio_category);
         holder.checkbox_audio.setChecked(videoItem.isSelected() ? true : false);
 
         ((SwipeLayout) holder.itemView).setItemState(SwipeLayout.ITEM_STATE_COLLAPSED, true);

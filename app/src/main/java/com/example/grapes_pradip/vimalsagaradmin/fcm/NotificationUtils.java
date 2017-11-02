@@ -53,11 +53,10 @@ public class NotificationUtils {
         if (TextUtils.isEmpty(message))
             return;
 
-
         // notification icon
         final int icon = R.mipmap.ic_launcher;
 
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         final PendingIntent resultPendingIntent =
                 PendingIntent.getActivity(
                         mContext,

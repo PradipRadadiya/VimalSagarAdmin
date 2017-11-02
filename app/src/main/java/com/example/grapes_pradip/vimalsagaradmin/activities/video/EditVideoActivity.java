@@ -135,7 +135,7 @@ public class EditVideoActivity extends AppCompatActivity implements View.OnClick
         edit_video_name.setText(videoname);
         edit_category_name.setText(categoryname);
         img_category_icon.setVisibility(View.VISIBLE);
-        Picasso.with(EditVideoActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.videoimage +photo.replaceAll(" ","%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).into(img_category_icon);
+        Picasso.with(EditVideoActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.videoimage +photo.replaceAll(" ","%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(img_category_icon);
         if (CommonMethod.isInternetConnected(EditVideoActivity.this)) {
 //            new AddInformation().execute(e_title.getText().toString(), e_description.getText().toString(), e_date.getText().toString(), e_address.getText().toString());
         }

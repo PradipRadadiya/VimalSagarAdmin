@@ -116,7 +116,7 @@ public class EditVideoCategoryActivity extends AppCompatActivity implements View
     private void setContent() {
         e_title.setText(name);
         img_category_icon.setVisibility(View.VISIBLE);
-        Picasso.with(EditVideoCategoryActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.videocategory + photo.replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).into(img_category_icon);
+        Picasso.with(EditVideoCategoryActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.videocategory + photo.replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(img_category_icon);
 
         if (CommonMethod.isInternetConnected(EditVideoCategoryActivity.this)) {
 //            new AddInformation().execute(e_title.getText().toString(), e_description.getText().toString(), e_date.getText().toString(), e_address.getText().toString());

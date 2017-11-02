@@ -31,6 +31,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private static final String TAG = MyFirebaseMessagingService.class.getSimpleName();
     private NotificationUtils notificationUtils;
     SharedPreferencesClass sharedPreferencesClass;
+    public static String questionid;
 
 
     @Override
@@ -163,6 +164,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     }
                 } else if (click_action.equalsIgnoreCase("competition_item_click")) {
                     Intent resultIntent = new Intent(getApplicationContext(), AllQuestionAnswerActivity.class);
+
+                    questionid=categoty_id;
                     resultIntent.putExtra("QID", categoty_id);
                     resultIntent.putExtra("Question", message);
                     if (sharedPreferencesClass.getPushNotification().equalsIgnoreCase("pushon")) {
@@ -413,6 +416,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     }
                 } else if (click_action.equalsIgnoreCase("competition_item_click")) {
                     Intent resultIntent = new Intent(getApplicationContext(), AllQuestionAnswerActivity.class);
+                    questionid=categoty_id;
+
                     resultIntent.putExtra("QID", categoty_id);
                     resultIntent.putExtra("Question", message);
 

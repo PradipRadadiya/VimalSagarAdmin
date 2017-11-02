@@ -115,7 +115,7 @@ public class EditCompetitionCategoryActivity extends AppCompatActivity implement
     private void setContent() {
         e_title.setText(name);
         img_category_icon.setVisibility(View.VISIBLE);
-        Picasso.with(EditCompetitionCategoryActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.competitioncategory + icon.replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).into(img_category_icon);
+        Picasso.with(EditCompetitionCategoryActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.competitioncategory + icon.replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(img_category_icon);
     }
 
     @SuppressLint("SetTextI18n")

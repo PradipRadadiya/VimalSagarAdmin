@@ -29,6 +29,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import static com.example.grapes_pradip.vimalsagaradmin.fcm.MyFirebaseMessagingService.questionid;
+
 /**
  * Created by Pradip on 1/2/17.
  */
@@ -90,6 +92,7 @@ public class RecyclerCompetitionQuestionAllAdapter extends RecyclerView.Adapter<
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(activity, AllQuestionAnswerActivity.class);
+                questionid=competitionQuestionItem.getID();
                 intent.putExtra("QID", competitionQuestionItem.getID());
                 intent.putExtra("Question", competitionQuestionItem.getQuestion());
                 activity.startActivity(intent);

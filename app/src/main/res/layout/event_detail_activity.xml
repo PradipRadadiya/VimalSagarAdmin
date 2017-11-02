@@ -21,7 +21,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="10sp">
+            android:padding="10sp"
+            tools:ignore="ExtraText">
 
 
             <TextView
@@ -203,7 +204,8 @@
                     android:background="@drawable/recycleviewborder"
                     android:gravity="center_horizontal|center_vertical"
                     android:text="No Data"
-                    android:textSize="30dp" />
+                    android:textSize="30sp"
+                    tools:ignore="HardcodedText" />
 
             </RelativeLayout>
 

@@ -1,5 +1,6 @@
 package com.example.grapes_pradip.vimalsagaradmin.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,6 +21,7 @@ public class AudioPlayActivity extends AppCompatActivity {
     ImageView img_back;
     TextView txt_header;
     String audio;
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

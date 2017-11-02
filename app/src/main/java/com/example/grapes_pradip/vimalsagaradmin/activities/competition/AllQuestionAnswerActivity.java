@@ -31,6 +31,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import static com.example.grapes_pradip.vimalsagaradmin.fcm.MyFirebaseMessagingService.questionid;
+
 /**
  * Created by Grapes-Pradip on 2/15/2017.
  */
@@ -211,6 +213,9 @@ public class AllQuestionAnswerActivity extends AppCompatActivity implements View
         editText_question.setText(question);
         Log.e("qid", "---------------" + qid);
         Log.e("Question", "---------------------" + question);
+
+        qid=questionid;
+        Log.e("qid", "---------------" + qid);
         answerItems = new ArrayList<>();
         if (CommonMethod.isInternetConnected(AllQuestionAnswerActivity.this)) {
             new GetAllAnswer().execute();
