@@ -115,6 +115,7 @@ public class AllQuestionAnswerActivity extends AppCompatActivity implements View
         protected String doInBackground(String... params) {
             responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallanswersbyqid + "?qid=" + qid);
             return responseJSON;
+
         }
 
         @Override
@@ -124,6 +125,7 @@ public class AllQuestionAnswerActivity extends AppCompatActivity implements View
             try {
                 JSONObject jsonObject = new JSONObject(s);
                 if (jsonObject.getString("status").equalsIgnoreCase("success")) {
+                    editText_question.setText(jsonObject.getString("Question"));
                     JSONArray jsonArray = jsonObject.getJSONArray("data");
                     Log.e("json array", "-------------------" + jsonArray);
                     answerItems = new ArrayList<>();
@@ -210,15 +212,16 @@ public class AllQuestionAnswerActivity extends AppCompatActivity implements View
         Intent intent = getIntent();
         qid = intent.getStringExtra("QID");
         question = intent.getStringExtra("Question");
-        editText_question.setText(question);
+//        editText_question.setText(question);
         Log.e("qid", "---------------" + qid);
         Log.e("Question", "---------------------" + question);
 
-        qid=questionid;
+        qid = questionid;
         Log.e("qid", "---------------" + qid);
         answerItems = new ArrayList<>();
         if (CommonMethod.isInternetConnected(AllQuestionAnswerActivity.this)) {
             new GetAllAnswer().execute();
+
         } else {
             Toast.makeText(AllQuestionAnswerActivity.this, R.string.internet, Toast.LENGTH_SHORT).show();
         }
