@@ -253,11 +253,17 @@ public class EditAudioCategoryActivity extends AppCompatActivity implements View
                 String imagepath = picturePath.substring(picturePath.lastIndexOf("/") + 1);
                 Log.e("result", "--------------" + imagepath);
                 txt_photo.setText("Selected photo : " + imagepath);
+
+                try {
+                    decodeFile(picturePath);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 //Log.w("path of image from gallery......******************.........", picturePath + "");
-                thumbnail = (BitmapFactory.decodeFile(picturePath));
+               /* thumbnail = (BitmapFactory.decodeFile(picturePath));
                 //Log.w("path of image from gallery......******************.........", picturePath + "");
                 img_category_icon.setVisibility(View.VISIBLE);
-                img_category_icon.setImageBitmap(thumbnail);
+                img_category_icon.setImageBitmap(thumbnail);*/
             } else if (requestCode == 2) {
                 flag = true;
 
@@ -430,5 +436,41 @@ public class EditAudioCategoryActivity extends AppCompatActivity implements View
             }
             progressDialog.dismiss();
         }
+    }
+
+    public void decodeFile(String filePath) throws IOException {
+
+        // Decode image size
+        BitmapFactory.Options o = new BitmapFactory.Options();
+        o.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(filePath, o);
+
+        // The new size we want to scale to
+        final int REQUIRED_SIZE = 1024;
+
+        // Find the correct scale value. It should be the power of 2.
+        int width_tmp = o.outWidth, height_tmp = o.outHeight;
+        int scale = 1;
+        while (true) {
+            if (width_tmp < REQUIRED_SIZE && height_tmp < REQUIRED_SIZE)
+                break;
+            width_tmp /= 2;
+            height_tmp /= 2;
+            scale *= 2;
+        }
+
+        // Decode with inSampleSize
+        BitmapFactory.Options o2 = new BitmapFactory.Options();
+        o2.inSampleSize = scale;
+        thumbnail = BitmapFactory.decodeFile(filePath, o2);
+
+        img_category_icon.setVisibility(View.VISIBLE);
+        img_category_icon.setImageBitmap(thumbnail);
+        OutputStream outFile = null;
+        File file=new File(picturePath);
+        outFile = new FileOutputStream(file);
+        thumbnail.compress(Bitmap.CompressFormat.JPEG, 40, outFile);
+        outFile.flush();
+        outFile.close();
     }
 }

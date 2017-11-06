@@ -346,7 +346,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView_video"
                 android:layout_width="match_parent"
-                android:layout_height="160sp"
+                android:layout_height="170sp"
                 android:visibility="gone" />
 
             <TextView

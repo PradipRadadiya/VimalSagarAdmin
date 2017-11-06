@@ -226,7 +226,6 @@ public class AllQuestionAnswerActivity extends AppCompatActivity implements View
             Toast.makeText(AllQuestionAnswerActivity.this, R.string.internet, Toast.LENGTH_SHORT).show();
         }
 
-
     }
 
 

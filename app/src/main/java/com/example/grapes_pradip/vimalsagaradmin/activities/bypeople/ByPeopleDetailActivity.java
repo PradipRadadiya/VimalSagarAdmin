@@ -182,7 +182,7 @@ public class ByPeopleDetailActivity extends AppCompatActivity implements View.On
 
 
     private void setContent() {
-        txt_header.setText("ByPeople Detail");
+        txt_header.setText("By People Detail");
         txt_title.setText(title);
         txt_date.setText(date);
         txt_description.setText(post);

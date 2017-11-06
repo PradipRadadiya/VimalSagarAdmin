@@ -245,7 +245,6 @@ public class EditEventActivity extends AppCompatActivity implements View.OnClick
             }
         });
 
-
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -267,7 +266,8 @@ public class EditEventActivity extends AppCompatActivity implements View.OnClick
                     edit_time.setError(getResources().getString(R.string.selecttime));
                     e_address.requestFocus();
                 } else {
-                    datetimefull = fulldate + " " + fulltime;
+                    datetimefull = edit_date.getText().toString() + " " + edit_time.getText().toString();
+
                     if (CommonMethod.isInternetConnected(EditEventActivity.this)) {
                         new EditEvent().execute();
                     } else {
@@ -287,7 +287,7 @@ public class EditEventActivity extends AppCompatActivity implements View.OnClick
             edit_videolink.setText(videoLink);
 
             Log.e("image", "---------------" + CommonURL.ImagePath + CommonAPI_Name.eventimage + photo);
-            Picasso.with(EditEventActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.eventimage + photo).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(img_category_icon);
+            Picasso.with(EditEventActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.eventimage + photo).resize(0, 200).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).into(img_category_icon);
 //            new AddInformation().execute(e_title.getText().toString(), e_description.getText().toString(), e_date.getText().toString(), e_address.getText().toString());
         }
     }
@@ -524,7 +524,13 @@ public class EditEventActivity extends AppCompatActivity implements View.OnClick
                 Log.e("result", "--------------" + imagepath);
 //                txt_photo.setText("Selected photo : " + imagepath);
 
-                thumbnail = (BitmapFactory.decodeFile(picturePath));
+                try {
+                    decodeFile(picturePath);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+//                thumbnail = (BitmapFactory.decodeFile(picturePath));
 
 
                 getEventImages.add(new EventImage("img", "eid", picturePath, thumbnail, false));
@@ -1214,7 +1220,7 @@ public class EditEventActivity extends AppCompatActivity implements View.OnClick
 
             } else {
                 Log.e("images", "---------------" + itemArrayList.get(position));
-                Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.eventimage + eventImage.getPhoto().replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(holder.img_item);
+                Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.eventimage + eventImage.getPhoto().replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0, 200).into(holder.img_item);
 
 
               /*  holder.img_item.setOnClickListener(new View.OnClickListener() {
@@ -1680,7 +1686,6 @@ public class EditEventActivity extends AppCompatActivity implements View.OnClick
 
         }
 
-
     }
 
     private class DeleteVideo extends AsyncTask<String, Void, String> {
@@ -1704,6 +1709,42 @@ public class EditEventActivity extends AppCompatActivity implements View.OnClick
 
         }
 
+    }
+
+    public void decodeFile(String filePath) throws IOException {
+
+        // Decode image size
+        BitmapFactory.Options o = new BitmapFactory.Options();
+        o.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(filePath, o);
+
+        // The new size we want to scale to
+        final int REQUIRED_SIZE = 1024;
+
+        // Find the correct scale value. It should be the power of 2.
+        int width_tmp = o.outWidth, height_tmp = o.outHeight;
+        int scale = 1;
+        while (true) {
+            if (width_tmp < REQUIRED_SIZE && height_tmp < REQUIRED_SIZE)
+                break;
+            width_tmp /= 2;
+            height_tmp /= 2;
+            scale *= 2;
+        }
+
+        // Decode with inSampleSize
+        BitmapFactory.Options o2 = new BitmapFactory.Options();
+        o2.inSampleSize = scale;
+        thumbnail = BitmapFactory.decodeFile(filePath, o2);
+
+        img_category_icon.setVisibility(View.VISIBLE);
+        img_category_icon.setImageBitmap(thumbnail);
+        OutputStream outFile = null;
+        File file=new File(picturePath);
+        outFile = new FileOutputStream(file);
+        thumbnail.compress(Bitmap.CompressFormat.JPEG, 40, outFile);
+        outFile.flush();
+        outFile.close();
     }
 
 }

@@ -39,7 +39,7 @@
         android:layout_below="@+id/img_item"
         android:gravity="center"
         android:lines="2"
-        android:text="dfgf"
+        android:text="dfgf\nsdfsdf"
         tools:ignore="HardcodedText" />
 
 </LinearLayout>
