@@ -169,6 +169,7 @@ public class UserActivity extends AppCompatActivity {
             try {
                 JSONObject jsonObject = new JSONObject(s);
                 if (jsonObject.getString("status").equalsIgnoreCase("success")) {
+                    usersItems=new ArrayList<>();
                     JSONArray jsonArray = jsonObject.getJSONArray("data");
                     Log.e("json array", "-------------------" + jsonArray);
                     if (jsonArray.length() < 20 || jsonArray.length() == 0) {

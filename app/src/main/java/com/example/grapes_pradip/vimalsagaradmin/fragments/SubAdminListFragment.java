@@ -205,7 +205,7 @@ public class SubAdminListFragment extends Fragment implements View.OnClickListen
                         Log.e("year", "-----------------" + year);
                         Log.e("day", "-----------------" + day);
 
-                        String fulldate = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + " " + string[1];
+                        String fulldate = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + ", " + string[1];
 
 
                         String role = jsonObject1.getString("Role");

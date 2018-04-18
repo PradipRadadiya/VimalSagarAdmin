@@ -304,7 +304,7 @@ public class EventFragment extends Fragment implements View.OnClickListener {
                         Log.e("year", "-----------------" + year);
                         Log.e("day", "-----------------" + day);
 
-                        String fulldate = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + " " + string[1];
+                        String fulldate = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + ", " + string[1];
 
 
                         allIEventItems.add(new AllIEventItem(id, title, description, address, fulldate, audio, audioimage, videolink, video, videoimage, photo, view,false));

@@ -2,7 +2,9 @@ package com.example.grapes_pradip.vimalsagaradmin.activities.video;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -21,13 +23,16 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.grapes_pradip.vimalsagaradmin.R;
+import com.example.grapes_pradip.vimalsagaradmin.activities.audio.EditAudioActivity;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
@@ -44,6 +49,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.util.Calendar;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 import ch.boye.httpclientandroidlib.client.HttpClient;
@@ -85,13 +91,22 @@ public class EditVideoActivity extends AppCompatActivity implements View.OnClick
     private MarshMallowPermission permission;
     LinearLayout lin_noti;
 
+    private EditText edit_date;
+    private EditText edit_time;
+    String datetimefull;
+    String fulltime;
+    String fulldate;
+
+    String finaldate;
+    String finaltime;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_video);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        permission=new MarshMallowPermission(this);
+        permission = new MarshMallowPermission(this);
         Intent intent = getIntent();
         vid = intent.getStringExtra("vid");
         videoname = intent.getStringExtra("videoname");
@@ -101,9 +116,96 @@ public class EditVideoActivity extends AppCompatActivity implements View.OnClick
         duration = intent.getStringExtra("duration");
         date = intent.getStringExtra("date");
         categoryname = intent.getStringExtra("categoryname");
+
+        Log.e("date","------------"+date);
+        String[] datesplit=date.split(",");
+        Log.e("dates","----------"+datesplit[1].replaceAll("/","-"));
+        Log.e("times","----------"+datesplit[2]);
+
+        String[] newdate=datesplit[1].replaceAll("/","-").split("-");
+        Log.e("day","---------"+newdate[0]);
+        Log.e("month","---------"+newdate[1]);
+        Log.e("year","---------"+newdate[2]);
+
+        finaldate=newdate[2]+"-"+newdate[1]+"-"+newdate[0];
+        finaltime=datesplit[2];
+        Log.e("new date","--------------------"+newdate);
+
         findID();
         idClick();
         setContent();
+
+        edit_date.setEnabled(true);
+        edit_time.setEnabled(true);
+
+        edit_date.setCursorVisible(false);
+        edit_date.setFocusableInTouchMode(false);
+//        edit_date.setFocusable(false);
+
+        edit_time.setCursorVisible(false);
+        edit_time.setFocusableInTouchMode(false);
+//        edit_date.setFocusable(false);
+        edit_date.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    openDatePicker();
+                }
+            }
+        });
+
+        edit_date.setText(finaldate);
+        edit_time.setText(finaltime);
+        edit_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDatePicker();
+            }
+        });
+        edit_time.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+
+                    Calendar mcurrentTime = Calendar.getInstance();
+                    int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                    int minute = mcurrentTime.get(Calendar.MINUTE);
+                    TimePickerDialog mTimePicker;
+                    mTimePicker = new TimePickerDialog(EditVideoActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                        @Override
+                        public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                            edit_time.setText(selectedHour + ":" + selectedMinute + ":00");
+                            fulltime = selectedHour + ":" + selectedMinute + ":00";
+
+//                            e_address.requestFocus();
+                        }
+                    }, hour, minute, true);//Yes 24 hour time
+                    mTimePicker.setTitle("Select Time");
+                    mTimePicker.show();
+                }
+            }
+        });
+
+        edit_time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar mcurrentTime = Calendar.getInstance();
+                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = mcurrentTime.get(Calendar.MINUTE);
+                TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(EditVideoActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        edit_time.setText(selectedHour + ":" + selectedMinute + ":00");
+                        fulltime = selectedHour + ":" + selectedMinute + ":00";
+
+//                        e_address.requestFocus();
+                    }
+                }, hour, minute, true);//Yes 24 hour time
+                mTimePicker.setTitle("Select Time");
+                mTimePicker.show();
+            }
+        });
 
     }
 
@@ -118,11 +220,11 @@ public class EditVideoActivity extends AppCompatActivity implements View.OnClick
                     edit_video_name.setError(getResources().getString(R.string.videoenter));
                     edit_video_name.requestFocus();
                 } else {
+                    datetimefull = edit_date.getText().toString() + " " + edit_time.getText().toString();
                     if (CommonMethod.isInternetConnected(EditVideoActivity.this)) {
                         new EditVideo().execute();
-                    }
-                    else {
-                        Toast.makeText(EditVideoActivity.this,R.string.internet,Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(EditVideoActivity.this, R.string.internet, Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -135,7 +237,7 @@ public class EditVideoActivity extends AppCompatActivity implements View.OnClick
         edit_video_name.setText(videoname);
         edit_category_name.setText(categoryname);
         img_category_icon.setVisibility(View.VISIBLE);
-        Picasso.with(EditVideoActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.videoimage +photo.replaceAll(" ","%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(img_category_icon);
+        Picasso.with(EditVideoActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.videoimage + photo.replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0, 200).into(img_category_icon);
         if (CommonMethod.isInternetConnected(EditVideoActivity.this)) {
 //            new AddInformation().execute(e_title.getText().toString(), e_description.getText().toString(), e_date.getText().toString(), e_address.getText().toString());
         }
@@ -143,7 +245,7 @@ public class EditVideoActivity extends AppCompatActivity implements View.OnClick
 
     @SuppressLint("SetTextI18n")
     private void findID() {
-        lin_noti= (LinearLayout) findViewById(R.id.lin_noti);
+        lin_noti = (LinearLayout) findViewById(R.id.lin_noti);
         lin_noti.setVisibility(View.GONE);
         edit_category_name = (EditText) findViewById(R.id.edit_category_name);
         edit_video_name = (EditText) findViewById(R.id.edit_video_name);
@@ -155,6 +257,8 @@ public class EditVideoActivity extends AppCompatActivity implements View.OnClick
         btn_add = (Button) findViewById(R.id.btn_add);
         txt_header.setText("Edit Video");
         btn_add.setText("Update");
+        edit_time = (EditText) findViewById(R.id.edit_time);
+        edit_date = (EditText) findViewById(R.id.edit_date);
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -168,6 +272,29 @@ public class EditVideoActivity extends AppCompatActivity implements View.OnClick
                 setContent();
             }
         });
+    }
+
+    private void openDatePicker() {
+        final Calendar c = Calendar.getInstance();
+        int mYear = c.get(Calendar.YEAR);
+        int mMonth = c.get(Calendar.MONTH);
+        int mDay = c.get(Calendar.DAY_OF_MONTH);
+//        mHour=c.get(Calendar.HOUR);
+//        mMinute=c.get(Calendar.MINUTE);
+        //launch datepicker modal
+        DatePickerDialog datePickerDialog = new DatePickerDialog(EditVideoActivity.this,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        Log.e("Date---", "DATE SELECTED " + dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+//                        fulldate = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+                        fulldate = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+                        edit_date.setText(fulldate);
+
+                        edit_time.requestFocus();
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.show();
     }
 
     @Override
@@ -184,7 +311,7 @@ public class EditVideoActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void checkPermissionImage() {
-           selectImage();
+        selectImage();
 
     }
 
@@ -201,6 +328,7 @@ public class EditVideoActivity extends AppCompatActivity implements View.OnClick
             }
         }
     }
+
     private void selectImage() {
         final CharSequence[] options = {"Take Photo", "Choose from Gallery", "Cancel"};
 
@@ -240,8 +368,6 @@ public class EditVideoActivity extends AppCompatActivity implements View.OnClick
                     }
 
 
-
-
                 } else if (options[item].equals("Choose from Gallery"))
 
                 {
@@ -258,10 +384,6 @@ public class EditVideoActivity extends AppCompatActivity implements View.OnClick
                             startActivityForResult(intent, 1);
                         }
                     }
-
-
-
-
 
 
                 } else if (options[item].equals("Cancel")) {
@@ -296,9 +418,9 @@ public class EditVideoActivity extends AppCompatActivity implements View.OnClick
                 int columnIndex = c.getColumnIndex(filePath[0]);
                 picturePath = c.getString(columnIndex);
                 c.close();
-                String imagepath = picturePath.substring(picturePath.lastIndexOf("/")+1);
+                String imagepath = picturePath.substring(picturePath.lastIndexOf("/") + 1);
                 Log.e("result", "--------------" + imagepath);
-                txt_photo.setText("Selected photo : "+imagepath);
+                txt_photo.setText("Selected photo : " + imagepath);
                 //Log.w("path of image from gallery......******************.........", picturePath + "");
                 try {
                     decodeFile(picturePath);
@@ -319,12 +441,11 @@ public class EditVideoActivity extends AppCompatActivity implements View.OnClick
                 int columnIndex = c.getColumnIndex(filePath[0]);
                 videoPath = c.getString(columnIndex);
                 c.close();
-                String videopath = videoPath.substring(videoPath.lastIndexOf("/")+1);
+                String videopath = videoPath.substring(videoPath.lastIndexOf("/") + 1);
                 Log.e("result", "--------------" + videopath);
-                txt_video.setText("Selected video : "+videopath);
+                txt_video.setText("Selected video : " + videopath);
                 //Log.w("path of image from gallery......******************.........", picturePath + "");
-            }
-            else if (requestCode == 3) {
+            } else if (requestCode == 3) {
                 flag = true;
 
                 File f = new File(Environment.getExternalStorageDirectory().toString());
@@ -357,15 +478,15 @@ public class EditVideoActivity extends AppCompatActivity implements View.OnClick
                     dir.mkdirs();
                     String pic = CommonMethod.getRandomString(30);
                     File file = new File(dir, String.valueOf(pic + ".jpg"));
-                    picturePath=picturePath+String.valueOf(pic) + ".jpg";
+                    picturePath = picturePath + String.valueOf(pic) + ".jpg";
                     try {
                         outFile = new FileOutputStream(file);
                         bitmap.compress(Bitmap.CompressFormat.JPEG, 40, outFile);
                         outFile.flush();
                         outFile.close();
-                        String imagepath = picturePath.substring(picturePath.lastIndexOf("/")+1);
+                        String imagepath = picturePath.substring(picturePath.lastIndexOf("/") + 1);
                         Log.e("result", "--------------" + imagepath);
-                        txt_photo.setText("Selected photo : "+imagepath);
+                        txt_photo.setText("Selected photo : " + imagepath);
 
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
@@ -377,7 +498,6 @@ public class EditVideoActivity extends AppCompatActivity implements View.OnClick
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
 
 
                 //Log.w("path of image from gallery......******************.........", picturePath + "");
@@ -430,6 +550,7 @@ public class EditVideoActivity extends AppCompatActivity implements View.OnClick
                 multipartEntity.addPart("duration", new StringBody("5:00"));
                 multipartEntity.addPart("hiddenphoto", new StringBody(photo));
                 multipartEntity.addPart("hiddenvideo", new StringBody(video));
+                multipartEntity.addPart("videodate", new StringBody(datetimefull));
 
 
                 if (picturePath == null) {
@@ -521,7 +642,7 @@ public class EditVideoActivity extends AppCompatActivity implements View.OnClick
         img_category_icon.setVisibility(View.VISIBLE);
         img_category_icon.setImageBitmap(thumbnail);
         OutputStream outFile = null;
-        File file=new File(picturePath);
+        File file = new File(picturePath);
         outFile = new FileOutputStream(file);
         thumbnail.compress(Bitmap.CompressFormat.JPEG, 40, outFile);
         outFile.flush();

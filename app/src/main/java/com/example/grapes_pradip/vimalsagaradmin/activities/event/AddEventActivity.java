@@ -127,6 +127,7 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
 
         edit_time.setCursorVisible(false);
         edit_time.setFocusableInTouchMode(false);
+
 //        edit_date.setFocusable(false);
         edit_date.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -613,16 +614,16 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
 
             Log.e("method", "----------------" + "call");
 
-            String title = e_title.getText().toString();
-            String description = e_description.getText().toString();
-            String date = edit_date.getText().toString();
-            String address = e_address.getText().toString();
-            String VideoLink = edit_videolink.getText().toString();
+            String title = CommonMethod.encodeEmoji(e_title.getText().toString());
+            String description =CommonMethod.encodeEmoji(e_description.getText().toString());
+            String date = CommonMethod.encodeEmoji(edit_date.getText().toString());
+            String address = CommonMethod.encodeEmoji(e_address.getText().toString());
+            String VideoLink = CommonMethod.encodeEmoji(edit_videolink.getText().toString());
 
-            Log.e("title", "----------" + title);
-            Log.e("description", "----------" + description);
+            Log.e("title", "----------" + CommonMethod.encodeEmoji(title));
+            Log.e("description", "----------" + CommonMethod.encodeEmoji(description));
             Log.e("date", "----------" + date);
-            Log.e("address", "----------" + address);
+            Log.e("address", "----------" + CommonMethod.encodeEmoji(address));
             Log.e("VideoLink", "----------" + VideoLink);
             String Audio = "no audio";
             String Video = "no video";

@@ -19,6 +19,7 @@ import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.activities.information.EditInformationActivity;
 import com.example.grapes_pradip.vimalsagaradmin.activities.information.InfomationDetailActivity;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
+import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
 import com.example.grapes_pradip.vimalsagaradmin.common.JsonParser;
 import com.example.grapes_pradip.vimalsagaradmin.model.information.AllInformationItem;
@@ -53,11 +54,11 @@ public class RecyclerInformationAdapter extends RecyclerView.Adapter<RecyclerInf
     public void onBindViewHolder(final ViewHolder holder, int i) {
 
         final AllInformationItem orderItem = itemArrayList.get(i);
-        holder.txt_title.setText(orderItem.getTitle());
-        holder.txt_description.setText(orderItem.getDiscription());
-        holder.txt_date.setText(orderItem.getDate());
-        holder.txt_location.setText(orderItem.getAddress());
-        holder.txt_views.setText(orderItem.getView());
+        holder.txt_title.setText(CommonMethod.decodeEmoji(orderItem.getTitle()));
+        holder.txt_description.setText(CommonMethod.decodeEmoji(orderItem.getDiscription()));
+        holder.txt_date.setText(CommonMethod.decodeEmoji(orderItem.getDate()));
+        holder.txt_location.setText(CommonMethod.decodeEmoji(orderItem.getAddress()));
+        holder.txt_views.setText(CommonMethod.decodeEmoji(orderItem.getView()));
         ((SwipeLayout) holder.itemView).setItemState(SwipeLayout.ITEM_STATE_COLLAPSED, true);
         holder.check_delete.setChecked(orderItem.isSelected() ? true : false);
 

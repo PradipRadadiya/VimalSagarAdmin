@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -50,7 +51,7 @@ public class RecyclerAdminAdapter extends RecyclerView.Adapter<RecyclerAdminAdap
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_sub_admin, viewGroup, false);
-        sharedPreferencesClass=new SharedPreferencesClass(activity);
+        sharedPreferencesClass = new SharedPreferencesClass(activity);
         return new ViewHolder(v);
     }
 
@@ -174,6 +175,7 @@ public class RecyclerAdminAdapter extends RecyclerView.Adapter<RecyclerAdminAdap
             final TextView txt_password = (TextView) dialog.findViewById(R.id.txt_password);
             final TextView last_update = (TextView) dialog.findViewById(R.id.last_update);
             final TextView txt_role = (TextView) dialog.findViewById(R.id.txt_role);
+            final ImageView img_close = (ImageView) dialog.findViewById(R.id.img_close);
             txt_id.setText(itemArrayList.get(getAdapterPosition()).getId());
             txt_name.setText(itemArrayList.get(getAdapterPosition()).getName());
             txt_email.setText(itemArrayList.get(getAdapterPosition()).getEmail());
@@ -182,6 +184,12 @@ public class RecyclerAdminAdapter extends RecyclerView.Adapter<RecyclerAdminAdap
             txt_password.setText(itemArrayList.get(getAdapterPosition()).getPassword());
             last_update.setText(itemArrayList.get(getAdapterPosition()).getDate());
             txt_role.setText(itemArrayList.get(getAdapterPosition()).getRole());
+            img_close.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
 

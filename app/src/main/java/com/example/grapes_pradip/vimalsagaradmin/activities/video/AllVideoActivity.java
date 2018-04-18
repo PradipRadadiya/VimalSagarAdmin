@@ -284,7 +284,7 @@ public class AllVideoActivity extends AppCompatActivity implements View.OnClickL
                         Log.e("year", "-----------------" + year);
                         Log.e("day", "-----------------" + day);
 
-                        String fulldate = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + " " + string[1];
+                        String fulldate = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + ", " + string[1];
                         allVideoItems.add(new AllVideoItem(id, videoname, categoryid, audio, photo, duration, fulldate, categoryName, view,false));
                     }
                 }

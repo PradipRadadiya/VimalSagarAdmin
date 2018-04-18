@@ -295,7 +295,7 @@ public class ThoughtFragment extends Fragment implements View.OnClickListener {
                         Log.e("year", "-----------------" + year);
                         Log.e("day", "-----------------" + day);
 
-                        String fulldate = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + " " + string[1];
+                        String fulldate = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + ", " + string[1];
                         allThoughtItemArrayList.add(new AllThoughtItem(id, title, description, fulldate, view,false));
                     }
                 }

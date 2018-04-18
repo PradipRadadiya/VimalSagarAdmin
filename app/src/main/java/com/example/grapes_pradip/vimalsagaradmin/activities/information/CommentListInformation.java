@@ -205,7 +205,7 @@ public class CommentListInformation extends AppCompatActivity {
                         Log.e("year", "-----------------" + year);
                         Log.e("day", "-----------------" + day);
 
-                        String fulldate = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + " " + string[1];
+                        String fulldate = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + ", " + string[1];
                         commentLists.add(new com.example.grapes_pradip.vimalsagaradmin.model.information.CommentList(comment, is_approved, userID, informationID, id, fulldate, name));
                     }
 

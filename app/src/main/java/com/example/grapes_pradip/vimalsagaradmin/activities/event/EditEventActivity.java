@@ -137,6 +137,7 @@ public class EditEventActivity extends AppCompatActivity implements View.OnClick
     String fulltime;
     String fulldate;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -690,11 +691,11 @@ public class EditEventActivity extends AppCompatActivity implements View.OnClick
 
             Log.e("method", "----------------" + "call");
 
-            String title = e_title.getText().toString();
-            String description = e_description.getText().toString();
-            String date = edit_date.getText().toString();
-            String address = e_address.getText().toString();
-            String VideoLink = edit_videolink.getText().toString();
+            String title = CommonMethod.encodeEmoji(e_title.getText().toString());
+            String description = CommonMethod.encodeEmoji(e_description.getText().toString());
+            String date = CommonMethod.encodeEmoji(edit_date.getText().toString());
+            String address = CommonMethod.encodeEmoji(e_address.getText().toString());
+            String VideoLink = CommonMethod.encodeEmoji(edit_videolink.getText().toString());
 
             Log.e("title", "----------" + title);
             Log.e("description", "----------" + description);

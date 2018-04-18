@@ -4,6 +4,9 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.ConnectivityManager;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -48,5 +51,25 @@ public class CommonMethod {
         for (int i = 0; i < sizeOfRandomString; ++i)
             sb.append(ALLOWED_CHARACTERS.charAt(random.nextInt(ALLOWED_CHARACTERS.length())));
         return sb.toString();
+    }
+
+    public static String encodeEmoji (String message) {
+        try {
+            return URLEncoder.encode(message,
+                    "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            return message;
+        }
+    }
+
+
+    public static String decodeEmoji (String message) {
+        String myString= null;
+        try {
+            return URLDecoder.decode(
+                    message, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            return message;
+        }
     }
 }

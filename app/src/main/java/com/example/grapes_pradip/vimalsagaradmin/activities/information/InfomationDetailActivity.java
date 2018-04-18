@@ -518,7 +518,7 @@ public class InfomationDetailActivity extends AppCompatActivity implements View.
                         Log.e("year", "-----------------" + year);
                         Log.e("day", "-----------------" + day);
 
-                        String fulldate = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + " " + string[1];
+                        String fulldate = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + ", " + string[1];
                         commentLists.add(new com.example.grapes_pradip.vimalsagaradmin.model.information.CommentList(comment, is_approved, userID, informationID, id, fulldate, name));
                     }
 
@@ -664,13 +664,13 @@ public class InfomationDetailActivity extends AppCompatActivity implements View.
                         Log.e("intMonth", "-----------------" + intMonth);
                         Log.e("year", "-----------------" + year);
                         Log.e("day", "-----------------" + day);
-                        date = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + " " + string[1];
+                        date = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + ", " + string[1];
 
-                        txt_title.setText(title);
-                        txt_date.setText(date);
-                        txt_description.setText(description);
-                        txt_address.setText(address);
-                        txt_views.setText(view);
+                        txt_title.setText(CommonMethod.decodeEmoji(title));
+                        txt_date.setText(CommonMethod.decodeEmoji(date));
+                        txt_description.setText(CommonMethod.decodeEmoji(description));
+                        txt_address.setText(CommonMethod.decodeEmoji(address));
+                        txt_views.setText(CommonMethod.decodeEmoji(view));
 
 
                         if (click_action.equalsIgnoreCase("information_comment_click")) {

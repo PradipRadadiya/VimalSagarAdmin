@@ -208,6 +208,7 @@ public class InformationFragment extends Fragment implements View.OnClickListene
 
                     // Setting Positive "Yes" Button
                     alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
                         public void onClick(DialogInterface dialog, int which) {
 
                             // Write your code here to invoke YES event
@@ -301,7 +302,7 @@ public class InformationFragment extends Fragment implements View.OnClickListene
                         Log.e("year", "-----------------" + year);
                         Log.e("day", "-----------------" + day);
 
-                        String fulldate = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + " " + string[1];
+                        String fulldate = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + ", " + string[1];
 
                         allInformationItems.add(new AllInformationItem(id, title, description, address, fulldate, view,false));
                     }

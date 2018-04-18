@@ -580,7 +580,7 @@ public class ThoughtDetailActivity extends AppCompatActivity implements View.OnC
                         Log.e("year", "-----------------" + year);
                         Log.e("day", "-----------------" + day);
 
-                        String fulldate = dayOfTheWeek + " , " + day + "/" + intMonth + "/" + year + " " + string[1];
+                        String fulldate = dayOfTheWeek + " , " + day + "/" + intMonth + "/" + year + ", " + string[1];
                         commentLists.add(new com.example.grapes_pradip.vimalsagaradmin.model.information.CommentList(comment, is_approved, userID, informationID, id, fulldate, name));
                     }
 
@@ -723,12 +723,12 @@ public class ThoughtDetailActivity extends AppCompatActivity implements View.OnC
                         Log.e("intMonth", "-----------------" + intMonth);
                         Log.e("year", "-----------------" + year);
                         Log.e("day", "-----------------" + day);
-                        date = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + " " + string[1];
+                        date = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + ", " + string[1];
 
-                        txt_title.setText(title);
-                        txt_date.setText(date);
-                        txt_description.setText(description);
-                        txt_views.setText(view);
+                        txt_title.setText(CommonMethod.decodeEmoji(title));
+                        txt_date.setText(CommonMethod.decodeEmoji(date));
+                        txt_description.setText(CommonMethod.decodeEmoji(description));
+                        txt_views.setText(CommonMethod.decodeEmoji(view));
 
 
                         if (click_action.equalsIgnoreCase("thought_comment_click")){

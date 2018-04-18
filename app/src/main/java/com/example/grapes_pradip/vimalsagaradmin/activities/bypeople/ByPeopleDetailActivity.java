@@ -637,7 +637,7 @@ public class ByPeopleDetailActivity extends AppCompatActivity implements View.On
                         Log.e("year", "-----------------" + year);
                         Log.e("day", "-----------------" + day);
 
-                        String fulldate = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + " " + string[1];
+                        String fulldate = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + ", " + string[1];
                         commentLists.add(new com.example.grapes_pradip.vimalsagaradmin.model.information.CommentList(comment, is_approved, userID, informationID, id, fulldate, name));
                     }
 
@@ -799,7 +799,7 @@ public class ByPeopleDetailActivity extends AppCompatActivity implements View.On
                         Log.e("intMonth", "-----------------" + intMonth);
                         Log.e("year", "-----------------" + year);
                         Log.e("day", "-----------------" + day);
-                        date = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + " " + string[1];
+                        date = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + ", " + string[1];
 
                         setContent();
 

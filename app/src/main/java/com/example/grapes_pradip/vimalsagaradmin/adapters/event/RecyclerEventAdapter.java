@@ -19,6 +19,7 @@ import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.activities.event.EditEventActivity;
 import com.example.grapes_pradip.vimalsagaradmin.activities.event.EventDetailActivity;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
+import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
 import com.example.grapes_pradip.vimalsagaradmin.common.JsonParser;
 import com.example.grapes_pradip.vimalsagaradmin.model.event.AllIEventItem;
@@ -57,11 +58,11 @@ public class RecyclerEventAdapter extends RecyclerView.Adapter<RecyclerEventAdap
     public void onBindViewHolder(final ViewHolder holder, int i) {
 
         final AllIEventItem eventItem = itemArrayList.get(i);
-        holder.txt_title.setText(eventItem.getTitle());
-        holder.txt_description.setText(eventItem.getDescription());
-        holder.txt_date.setText(eventItem.getDate());
-        holder.txt_location.setText(eventItem.getAddress());
-        holder.txt_views.setText(eventItem.getView());
+        holder.txt_title.setText(CommonMethod.decodeEmoji(eventItem.getTitle()));
+        holder.txt_description.setText(CommonMethod.decodeEmoji(eventItem.getDescription()));
+        holder.txt_date.setText(CommonMethod.decodeEmoji(eventItem.getDate()));
+        holder.txt_location.setText(CommonMethod.decodeEmoji(eventItem.getAddress()));
+        holder.txt_views.setText(CommonMethod.decodeEmoji(eventItem.getView()));
         ((SwipeLayout) holder.itemView).setItemState(SwipeLayout.ITEM_STATE_COLLAPSED, true);
 
         holder.delete_data.setChecked(eventItem.isSelected() ? true : false);

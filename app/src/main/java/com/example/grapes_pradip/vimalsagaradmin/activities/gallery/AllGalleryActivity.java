@@ -54,6 +54,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 import ch.boye.httpclientandroidlib.client.HttpClient;
@@ -95,8 +97,6 @@ public class AllGalleryActivity extends AppCompatActivity implements View.OnClic
     private int firstVisibleItem;
     private int visibleItemCount;
     private int totalItemCount;
-
-
     private String picturePath = null;
     private boolean flag = false;
     private Bitmap thumbnail;
@@ -106,6 +106,9 @@ public class AllGalleryActivity extends AppCompatActivity implements View.OnClic
     private MarshMallowPermission permission;
     private Intent intent;
     ProgressBar progress_load;
+    private static final int CustomGallerySelectId = 1;//Set Intent Id
+    public static final String CustomGalleryIntentKey = "ImageArray";//Set Intent Key Value
+    public static String gallerycid;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -114,6 +117,7 @@ public class AllGalleryActivity extends AppCompatActivity implements View.OnClic
         permission = new MarshMallowPermission(this);
         Intent intent = getIntent();
         cid = intent.getStringExtra("gallery_category_id");
+        gallerycid=cid;
         title = intent.getStringExtra("title");
         linearLayoutManager = new LinearLayoutManager(AllGalleryActivity.this);
         gridLayoutManager = new GridLayoutManager(AllGalleryActivity.this, 3);
@@ -200,6 +204,9 @@ public class AllGalleryActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.txt_addnew:
+
+                startActivityForResult(new Intent(AllGalleryActivity.this, CustomGallery_Activity.class), CustomGallerySelectId);
+                /*
                 dialog = new Dialog(AllGalleryActivity.this);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setContentView(R.layout.add_image);
@@ -230,7 +237,7 @@ public class AllGalleryActivity extends AppCompatActivity implements View.OnClic
                 });
                 dialog.getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
+*/
                 break;
             case R.id.img_back:
                 finish();
@@ -385,8 +392,8 @@ public class AllGalleryActivity extends AppCompatActivity implements View.OnClic
                         String categoryid = jsonObject1.getString("CID");
                         String photo = jsonObject1.getString("Photo");
                         String date = jsonObject1.getString("Date");
-                        imageItems.add(new AllImageItem(id, categoryid, photo, date,false));
-                        itemSplashArrayList.add(new ImageItemSplash(CommonURL.ImagePath + CommonAPI_Name.Gallery + photo, CommonURL.ImagePath + CommonAPI_Name.Gallery + photo,false));
+                        imageItems.add(new AllImageItem(id, categoryid, photo, date, false));
+                        itemSplashArrayList.add(new ImageItemSplash(CommonURL.ImagePath + CommonAPI_Name.Gallery + photo, CommonURL.ImagePath + CommonAPI_Name.Gallery + photo, false));
                     }
                 }
 
@@ -433,6 +440,23 @@ public class AllGalleryActivity extends AppCompatActivity implements View.OnClic
 
         super.onActivityResult(requestCode, resultCode, data);
 
+        switch (requestCode) {
+            case CustomGallerySelectId:
+                if (requestCode == RESULT_OK) {
+                    String imagesArray = data.getStringExtra(CustomGalleryIntentKey);//get Intent data
+                    //Convert string array into List by splitting by ',' and substring after '[' and before ']'
+                    Log.e("images", "---------------" + imagesArray);
+//                    List<String> selectedImages = Arrays.asList(imagesArray.substring(1, imagesArray.length() - 1).split(", "));
+
+//                    Log.e("images","---------------"+selectedImages);
+//                    loadGridView(new ArrayList<String>(selectedImages));//call load gridview method by passing converted list into arrayList
+                }
+                break;
+
+        }
+
+
+/*
         if (resultCode == RESULT_OK) {
             flag = true;
             if (requestCode == 1) {
@@ -466,7 +490,7 @@ public class AllGalleryActivity extends AppCompatActivity implements View.OnClic
 //                //Log.w("path of image from gallery......******************.........", picturePath + "");
 //                img_category_icon.setVisibility(View.VISIBLE);
 //                img_category_icon.setImageBitmap(thumbnail);
-            } else if (requestCode == 2) {
+           /* } else if (requestCode == 2) {
                 flag = true;
 
                 File f = new File(Environment.getExternalStorageDirectory().toString());
@@ -526,7 +550,7 @@ public class AllGalleryActivity extends AppCompatActivity implements View.OnClic
                 //Log.w("path of image from gallery......******************.........", picturePath + "");
                 Log.e("picturepath", "--------------" + picturePath);
             }
-        }
+        }*/
     }
 
     private class AddImage extends AsyncTask<String, Void, String> {
@@ -546,11 +570,7 @@ public class AllGalleryActivity extends AppCompatActivity implements View.OnClic
         protected String doInBackground(String... params) {
 
             Log.e("method", "----------------" + "call");
-
-
             String Photo = "";
-
-
             try {
                 HttpClient httpClient = new DefaultHttpClient();
                 HttpPost httpPost = new HttpPost(CommonURL.Main_url + CommonAPI_Name.addphotogallery);
@@ -676,7 +696,7 @@ public class AllGalleryActivity extends AppCompatActivity implements View.OnClic
         img_category_icon.setVisibility(View.VISIBLE);
         img_category_icon.setImageBitmap(thumbnail);
         OutputStream outFile = null;
-        File file=new File(picturePath);
+        File file = new File(picturePath);
         outFile = new FileOutputStream(file);
         thumbnail.compress(Bitmap.CompressFormat.JPEG, 40, outFile);
         outFile.flush();

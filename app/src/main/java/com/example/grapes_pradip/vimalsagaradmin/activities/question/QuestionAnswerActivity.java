@@ -272,7 +272,7 @@ public class QuestionAnswerActivity extends AppCompatActivity implements View.On
                         Log.e("year", "-----------------" + year);
                         Log.e("day", "-----------------" + day);
 
-                        String fulldate = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + " " + string[1];
+                        String fulldate = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + ", " + string[1];
                         responseArrayList.add(new QuestiinItem(answer, is_Approved, uid, question, id, fulldate, name, view,false));
                     }
                 }

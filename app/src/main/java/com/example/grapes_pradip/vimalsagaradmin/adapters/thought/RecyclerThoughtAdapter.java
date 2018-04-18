@@ -18,6 +18,7 @@ import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.activities.thought.EditThoughtActivity;
 import com.example.grapes_pradip.vimalsagaradmin.activities.thought.ThoughtDetailActivity;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
+import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
 import com.example.grapes_pradip.vimalsagaradmin.common.JsonParser;
 import com.example.grapes_pradip.vimalsagaradmin.model.thought.AllThoughtItem;
@@ -52,10 +53,10 @@ public class RecyclerThoughtAdapter extends RecyclerView.Adapter<RecyclerThought
     public void onBindViewHolder(final ViewHolder holder, int i) {
 
         final AllThoughtItem thoughtItem = itemArrayList.get(i);
-        holder.txt_title.setText(thoughtItem.getTitle());
-        holder.txt_des.setText(thoughtItem.getDescription());
-        holder.txt_date.setText(thoughtItem.getDate());
-        holder.txt_views.setText(thoughtItem.getView());
+        holder.txt_title.setText(CommonMethod.decodeEmoji(thoughtItem.getTitle()));
+        holder.txt_des.setText(CommonMethod.decodeEmoji(thoughtItem.getDescription()));
+        holder.txt_date.setText(CommonMethod.decodeEmoji(thoughtItem.getDate()));
+        holder.txt_views.setText(CommonMethod.decodeEmoji(thoughtItem.getView()));
         ((SwipeLayout) holder.itemView).setItemState(SwipeLayout.ITEM_STATE_COLLAPSED, true);
         holder.checkbox_thought.setChecked(thoughtItem.isSelected() ? true : false);
         holder.txt_edit.setOnClickListener(new View.OnClickListener() {

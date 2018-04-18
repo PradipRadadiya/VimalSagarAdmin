@@ -282,7 +282,7 @@ public class AllAudioActivity extends AppCompatActivity implements View.OnClickL
                         Log.e("year", "-----------------" + year);
                         Log.e("day", "-----------------" + day);
 
-                        String fulldate = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + " " + string[1];
+                        String fulldate = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + ", " + string[1];
                         allAudioItems.add(new AllAudioItem(id, audioname, categoryid, audio, photo, duration, fulldate, categoryName, view,false));
                     }
                 }

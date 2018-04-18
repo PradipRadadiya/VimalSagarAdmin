@@ -74,7 +74,7 @@ public class EditThoughtActivity extends AppCompatActivity {
                 edit_description.requestFocus();
             } else {
                 if (CommonMethod.isInternetConnected(EditThoughtActivity.this)) {
-                    new EditThought().execute(tid, edit_title.getText().toString(), edit_description.getText().toString());
+                    new EditThought().execute(tid, CommonMethod.encodeEmoji(edit_title.getText().toString()), CommonMethod.encodeEmoji(edit_description.getText().toString()));
                 }
                 else {
                     Toast.makeText(EditThoughtActivity.this,R.string.internet,Toast.LENGTH_SHORT).show();

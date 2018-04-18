@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#eeeeee"
+    >
+
+    <!-- Grid View fr Custom Gallery  -->
+    <include layout="@layout/toolbar_back"
+        android:id="@+id/toolbar"
+        />
+    <include
+        android:layout_below="@+id/toolbar"
+        android:id="@+id/galleryImagesGridView"
+        layout="@layout/gridview_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/selectImagesBtn" />
+
+    <!-- Button to return Selected Images  -->
+    <Button
+        android:id="@+id/selectImagesBtn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="5dp"
+        android:background="#ffffff"
+        android:textColor="@color/colorPrimary"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:text="Upload"
+        android:visibility="gone" />
+</RelativeLayout>

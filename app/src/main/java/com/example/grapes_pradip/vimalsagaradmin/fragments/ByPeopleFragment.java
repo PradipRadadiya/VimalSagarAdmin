@@ -186,7 +186,7 @@ public class ByPeopleFragment extends Fragment {
                         Log.e("year", "-----------------" + year);
                         Log.e("day", "-----------------" + day);
 
-                        String fulldate = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + " " + string[1];
+                        String fulldate = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + ", " + string[1];
 
 
                         byPeopleItemArrayList.add(new ByPeopleItem(post, title, videoimage, photo, fulldate, name, audioimage, videoimage, is_approved, video, uid, id, Audio, view));

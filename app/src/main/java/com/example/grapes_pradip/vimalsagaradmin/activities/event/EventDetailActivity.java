@@ -229,11 +229,11 @@ public class EventDetailActivity extends AppCompatActivity implements View.OnCli
     private void setContent() {
         txt_header.setText("Event Detail");
 
-        txt_title.setText(title);
-        txt_description.setText(description);
-        txt_address.setText(address);
-        txt_date.setText(date);
-        txt_videolink.setText(videoLink);
+        txt_title.setText(CommonMethod.decodeEmoji(title));
+        txt_description.setText(CommonMethod.decodeEmoji(description));
+        txt_address.setText(CommonMethod.decodeEmoji(address));
+        txt_date.setText(CommonMethod.decodeEmoji(date));
+        txt_videolink.setText(CommonMethod.decodeEmoji(videoLink));
 
         if (photo.equalsIgnoreCase("null")) {
             txt_nodata.setVisibility(View.VISIBLE);
@@ -778,7 +778,7 @@ public class EventDetailActivity extends AppCompatActivity implements View.OnCli
                         Log.e("year", "-----------------" + year);
                         Log.e("day", "-----------------" + day);
 
-                        String fulldate = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + " " + string[1];
+                        String fulldate = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + ", " + string[1];
                         commentLists.add(new com.example.grapes_pradip.vimalsagaradmin.model.information.CommentList(comment, is_approved, userID, informationID, id, fulldate, name));
                     }
 
@@ -957,7 +957,7 @@ public class EventDetailActivity extends AppCompatActivity implements View.OnCli
                         Log.e("intMonth", "-----------------" + intMonth);
                         Log.e("year", "-----------------" + year);
                         Log.e("day", "-----------------" + day);
-                        date = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + " " + string[1];
+                        date = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + ", " + string[1];
 
 
                         if (click_action.equalsIgnoreCase("event_comment_click")) {

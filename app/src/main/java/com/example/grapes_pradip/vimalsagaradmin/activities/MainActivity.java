@@ -290,9 +290,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         lin_bypeople = (LinearLayout) headerLayout.findViewById(R.id.lin_bypeople);
         lin_user = (LinearLayout) headerLayout.findViewById(R.id.lin_user);
         lin_setting = (LinearLayout) headerLayout.findViewById(R.id.lin_setting);
+
     }
 
     private void idClick() {
+
         img_home.setOnClickListener(this);
         lin_home.setOnClickListener(this);
         lin_info.setOnClickListener(this);
@@ -307,6 +309,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         lin_bypeople.setOnClickListener(this);
         lin_user.setOnClickListener(this);
         lin_setting.setOnClickListener(this);
+
     }
 
     @Override

@@ -64,10 +64,10 @@ public class RecyclerCommentAdapter extends RecyclerView.Adapter<RecyclerComment
             if (commentList.getName().equalsIgnoreCase("null")) {
                 holder.txt_unm.setText("Admin");
             } else {
-                holder.txt_unm.setText(commentList.getName());
+                holder.txt_unm.setText(CommonMethod.decodeEmoji(commentList.getName()));
             }
-            holder.txt_post.setText(commentList.getComment());
-            holder.txt_date.setText(commentList.getDate());
+            holder.txt_post.setText(CommonMethod.decodeEmoji(commentList.getComment()));
+            holder.txt_date.setText(CommonMethod.decodeEmoji(commentList.getDate()));
 
             holder.lin_delete.setOnClickListener(new View.OnClickListener() {
                 @Override

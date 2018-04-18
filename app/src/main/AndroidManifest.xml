@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:fullBackupContent="@xml/backup_descriptor"
         android:hardwareAccelerated="false"
@@ -35,6 +36,9 @@
         <activity
             android:name=".activities.splash.Splash_Activity1"
             android:screenOrientation="portrait" />
+
+        <activity android:name=".activities.gallery.CustomGallery_Activity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/title_activity_main2"

@@ -2,7 +2,9 @@ package com.example.grapes_pradip.vimalsagaradmin.activities.audio;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -22,13 +24,16 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.grapes_pradip.vimalsagaradmin.R;
+import com.example.grapes_pradip.vimalsagaradmin.activities.event.AddEventActivity;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
@@ -45,6 +50,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.util.Calendar;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 import ch.boye.httpclientandroidlib.client.HttpClient;
@@ -80,7 +86,11 @@ public class AddAudioActivity extends AppCompatActivity implements View.OnClickL
     long totalSize = 0;
     KProgressHUD hud;
     private Switch notificationswitch;
-    String notify="0";
+    String notify = "0";
+    private EditText edit_date, edit_time;
+    String fulltime;
+    private String fulldate;
+    String datetimefull;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -95,6 +105,101 @@ public class AddAudioActivity extends AppCompatActivity implements View.OnClickL
         findID();
         idClick();
 
+        edit_date.setCursorVisible(false);
+        edit_date.setFocusableInTouchMode(false);
+//        edit_date.setFocusable(false);
+
+        edit_time.setCursorVisible(false);
+        edit_time.setFocusableInTouchMode(false);
+
+        edit_date.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+                    openDatePicker();
+                }
+            }
+        });
+
+        edit_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+                openDatePicker();
+            }
+        });
+
+
+        edit_time.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+
+                    Calendar mcurrentTime = Calendar.getInstance();
+                    int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                    int minute = mcurrentTime.get(Calendar.MINUTE);
+                    TimePickerDialog mTimePicker;
+                    mTimePicker = new TimePickerDialog(AddAudioActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                        @Override
+                        public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                            edit_time.setText(selectedHour + ":" + selectedMinute + ":00");
+                            fulltime = selectedHour + ":" + selectedMinute + ":00";
+
+//                            e_address.requestFocus();
+                        }
+                    }, hour, minute, true);//Yes 24 hour time
+                    mTimePicker.setTitle("Select Time");
+                    mTimePicker.show();
+                }
+            }
+        });
+
+        edit_time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar mcurrentTime = Calendar.getInstance();
+                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = mcurrentTime.get(Calendar.MINUTE);
+                TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(AddAudioActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        edit_time.setText(selectedHour + ":" + selectedMinute + ":00");
+                        fulltime = selectedHour + ":" + selectedMinute + ":00";
+
+//                            e_address.requestFocus();
+                    }
+                }, hour, minute, true);//Yes 24 hour time
+                mTimePicker.setTitle("Select Time");
+                mTimePicker.show();
+            }
+        });
+
+
+    }
+
+    private void openDatePicker() {
+        final Calendar c = Calendar.getInstance();
+        int mYear = c.get(Calendar.YEAR);
+        int mMonth = c.get(Calendar.MONTH);
+        int mDay = c.get(Calendar.DAY_OF_MONTH);
+//        mHour=c.get(Calendar.HOUR);
+//        mMinute=c.get(Calendar.MINUTE);
+        //launch datepicker modal
+        DatePickerDialog datePickerDialog = new DatePickerDialog(AddAudioActivity.this,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        Log.e("Date---", "DATE SELECTED " + dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+//                        fulldate = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+                        fulldate = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+                        edit_date.setText(fulldate);
+
+//                        edit_time.requestFocus();
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.show();
     }
 
     private void idClick() {
@@ -111,8 +216,15 @@ public class AddAudioActivity extends AppCompatActivity implements View.OnClickL
                 } else if (audioPath == null) {
                     Toast.makeText(AddAudioActivity.this, R.string.uploadaudio, Toast.LENGTH_SHORT).show();
 
+                } else if (TextUtils.isEmpty(edit_date.getText().toString())) {
+                    edit_date.setError(getResources().getString(R.string.selectdate));
+                    edit_audio_name.requestFocus();
+                } else if (TextUtils.isEmpty(edit_time.getText().toString())) {
+                    edit_time.setError(getResources().getString(R.string.selecttime));
+                    edit_audio_name.requestFocus();
                 } else {
                     if (CommonMethod.isInternetConnected(AddAudioActivity.this)) {
+                        datetimefull = fulldate + " " + fulltime;
                         new AddAudio().execute();
                     } else {
                         Toast.makeText(AddAudioActivity.this, R.string.internet, Toast.LENGTH_SHORT).show();
@@ -131,6 +243,8 @@ public class AddAudioActivity extends AppCompatActivity implements View.OnClickL
 
     @SuppressLint("SetTextI18n")
     private void findID() {
+        edit_date = (EditText) findViewById(R.id.edit_date);
+        edit_time = (EditText) findViewById(R.id.edit_time);
         edit_category_name = (EditText) findViewById(R.id.edit_category_name);
         edit_audio_name = (EditText) findViewById(R.id.edit_audio_name);
         txt_header = (TextView) findViewById(R.id.txt_header);
@@ -141,17 +255,17 @@ public class AddAudioActivity extends AppCompatActivity implements View.OnClickL
         btn_add = (Button) findViewById(R.id.btn_add);
         txt_header.setText("Add Audio");
         edit_category_name.setText(categoryname);
-        notificationswitch= (Switch) findViewById(R.id.notificationswitch);
+        notificationswitch = (Switch) findViewById(R.id.notificationswitch);
 
         notificationswitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    Log.e("checked","----------------"+isChecked);
-                    notify="0";
-                }else{
-                    Log.e("checked","----------------"+isChecked);
-                    notify="1";
+                if (isChecked) {
+                    Log.e("checked", "----------------" + isChecked);
+                    notify = "0";
+                } else {
+                    Log.e("checked", "----------------" + isChecked);
+                    notify = "1";
                 }
             }
         });
@@ -185,21 +299,35 @@ public class AddAudioActivity extends AppCompatActivity implements View.OnClickL
 
     private void checkPermissionAudio() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+
             intent = new Intent(Intent.ACTION_PICK, MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(intent, 2);
+
+//
+//            Intent intent = new Intent()
+//                    .setType("*/*")
+//                    .setAction(Intent.ACTION_GET_CONTENT);
+//
+//            startActivityForResult(Intent.createChooser(intent, "Select a file"), 2);
+
+
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!permission.checkPermissionForExternalStorage()) {
                 permission.requestPermissionForExternalStorage();
             } else {
-                intent = new Intent(Intent.ACTION_PICK, MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent, 2);
+                Intent intent = new Intent()
+                        .setType("*/*")
+                        .setAction(Intent.ACTION_GET_CONTENT);
+
+                startActivityForResult(Intent.createChooser(intent, "Select a file"), 2);
+//                intent = new Intent(Intent.ACTION_PICK, MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
+//                startActivityForResult(intent, 2);
             }
         }
     }
 
     private void selectImage() {
         final CharSequence[] options = {"Take Photo", "Choose from Gallery", "Cancel"};
-
 
         AlertDialog.Builder builder = new AlertDialog.Builder(AddAudioActivity.this);
 
@@ -294,6 +422,7 @@ public class AddAudioActivity extends AppCompatActivity implements View.OnClickL
                 //Log.w("path of image from gallery......******************.........", picturePath + "");
 //                img_category_icon.setVisibility(View.VISIBLE);
 //                img_category_icon.setImageBitmap(thumbnail);
+
             } else if (requestCode == 2) {
                 Uri selectedImage = data.getData();
                 String[] filePath = {MediaStore.Audio.Media.DATA};
@@ -367,6 +496,7 @@ public class AddAudioActivity extends AppCompatActivity implements View.OnClickL
             }
         }
     }
+
     public void decodeFile(String filePath) throws IOException {
 
         // Decode image size
@@ -396,7 +526,7 @@ public class AddAudioActivity extends AppCompatActivity implements View.OnClickL
         img_category_icon.setVisibility(View.VISIBLE);
         img_category_icon.setImageBitmap(thumbnail);
         OutputStream outFile = null;
-        File file=new File(picturePath);
+        File file = new File(picturePath);
         outFile = new FileOutputStream(file);
         thumbnail.compress(Bitmap.CompressFormat.JPEG, 40, outFile);
         outFile.flush();
@@ -494,6 +624,7 @@ public class AddAudioActivity extends AppCompatActivity implements View.OnClickL
                 multipartEntity.addPart("Photo", fileBody1);
                 multipartEntity.addPart("Audio", fileBody2);
                 multipartEntity.addPart("Is_notify", new StringBody(notify));
+                multipartEntity.addPart("audiodate", new StringBody(datetimefull));
 
                 httpPost.setEntity(multipartEntity);
                 HttpResponse httpResponse = httpClient.execute(httpPost);

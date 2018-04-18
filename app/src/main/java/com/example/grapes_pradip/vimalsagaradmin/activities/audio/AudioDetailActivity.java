@@ -62,6 +62,7 @@ public class AudioDetailActivity extends AppCompatActivity implements View.OnCli
     private String photo;
     private String duration;
     private String date;
+    private String datefull;
     private String categoryname;
     private String view;
     private TextView txt_title;
@@ -101,6 +102,7 @@ public class AudioDetailActivity extends AppCompatActivity implements View.OnCli
     private EditText edit_comment;
     private ImageView img_send;
     String action_click;
+    String fulldate;
 
 
     @Override
@@ -187,7 +189,7 @@ public class AudioDetailActivity extends AppCompatActivity implements View.OnCli
                 intent.putExtra("audio", audio);
                 intent.putExtra("photo", photo);
                 intent.putExtra("duration", duration);
-                intent.putExtra("date", date);
+                intent.putExtra("date", datefull);
                 intent.putExtra("categoryname", categoryname);
                 startActivity(intent);
                 finish();
@@ -305,7 +307,7 @@ public class AudioDetailActivity extends AppCompatActivity implements View.OnCli
                 break;
             case R.id.infocomment:
 
-                Intent intent1=new Intent(AudioDetailActivity.this,CommentListAudio.class);
+                Intent intent1 = new Intent(AudioDetailActivity.this, CommentListAudio.class);
                 intent1.putExtra("click_action", "audio_comment_click");
                 intent1.putExtra("aid", aid);
                 intent1.putExtra("categoryname", categoryname);
@@ -503,13 +505,13 @@ public class AudioDetailActivity extends AppCompatActivity implements View.OnCli
                         Log.e("year", "-----------------" + year);
                         Log.e("day", "-----------------" + day);
 
-                        String fulldate = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + " " + string[1];
+                        fulldate = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + ", " + string[1];
+                        datefull = fulldate;
                         txt_title.setText(audioname);
                         txt_date.setText(fulldate);
                         txt_views.setText(view);
                         Picasso.with(AudioDetailActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.audioimage + jsonObject1.getString("Photo").replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).into(img_photo);
                         jcplayer_audio.playAudio(CommonURL.AudioPath + CommonAPI_Name.audios + jsonObject1.getString("Audio").replaceAll(" ", "%20"), jsonObject1.getString("AudioName"));
-
 
                         if (action_click.equalsIgnoreCase("audio_comment_click")) {
                             commentLists = new ArrayList<>();
@@ -820,7 +822,7 @@ public class AudioDetailActivity extends AppCompatActivity implements View.OnCli
                         Log.e("year", "-----------------" + year);
                         Log.e("day", "-----------------" + day);
 
-                        String fulldate = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + " " + string[1];
+                        String fulldate = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + ", " + string[1];
                         commentLists.add(new com.example.grapes_pradip.vimalsagaradmin.model.information.CommentList(comment, is_approved, userID, informationID, id, fulldate, name));
                     }
 
