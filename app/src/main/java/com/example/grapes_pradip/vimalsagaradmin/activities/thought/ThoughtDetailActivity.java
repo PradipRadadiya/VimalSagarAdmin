@@ -26,6 +26,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.adapters.information.RecyclerLikeAdapter;
 import com.example.grapes_pradip.vimalsagaradmin.adapters.thought.RecyclerThoughtCommentAdapter;
@@ -58,6 +59,9 @@ public class ThoughtDetailActivity extends AppCompatActivity implements View.OnC
     String address;
     private String date;
     private String view;
+    private String photos;
+    private String isodate;
+    private String location;
     private TextView txt_title;
     private TextView txt_date;
     private TextView txt_description;
@@ -95,6 +99,8 @@ public class ThoughtDetailActivity extends AppCompatActivity implements View.OnC
     private ImageView img_send;
     private TextView detailcomment;
     String click_action;
+    private ImageView img_thought;
+    private TextView txt_location;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -129,6 +135,8 @@ public class ThoughtDetailActivity extends AppCompatActivity implements View.OnC
         infocomment = (Button) findViewById(R.id.infocomment);
         img_send = (ImageView) findViewById(R.id.img_send);
         detailcomment = (TextView) findViewById(R.id.detailcomment);
+        txt_location = (TextView) findViewById(R.id.txt_location);
+        img_thought = (ImageView) findViewById(R.id.img_thought);
 
     }
 
@@ -138,6 +146,7 @@ public class ThoughtDetailActivity extends AppCompatActivity implements View.OnC
         btn_delete.setOnClickListener(this);
         infolike.setOnClickListener(this);
         infocomment.setOnClickListener(this);
+        img_thought.setOnClickListener(this);
     }
 
     @SuppressLint("SetTextI18n")
@@ -162,11 +171,19 @@ public class ThoughtDetailActivity extends AppCompatActivity implements View.OnC
                 finish();
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 break;
+
+            case R.id.img_thought:
+
+                break;
+
             case R.id.btn_edit:
                 Intent intent = new Intent(ThoughtDetailActivity.this, EditThoughtActivity.class);
                 intent.putExtra("tid", tid);
                 intent.putExtra("title", title);
                 intent.putExtra("description", description);
+                intent.putExtra("photo", photos);
+                intent.putExtra("isodate", isodate);
+                intent.putExtra("location", location);
                 startActivity(intent);
                 finish();
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -616,7 +633,7 @@ public class ThoughtDetailActivity extends AppCompatActivity implements View.OnC
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog=new ProgressDialog(ThoughtDetailActivity.this);
+            progressDialog = new ProgressDialog(ThoughtDetailActivity.this);
             progressDialog.setMessage("Loading..");
             progressDialog.show();
 
@@ -704,7 +721,10 @@ public class ThoughtDetailActivity extends AppCompatActivity implements View.OnC
                         title = object.getString("Title");
                         description = object.getString("Description");
                         String dates = object.getString("Date");
+                        isodate = object.getString("Date");
                         view = object.getString("View");
+                        photos = object.getString("Photo");
+                        location = object.getString("location");
 
                         String[] string = dates.split(" ");
                         Log.e("str1", "--------" + string[0]);
@@ -729,9 +749,14 @@ public class ThoughtDetailActivity extends AppCompatActivity implements View.OnC
                         txt_date.setText(CommonMethod.decodeEmoji(date));
                         txt_description.setText(CommonMethod.decodeEmoji(description));
                         txt_views.setText(CommonMethod.decodeEmoji(view));
+                        txt_location.setText(CommonMethod.decodeEmoji(location));
+
+                        Glide.with(ThoughtDetailActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.thoughtimage + photos
+                                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(img_thought);
 
 
-                        if (click_action.equalsIgnoreCase("thought_comment_click")){
+
+                        if (click_action.equalsIgnoreCase("thought_comment_click")) {
                             commentLists = new ArrayList<>();
                             page_count = 1;
                             dialog = new Dialog(ThoughtDetailActivity.this);
@@ -811,7 +836,7 @@ public class ThoughtDetailActivity extends AppCompatActivity implements View.OnC
                             getWindow().setAttributes(attrs);
                             dialog.getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                        }else {
+                        } else {
 
                         }
                     }

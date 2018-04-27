@@ -31,13 +31,12 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.grapes_pradip.vimalsagaradmin.R;
-import com.example.grapes_pradip.vimalsagaradmin.activities.audio.EditAudioActivity;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
 import com.example.grapes_pradip.vimalsagaradmin.util.MarshMallowPermission;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,6 +49,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.Calendar;
+import java.util.Date;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 import ch.boye.httpclientandroidlib.client.HttpClient;
@@ -88,6 +88,9 @@ public class EditVideoActivity extends AppCompatActivity implements View.OnClick
     private String duration;
     private String date;
     private String categoryname;
+    private String description;
+    private String videolink;
+    private String isodate;
     private MarshMallowPermission permission;
     LinearLayout lin_noti;
 
@@ -99,6 +102,7 @@ public class EditVideoActivity extends AppCompatActivity implements View.OnClick
 
     String finaldate;
     String finaltime;
+    private EditText e_description,edit_videolink;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -116,6 +120,9 @@ public class EditVideoActivity extends AppCompatActivity implements View.OnClick
         duration = intent.getStringExtra("duration");
         date = intent.getStringExtra("date");
         categoryname = intent.getStringExtra("categoryname");
+        description = intent.getStringExtra("description");
+        videolink = intent.getStringExtra("videolink");
+        isodate = intent.getStringExtra("isodate");
 
         Log.e("date","------------"+date);
         String[] datesplit=date.split(",");
@@ -131,7 +138,33 @@ public class EditVideoActivity extends AppCompatActivity implements View.OnClick
         finaltime=datesplit[2];
         Log.e("new date","--------------------"+newdate);
 
+
         findID();
+
+        String[] string = isodate.split(" ");
+        Log.e("str1", "--------" + string[0]);
+        Log.e("str2", "--------" + string[1]);
+
+        Date dt = CommonMethod.convert_date(isodate);
+        Log.e("Convert date is", "------------------" + dt);
+        String dayOfTheWeek = (String) android.text.format.DateFormat.format("EEEE", dt);//Thursday
+        String stringMonth = (String) android.text.format.DateFormat.format("MMM", dt); //Jun
+        String intMonth = (String) android.text.format.DateFormat.format("MM", dt); //06
+        String year = (String) android.text.format.DateFormat.format("yyyy", dt); //2013
+        String day = (String) android.text.format.DateFormat.format("dd", dt); //20
+
+        Log.e("dayOfTheWeek", "-----------------" + dayOfTheWeek);
+        Log.e("stringMonth", "-----------------" + stringMonth);
+        Log.e("intMonth", "-----------------" + intMonth);
+        Log.e("year", "-----------------" + year);
+        Log.e("day", "-----------------" + day);
+//                        date = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + " " + string[1];
+        date = year + "-" + intMonth + "-" + day;
+        edit_date.setText(date);
+        edit_time.setText(string[1]);
+
+        datetimefull = date + " " + string[1];
+
         idClick();
         setContent();
 
@@ -154,8 +187,8 @@ public class EditVideoActivity extends AppCompatActivity implements View.OnClick
             }
         });
 
-        edit_date.setText(finaldate);
-        edit_time.setText(finaltime);
+//        edit_date.setText(finaldate);
+//        edit_time.setText(finaltime);
         edit_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -234,10 +267,17 @@ public class EditVideoActivity extends AppCompatActivity implements View.OnClick
 
 
     private void setContent() {
-        edit_video_name.setText(videoname);
-        edit_category_name.setText(categoryname);
+        edit_video_name.setText(CommonMethod.decodeEmoji(videoname));
+        edit_category_name.setText(CommonMethod.decodeEmoji(categoryname));
+        e_description.setText(CommonMethod.decodeEmoji(description));
+        edit_videolink.setText(CommonMethod.decodeEmoji(videolink));
+
         img_category_icon.setVisibility(View.VISIBLE);
-        Picasso.with(EditVideoActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.videoimage + photo.replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0, 200).into(img_category_icon);
+//        Picasso.with(EditVideoActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.videoimage + photo.replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0, 200).into(img_category_icon);
+
+        Glide.with(EditVideoActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.videoimage + photo
+                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(img_category_icon);
+
         if (CommonMethod.isInternetConnected(EditVideoActivity.this)) {
 //            new AddInformation().execute(e_title.getText().toString(), e_description.getText().toString(), e_date.getText().toString(), e_address.getText().toString());
         }
@@ -259,6 +299,10 @@ public class EditVideoActivity extends AppCompatActivity implements View.OnClick
         btn_add.setText("Update");
         edit_time = (EditText) findViewById(R.id.edit_time);
         edit_date = (EditText) findViewById(R.id.edit_date);
+        e_description = (EditText) findViewById(R.id.e_description);
+        edit_videolink = (EditText) findViewById(R.id.edit_videolink);
+
+
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -533,8 +577,8 @@ public class EditVideoActivity extends AppCompatActivity implements View.OnClick
 
             Log.e("method", "----------------" + "call");
 
-            String categoryname = edit_category_name.getText().toString();
-            String videoname = edit_video_name.getText().toString();
+            String categoryname = CommonMethod.encodeEmoji(edit_category_name.getText().toString());
+            String videoname = CommonMethod.encodeEmoji(edit_video_name.getText().toString());
 
             Log.e("categoryname", "----------" + categoryname);
             String Photo = "";
@@ -551,7 +595,8 @@ public class EditVideoActivity extends AppCompatActivity implements View.OnClick
                 multipartEntity.addPart("hiddenphoto", new StringBody(photo));
                 multipartEntity.addPart("hiddenvideo", new StringBody(video));
                 multipartEntity.addPart("videodate", new StringBody(datetimefull));
-
+                multipartEntity.addPart("Description", new StringBody(CommonMethod.encodeEmoji(e_description.getText().toString())));
+                multipartEntity.addPart("VideoLink", new StringBody(CommonMethod.encodeEmoji(edit_videolink.getText().toString())));
 
                 if (picturePath == null) {
                     Log.e("if call", "-----------");

@@ -109,11 +109,11 @@ public class QuestionDetailActivity extends AppCompatActivity implements View.On
 
     @SuppressLint("SetTextI18n")
     private void setContent() {
-        txt_title.setText(question);
-        txt_date.setText(date);
-        txt_name.setText(name);
+        txt_title.setText(CommonMethod.decodeEmoji(question));
+        txt_date.setText(CommonMethod.decodeEmoji(date));
+        txt_name.setText(CommonMethod.decodeEmoji(name));
         txt_header.setText("Question Detail");
-        txt_views.setText(view);
+        txt_views.setText(CommonMethod.decodeEmoji(view));
         if (isApprove.equalsIgnoreCase("R")) {
             lin_replay_answer.setVisibility(View.GONE);
             lin_approve.setVisibility(View.GONE);
@@ -123,7 +123,7 @@ public class QuestionDetailActivity extends AppCompatActivity implements View.On
             if (status == 1) {
                 lin_replay_answer.setVisibility(View.VISIBLE);
                 lin_approve.setVisibility(View.GONE);
-                edit_answer.setText(answer);
+                edit_answer.setText(CommonMethod.decodeEmoji(answer));
             } else {
                 lin_replay_answer.setVisibility(View.GONE);
                 lin_approve.setVisibility(View.VISIBLE);

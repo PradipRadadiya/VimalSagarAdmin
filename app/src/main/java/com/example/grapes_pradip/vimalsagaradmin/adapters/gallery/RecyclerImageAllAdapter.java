@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.activities.gallery.SlidingGalleryImage;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
@@ -48,7 +49,11 @@ public class RecyclerImageAllAdapter extends RecyclerView.Adapter<RecyclerImageA
     public void onBindViewHolder(final ViewHolder holder, final int i) {
 
         final AllImageItem imageItem = itemArrayList.get(i);
-        Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.Gallery + imageItem.getPhoto().replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(holder.img_photos);
+//        Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.Gallery + imageItem.getPhoto().replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(holder.img_photos);
+
+        Glide.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.Gallery + imageItem.getPhoto()
+                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(holder.img_photos);
+
         holder.check_image.setChecked(imageItem.isSelected() ? true : false);
         holder.img_photos.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -25,6 +25,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.adapters.information.RecyclerCommentAdapter;
 import com.example.grapes_pradip.vimalsagaradmin.adapters.information.RecyclerLikeAdapter;
@@ -55,6 +56,10 @@ public class InfomationDetailActivity extends AppCompatActivity implements View.
     private String address;
     private String date;
     private String view;
+    private String photos;
+    private String isodate;
+
+
     private TextView txt_title;
     private TextView txt_date;
     private TextView txt_description;
@@ -90,6 +95,7 @@ public class InfomationDetailActivity extends AppCompatActivity implements View.
     private EditText edit_comment;
     private ImageView img_send;
     private TextView detailcomment;
+    private ImageView img_info;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -125,6 +131,7 @@ public class InfomationDetailActivity extends AppCompatActivity implements View.
         infolike = (Button) findViewById(R.id.infolike);
         infocomment = (Button) findViewById(R.id.infocomment);
         detailcomment = (TextView) findViewById(R.id.detailcomment);
+        img_info=(ImageView) findViewById(R.id.img_info);
     }
 
     private void idClick() {
@@ -133,6 +140,7 @@ public class InfomationDetailActivity extends AppCompatActivity implements View.
         btn_delete.setOnClickListener(this);
         infolike.setOnClickListener(this);
         infocomment.setOnClickListener(this);
+        img_info.setOnClickListener(this);
     }
 
     private void setContent() {
@@ -151,6 +159,10 @@ public class InfomationDetailActivity extends AppCompatActivity implements View.
                 finish();
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 break;
+
+            case R.id.img_info:
+                Log.e("image","-------------");
+                break;
             case R.id.btn_edit:
                 Intent intent = new Intent(InfomationDetailActivity.this, EditInformationActivity.class);
                 intent.putExtra("info_id", id);
@@ -158,6 +170,8 @@ public class InfomationDetailActivity extends AppCompatActivity implements View.
                 intent.putExtra("description", description);
                 intent.putExtra("address", address);
                 intent.putExtra("date", date);
+                intent.putExtra("photo", photos);
+                intent.putExtra("isodate",isodate);
                 startActivity(intent);
                 finish();
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -646,6 +660,8 @@ public class InfomationDetailActivity extends AppCompatActivity implements View.
                         address = object.getString("Address");
                         String dates = object.getString("Date");
                         view = object.getString("View");
+                        photos = object.getString("Photo");
+                        isodate=dates;
 
                         String[] string = dates.split(" ");
                         Log.e("str1", "--------" + string[0]);
@@ -671,6 +687,10 @@ public class InfomationDetailActivity extends AppCompatActivity implements View.
                         txt_description.setText(CommonMethod.decodeEmoji(description));
                         txt_address.setText(CommonMethod.decodeEmoji(address));
                         txt_views.setText(CommonMethod.decodeEmoji(view));
+
+                        Glide.with(InfomationDetailActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.infoimage + photos
+                                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(img_info);
+
 
 
                         if (click_action.equalsIgnoreCase("information_comment_click")) {

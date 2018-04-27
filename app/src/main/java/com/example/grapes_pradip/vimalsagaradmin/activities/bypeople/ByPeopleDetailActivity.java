@@ -24,8 +24,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.activities.gallery.ImageViewActivity;
+import com.example.grapes_pradip.vimalsagaradmin.activities.video.EditVideoCategoryActivity;
 import com.example.grapes_pradip.vimalsagaradmin.activities.video.VideoFullActivity;
 import com.example.grapes_pradip.vimalsagaradmin.adapters.bypeople.RecyclerByPeopleCommentAdapter;
 import com.example.grapes_pradip.vimalsagaradmin.adapters.information.RecyclerLikeAdapter;
@@ -126,6 +128,7 @@ public class ByPeopleDetailActivity extends AppCompatActivity implements View.On
         id = intent.getStringExtra("ID");
         action_click = intent.getStringExtra("click_action");
         name = intent.getStringExtra("Name");
+
 //        title = intent.getStringExtra("Title");
 //        post = intent.getStringExtra("Post");
 //        audio = intent.getStringExtra("Audio").replaceAll(" ", "%20");
@@ -183,18 +186,23 @@ public class ByPeopleDetailActivity extends AppCompatActivity implements View.On
 
     private void setContent() {
         txt_header.setText("By People Detail");
-        txt_title.setText(title);
-        txt_date.setText(date);
-        txt_description.setText(post);
-        txt_address.setText(name);
-        txt_videolink.setText(videoLink);
-        txt_views.setText(view);
+        txt_title.setText(CommonMethod.decodeEmoji(title));
+        txt_date.setText(CommonMethod.decodeEmoji(date));
+        txt_description.setText(CommonMethod.decodeEmoji(post));
+        txt_address.setText(CommonMethod.decodeEmoji(name));
+        txt_videolink.setText(CommonMethod.decodeEmoji(videoLink));
+        txt_views.setText(CommonMethod.decodeEmoji(view));
 
         if (photo.equalsIgnoreCase("null")) {
             txt_img.setVisibility(View.GONE);
             img_photo.setVisibility(View.GONE);
         } else {
-            Picasso.with(ByPeopleDetailActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.bypeopleimage + photo.replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(img_photo);
+//            Picasso.with(ByPeopleDetailActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.bypeopleimage + photo.replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(img_photo);
+
+            Glide.with(ByPeopleDetailActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.bypeopleimage + photo
+                    .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(img_photo);
+
+
         }
         if (video.equalsIgnoreCase("")) {
 //            videoPlayerStandard.setVisibility(View.GONE);

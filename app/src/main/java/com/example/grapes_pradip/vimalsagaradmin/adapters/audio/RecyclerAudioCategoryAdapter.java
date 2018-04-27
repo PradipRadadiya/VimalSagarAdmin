@@ -16,10 +16,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alexandrius.accordionswipelayout.library.SwipeLayout;
+import com.bumptech.glide.Glide;
 import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.activities.audio.AllAudioActivity;
 import com.example.grapes_pradip.vimalsagaradmin.activities.audio.EditAudioCategoryActivity;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
+import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
 import com.example.grapes_pradip.vimalsagaradmin.common.JsonParser;
 import com.example.grapes_pradip.vimalsagaradmin.model.audio.AllAudioCategoryItem;
@@ -59,12 +61,16 @@ public class RecyclerAudioCategoryAdapter extends RecyclerView.Adapter<RecyclerA
     public void onBindViewHolder(final ViewHolder holder, int i) {
 
         final AllAudioCategoryItem audioCategoryItem = itemArrayList.get(i);
-        holder.txt_title.setText(audioCategoryItem.getName());
+        holder.txt_title.setText(CommonMethod.decodeEmoji(audioCategoryItem.getName()));
         String path = CommonURL.ImagePath + CommonAPI_Name.audiocategory + audioCategoryItem.getCategoryicon().replaceAll(" ", "%20");
         if (audioCategoryItem.getCategoryicon().equalsIgnoreCase("")) {
-            Picasso.with(activity).load(R.drawable.noimageavailable);
+//            Picasso.with(activity).load(R.drawable.noimageavailable);
         } else {
-            Picasso.with(activity).load(path).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(holder.img_audio_category);
+//            Picasso.with(activity).load(path).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(holder.img_audio_category);
+
+            Glide.with(activity).load(path
+                    .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(holder.img_audio_category);
+
         }
 
         ((SwipeLayout) holder.itemView).setItemState(SwipeLayout.ITEM_STATE_COLLAPSED, true);

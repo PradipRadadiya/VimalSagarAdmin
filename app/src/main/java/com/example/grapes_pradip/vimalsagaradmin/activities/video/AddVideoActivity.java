@@ -90,6 +90,7 @@ public class AddVideoActivity extends AppCompatActivity implements View.OnClickL
     String fulltime;
     private String fulldate;
     String datetimefull;
+    private EditText e_description,edit_videolink;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -189,9 +190,11 @@ public class AddVideoActivity extends AppCompatActivity implements View.OnClickL
         btn_add = (Button) findViewById(R.id.btn_add);
         edit_date = (EditText) findViewById(R.id.edit_date);
         edit_time = (EditText) findViewById(R.id.edit_time);
+        e_description = (EditText) findViewById(R.id.e_description);
+        edit_videolink = (EditText) findViewById(R.id.edit_videolink);
 
         txt_header.setText("Add Video");
-        edit_category_name.setText(categoryname);
+        edit_category_name.setText(CommonMethod.decodeEmoji(categoryname));
         notificationswitch = (Switch) findViewById(R.id.notificationswitch);
 
         notificationswitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -503,8 +506,8 @@ public class AddVideoActivity extends AppCompatActivity implements View.OnClickL
 
             Log.e("method", "----------------" + "call");
 
-            String categoryname = edit_category_name.getText().toString();
-            String videoname = edit_video_name.getText().toString();
+            String categoryname = CommonMethod.encodeEmoji(edit_category_name.getText().toString());
+            String videoname = CommonMethod.encodeEmoji(edit_video_name.getText().toString());
 
             Log.e("categoryname", "----------" + categoryname);
             String Photo = "";
@@ -527,6 +530,9 @@ public class AddVideoActivity extends AppCompatActivity implements View.OnClickL
                 multipartEntity.addPart("Video", fileBody2);
                 multipartEntity.addPart("Is_notify", new StringBody(notify));
                 multipartEntity.addPart("videodate", new StringBody(datetimefull));
+
+                multipartEntity.addPart("Description", new StringBody(CommonMethod.encodeEmoji(e_description.getText().toString())));
+                multipartEntity.addPart("VideoLink", new StringBody(CommonMethod.encodeEmoji(edit_videolink.getText().toString())));
 
                 httpPost.setEntity(multipartEntity);
                 HttpResponse httpResponse = httpClient.execute(httpPost);

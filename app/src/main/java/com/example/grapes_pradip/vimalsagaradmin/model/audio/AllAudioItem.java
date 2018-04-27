@@ -17,9 +17,11 @@ public class AllAudioItem {
     private String categoryname;
     private String view;
     private boolean isSelected=false;
+    private String description;
+    private String isodate;
 
 
-    public AllAudioItem(String id, String audioname, String categoryid, String audio, String photo, String duration, String date, String categoryname, String view, boolean isSelected) {
+    public AllAudioItem(String id, String audioname, String categoryid, String audio, String photo, String duration, String date, String categoryname, String view, boolean isSelected, String description, String isodate) {
         this.id = id;
         this.audioname = audioname;
         this.categoryid = categoryid;
@@ -30,6 +32,8 @@ public class AllAudioItem {
         this.categoryname = categoryname;
         this.view = view;
         this.isSelected = isSelected;
+        this.description = description;
+        this.isodate = isodate;
     }
 
     public String getId() {
@@ -110,5 +114,21 @@ public class AllAudioItem {
 
     public void setSelected(boolean selected) {
         isSelected = selected;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getIsodate() {
+        return isodate;
+    }
+
+    public void setIsodate(String isodate) {
+        this.isodate = isodate;
     }
 }

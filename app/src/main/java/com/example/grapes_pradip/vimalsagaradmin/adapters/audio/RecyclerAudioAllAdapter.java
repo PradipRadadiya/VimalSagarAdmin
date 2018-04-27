@@ -16,10 +16,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alexandrius.accordionswipelayout.library.SwipeLayout;
+import com.bumptech.glide.Glide;
 import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.activities.audio.AudioDetailActivity;
 import com.example.grapes_pradip.vimalsagaradmin.activities.audio.EditAudioActivity;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
+import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
 import com.example.grapes_pradip.vimalsagaradmin.common.JsonParser;
 import com.example.grapes_pradip.vimalsagaradmin.model.audio.AllAudioItem;
@@ -59,15 +61,16 @@ public class RecyclerAudioAllAdapter extends RecyclerView.Adapter<RecyclerAudioA
     public void onBindViewHolder(final ViewHolder holder, int i) {
 
         final AllAudioItem audioItem = itemArrayList.get(i);
-        holder.txt_title.setText(audioItem.getAudioname());
-        holder.txt_date.setText(audioItem.getDate());
-        holder.txt_views.setText(audioItem.getView());
-        Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.audioimage + audioItem.getPhoto().replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(holder.img_audio_category);
+        holder.txt_title.setText(CommonMethod.decodeEmoji(audioItem.getAudioname()));
+        holder.txt_date.setText(CommonMethod.decodeEmoji(audioItem.getDate()));
+        holder.txt_views.setText(CommonMethod.decodeEmoji(audioItem.getView()));
+//        Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.audioimage + audioItem.getPhoto().replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(holder.img_audio_category);
+        Glide.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.audioimage + audioItem.getPhoto()
+                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(holder.img_audio_category);
+
         holder.check_delete.setChecked(audioItem.isSelected() ? true : false);
 
         ((SwipeLayout) holder.itemView).setItemState(SwipeLayout.ITEM_STATE_COLLAPSED, true);
-
-
 
         holder.txt_edit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +84,8 @@ public class RecyclerAudioAllAdapter extends RecyclerView.Adapter<RecyclerAudioA
                 intent.putExtra("duration", itemArrayList.get(holder.getAdapterPosition()).getDuration());
                 intent.putExtra("date", itemArrayList.get(holder.getAdapterPosition()).getDate());
                 intent.putExtra("categoryname", itemArrayList.get(holder.getAdapterPosition()).getCategoryname());
+                intent.putExtra("description", itemArrayList.get(holder.getAdapterPosition()).getDescription());
+                intent.putExtra("isodate", itemArrayList.get(holder.getAdapterPosition()).getIsodate());
                 activity.startActivity(intent);
                 activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }

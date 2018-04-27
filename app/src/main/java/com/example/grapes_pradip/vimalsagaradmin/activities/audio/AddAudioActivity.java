@@ -87,10 +87,12 @@ public class AddAudioActivity extends AppCompatActivity implements View.OnClickL
     KProgressHUD hud;
     private Switch notificationswitch;
     String notify = "0";
+
     private EditText edit_date, edit_time;
     String fulltime;
     private String fulldate;
     String datetimefull;
+    private EditText e_description;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -245,6 +247,7 @@ public class AddAudioActivity extends AppCompatActivity implements View.OnClickL
     private void findID() {
         edit_date = (EditText) findViewById(R.id.edit_date);
         edit_time = (EditText) findViewById(R.id.edit_time);
+        e_description = (EditText) findViewById(R.id.e_description);
         edit_category_name = (EditText) findViewById(R.id.edit_category_name);
         edit_audio_name = (EditText) findViewById(R.id.edit_audio_name);
         txt_header = (TextView) findViewById(R.id.txt_header);
@@ -254,7 +257,7 @@ public class AddAudioActivity extends AppCompatActivity implements View.OnClickL
         img_category_icon = (ImageView) findViewById(R.id.img_category_icon);
         btn_add = (Button) findViewById(R.id.btn_add);
         txt_header.setText("Add Audio");
-        edit_category_name.setText(categoryname);
+        edit_category_name.setText(CommonMethod.decodeEmoji(categoryname));
         notificationswitch = (Switch) findViewById(R.id.notificationswitch);
 
         notificationswitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -593,7 +596,7 @@ public class AddAudioActivity extends AppCompatActivity implements View.OnClickL
             Log.e("method", "----------------" + "call");
 
             String categoryname = edit_category_name.getText().toString();
-            String audioname = edit_audio_name.getText().toString();
+            String audioname = CommonMethod.encodeEmoji(edit_audio_name.getText().toString());
 
             Log.e("categoryname", "----------" + categoryname);
             String Photo = "";
@@ -625,6 +628,7 @@ public class AddAudioActivity extends AppCompatActivity implements View.OnClickL
                 multipartEntity.addPart("Audio", fileBody2);
                 multipartEntity.addPart("Is_notify", new StringBody(notify));
                 multipartEntity.addPart("audiodate", new StringBody(datetimefull));
+                multipartEntity.addPart("Description", new StringBody(CommonMethod.encodeEmoji(e_description.getText().toString())));
 
                 httpPost.setEntity(multipartEntity);
                 HttpResponse httpResponse = httpClient.execute(httpPost);

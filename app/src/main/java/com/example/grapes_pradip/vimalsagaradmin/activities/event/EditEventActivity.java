@@ -36,8 +36,10 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.activities.AudioPlayActivity;
+import com.example.grapes_pradip.vimalsagaradmin.activities.audio.EditAudioActivity;
 import com.example.grapes_pradip.vimalsagaradmin.activities.video.VideoFullActivity;
 import com.example.grapes_pradip.vimalsagaradmin.adapters.PhotoAudioVideoAdapter;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
@@ -281,14 +283,19 @@ public class EditEventActivity extends AppCompatActivity implements View.OnClick
 
     private void setContent() {
         if (CommonMethod.isInternetConnected(EditEventActivity.this)) {
-            e_title.setText(title);
-            e_description.setText(description);
-            e_address.setText(address);
+            e_title.setText(CommonMethod.decodeEmoji(title));
+            e_description.setText(CommonMethod.decodeEmoji(description));
+            e_address.setText(CommonMethod.decodeEmoji(address));
             edit_date.setText(date);
             edit_videolink.setText(videoLink);
 
             Log.e("image", "---------------" + CommonURL.ImagePath + CommonAPI_Name.eventimage + photo);
-            Picasso.with(EditEventActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.eventimage + photo).resize(0, 200).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).into(img_category_icon);
+//            Picasso.with(EditEventActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.eventimage + photo).resize(0, 200).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).into(img_category_icon);
+
+//            Glide.with(EditEventActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.eventimage + photo
+//                    .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(img_category_icon);
+
+
 //            new AddInformation().execute(e_title.getText().toString(), e_description.getText().toString(), e_date.getText().toString(), e_address.getText().toString());
         }
     }
@@ -312,6 +319,7 @@ public class EditEventActivity extends AppCompatActivity implements View.OnClick
         img_category_icon.setVisibility(View.GONE);
         txt_header.setText("Edit Event");
         btn_add.setText("Update");
+
 
         edit_time = (EditText) findViewById(R.id.edit_time);
         textphotos = (TextView) findViewById(R.id.textphotos);
@@ -1221,7 +1229,11 @@ public class EditEventActivity extends AppCompatActivity implements View.OnClick
 
             } else {
                 Log.e("images", "---------------" + itemArrayList.get(position));
-                Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.eventimage + eventImage.getPhoto().replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0, 200).into(holder.img_item);
+//                Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.eventimage + eventImage.getPhoto().replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0, 200).into(holder.img_item);
+
+                Glide.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.eventimage + eventImage.getPhoto()
+                        .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(holder.img_item);
+
 
 
               /*  holder.img_item.setOnClickListener(new View.OnClickListener() {
@@ -1431,7 +1443,7 @@ public class EditEventActivity extends AppCompatActivity implements View.OnClick
 
             try {
                 HttpClient httpClient = new DefaultHttpClient();
-                HttpPost httpPost = new HttpPost("http://www.grapes-solutions.com/vimalsagarji/event/addmultiphoto/");
+                HttpPost httpPost = new HttpPost(CommonURL.Main_url + "event/addmultiphoto/");
                 MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
 
                 Log.e("eid", "--------------" + id);
@@ -1506,7 +1518,7 @@ public class EditEventActivity extends AppCompatActivity implements View.OnClick
 
             try {
                 HttpClient httpClient = new DefaultHttpClient();
-                HttpPost httpPost = new HttpPost("http://www.grapes-solutions.com/vimalsagarji/event/addmultiaudio/");
+                HttpPost httpPost = new HttpPost(CommonURL.Main_url + "event/addmultiaudio/");
                 MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
                 multipartEntity.addPart("eid", new StringBody(id));
 
@@ -1585,7 +1597,7 @@ public class EditEventActivity extends AppCompatActivity implements View.OnClick
 
             try {
                 HttpClient httpClient = new DefaultHttpClient();
-                HttpPost httpPost = new HttpPost("http://www.grapes-solutions.com/vimalsagarji/event/addmultivideo/");
+                HttpPost httpPost = new HttpPost(CommonURL.Main_url + "event/addmultivideo/");
                 MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
                 multipartEntity.addPart("eid", new StringBody(id));
                 if (videoPath == null) {
@@ -1653,7 +1665,7 @@ public class EditEventActivity extends AppCompatActivity implements View.OnClick
 
         @Override
         protected String doInBackground(String... params) {
-            responseString = JsonParser.getStringResponse("http://www.grapes-solutions.com/vimalsagarji/event/deletephoto/?eid=" + id + "&EventPhoto=" + imagename);
+            responseString = JsonParser.getStringResponse(CommonURL.Main_url + "event/deletephoto/?eid=" + id + "&EventPhoto=" + imagename);
             return responseString;
         }
 
@@ -1676,7 +1688,7 @@ public class EditEventActivity extends AppCompatActivity implements View.OnClick
         @Override
         protected String doInBackground(String... params) {
 
-            responseString = JsonParser.getStringResponse("http://www.grapes-solutions.com/vimalsagarji/event/deleteaudio/?eid=" + id + "&EventAudio=" + audioname);
+            responseString = JsonParser.getStringResponse(CommonURL.Main_url + "event/deleteaudio/?eid=" + id + "&EventAudio=" + audioname);
             return responseString;
         }
 
@@ -1699,7 +1711,7 @@ public class EditEventActivity extends AppCompatActivity implements View.OnClick
 
         @Override
         protected String doInBackground(String... params) {
-            responseString = JsonParser.getStringResponse("http://www.grapes-solutions.com/vimalsagarji/event/deletevideo/?eid=" + id + "&EventVideo=" + videoname);
+            responseString = JsonParser.getStringResponse(CommonURL.Main_url + "event/deletevideo/?eid=" + id + "&EventVideo=" + videoname);
             return responseString;
         }
 
@@ -1741,7 +1753,7 @@ public class EditEventActivity extends AppCompatActivity implements View.OnClick
         img_category_icon.setVisibility(View.VISIBLE);
         img_category_icon.setImageBitmap(thumbnail);
         OutputStream outFile = null;
-        File file=new File(picturePath);
+        File file = new File(picturePath);
         outFile = new FileOutputStream(file);
         thumbnail.compress(Bitmap.CompressFormat.JPEG, 40, outFile);
         outFile.flush();

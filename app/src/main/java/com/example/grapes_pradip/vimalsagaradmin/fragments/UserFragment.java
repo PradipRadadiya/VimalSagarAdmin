@@ -64,6 +64,14 @@ public class UserFragment extends Fragment {
         rootview = inflater.inflate(R.layout.user_fragment, container, false);
         linearLayoutManager = new LinearLayoutManager(getActivity());
         findID();
+//        linearLayoutManager=new LinearLayoutManager(getActivity());
+        recyclerView_users = (RecyclerView) rootview.findViewById(R.id.recyclerView_users);
+        recyclerView_users.setLayoutManager(linearLayoutManager);
+
+        recyclerUsersAdapter = new RecyclerUsersAdapter(getActivity(),usersItems);
+        recyclerView_users.setAdapter(recyclerUsersAdapter);
+
+//        usersItems = new ArrayList<>();
 
         swipe_refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -86,7 +94,7 @@ public class UserFragment extends Fragment {
                                                        firstVisibleItem = linearLayoutManager.findFirstVisibleItemPosition();
 
                                                        if (flag_scroll) {
-                                                           Log.e("flag-Scroll", flag_scroll + "");
+//                                                                 Log.e("flag-Scroll", flag_scroll + "");
                                                        } else {
                                                            if (loading) {
                                                                Log.e("flag-Loading", loading + "");
@@ -111,13 +119,20 @@ public class UserFragment extends Fragment {
                                                                }
                                                                loading = true;
 
+
                                                            }
+
                                                        }
                                                    }
 
                                                }
 
         );
+
+
+        if (CommonMethod.isInternetConnected(getActivity())) {
+            new GetAllUser().execute();
+        }
         return rootview;
     }
 
@@ -130,10 +145,11 @@ public class UserFragment extends Fragment {
 
     private void findID() {
         swipe_refresh = (SwipeRefreshLayout) rootview.findViewById(R.id.swipe_refresh);
-        recyclerView_users = (RecyclerView) rootview.findViewById(R.id.recyclerView_users);
-        recyclerView_users.setLayoutManager(linearLayoutManager);
+//        recyclerView_users = (RecyclerView) rootview.findViewById(R.id.recyclerView_users);
+//        recyclerView_users.setLayoutManager(linearLayoutManager);
         img_nodata = (ImageView) rootview.findViewById(R.id.img_nodata);
         progress_load = (ProgressBar) rootview.findViewById(R.id.progress_load);
+
     }
 
 
@@ -175,7 +191,7 @@ public class UserFragment extends Fragment {
 //            progressDialog.show();
 //            progressDialog.setCancelable(false);
             progress_load.setVisibility(View.VISIBLE);
-            recyclerView_users.setVisibility(View.GONE);
+//            recyclerView_users.setVisibility(View.GONE);
         }
 
         @Override
@@ -191,13 +207,13 @@ public class UserFragment extends Fragment {
             try {
                 JSONObject jsonObject = new JSONObject(s);
                 if (jsonObject.getString("status").equalsIgnoreCase("success")) {
-                    usersItems=new ArrayList<>();
+//                    usersItems=new ArrayList<>();
                     JSONArray jsonArray = jsonObject.getJSONArray("data");
                     Log.e("json array", "-------------------" + jsonArray);
-                    if (jsonArray.length() < 20 || jsonArray.length() == 0) {
+                   /* if (jsonArray.length() < 20 || jsonArray.length() == 0) {
                         flag_scroll = true;
                         Log.e("length_array_news", flag_scroll + "" + "<30===OR(0)===" + jsonArray.length());
-                    }
+                    }*/
                     for (int i = 0; i < jsonArray.length(); i++) {
 
                         JSONObject jsonObject1 = jsonArray.getJSONObject(i);
@@ -233,6 +249,7 @@ public class UserFragment extends Fragment {
                         String fulldate = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + " " + string[1];
                         usersItems.add(new UsersItem(email, address, is_active, deviceid, devicetoken, phone, fulldate, id, name));
                     }
+                    recyclerUsersAdapter.notifyDataSetChanged();
                 }
 
             } catch (JSONException e) {
@@ -243,18 +260,19 @@ public class UserFragment extends Fragment {
 //                progressDialog.dismiss();
 //            }
             progress_load.setVisibility(View.GONE);
-            recyclerView_users.setVisibility(View.VISIBLE);
+            /*recyclerView_users.setVisibility(View.VISIBLE);
+            recyclerView_users.setAdapter(recyclerUsersAdapter);
             if (recyclerView_users != null) {
-                recyclerUsersAdapter = new RecyclerUsersAdapter(getActivity(), usersItems);
+
                 if (recyclerUsersAdapter.getItemCount() != 0) {
                     recyclerView_users.setVisibility(View.VISIBLE);
                     img_nodata.setVisibility(View.GONE);
-                    recyclerView_users.setAdapter(recyclerUsersAdapter);
+//                    recyclerView_users.setAdapter(recyclerUsersAdapter);
                 } else {
                     recyclerView_users.setVisibility(View.GONE);
                     img_nodata.setVisibility(View.VISIBLE);
                 }
-            }
+            }*/
 
         }
     }
@@ -263,10 +281,6 @@ public class UserFragment extends Fragment {
     public void onResume() {
         super.onResume();
         // put your code here...
-        usersItems = new ArrayList<>();
-        page_count = 1;
-        if (CommonMethod.isInternetConnected(getActivity())) {
-            new GetAllUser().execute();
-        }
+
     }
 }

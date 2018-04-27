@@ -58,6 +58,23 @@
                 android:padding="8sp" />
 
             <TextView
+                android:id="@+id/tdescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Description :"
+                android:textColor="@color/lable"
+                android:textSize="18sp"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/txt_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8sp"
+                android:text="" />
+
+
+            <TextView
                 android:id="@+id/tdate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -74,6 +91,23 @@
                 android:lines="1"
                 android:padding="8sp"
                 android:text="" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Videolink :"
+                android:textColor="@color/lable"
+                android:textSize="18sp"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/txt_videolink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8sp"
+                android:autoLink="web"
+                android:text="" />
+
 
 
             <TextView

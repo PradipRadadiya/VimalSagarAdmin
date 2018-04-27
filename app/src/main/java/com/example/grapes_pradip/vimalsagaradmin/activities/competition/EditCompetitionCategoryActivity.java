@@ -26,7 +26,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.grapes_pradip.vimalsagaradmin.R;
+import com.example.grapes_pradip.vimalsagaradmin.activities.bypeople.ByPeopleDetailActivity;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
@@ -115,7 +117,11 @@ public class EditCompetitionCategoryActivity extends AppCompatActivity implement
     private void setContent() {
         e_title.setText(name);
         img_category_icon.setVisibility(View.VISIBLE);
-        Picasso.with(EditCompetitionCategoryActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.competitioncategory + icon.replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(img_category_icon);
+//        Picasso.with(EditCompetitionCategoryActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.competitioncategory + icon.replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(img_category_icon);
+        Glide.with(EditCompetitionCategoryActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.competitioncategory + icon
+                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(img_category_icon);
+
+
     }
 
     @SuppressLint("SetTextI18n")

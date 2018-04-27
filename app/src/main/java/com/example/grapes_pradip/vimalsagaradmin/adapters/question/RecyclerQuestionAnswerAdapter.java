@@ -17,6 +17,7 @@ import com.alexandrius.accordionswipelayout.library.SwipeLayout;
 import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.activities.question.QuestionDetailActivity;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
+import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
 import com.example.grapes_pradip.vimalsagaradmin.common.JsonParser;
 import com.example.grapes_pradip.vimalsagaradmin.model.question.QuestiinItem;
@@ -52,10 +53,10 @@ public class RecyclerQuestionAnswerAdapter extends RecyclerView.Adapter<Recycler
     public void onBindViewHolder(final ViewHolder holder, int i) {
 
         final QuestiinItem questiinItem = itemArrayList.get(i);
-        holder.txt_title.setText(questiinItem.getQuestion());
-        holder.txt_date.setText(questiinItem.getDate());
-        holder.txt_name.setText(questiinItem.getName());
-        holder.txt_views.setText(questiinItem.getView());
+        holder.txt_title.setText(CommonMethod.decodeEmoji(questiinItem.getQuestion()));
+        holder.txt_date.setText(CommonMethod.decodeEmoji(questiinItem.getDate()));
+        holder.txt_name.setText(CommonMethod.decodeEmoji(questiinItem.getName()));
+        holder.txt_views.setText(CommonMethod.decodeEmoji(questiinItem.getView()));
         ((SwipeLayout) holder.itemView).setItemState(SwipeLayout.ITEM_STATE_COLLAPSED, true);
         holder.checkbox_question.setChecked(questiinItem.isSelected() ? true : false);
 

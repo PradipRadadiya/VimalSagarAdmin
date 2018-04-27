@@ -87,6 +87,7 @@ public class AddAudioCategoryActivity extends AppCompatActivity implements View.
 
     private void idClick() {
         txt_photo.setOnClickListener(this);
+
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -330,7 +331,7 @@ public class AddAudioCategoryActivity extends AppCompatActivity implements View.
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
-    private class AddAudioCategory extends AsyncTask<String, Integer, String> {
+    private class AddAudioCategory extends AsyncTask<String, Void, String> {
         String responseJSON = "";
 
         @Override
@@ -346,17 +347,6 @@ public class AddAudioCategoryActivity extends AppCompatActivity implements View.
 
         }
 
-        @Override
-        protected void onProgressUpdate(Integer... progress) {
-            // Making progress bar visible
-//            progressBar.setVisibility(View.VISIBLE);
-
-            // updating progress bar value
-//            progressBar.setProgress(progress[0]);
-
-            // updating percentage value
-            Log.e("", "-------------" + String.valueOf(progress[0]) + "%");
-        }
 
         //
         @Override
@@ -366,7 +356,7 @@ public class AddAudioCategoryActivity extends AppCompatActivity implements View.
 
             String title = e_title.getText().toString();
 
-            Log.e("title", "----------" + title);
+            Log.e("title", "----------" + CommonMethod.encodeEmoji(title));
             String Photo = "";
 
             File file1 = new File(picturePath);
@@ -375,18 +365,9 @@ public class AddAudioCategoryActivity extends AppCompatActivity implements View.
                 HttpClient httpClient = new DefaultHttpClient();
                 HttpPost httpPost = new HttpPost(CommonURL.Main_url + CommonAPI_Name.addcategory);
 
-                AndroidMultiPartEntity entity = new AndroidMultiPartEntity(
-                        new AndroidMultiPartEntity.ProgressListener() {
-
-                            @Override
-                            public void transferred(long num) {
-                                publishProgress((int) ((num / (float) totalSize) * 100));
-                            }
-                        });
-
                 FileBody fileBody1 = new FileBody(file1);
                 MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
-                multipartEntity.addPart("Name", new StringBody(title));
+                multipartEntity.addPart("Name", new StringBody(CommonMethod.encodeEmoji(title)));
                 Log.e("file", "----------------------------" + fileBody1);
                 multipartEntity.addPart("Photo", fileBody1);
 

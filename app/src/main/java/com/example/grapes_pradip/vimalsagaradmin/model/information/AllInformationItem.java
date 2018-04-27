@@ -14,10 +14,10 @@ public class AllInformationItem {
     private String date;
     private String view;
     private boolean isSelected = false;
+    private String photo;
+    private String isodate;
 
-
-
-    public AllInformationItem(String id, String title, String discription, String address, String date, String view, boolean isSelected) {
+    public AllInformationItem(String id, String title, String discription, String address, String date, String view, boolean isSelected, String photo, String isodate) {
         this.id = id;
         this.title = title;
         this.discription = discription;
@@ -25,6 +25,24 @@ public class AllInformationItem {
         this.date = date;
         this.view = view;
         this.isSelected = isSelected;
+        this.photo = photo;
+        this.isodate = isodate;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public String getIsodate() {
+        return isodate;
+    }
+
+    public void setIsodate(String isodate) {
+        this.isodate = isodate;
     }
 
     public String getId() {

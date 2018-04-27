@@ -31,8 +31,10 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.activities.event.EditEventActivity;
+import com.example.grapes_pradip.vimalsagaradmin.activities.video.EditVideoActivity;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
@@ -50,6 +52,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.Calendar;
+import java.util.Date;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 import ch.boye.httpclientandroidlib.client.HttpClient;
@@ -59,6 +62,7 @@ import ch.boye.httpclientandroidlib.entity.mime.MultipartEntity;
 import ch.boye.httpclientandroidlib.entity.mime.content.FileBody;
 import ch.boye.httpclientandroidlib.entity.mime.content.StringBody;
 import ch.boye.httpclientandroidlib.impl.client.DefaultHttpClient;
+
 
 /**
  * Created by Grapes-Pradip on 2/16/2017.
@@ -88,6 +92,8 @@ public class EditAudioActivity extends AppCompatActivity implements View.OnClick
     private String duration;
     private String date;
     private String categoryname;
+    private String description;
+    private String isodate;
     private MarshMallowPermission permission;
     LinearLayout lin_noti;
     private EditText edit_date;
@@ -97,6 +103,7 @@ public class EditAudioActivity extends AppCompatActivity implements View.OnClick
     String fulldate;
     String finaldate;
     String finaltime;
+    private EditText e_description;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -115,6 +122,10 @@ public class EditAudioActivity extends AppCompatActivity implements View.OnClick
         Log.e("photo", "--------------" + photo);
         duration = intent.getStringExtra("duration");
         date = intent.getStringExtra("date");
+        categoryname = intent.getStringExtra("categoryname");
+        description = intent.getStringExtra("description");
+        isodate = intent.getStringExtra("isodate");
+
         Log.e("date","------------"+date);
         String[] datesplit=date.split(",");
         Log.e("dates","----------"+datesplit[1].replaceAll("/","-"));
@@ -152,9 +163,30 @@ public class EditAudioActivity extends AppCompatActivity implements View.OnClick
             }
         });
 
+        String[] string = isodate.split(" ");
+        Log.e("str1", "--------" + string[0]);
+        Log.e("str2", "--------" + string[1]);
+        Date dt = CommonMethod.convert_date(isodate);
+        Log.e("Convert date is", "------------------" + dt);
+        String dayOfTheWeek = (String) android.text.format.DateFormat.format("EEEE", dt);//Thursday
+        String stringMonth = (String) android.text.format.DateFormat.format("MMM", dt); //Jun
+        String intMonth = (String) android.text.format.DateFormat.format("MM", dt); //06
+        String year = (String) android.text.format.DateFormat.format("yyyy", dt); //2013
+        String day = (String) android.text.format.DateFormat.format("dd", dt); //20
 
-        edit_date.setText(finaldate);
-        edit_time.setText(finaltime);
+        Log.e("dayOfTheWeek", "-----------------" + dayOfTheWeek);
+        Log.e("stringMonth", "-----------------" + stringMonth);
+        Log.e("intMonth", "-----------------" + intMonth);
+        Log.e("year", "-----------------" + year);
+        Log.e("day", "-----------------" + day);
+//                        date = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + " " + string[1];
+        date = year + "-" + intMonth + "-" + day;
+        edit_date.setText(date);
+        edit_time.setText(string[1]);
+
+
+//        edit_date.setText(finaldate);
+//        edit_time.setText(finaltime);
         edit_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -243,6 +275,7 @@ public class EditAudioActivity extends AppCompatActivity implements View.OnClick
                 } else {
 
                     datetimefull = edit_date.getText().toString() + " " + edit_time.getText().toString();
+                    Log.e("fulldate","-----------"+datetimefull);
                     if (CommonMethod.isInternetConnected(EditAudioActivity.this)) {
 
                         new EditAudio().execute();
@@ -255,12 +288,17 @@ public class EditAudioActivity extends AppCompatActivity implements View.OnClick
         });
     }
 
-
     private void setContent() {
-        edit_audio_name.setText(audioname);
-        edit_category_name.setText(categoryname);
+        edit_audio_name.setText(CommonMethod.decodeEmoji(audioname));
+        edit_category_name.setText(CommonMethod.decodeEmoji(categoryname));
+        e_description.setText(CommonMethod.decodeEmoji(description));
+
         Log.e("image", "-------------------" + CommonURL.ImagePath + CommonAPI_Name.audioimage + photo.replaceAll(" ", "%20"));
-        Picasso.with(EditAudioActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.audioimage + photo.replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0, 200).into(img_category_icon);
+//        Picasso.with(EditAudioActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.audioimage + photo.replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0, 200).into(img_category_icon);
+
+        Glide.with(EditAudioActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.audioimage + photo
+                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(img_category_icon);
+
         if (CommonMethod.isInternetConnected(EditAudioActivity.this)) {
 //            new AddInformation().execute(e_title.getText().toString(), e_description.getText().toString(), e_date.getText().toString(), e_address.getText().toString());
         }
@@ -272,6 +310,8 @@ public class EditAudioActivity extends AppCompatActivity implements View.OnClick
         lin_noti.setVisibility(View.GONE);
         edit_category_name = (EditText) findViewById(R.id.edit_category_name);
         edit_audio_name = (EditText) findViewById(R.id.edit_audio_name);
+        e_description = (EditText) findViewById(R.id.e_description);
+
         txt_header = (TextView) findViewById(R.id.txt_header);
         txt_photo = (TextView) findViewById(R.id.txt_photo);
         txt_audio = (TextView) findViewById(R.id.txt_audio);
@@ -338,6 +378,7 @@ public class EditAudioActivity extends AppCompatActivity implements View.OnClick
         AlertDialog.Builder builder = new AlertDialog.Builder(EditAudioActivity.this);
 
         builder.setTitle("Add Photo!");
+
 
         builder.setItems(options, new DialogInterface.OnClickListener() {
 
@@ -536,7 +577,7 @@ public class EditAudioActivity extends AppCompatActivity implements View.OnClick
             Log.e("method", "----------------" + "call");
 
             String categoryname = edit_category_name.getText().toString();
-            String audioname = edit_audio_name.getText().toString();
+            String audioname = CommonMethod.encodeEmoji(edit_audio_name.getText().toString());
 
             Log.e("categoryname", "----------" + categoryname);
             String Photo = "";
@@ -557,6 +598,8 @@ public class EditAudioActivity extends AppCompatActivity implements View.OnClick
                 multipartEntity.addPart("hiddenphoto", new StringBody(photo));
                 multipartEntity.addPart("hiddenaudio", new StringBody(audio));
                 multipartEntity.addPart("audiodate", new StringBody(datetimefull));
+                Log.e("datetimefull","-----------------"+datetimefull);
+                multipartEntity.addPart("Description", new StringBody(CommonMethod.encodeEmoji(e_description.getText().toString())));
 //                Log.e("file", "----------------------------" + fileBody1);
 
 

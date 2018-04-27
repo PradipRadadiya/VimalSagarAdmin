@@ -67,6 +67,11 @@ public class AllVideoActivity extends AppCompatActivity implements View.OnClickL
     private int totalItemCount;
     ProgressBar progress_load;
 
+    public static String description;
+    public static String videolink;
+    public static String isodate;
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -148,7 +153,7 @@ public class AllVideoActivity extends AppCompatActivity implements View.OnClickL
         txt_header = (TextView) findViewById(R.id.txt_header);
         txt_h = (TextView) findViewById(R.id.txt_h);
         img_back = (ImageView) findViewById(R.id.img_back);
-        txt_header.setText(title);
+        txt_header.setText(CommonMethod.decodeEmoji(title));
         txt_h.setText("All Video");
         img_nodata = (ImageView) findViewById(R.id.img_nodata);
         delete_data = (ImageView) findViewById(R.id.delete_data);
@@ -263,8 +268,11 @@ public class AllVideoActivity extends AppCompatActivity implements View.OnClickL
                         String photo = jsonObject1.getString("Photo");
                         String duration = jsonObject1.getString("Duration");
                         String date = jsonObject1.getString("Date");
+                        isodate=jsonObject1.getString("Date");
                         String categoryName = jsonObject1.getString("Name");
                         String view = jsonObject1.getString("View");
+                        description = jsonObject1.getString("Description");
+                        videolink = jsonObject1.getString("video_link");
 
                         String[] string = date.split(" ");
                         Log.e("str1", "--------" + string[0]);
@@ -285,7 +293,7 @@ public class AllVideoActivity extends AppCompatActivity implements View.OnClickL
                         Log.e("day", "-----------------" + day);
 
                         String fulldate = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + ", " + string[1];
-                        allVideoItems.add(new AllVideoItem(id, videoname, categoryid, audio, photo, duration, fulldate, categoryName, view,false));
+                        allVideoItems.add(new AllVideoItem(id, videoname, categoryid, audio, photo, duration, fulldate, categoryName, view,false,description,videolink,isodate));
                     }
                 }
 

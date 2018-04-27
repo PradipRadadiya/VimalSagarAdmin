@@ -27,6 +27,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.activities.gallery.ImageViewActivity;
 import com.example.grapes_pradip.vimalsagaradmin.adapters.information.RecyclerLikeAdapter;
@@ -64,6 +65,9 @@ public class VideoDetailActivity extends AppCompatActivity implements View.OnCli
     private String date;
     private String categoryname;
     private String view;
+    private String description;
+    private String videolink;
+    private String isodate;
     private TextView txt_title;
     private TextView txt_date;
     private TextView txt_header;
@@ -106,6 +110,8 @@ public class VideoDetailActivity extends AppCompatActivity implements View.OnCli
     public static String video_play_url;
     String fulldates;
 
+    private TextView txt_videolink,txt_description;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -139,6 +145,8 @@ public class VideoDetailActivity extends AppCompatActivity implements View.OnCli
         txt_header = (TextView) findViewById(R.id.txt_header);
         txt_category = (TextView) findViewById(R.id.txt_category);
         txt_title = (TextView) findViewById(R.id.txt_titles);
+        txt_videolink = (TextView) findViewById(R.id.txt_videolink);
+        txt_description = (TextView) findViewById(R.id.txt_description);
         txt_date = (TextView) findViewById(R.id.txt_date);
         detaillike = (TextView) findViewById(R.id.detaillike);
         img_back = (ImageView) findViewById(R.id.img_back);
@@ -166,12 +174,18 @@ public class VideoDetailActivity extends AppCompatActivity implements View.OnCli
     @SuppressLint("SetTextI18n")
     private void setContent() {
         txt_header.setText("Video Detail");
-        txt_category.setText(categoryname);
-        txt_title.setText(videoname);
+        txt_category.setText(CommonMethod.decodeEmoji(categoryname));
+        txt_title.setText(CommonMethod.decodeEmoji(videoname));
+        txt_description.setText(CommonMethod.decodeEmoji(description));
+        txt_videolink.setText(CommonMethod.decodeEmoji(videolink));
         txt_date.setText(date);
         txt_views.setText(view);
 
-        Picasso.with(VideoDetailActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.videoimage + photo.replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(img_photo);
+//        Picasso.with(VideoDetailActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.videoimage + photo.replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(img_photo);
+
+        Glide.with(VideoDetailActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.videoimage + photo
+                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(img_photo);
+
 
         Log.e("image path","------------------"+CommonURL.ImagePath + CommonAPI_Name.videoimage + photo.replaceAll(" ", "%20"));
         Log.e("video url", "-------------" + CommonURL.VideoPath + CommonAPI_Name.videos + video);
@@ -218,6 +232,9 @@ public class VideoDetailActivity extends AppCompatActivity implements View.OnCli
                 intent.putExtra("duration", duration);
                 intent.putExtra("date", date);
                 intent.putExtra("categoryname", categoryname);
+                intent.putExtra("description", description);
+                intent.putExtra("videolink", videolink);
+                intent.putExtra("isodate", isodate);
                 startActivity(intent);
                 finish();
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -812,9 +829,11 @@ public class VideoDetailActivity extends AppCompatActivity implements View.OnCli
                         duration = jsonObject1.getString("Duration");
                         String dates = jsonObject1.getString("Date");
                         view = jsonObject1.getString("View");
-
-
+                        description = jsonObject1.getString("Description");
+                        videolink = jsonObject1.getString("video_link");
+                        isodate = jsonObject1.getString("Date");
                         String[] string = dates.split(" ");
+
                         Log.e("str1", "--------" + string[0]);
                         Log.e("str2", "--------" + string[1]);
 

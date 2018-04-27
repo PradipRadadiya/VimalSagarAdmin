@@ -64,10 +64,10 @@ public class RecyclerByPeopleCommentAdapter extends RecyclerView.Adapter<Recycle
             if (commentList.getName().equalsIgnoreCase("null")) {
                 holder.txt_unm.setText("Admin");
             } else {
-                holder.txt_unm.setText(commentList.getName());
+                holder.txt_unm.setText(CommonMethod.decodeEmoji(commentList.getName()));
             }
-            holder.txt_post.setText(commentList.getComment());
-            holder.txt_date.setText(commentList.getDate());
+            holder.txt_post.setText(CommonMethod.decodeEmoji(commentList.getComment()));
+            holder.txt_date.setText(CommonMethod.decodeEmoji(commentList.getDate()));
 
             holder.lin_delete.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -87,9 +87,9 @@ public class RecyclerByPeopleCommentAdapter extends RecyclerView.Adapter<Recycle
             holder.lin_approve.setVisibility(View.VISIBLE);
             holder.lin_delete.setVisibility(View.VISIBLE);
             holder.rejected.setVisibility(View.GONE);
-            holder.txt_unm.setText(commentList.getName());
-            holder.txt_post.setText(commentList.getComment());
-            holder.txt_date.setText(commentList.getDate());
+            holder.txt_unm.setText(CommonMethod.decodeEmoji(commentList.getName()));
+            holder.txt_post.setText(CommonMethod.decodeEmoji(commentList.getComment()));
+            holder.txt_date.setText(CommonMethod.decodeEmoji(commentList.getDate()));
             holder.lin_approve.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -124,9 +124,9 @@ public class RecyclerByPeopleCommentAdapter extends RecyclerView.Adapter<Recycle
             holder.lin_approve.setVisibility(View.GONE);
             holder.lin_delete.setVisibility(View.GONE);
             holder.rejected.setVisibility(View.VISIBLE);
-            holder.txt_unm.setText(commentList.getName());
-            holder.txt_post.setText(commentList.getComment());
-            holder.txt_date.setText(commentList.getDate());
+            holder.txt_unm.setText(CommonMethod.decodeEmoji(commentList.getName()));
+            holder.txt_post.setText(CommonMethod.decodeEmoji(commentList.getComment()));
+            holder.txt_date.setText(CommonMethod.decodeEmoji(commentList.getDate()));
         }
 
     }

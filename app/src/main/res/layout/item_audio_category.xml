@@ -31,8 +31,8 @@
                 android:layout_height="75sp"
                 android:layout_weight="3"
                 android:padding="5sp"
-                android:scaleType="fitXY"
                 android:src="@drawable/logo"
+                android:scaleType="fitCenter"
                 tools:ignore="ContentDescription" />
 
             <TextView

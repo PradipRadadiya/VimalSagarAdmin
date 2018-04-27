@@ -66,6 +66,9 @@ public class RecyclerThoughtAdapter extends RecyclerView.Adapter<RecyclerThought
                 intent.putExtra("tid", itemArrayList.get(holder.getAdapterPosition()).getId());
                 intent.putExtra("title", itemArrayList.get(holder.getAdapterPosition()).getTitle());
                 intent.putExtra("description", itemArrayList.get(holder.getAdapterPosition()).getDescription());
+                intent.putExtra("photo", itemArrayList.get(holder.getAdapterPosition()).getPhoto());
+                intent.putExtra("isodate", itemArrayList.get(holder.getAdapterPosition()).getIsodate());
+                intent.putExtra("location", itemArrayList.get(holder.getAdapterPosition()).getLocation());
                 activity.startActivity(intent);
                 activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }

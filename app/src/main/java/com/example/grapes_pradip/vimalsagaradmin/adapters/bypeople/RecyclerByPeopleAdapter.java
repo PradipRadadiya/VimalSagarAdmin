@@ -105,10 +105,10 @@ public class RecyclerByPeopleAdapter extends RecyclerView.Adapter<RecyclerByPeop
             holder.lin_approve.setVisibility(View.GONE);
             holder.lin_delete.setVisibility(View.VISIBLE);
             holder.txt_title.setText(byPeopleItem.getTitle());
-            holder.txt_post.setText(byPeopleItem.getPost());
-            holder.txt_unm.setText(byPeopleItem.getName());
-            holder.txt_date.setText(byPeopleItem.getDate());
-            holder.txt_views.setText(byPeopleItem.getView());
+            holder.txt_post.setText(CommonMethod.decodeEmoji(byPeopleItem.getPost()));
+            holder.txt_unm.setText(CommonMethod.decodeEmoji(byPeopleItem.getName()));
+            holder.txt_date.setText(CommonMethod.decodeEmoji(byPeopleItem.getDate()));
+            holder.txt_views.setText(CommonMethod.decodeEmoji(byPeopleItem.getView()));
 
             holder.lin_delete.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -155,11 +155,11 @@ public class RecyclerByPeopleAdapter extends RecyclerView.Adapter<RecyclerByPeop
         if (byPeopleItem.getIsApproved().equalsIgnoreCase("0")) {
             holder.lin_approve.setVisibility(View.VISIBLE);
             holder.lin_delete.setVisibility(View.VISIBLE);
-            holder.txt_title.setText(byPeopleItem.getTitle());
-            holder.txt_post.setText(byPeopleItem.getPost());
-            holder.txt_unm.setText(byPeopleItem.getName());
-            holder.txt_date.setText(byPeopleItem.getDate());
-            holder.txt_views.setText(byPeopleItem.getView());
+            holder.txt_title.setText(CommonMethod.decodeEmoji(byPeopleItem.getTitle()));
+            holder.txt_post.setText(CommonMethod.decodeEmoji(byPeopleItem.getPost()));
+            holder.txt_unm.setText(CommonMethod.decodeEmoji(byPeopleItem.getName()));
+            holder.txt_date.setText(CommonMethod.decodeEmoji(byPeopleItem.getDate()));
+            holder.txt_views.setText(CommonMethod.decodeEmoji(byPeopleItem.getView()));
 
             holder.lin_approve.setOnClickListener(new View.OnClickListener() {
                 @Override

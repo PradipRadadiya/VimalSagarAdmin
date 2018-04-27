@@ -26,6 +26,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
@@ -119,7 +120,10 @@ public class EditGalleryCategoryActivity extends AppCompatActivity implements Vi
     private void setContent() {
         e_title.setText(name);
         img_category_icon.setVisibility(View.VISIBLE);
-        Picasso.with(EditGalleryCategoryActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.gallerycategory + photo.replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(img_category_icon);
+//        Picasso.with(EditGalleryCategoryActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.gallerycategory + photo.replaceAll(" ", "%20")).placeholder(R.drawable.loading_bar).resize(0,200).error(R.drawable.noimageavailable).into(img_category_icon);
+
+        Glide.with(EditGalleryCategoryActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.gallerycategory + photo.replaceAll(" ", "%20"))
+               .crossFade().placeholder(R.drawable.loading_bar).into(img_category_icon);
 
         if (CommonMethod.isInternetConnected(EditGalleryCategoryActivity.this)) {
 //            new AddInformation().execute(e_title.getText().toString(), e_description.getText().toString(), e_date.getText().toString(), e_address.getText().toString());

@@ -14,6 +14,8 @@ public class CommonAPI_Name {
     public static final String eventaudioimage = "eventaudioimage/";
     public static final String audiocategory = "audiocategory/";
     public static final String audioimage = "audioimage/";
+    public static final String infoimage = "infoimage/";
+    public static final String thoughtimage = "thoughtimage/";
     public static final String audios = "audios/";
     public static final String videos = "videos/";
     public static final String videoimage = "videoimage/";
@@ -24,6 +26,8 @@ public class CommonAPI_Name {
     public static final String competitioncategory = "competitioncategory/";
     public static final String gallerycategory = "gallerycategory/";
     public static final String Gallery = "Gallery/";
+
+
 
     //  Admin
     public static final String addAdmin = "admin/addadmin/";

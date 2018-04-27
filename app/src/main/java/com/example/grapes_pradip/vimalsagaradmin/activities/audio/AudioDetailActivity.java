@@ -26,6 +26,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.activities.gallery.ImageViewActivity;
 import com.example.grapes_pradip.vimalsagaradmin.adapters.audio.RecyclerAudioCommentAdapter;
@@ -103,6 +104,8 @@ public class AudioDetailActivity extends AppCompatActivity implements View.OnCli
     private ImageView img_send;
     String action_click;
     String fulldate;
+    private TextView txt_description;
+    private String description,isodate;
 
 
     @Override
@@ -126,6 +129,7 @@ public class AudioDetailActivity extends AppCompatActivity implements View.OnCli
         txt_header = (TextView) findViewById(R.id.txt_header);
         txt_category = (TextView) findViewById(R.id.txt_category);
         txt_title = (TextView) findViewById(R.id.txt_titles);
+        txt_description = (TextView) findViewById(R.id.txt_description);
         txt_date = (TextView) findViewById(R.id.txt_date);
         detaillike = (TextView) findViewById(R.id.detaillike);
         detailcomment = (TextView) findViewById(R.id.detailcomment);
@@ -154,7 +158,7 @@ public class AudioDetailActivity extends AppCompatActivity implements View.OnCli
     @SuppressLint("SetTextI18n")
     private void setContent() {
         txt_header.setText("Audio Detail");
-        txt_category.setText(categoryname);
+        txt_category.setText(CommonMethod.decodeEmoji(categoryname));
 
         if (CommonMethod.isInternetConnected(AudioDetailActivity.this)) {
             new AudioDetail().execute();
@@ -191,6 +195,8 @@ public class AudioDetailActivity extends AppCompatActivity implements View.OnCli
                 intent.putExtra("duration", duration);
                 intent.putExtra("date", datefull);
                 intent.putExtra("categoryname", categoryname);
+                intent.putExtra("description", description);
+                intent.putExtra("isodate", date);
                 startActivity(intent);
                 finish();
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -479,6 +485,7 @@ public class AudioDetailActivity extends AppCompatActivity implements View.OnCli
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject1 = jsonArray.getJSONObject(i);
                         audioname = jsonObject1.getString("AudioName");
+                        description = jsonObject1.getString("Description");
                         cid = jsonObject1.getString("CategoryID");
                         audio = jsonObject1.getString("Audio").replaceAll(" ", "%20");
                         photo = jsonObject1.getString("Photo").replaceAll(" ", "%20");
@@ -507,11 +514,16 @@ public class AudioDetailActivity extends AppCompatActivity implements View.OnCli
 
                         fulldate = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + ", " + string[1];
                         datefull = fulldate;
-                        txt_title.setText(audioname);
-                        txt_date.setText(fulldate);
-                        txt_views.setText(view);
-                        Picasso.with(AudioDetailActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.audioimage + jsonObject1.getString("Photo").replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).into(img_photo);
-                        jcplayer_audio.playAudio(CommonURL.AudioPath + CommonAPI_Name.audios + jsonObject1.getString("Audio").replaceAll(" ", "%20"), jsonObject1.getString("AudioName"));
+                        txt_title.setText(CommonMethod.decodeEmoji(audioname));
+                        txt_date.setText(CommonMethod.decodeEmoji(fulldate));
+                        txt_views.setText(CommonMethod.decodeEmoji(view));
+                        txt_description.setText(CommonMethod.decodeEmoji(description));
+//                        Picasso.with(AudioDetailActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.audioimage + jsonObject1.getString("Photo").replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).into(img_photo);
+
+                        Glide.with(AudioDetailActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.audioimage + jsonObject1.getString("Photo")
+                                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(img_photo);
+
+                        jcplayer_audio.playAudio(CommonURL.AudioPath + CommonAPI_Name.audios + jsonObject1.getString("Audio").replaceAll(" ", "%20"), CommonMethod.decodeEmoji(jsonObject1.getString("AudioName")));
 
                         if (action_click.equalsIgnoreCase("audio_comment_click")) {
                             commentLists = new ArrayList<>();

@@ -37,8 +37,10 @@
             android:name=".activities.splash.Splash_Activity1"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".activities.gallery.CustomGallery_Activity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activities.gallery.CustomGallery_Activity"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/title_activity_main2"
@@ -306,6 +308,27 @@
         <activity
             android:name=".activities.video.CommentListVideo"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".gallery.activities.AlbumSelectActivity"
+            android:label="@string/app_name"
+            android:theme="@style/MultipleImageSelectTheme"
+            android:configChanges="orientation|screenSize">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".gallery.activities.ImageSelectActivity"
+            android:label="@string/app_name"
+            android:theme="@style/MultipleImageSelectTheme"
+            android:configChanges="orientation|screenSize">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+
 
         <activity android:name=".activities.AudioPlayActivity" />
 

@@ -34,11 +34,11 @@
 
                 <ImageView
                     android:id="@+id/img_audio_category"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="75sp"
                     android:padding="5sp"
-                    android:scaleType="fitXY"
                     android:src="@drawable/logo"
+                    android:scaleType="centerCrop"
                     tools:ignore="ContentDescription" />
 
                 <ImageView

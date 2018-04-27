@@ -637,7 +637,7 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
                 MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
                 multipartEntity.addPart("Title", new StringBody(title));
                 multipartEntity.addPart("Description", new StringBody(description));
-                multipartEntity.addPart("Date", new StringBody(datetimefull));
+                multipartEntity.addPart("Date", new StringBody(CommonMethod.encodeEmoji(datetimefull)));
                 multipartEntity.addPart("Address", new StringBody(address));
                 multipartEntity.addPart("VideoLink", new StringBody(VideoLink));
 
@@ -666,7 +666,7 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
                     String[] audioArr = new String[audioarray.size()];
                     for (int i = 0; i < audioarray.size(); i++) {
                         audioArr[i] = audioarray.get(i);
-                        Log.e("photoArr", "--------" + audioArr[i]);
+                        Log.e("audioArr", "--------" + audioArr[i]);
                         File file2 = new File(audioArr[i]);
                         FileBody fileBody2 = new FileBody(file2);
                         multipartEntity.addPart("Audio[" + i + "]", fileBody2);
@@ -686,7 +686,7 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
                     String[] videoArr = new String[videoarray.size()];
                     for (int i = 0; i < videoarray.size(); i++) {
                         videoArr[i] = videoarray.get(i);
-                        Log.e("photoArr", "--------" + videoArr[i]);
+                        Log.e("videoArr", "--------" + videoArr[i]);
                         File file3 = new File(videoArr[i]);
                         FileBody fileBody3 = new FileBody(file3);
                         multipartEntity.addPart("Video[" + i + "]", fileBody3);

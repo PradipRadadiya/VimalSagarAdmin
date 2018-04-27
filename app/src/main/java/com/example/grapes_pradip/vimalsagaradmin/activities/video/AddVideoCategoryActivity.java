@@ -353,7 +353,7 @@ public class AddVideoCategoryActivity extends AppCompatActivity implements View.
 
                 FileBody fileBody1 = new FileBody(file1);
                 MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
-                multipartEntity.addPart("Name", new StringBody(title));
+                multipartEntity.addPart("Name", new StringBody(CommonMethod.encodeEmoji(title)));
                 Log.e("file", "----------------------------" + fileBody1);
                 multipartEntity.addPart("Photo", fileBody1);
 

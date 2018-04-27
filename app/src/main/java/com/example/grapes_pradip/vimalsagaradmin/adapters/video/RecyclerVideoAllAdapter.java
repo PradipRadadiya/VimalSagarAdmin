@@ -16,10 +16,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alexandrius.accordionswipelayout.library.SwipeLayout;
+import com.bumptech.glide.Glide;
 import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.activities.video.EditVideoActivity;
 import com.example.grapes_pradip.vimalsagaradmin.activities.video.VideoDetailActivity;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
+import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
 import com.example.grapes_pradip.vimalsagaradmin.common.JsonParser;
 import com.example.grapes_pradip.vimalsagaradmin.model.video.AllVideoItem;
@@ -59,10 +61,15 @@ public class RecyclerVideoAllAdapter extends RecyclerView.Adapter<RecyclerVideoA
     public void onBindViewHolder(final ViewHolder holder, int i) {
 
         final AllVideoItem videoItem = itemArrayList.get(i);
-        holder.txt_title.setText(videoItem.getAudioname());
-        holder.txt_date.setText(videoItem.getDate());
-        holder.txt_views.setText(videoItem.getView());
-        Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.videoimage + videoItem.getPhoto().replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(holder.img_audio_category);
+        holder.txt_title.setText(CommonMethod.decodeEmoji(videoItem.getAudioname()));
+        holder.txt_date.setText(CommonMethod.decodeEmoji(videoItem.getDate()));
+        holder.txt_views.setText(CommonMethod.decodeEmoji(videoItem.getView()));
+//        Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.videoimage + videoItem.getPhoto().replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(holder.img_audio_category);
+
+        Glide.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.videoimage + videoItem.getPhoto()
+                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(holder.img_audio_category);
+
+
         holder.checkbox_audio.setChecked(videoItem.isSelected() ? true : false);
 
         ((SwipeLayout) holder.itemView).setItemState(SwipeLayout.ITEM_STATE_COLLAPSED, true);
@@ -80,6 +87,9 @@ public class RecyclerVideoAllAdapter extends RecyclerView.Adapter<RecyclerVideoA
                 intent.putExtra("duration", itemArrayList.get(holder.getAdapterPosition()).getDuration());
                 intent.putExtra("date", itemArrayList.get(holder.getAdapterPosition()).getDate());
                 intent.putExtra("categoryname", itemArrayList.get(holder.getAdapterPosition()).getCategoryname());
+                intent.putExtra("description", itemArrayList.get(holder.getAdapterPosition()).getDescription());
+                intent.putExtra("videolink", itemArrayList.get(holder.getAdapterPosition()).getVideolink());
+                intent.putExtra("isodate", itemArrayList.get(holder.getAdapterPosition()).getIsodate());
                 activity.startActivity(intent);
                 activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }

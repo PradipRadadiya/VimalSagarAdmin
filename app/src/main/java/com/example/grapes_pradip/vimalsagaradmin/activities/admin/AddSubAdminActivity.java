@@ -153,7 +153,7 @@ public class AddSubAdminActivity extends AppCompatActivity {
             Log.e("response", "---------------------" + s);
             try {
                 JSONObject jsonObject = new JSONObject(s);
-                if (jsonObject.getString("status").equalsIgnoreCase("success")) {
+                if (jsonObject.getString("status").equalsIgnoreCase("error")) {
                     progressDialog.dismiss();
 //                    Toast.makeText(AddSubAdminActivity.this, "" + jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
                     new AddAdmin().execute(entername.getText().toString(), eemail.getText().toString(), eusername.getText().toString(), emobile.getText().toString(), epassword.getText().toString());

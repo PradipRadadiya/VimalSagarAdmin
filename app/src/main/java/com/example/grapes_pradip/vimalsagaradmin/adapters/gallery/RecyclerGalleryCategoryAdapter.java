@@ -16,10 +16,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alexandrius.accordionswipelayout.library.SwipeLayout;
+import com.bumptech.glide.Glide;
 import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.activities.gallery.AllGalleryActivity;
 import com.example.grapes_pradip.vimalsagaradmin.activities.gallery.EditGalleryCategoryActivity;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
+import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
 import com.example.grapes_pradip.vimalsagaradmin.common.JsonParser;
 import com.example.grapes_pradip.vimalsagaradmin.model.gallery.GalleryCategoryItem;
@@ -59,8 +61,12 @@ public class RecyclerGalleryCategoryAdapter extends RecyclerView.Adapter<Recycle
     public void onBindViewHolder(final ViewHolder holder, int i) {
 
         final GalleryCategoryItem galleryCategoryItem = itemArrayList.get(i);
-        holder.txt_title.setText(galleryCategoryItem.getName());
-        Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.gallerycategory + galleryCategoryItem.getCategoryIcon().replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(holder.img_audio_category);
+        holder.txt_title.setText(CommonMethod.decodeEmoji(galleryCategoryItem.getName()));
+//        Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.gallerycategory + galleryCategoryItem.getCategoryIcon().replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(holder.img_audio_category);
+
+        Glide.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.gallerycategory + galleryCategoryItem.getCategoryIcon().replaceAll(" ", "%20")).crossFade().into(holder.img_audio_category);
+
+        Log.e("image","------------------"+CommonURL.ImagePath + CommonAPI_Name.gallerycategory + galleryCategoryItem.getCategoryIcon().replaceAll(" ", "%20"));
         ((SwipeLayout) holder.itemView).setItemState(SwipeLayout.ITEM_STATE_COLLAPSED, true);
         holder.check_delete.setChecked(galleryCategoryItem.isSelected() ? true : false);
         holder.txt_edit.setOnClickListener(new View.OnClickListener() {

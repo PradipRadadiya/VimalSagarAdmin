@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.activities.gallery.SlidingGalleryImage;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
@@ -47,7 +48,11 @@ public class PhotoAudioVideoAdapter extends RecyclerView.Adapter<PhotoAudioVideo
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
         Log.e("images", "---------------" + CommonURL.ImagePath + CommonAPI_Name.eventimage + itemArrayList.get(position));
-        Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.eventimage + itemArrayList.get(position).replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).into(holder.img_item);
+//        Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.eventimage + itemArrayList.get(position).replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).into(holder.img_item);
+        Glide.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.eventimage + itemArrayList.get(position)
+                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(holder.img_item);
+
+
         holder.img_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

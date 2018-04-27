@@ -19,6 +19,7 @@ import com.example.grapes_pradip.vimalsagaradmin.activities.opinionpoll.OpinionP
 import com.example.grapes_pradip.vimalsagaradmin.activities.question.QuestionAnswerActivity;
 import com.example.grapes_pradip.vimalsagaradmin.activities.thought.CommentListThought;
 import com.example.grapes_pradip.vimalsagaradmin.activities.video.CommentListVideo;
+import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.SharedPreferencesClass;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -89,11 +90,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             JSONObject data = json;
             String imageUrl = "";
 //            String imageUrl = data.getString("image");
-            String title = data.getString("title");
-            String click_action = data.getString("click_action");
-            String message = data.getString("message");
-            String categoty_id = data.getString("categoty_id");
-            String category_title = data.getString("category_title");
+            String title = CommonMethod.decodeEmoji(data.getString("title"));
+            String click_action = CommonMethod.decodeEmoji(data.getString("click_action"));
+            String message = CommonMethod.decodeEmoji(data.getString("message"));
+            String categoty_id = CommonMethod.decodeEmoji(data.getString("categoty_id"));
+            String category_title = CommonMethod.decodeEmoji(data.getString("category_title"));
 
             Log.e(TAG, "title: " + title);
             Log.e(TAG, "message: " + message);
@@ -165,7 +166,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 } else if (click_action.equalsIgnoreCase("competition_item_click")) {
                     Intent resultIntent = new Intent(getApplicationContext(), AllQuestionAnswerActivity.class);
 
-                    questionid=categoty_id;
+                    questionid = categoty_id;
                     resultIntent.putExtra("QID", categoty_id);
                     resultIntent.putExtra("Question", message);
                     if (sharedPreferencesClass.getPushNotification().equalsIgnoreCase("pushon")) {
@@ -416,7 +417,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     }
                 } else if (click_action.equalsIgnoreCase("competition_item_click")) {
                     Intent resultIntent = new Intent(getApplicationContext(), AllQuestionAnswerActivity.class);
-                    questionid=categoty_id;
+                    questionid = categoty_id;
 
                     resultIntent.putExtra("QID", categoty_id);
                     resultIntent.putExtra("Question", message);
@@ -643,8 +644,5 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         notificationUtils.showNotificationMessage(title, message, timeStamp, intent, imageUrl);
     }
-
-
-
 
 }

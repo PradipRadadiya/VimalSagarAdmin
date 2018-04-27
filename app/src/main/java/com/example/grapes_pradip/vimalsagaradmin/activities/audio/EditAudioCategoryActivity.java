@@ -26,6 +26,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
@@ -116,10 +117,15 @@ public class EditAudioCategoryActivity extends AppCompatActivity implements View
 
 
     private void setContent() {
-        e_title.setText(name);
+        e_title.setText(CommonMethod.decodeEmoji(name));
         img_category_icon.setVisibility(View.VISIBLE);
         Log.e("image path", "-------------" + CommonURL.ImagePath + CommonAPI_Name.audiocategory + photo);
-        Picasso.with(EditAudioCategoryActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.audiocategory + photo.replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(img_category_icon);
+//        Picasso.with(EditAudioCategoryActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.audiocategory + photo.replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(img_category_icon);
+
+        Glide.with(EditAudioCategoryActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.audiocategory + photo
+                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(img_category_icon);
+
+
 
         if (CommonMethod.isInternetConnected(EditAudioCategoryActivity.this)) {
 //            new AddInformation().execute(e_title.getText().toString(), e_description.getText().toString(), e_date.getText().toString(), e_address.getText().toString());
@@ -364,7 +370,7 @@ public class EditAudioCategoryActivity extends AppCompatActivity implements View
 
             Log.e("method", "----------------" + "call");
 
-            String title = e_title.getText().toString();
+            String title = CommonMethod.encodeEmoji(e_title.getText().toString());
 
             Log.e("title", "----------" + title);
             String Photo = "";

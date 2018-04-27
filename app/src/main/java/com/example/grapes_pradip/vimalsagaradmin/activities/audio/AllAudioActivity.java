@@ -147,7 +147,7 @@ public class AllAudioActivity extends AppCompatActivity implements View.OnClickL
         img_nodata = (ImageView) findViewById(R.id.img_nodata);
         delete_data = (ImageView) findViewById(R.id.delete_data);
         progress_load = (ProgressBar) findViewById(R.id.progress_load);
-        txt_header.setText(title);
+        txt_header.setText(CommonMethod.decodeEmoji(title));
     }
 
     private void idClick() {
@@ -263,6 +263,7 @@ public class AllAudioActivity extends AppCompatActivity implements View.OnClickL
                         String date = jsonObject1.getString("Date");
                         String categoryName = jsonObject1.getString("Name");
                         String view = jsonObject1.getString("View");
+                        String description = jsonObject1.getString("Description");
 
                         String[] string = date.split(" ");
                         Log.e("str1", "--------" + string[0]);
@@ -283,7 +284,7 @@ public class AllAudioActivity extends AppCompatActivity implements View.OnClickL
                         Log.e("day", "-----------------" + day);
 
                         String fulldate = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + ", " + string[1];
-                        allAudioItems.add(new AllAudioItem(id, audioname, categoryid, audio, photo, duration, fulldate, categoryName, view,false));
+                        allAudioItems.add(new AllAudioItem(id, audioname, categoryid, audio, photo, duration, fulldate, categoryName, view,false,description,date));
                     }
                 }
 

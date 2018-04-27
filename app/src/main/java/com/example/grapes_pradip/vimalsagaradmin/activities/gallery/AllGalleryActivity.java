@@ -38,6 +38,9 @@ import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
 import com.example.grapes_pradip.vimalsagaradmin.common.JsonParser;
+import com.example.grapes_pradip.vimalsagaradmin.gallery.activities.AlbumSelectActivity;
+import com.example.grapes_pradip.vimalsagaradmin.gallery.helpers.Constants;
+import com.example.grapes_pradip.vimalsagaradmin.gallery.models.Image;
 import com.example.grapes_pradip.vimalsagaradmin.model.gallery.AllImageItem;
 import com.example.grapes_pradip.vimalsagaradmin.model.gallery.ImageItemSplash;
 import com.example.grapes_pradip.vimalsagaradmin.util.MarshMallowPermission;
@@ -109,6 +112,7 @@ public class AllGalleryActivity extends AppCompatActivity implements View.OnClic
     private static final int CustomGallerySelectId = 1;//Set Intent Id
     public static final String CustomGalleryIntentKey = "ImageArray";//Set Intent Key Value
     public static String gallerycid;
+    ArrayList<String> selectedImage=new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -117,12 +121,20 @@ public class AllGalleryActivity extends AppCompatActivity implements View.OnClic
         permission = new MarshMallowPermission(this);
         Intent intent = getIntent();
         cid = intent.getStringExtra("gallery_category_id");
-        gallerycid=cid;
+        gallerycid = cid;
         title = intent.getStringExtra("title");
         linearLayoutManager = new LinearLayoutManager(AllGalleryActivity.this);
         gridLayoutManager = new GridLayoutManager(AllGalleryActivity.this, 3);
         findID();
         idClick();
+
+        imageItems = new ArrayList<>();
+        // put your code here...
+        if (CommonMethod.isInternetConnected(AllGalleryActivity.this)) {
+            new GetAllImageCategory().execute();
+        } else {
+            Toast.makeText(AllGalleryActivity.this, R.string.internet, Toast.LENGTH_SHORT).show();
+        }
 
         swipe_refresh_information.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -188,7 +200,7 @@ public class AllGalleryActivity extends AppCompatActivity implements View.OnClic
         txt_addnew = (TextView) findViewById(R.id.txt_addnew);
         txt_header = (TextView) findViewById(R.id.txt_header);
         img_back = (ImageView) findViewById(R.id.img_back);
-        txt_header.setText(title);
+        txt_header.setText(CommonMethod.decodeEmoji(title));
         img_nodata = (ImageView) findViewById(R.id.img_nodata);
         delete_data = (ImageView) findViewById(R.id.delete_data);
         progress_load = (ProgressBar) findViewById(R.id.progress_load);
@@ -204,8 +216,12 @@ public class AllGalleryActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.txt_addnew:
+//                startActivityForResult(new Intent(AllGalleryActivity.this, CustomGallery_Activity.class), CustomGallerySelectId);
+                Intent intent = new Intent(AllGalleryActivity.this, AlbumSelectActivity.class);
+                intent.putExtra(Constants.INTENT_EXTRA_LIMIT, 20);
+                startActivityForResult(intent, Constants.REQUEST_CODE);
 
-                startActivityForResult(new Intent(AllGalleryActivity.this, CustomGallery_Activity.class), CustomGallerySelectId);
+
                 /*
                 dialog = new Dialog(AllGalleryActivity.this);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -238,6 +254,8 @@ public class AllGalleryActivity extends AppCompatActivity implements View.OnClic
                 dialog.getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 */
+
+
                 break;
             case R.id.img_back:
                 finish();
@@ -424,15 +442,15 @@ public class AllGalleryActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onResume() {
         super.onResume();
-        imgid.clear();
-        imageItems = new ArrayList<>();
+//        imgid.clear();
+        /*imageItems = new ArrayList<>();
         // put your code here...
         if (CommonMethod.isInternetConnected(AllGalleryActivity.this)) {
             page_count = 1;
             new GetAllImageCategory().execute();
         } else {
             Toast.makeText(AllGalleryActivity.this, R.string.internet, Toast.LENGTH_SHORT).show();
-        }
+        }*/
     }
 
     @Override
@@ -440,7 +458,27 @@ public class AllGalleryActivity extends AppCompatActivity implements View.OnClic
 
         super.onActivityResult(requestCode, resultCode, data);
 
-        switch (requestCode) {
+
+        if (requestCode == Constants.REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+            ArrayList<Image> images = data.getParcelableArrayListExtra(Constants.INTENT_EXTRA_IMAGES);
+            StringBuffer stringBuffer = new StringBuffer();
+            for (int i = 0, l = images.size(); i < l; i++) {
+                stringBuffer.append(images.get(i).path + "\n");
+                selectedImage.add(images.get(i).path);
+
+                if (i+1==images.size()){
+                    new AddImage().execute();
+                }
+            }
+
+
+            Log.e("image list", "------------" + stringBuffer.toString());
+//            selectedImage.add(stringBuffer.toString());
+//            textView.setText(stringBuffer.toString());
+        }
+
+
+        /*switch (requestCode) {
             case CustomGallerySelectId:
                 if (requestCode == RESULT_OK) {
                     String imagesArray = data.getStringExtra(CustomGalleryIntentKey);//get Intent data
@@ -453,7 +491,7 @@ public class AllGalleryActivity extends AppCompatActivity implements View.OnClic
                 }
                 break;
 
-        }
+        }*/
 
 
 /*
@@ -553,7 +591,7 @@ public class AllGalleryActivity extends AppCompatActivity implements View.OnClic
         }*/
     }
 
-    private class AddImage extends AsyncTask<String, Void, String> {
+   /* private class AddImage extends AsyncTask<String, Void, String> {
         String responseJSON = "";
 
         @Override
@@ -632,7 +670,106 @@ public class AllGalleryActivity extends AppCompatActivity implements View.OnClic
             }
 
         }
+    }*/
+
+
+    private class AddImage extends AsyncTask<String, Void, String> {
+        String responseJSON = "";
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = new ProgressDialog(AllGalleryActivity.this);
+            progressDialog.setMessage("Uploading...");
+            progressDialog.show();
+            progressDialog.setCancelable(false);
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            Log.e("method", "----------------" + "call");
+
+
+            String Photo = "";
+
+
+            try {
+                HttpClient httpClient = new DefaultHttpClient();
+                HttpPost httpPost = new HttpPost(CommonURL.Main_url + CommonAPI_Name.addphotogallery);
+
+                MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
+                multipartEntity.addPart("cid", new StringBody(gallerycid));
+                String[] photoArr = new String[selectedImage.size()];
+
+                Log.e("image size","-------------"+selectedImage.size());
+
+                for (int i = 0; i < selectedImage.size(); i++) {
+                    photoArr[i] = selectedImage.get(i);
+                    Log.e("photoArr", "--------" + photoArr[i]);
+                    File file1 = new File(photoArr[i]);
+                    FileBody fileBody1 = new FileBody(file1);
+                    multipartEntity.addPart("Photo[" + i + "]", fileBody1);
+
+                }
+
+
+//                File file1 = new File(picturePath);
+//
+//                FileBody fileBody1 = new FileBody(file1);
+//                Log.e("file", "----------------------------" + fileBody1);
+//                multipartEntity.addPart("Photo", fileBody1);
+
+                httpPost.setEntity(multipartEntity);
+                HttpResponse httpResponse = httpClient.execute(httpPost);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent(), "UTF-8"));
+                String sResponse;
+                StringBuilder s = new StringBuilder();
+                while ((sResponse = reader.readLine()) != null) {
+                    s = s.append(sResponse);
+
+                    responseJSON = s.toString();
+                }
+
+
+            } catch (Exception e) {
+                Log.e("exception", "------------" + e.toString());
+            }
+
+            return responseJSON;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            Log.e("response", "-----------------" + s);
+            try {
+                JSONObject jsonObject = new JSONObject(s);
+                if (jsonObject.getString("status").equalsIgnoreCase("success")) {
+
+                    progressDialog.dismiss();
+
+                    Toast.makeText(AllGalleryActivity.this, "Image added successfully.", Toast.LENGTH_SHORT).show();
+                    imageItems = new ArrayList<>();
+                    selectedImage.clear();
+                    new GetAllImageCategory().execute();
+//                    finish();
+//                    Toast.makeText(AllGalleryActivity.this, "" + jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+
+                } else {
+                    Toast.makeText(AllGalleryActivity.this, "Image not added.", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(AllGalleryActivity.this, "" + jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+        }
     }
+
+
 
     private class DeleteGalleryImage extends AsyncTask<String, Void, String> {
         String responseJSON = "";

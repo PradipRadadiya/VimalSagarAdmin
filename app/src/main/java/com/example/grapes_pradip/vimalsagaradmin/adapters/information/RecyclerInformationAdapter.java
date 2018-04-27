@@ -74,6 +74,8 @@ public class RecyclerInformationAdapter extends RecyclerView.Adapter<RecyclerInf
                 intent.putExtra("address", itemArrayList.get(holder.getAdapterPosition()).getAddress());
                 intent.putExtra("date", itemArrayList.get(holder.getAdapterPosition()).getDate());
                 intent.putExtra("view", itemArrayList.get(holder.getAdapterPosition()).getView());
+                intent.putExtra("photo", itemArrayList.get(holder.getAdapterPosition()).getPhoto());
+                intent.putExtra("isodate", itemArrayList.get(holder.getAdapterPosition()).getIsodate());
                 activity.startActivity(intent);
                 activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }

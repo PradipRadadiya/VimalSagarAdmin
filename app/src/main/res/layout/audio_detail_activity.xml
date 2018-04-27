@@ -38,6 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8sp" />
+
             <TextView
                 android:id="@+id/ttitle"
                 android:layout_width="wrap_content"
@@ -53,6 +54,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8sp" />
+
+            <TextView
+                android:id="@+id/tdescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Description :"
+                android:textColor="@color/lable"
+                android:textSize="18sp"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/txt_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8sp"
+                android:text="" />
 
             <TextView
                 android:id="@+id/tdate"
@@ -80,15 +97,14 @@
                 tools:ignore="HardcodedText" />
 
             <ImageView
-                android:layout_gravity="center"
                 android:id="@+id/img_photo"
                 android:layout_width="150sp"
                 android:layout_height="150sp"
+                android:layout_gravity="center"
                 android:layout_marginTop="5sp"
                 android:scaleType="fitXY"
-                tools:ignore="ContentDescription"
                 android:src="@drawable/nodataavi"
-                />
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -103,7 +119,6 @@
                 android:id="@+id/jcplayer_audio"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
-
 
 
             <LinearLayout
@@ -192,13 +207,15 @@
                     android:textColor="@color/colorPrimaryDark"
                     tools:ignore="HardcodedText" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:gravity="right"
+                android:orientation="horizontal"
                 android:padding="10sp"
                 tools:ignore="RtlHardcoded">
+
                 <TextView
                     android:id="@+id/txt_views"
                     android:layout_width="wrap_content"
@@ -208,6 +225,7 @@
                     android:text="10120"
                     android:textSize="16sp"
                     tools:ignore="HardcodedText,InconsistentLayout,RtlHardcoded" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -217,6 +235,7 @@
                     android:textSize="16sp"
                     tools:ignore="HardcodedText,RtlHardcoded" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

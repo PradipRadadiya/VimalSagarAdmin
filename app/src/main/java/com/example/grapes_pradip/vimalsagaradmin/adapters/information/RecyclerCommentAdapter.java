@@ -124,9 +124,9 @@ public class RecyclerCommentAdapter extends RecyclerView.Adapter<RecyclerComment
             holder.lin_approve.setVisibility(View.GONE);
             holder.lin_delete.setVisibility(View.GONE);
             holder.rejected.setVisibility(View.VISIBLE);
-            holder.txt_unm.setText(commentList.getName());
-            holder.txt_post.setText(commentList.getComment());
-            holder.txt_date.setText(commentList.getDate());
+            holder.txt_unm.setText(CommonMethod.decodeEmoji(commentList.getName()));
+            holder.txt_post.setText(CommonMethod.decodeEmoji(commentList.getComment()));
+            holder.txt_date.setText(CommonMethod.decodeEmoji(commentList.getDate()));
         }
 
     }

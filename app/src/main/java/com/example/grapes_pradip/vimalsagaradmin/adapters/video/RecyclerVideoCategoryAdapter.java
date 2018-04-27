@@ -16,10 +16,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alexandrius.accordionswipelayout.library.SwipeLayout;
+import com.bumptech.glide.Glide;
 import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.activities.video.AllVideoActivity;
 import com.example.grapes_pradip.vimalsagaradmin.activities.video.EditVideoCategoryActivity;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
+import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
 import com.example.grapes_pradip.vimalsagaradmin.common.JsonParser;
 import com.example.grapes_pradip.vimalsagaradmin.model.video.AllVideoCategoryItem;
@@ -58,8 +60,15 @@ public class RecyclerVideoCategoryAdapter extends RecyclerView.Adapter<RecyclerV
     public void onBindViewHolder(final ViewHolder holder, int i) {
 
         final AllVideoCategoryItem videoCategoryItem = itemArrayList.get(i);
-        holder.txt_title.setText(videoCategoryItem.getName());
-        Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.videocategory + videoCategoryItem.getCategoryicon().replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(holder.img_video_category);
+        holder.txt_title.setText(CommonMethod.decodeEmoji(videoCategoryItem.getName()));
+//        Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.videocategory + videoCategoryItem.getCategoryicon().replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(holder.img_video_category);
+
+        Glide.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.videocategory + videoCategoryItem.getCategoryicon()
+                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(holder.img_video_category);
+
+
+
+
         ((SwipeLayout) holder.itemView).setItemState(SwipeLayout.ITEM_STATE_COLLAPSED, true);
         holder.checkbox_delete.setChecked(videoCategoryItem.isSelected() ? true : false);
         holder.txt_edit.setOnClickListener(new View.OnClickListener() {

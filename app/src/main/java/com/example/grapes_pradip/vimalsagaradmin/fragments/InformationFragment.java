@@ -284,6 +284,8 @@ public class InformationFragment extends Fragment implements View.OnClickListene
                         String date = jsonObject1.getString("Date");
                         String view = jsonObject1.getString("View");
 
+                        String photo = jsonObject1.getString("Photo");
+
                         String[] string = date.split(" ");
                         Log.e("str1", "--------" + string[0]);
                         Log.e("str2", "--------" + string[1]);
@@ -303,8 +305,8 @@ public class InformationFragment extends Fragment implements View.OnClickListene
                         Log.e("day", "-----------------" + day);
 
                         String fulldate = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + ", " + string[1];
+                        allInformationItems.add(new AllInformationItem(id, title, description, address, fulldate, view, false, photo, date));
 
-                        allInformationItems.add(new AllInformationItem(id, title, description, address, fulldate, view,false));
                     }
                 }
 
