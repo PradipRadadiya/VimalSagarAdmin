@@ -311,23 +311,26 @@
 
         <activity
             android:name=".gallery.activities.AlbumSelectActivity"
+            android:configChanges="orientation|screenSize"
             android:label="@string/app_name"
-            android:theme="@style/MultipleImageSelectTheme"
-            android:configChanges="orientation|screenSize">
+            android:theme="@style/MultipleImageSelectTheme">
             <intent-filter>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
             android:name=".gallery.activities.ImageSelectActivity"
+            android:configChanges="orientation|screenSize"
             android:label="@string/app_name"
-            android:theme="@style/MultipleImageSelectTheme"
-            android:configChanges="orientation|screenSize">
+            android:theme="@style/MultipleImageSelectTheme">
             <intent-filter>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".activities.admin.UserViewActivity"
+            android:screenOrientation="portrait" />
 
 
         <activity android:name=".activities.AudioPlayActivity" />

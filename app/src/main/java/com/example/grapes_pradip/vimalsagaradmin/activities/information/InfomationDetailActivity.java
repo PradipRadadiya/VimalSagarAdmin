@@ -688,8 +688,13 @@ public class InfomationDetailActivity extends AppCompatActivity implements View.
                         txt_address.setText(CommonMethod.decodeEmoji(address));
                         txt_views.setText(CommonMethod.decodeEmoji(view));
 
-                        Glide.with(InfomationDetailActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.infoimage + photos
-                                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(img_info);
+
+                        if (!photos.equalsIgnoreCase("")) {
+                            Glide.with(InfomationDetailActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.infoimage + photos
+                                    .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(img_info);
+                        }else{
+                            img_info.setVisibility(View.GONE);
+                        }
 
 
 

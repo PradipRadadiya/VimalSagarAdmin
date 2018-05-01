@@ -29,7 +29,7 @@ import java.util.List;
  * Created by Pradip on 1/2/17.
  */
 @SuppressWarnings("ALL")
-public class RecyclerQuestionAnswerAdapter extends RecyclerView.Adapter<RecyclerQuestionAnswerAdapter.ViewHolder> {
+public class RecyclerApproveQuestionAnswerAdapter extends RecyclerView.Adapter<RecyclerApproveQuestionAnswerAdapter.ViewHolder> {
 
 
     private final Activity activity;
@@ -37,7 +37,7 @@ public class RecyclerQuestionAnswerAdapter extends RecyclerView.Adapter<Recycler
     private String id;
     public static final ArrayList<String> questionid = new ArrayList<>();
 
-    public RecyclerQuestionAnswerAdapter(Activity activity, List<QuestiinItem> itemArrayList) {
+    public RecyclerApproveQuestionAnswerAdapter(Activity activity, List<QuestiinItem> itemArrayList) {
         super();
         this.activity = activity;
         this.itemArrayList = itemArrayList;
@@ -54,12 +54,17 @@ public class RecyclerQuestionAnswerAdapter extends RecyclerView.Adapter<Recycler
 
         final QuestiinItem questiinItem = itemArrayList.get(i);
 
+        if (questiinItem.getIsApproved().equalsIgnoreCase("1")) {
             holder.txt_title.setText(CommonMethod.decodeEmoji(questiinItem.getQuestion()));
             holder.txt_date.setText(CommonMethod.decodeEmoji(questiinItem.getDate()));
             holder.txt_name.setText(CommonMethod.decodeEmoji(questiinItem.getName()));
             holder.txt_views.setText(CommonMethod.decodeEmoji(questiinItem.getView()));
             ((SwipeLayout) holder.itemView).setItemState(SwipeLayout.ITEM_STATE_COLLAPSED, true);
             holder.checkbox_question.setChecked(questiinItem.isSelected() ? true : false);
+        }else{
+            itemArrayList.remove(i);
+            notifyItemRemoved(i);
+        }
 
         holder.txt_edit.setOnClickListener(new View.OnClickListener() {
             @Override

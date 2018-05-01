@@ -90,7 +90,7 @@ public class AddVideoActivity extends AppCompatActivity implements View.OnClickL
     String fulltime;
     private String fulldate;
     String datetimefull;
-    private EditText e_description,edit_videolink;
+    private EditText e_description, edit_videolink;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -255,14 +255,23 @@ public class AddVideoActivity extends AppCompatActivity implements View.OnClickL
                     edit_video_name.requestFocus();
                 } else if (picturePath == null) {
                     Toast.makeText(AddVideoActivity.this, R.string.videoimage, Toast.LENGTH_SHORT).show();
-                } else if (videoPath == null) {
+                }
+                /*else if (videoPath == null) {
                     Toast.makeText(AddVideoActivity.this, R.string.videoupload, Toast.LENGTH_SHORT).show();
-                } else if (TextUtils.isEmpty(edit_date.getText().toString())) {
+                }*/
+
+                else if (TextUtils.isEmpty(edit_date.getText().toString())) {
                     edit_date.setError(getResources().getString(R.string.selectdate));
                     edit_video_name.requestFocus();
                 } else if (TextUtils.isEmpty(edit_time.getText().toString())) {
                     edit_time.setError(getResources().getString(R.string.selecttime));
                     edit_video_name.requestFocus();
+                } else if (TextUtils.isEmpty(e_description.getText().toString())) {
+                    e_description.setError("Please enter description.");
+                    e_description.requestFocus();
+                } else if (TextUtils.isEmpty(edit_videolink.getText().toString())) {
+                    edit_videolink.setError("Please enter videolink.");
+                    edit_videolink.requestFocus();
                 } else {
                     datetimefull = fulldate + " " + fulltime;
                     new AddVideo().execute();
@@ -513,26 +522,36 @@ public class AddVideoActivity extends AppCompatActivity implements View.OnClickL
             String Photo = "";
 
             File file1 = new File(picturePath);
-            File file2 = new File(videoPath);
 
             try {
                 HttpClient httpClient = new DefaultHttpClient();
                 HttpPost httpPost = new HttpPost(CommonURL.Main_url + CommonAPI_Name.addvideo);
 
                 FileBody fileBody1 = new FileBody(file1);
-                FileBody fileBody2 = new FileBody(file2);
+
                 MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
                 multipartEntity.addPart("VideoName", new StringBody(videoname));
                 multipartEntity.addPart("cid", new StringBody(cid));
                 multipartEntity.addPart("duration", new StringBody("5:00"));
                 Log.e("file", "----------------------------" + fileBody1);
                 multipartEntity.addPart("Photo", fileBody1);
-                multipartEntity.addPart("Video", fileBody2);
+
+
+                if (videoPath == null) {
+
+                } else {
+                    File file2 = new File(videoPath);
+                    FileBody fileBody2 = new FileBody(file2);
+                    multipartEntity.addPart("Video", fileBody2);
+                }
+
+
                 multipartEntity.addPart("Is_notify", new StringBody(notify));
                 multipartEntity.addPart("videodate", new StringBody(datetimefull));
 
                 multipartEntity.addPart("Description", new StringBody(CommonMethod.encodeEmoji(e_description.getText().toString())));
                 multipartEntity.addPart("VideoLink", new StringBody(CommonMethod.encodeEmoji(edit_videolink.getText().toString())));
+
 
                 httpPost.setEntity(multipartEntity);
                 HttpResponse httpResponse = httpClient.execute(httpPost);

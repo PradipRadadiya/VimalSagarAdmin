@@ -115,8 +115,12 @@ public class EditInformationActivity extends AppCompatActivity {
         findID();
 
         img_icon.setVisibility(View.VISIBLE);
-        Glide.with(EditInformationActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.infoimage + photos
-                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(img_icon);
+        if (!photos.equalsIgnoreCase("")) {
+            Glide.with(EditInformationActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.infoimage + photos
+                    .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(img_icon);
+        }else{
+            img_icon.setVisibility(View.GONE);
+        }
 
 
         String[] string = isodate.split(" ");
@@ -611,7 +615,10 @@ public class EditInformationActivity extends AppCompatActivity {
                 multipartEntity.addPart("infodate", new StringBody(params[3]));
                 multipartEntity.addPart("Address", new StringBody(params[4]));
 
-                multipartEntity.addPart("hiddenphoto", new StringBody(photos));
+                if (!photos.equalsIgnoreCase("")) {
+                    multipartEntity.addPart("hiddenphoto", new StringBody(photos));
+                }
+
                 Log.e("photo", "----------------" + photo);
 
                 if (picturePath == null) {

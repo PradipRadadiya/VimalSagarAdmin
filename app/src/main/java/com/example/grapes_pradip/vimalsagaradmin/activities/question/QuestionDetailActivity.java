@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.grapes_pradip.vimalsagaradmin.R;
+import com.example.grapes_pradip.vimalsagaradmin.activities.admin.UserViewActivity;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
@@ -63,6 +64,7 @@ public class QuestionDetailActivity extends AppCompatActivity implements View.On
     private LinearLayout lin_replay_answer;
     private int status;
     private ProgressDialog progressDialog;
+    private TextView txt_userdetail;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -82,10 +84,20 @@ public class QuestionDetailActivity extends AppCompatActivity implements View.On
         findID();
         idClick();
         setContent();
+
+        txt_userdetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(QuestionDetailActivity.this, UserViewActivity.class);
+                intent1.putExtra("uid", userid);
+                startActivity(intent1);
+            }
+        });
     }
 
 
     private void findID() {
+        txt_userdetail = (TextView) findViewById(R.id.txt_userdetail);
         txt_name = (TextView) findViewById(R.id.txt_unm);
         txt_title = (TextView) findViewById(R.id.txt_titles);
         txt_date = (TextView) findViewById(R.id.txt_date);
@@ -148,18 +160,16 @@ public class QuestionDetailActivity extends AppCompatActivity implements View.On
                     if (CommonMethod.isInternetConnected(QuestionDetailActivity.this)) {
                         answer = edit_answer.getText().toString();
                         new ReplyAnswer().execute(qid, edit_answer.getText().toString());
-                    }
-                    else {
-                        Toast.makeText(QuestionDetailActivity.this,R.string.internet,Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(QuestionDetailActivity.this, R.string.internet, Toast.LENGTH_SHORT).show();
                     }
                 }
                 break;
             case R.id.txt_approve:
                 if (CommonMethod.isInternetConnected(QuestionDetailActivity.this)) {
                     new ApproveQuestion().execute();
-                }
-                else {
-                    Toast.makeText(QuestionDetailActivity.this,R.string.internet,Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(QuestionDetailActivity.this, R.string.internet, Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.txt_reject:
@@ -180,9 +190,8 @@ public class QuestionDetailActivity extends AppCompatActivity implements View.On
                         public void onClick(DialogInterface dialog, int which) {
                             if (CommonMethod.isInternetConnected(QuestionDetailActivity.this)) {
                                 new RejectQuestion().execute();
-                            }
-                            else {
-                                Toast.makeText(QuestionDetailActivity.this,R.string.internet,Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(QuestionDetailActivity.this, R.string.internet, Toast.LENGTH_SHORT).show();
                             }
                             // Write your code here to invoke YES event
 //                            Toast.makeText(activity, "You clicked on YES", Toast.LENGTH_SHORT).show();
@@ -200,9 +209,8 @@ public class QuestionDetailActivity extends AppCompatActivity implements View.On
 
                     alertDialog.show();
 
-                }
-                else {
-                    Toast.makeText(QuestionDetailActivity.this,R.string.internet,Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(QuestionDetailActivity.this, R.string.internet, Toast.LENGTH_SHORT).show();
                 }
                 break;
         }

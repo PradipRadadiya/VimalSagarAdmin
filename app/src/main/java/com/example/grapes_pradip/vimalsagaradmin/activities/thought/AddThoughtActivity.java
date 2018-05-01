@@ -208,9 +208,21 @@ public class AddThoughtActivity extends AppCompatActivity {
             edit_description.setError(getResources().getString(R.string.thoughtdes));
             edit_description.requestFocus();
         }
-        else if (picturePath == null) {
-            Toast.makeText(AddThoughtActivity.this, R.string.uploadcategoryimage, Toast.LENGTH_SHORT).show();
+        else if (TextUtils.isEmpty(e_address.getText().toString())) {
+            e_address.setError("Please enter location.");
+            e_address.requestFocus();
         }
+        else if (TextUtils.isEmpty(edit_date.getText().toString())) {
+            edit_date.setError("Please enter date.");
+            edit_date.requestFocus();
+        }
+
+        else if (TextUtils.isEmpty(edit_time.getText().toString())) {
+            edit_time.setError("Please enter time.");
+            edit_time.requestFocus();
+        }
+
+
         else {
             if (CommonMethod.isInternetConnected(AddThoughtActivity.this)) {
                 datetimefull = edit_date.getText().toString() + " " + edit_time.getText().toString();
@@ -355,13 +367,13 @@ public class AddThoughtActivity extends AppCompatActivity {
 //            Log.e("title", "----------" + CommonMethod.encodeEmoji(title));
             String Photo = "";
 
-            File file1 = new File(picturePath);
+
 
             try {
                 HttpClient httpClient = new DefaultHttpClient();
                 HttpPost httpPost = new HttpPost(CommonURL.Main_url + CommonAPI_Name.addThought);
 
-                FileBody fileBody1 = new FileBody(file1);
+
                 MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
 
 
@@ -370,8 +382,17 @@ public class AddThoughtActivity extends AppCompatActivity {
                 multipartEntity.addPart("Is_notify", new StringBody(params[2]));
                 multipartEntity.addPart("thoughtdate", new StringBody(params[3]));
                 multipartEntity.addPart("Location", new StringBody(params[4]));
-                Log.e("file", "----------------------------" + fileBody1);
-                multipartEntity.addPart("Photo", fileBody1);
+
+
+                if (picturePath==null){
+
+                }else {
+                    File file1 = new File(picturePath);
+                    FileBody fileBody1 = new FileBody(file1);
+                    Log.e("file", "----------------------------" + fileBody1);
+                    multipartEntity.addPart("Photo", fileBody1);
+                }
+
 
                 httpPost.setEntity(multipartEntity);
                 HttpResponse httpResponse = httpClient.execute(httpPost);

@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.activities.thought.AddThoughtActivity;
+import com.example.grapes_pradip.vimalsagaradmin.adapters.question.RecyclerApproveQuestionAnswerAdapter;
 import com.example.grapes_pradip.vimalsagaradmin.adapters.question.RecyclerQuestionAnswerAdapter;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
@@ -47,13 +48,13 @@ import static com.example.grapes_pradip.vimalsagaradmin.adapters.question.Recycl
  */
 
 @SuppressWarnings("ALL")
-public class QuestionAnswerFragment extends Fragment implements View.OnClickListener {
+public class ApproveQuestionAnswerFragment extends Fragment implements View.OnClickListener {
     private View rootview;
     private SwipeRefreshLayout swipe_refresh;
     private RecyclerView recyclerView_question;
     private LinearLayoutManager linearLayoutManager;
     private List<QuestiinItem> responseArrayList = new ArrayList<>();
-    private RecyclerQuestionAnswerAdapter recyclerQuestionAnswerAdapter;
+    private RecyclerApproveQuestionAnswerAdapter recyclerQuestionAnswerAdapter;
     private TextView txt_addnew;
     //page count
     private int page_count = 1;
@@ -72,7 +73,7 @@ public class QuestionAnswerFragment extends Fragment implements View.OnClickList
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootview = inflater.inflate(R.layout.question_answer_fragment, container, false);
+        rootview = inflater.inflate(R.layout.approve_question_fragment, container, false);
         linearLayoutManager = new LinearLayoutManager(getActivity());
         findID();
 
@@ -157,6 +158,8 @@ public class QuestionAnswerFragment extends Fragment implements View.OnClickList
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+
         getView().setFocusableInTouchMode(true);
         getView().requestFocus();
 
@@ -167,7 +170,7 @@ public class QuestionAnswerFragment extends Fragment implements View.OnClickList
                     if (keyCode == KeyEvent.KEYCODE_BACK) {
 //                        Toast.makeText(getActivity(), "Back Pressed", Toast.LENGTH_SHORT).show();
                         Fragment fr = null;
-                        fr = new DesktopFragment();
+                        fr = new QuestionAnswerFragment();
                         FragmentManager fm = getFragmentManager();
                         FragmentTransaction fragmentTransaction = fm.beginTransaction();
                         fragmentTransaction.replace(R.id.frame_content, fr);
@@ -178,6 +181,8 @@ public class QuestionAnswerFragment extends Fragment implements View.OnClickList
                 return false;
             }
         });
+
+
     }
 
     @Override
@@ -191,13 +196,6 @@ public class QuestionAnswerFragment extends Fragment implements View.OnClickList
 
             case R.id.txt_approveQuestion:
 
-                Fragment fr = null;
-                fr = new ApproveQuestionAnswerFragment();
-                FragmentManager fm = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fm.beginTransaction();
-                fragmentTransaction.replace(R.id.frame_content, fr);
-//        fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
                 break;
             case R.id.delete_data:
                 if (questionid.size() > 0) {
@@ -304,7 +302,7 @@ public class QuestionAnswerFragment extends Fragment implements View.OnClickList
                         Log.e("year", "-----------------" + year);
                         Log.e("day", "-----------------" + day);
 
-                        if (is_Approved.equalsIgnoreCase("0")) {
+                        if (is_Approved.equalsIgnoreCase("1")) {
                             String fulldate = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + ", " + string[1];
                             responseArrayList.add(new QuestiinItem(answer, is_Approved, uid, question, id, fulldate, name, view, false));
                         }
@@ -321,7 +319,7 @@ public class QuestionAnswerFragment extends Fragment implements View.OnClickList
             progress_load.setVisibility(View.GONE);
             recyclerView_question.setVisibility(View.VISIBLE);
             if (recyclerView_question != null) {
-                recyclerQuestionAnswerAdapter = new RecyclerQuestionAnswerAdapter(getActivity(), responseArrayList);
+                recyclerQuestionAnswerAdapter = new RecyclerApproveQuestionAnswerAdapter(getActivity(), responseArrayList);
                 if (recyclerQuestionAnswerAdapter.getItemCount() != 0) {
                     recyclerView_question.setVisibility(View.VISIBLE);
                     img_nodata.setVisibility(View.GONE);

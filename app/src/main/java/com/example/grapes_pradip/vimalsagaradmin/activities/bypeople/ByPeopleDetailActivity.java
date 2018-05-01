@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.grapes_pradip.vimalsagaradmin.R;
+import com.example.grapes_pradip.vimalsagaradmin.activities.admin.UserViewActivity;
 import com.example.grapes_pradip.vimalsagaradmin.activities.gallery.ImageViewActivity;
 import com.example.grapes_pradip.vimalsagaradmin.activities.video.EditVideoCategoryActivity;
 import com.example.grapes_pradip.vimalsagaradmin.activities.video.VideoFullActivity;
@@ -117,13 +118,14 @@ public class ByPeopleDetailActivity extends AppCompatActivity implements View.On
     private TextView detailcomment;
     String action_click;
     RelativeLayout rel_video;
+    private TextView txt_userdetail;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bypeople_detail_activity);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
 
         id = intent.getStringExtra("ID");
         action_click = intent.getStringExtra("click_action");
@@ -145,10 +147,23 @@ public class ByPeopleDetailActivity extends AppCompatActivity implements View.On
         findID();
         idClick();
 //        setContent();
+
+
+        txt_userdetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent1 = new Intent(ByPeopleDetailActivity.this, UserViewActivity.class);
+                intent1.putExtra("uid",uid);
+                startActivity(intent1);
+
+            }
+        });
     }
 
 
     private void findID() {
+        txt_userdetail = (TextView) findViewById(R.id.txt_userdetail);
         rel_video = (RelativeLayout) findViewById(R.id.rel_video);
         txt_img = (TextView) findViewById(R.id.txt_img);
         txt_views = (TextView) findViewById(R.id.txt_views);
@@ -681,10 +696,11 @@ public class ByPeopleDetailActivity extends AppCompatActivity implements View.On
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog=new ProgressDialog(ByPeopleDetailActivity.this);
+            progressDialog = new ProgressDialog(ByPeopleDetailActivity.this);
             progressDialog.setMessage("Loading..");
             progressDialog.show();
         }
+
         @Override
         protected String doInBackground(String... params) {
 
@@ -704,7 +720,7 @@ public class ByPeopleDetailActivity extends AppCompatActivity implements View.On
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            Log.e("response","-------------------"+s);
+            Log.e("response", "-------------------" + s);
             progressDialog.dismiss();
             edit_comment.setText("");
             commentLists = new ArrayList<>();
@@ -720,7 +736,7 @@ public class ByPeopleDetailActivity extends AppCompatActivity implements View.On
                         Toast.makeText(ByPeopleDetailActivity.this, "Comment added successfully.", Toast.LENGTH_SHORT).show();
 //                        dialog.dismiss();
 //                        Toast.makeText(ByPeopleDetailActivity.this, "" + jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
-                       ;
+                        ;
                     } else {
                         Toast.makeText(ByPeopleDetailActivity.this, "Comment not added.", Toast.LENGTH_SHORT).show();
 //                        Toast.makeText(ByPeopleDetailActivity.this, "" + jsonObject.getString("message"), Toast.LENGTH_SHORT).show();

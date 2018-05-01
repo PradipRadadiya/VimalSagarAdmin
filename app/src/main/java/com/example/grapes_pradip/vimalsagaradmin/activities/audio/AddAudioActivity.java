@@ -224,7 +224,12 @@ public class AddAudioActivity extends AppCompatActivity implements View.OnClickL
                 } else if (TextUtils.isEmpty(edit_time.getText().toString())) {
                     edit_time.setError(getResources().getString(R.string.selecttime));
                     edit_audio_name.requestFocus();
-                } else {
+                }
+                else if (TextUtils.isEmpty(e_description.getText().toString())) {
+                    e_description.setError("Please enter description.");
+                    e_description.requestFocus();
+                }
+                else {
                     if (CommonMethod.isInternetConnected(AddAudioActivity.this)) {
                         datetimefull = fulldate + " " + fulltime;
                         new AddAudio().execute();

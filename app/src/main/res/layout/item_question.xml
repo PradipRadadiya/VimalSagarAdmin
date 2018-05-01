@@ -28,7 +28,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Que."
+                android:text=""
                 android:textColor="#000"
                 android:textSize="18sp"
                 tools:ignore="HardcodedText" />
@@ -38,7 +38,7 @@
                 android:layout_width="0sp"
                 android:layout_height="wrap_content"
                 android:padding="8sp"
-                android:text="Guru Purnima"
+                android:text=""
                 android:textColor="@color/lable"
                 android:textSize="16sp"
                 android:layout_weight="9"
@@ -60,7 +60,7 @@
             android:layout_marginRight="5sp"
             android:gravity="right|bottom"
             android:paddingBottom="5sp"
-            android:text="15/02/2017"
+            android:text=""
             android:textSize="12sp"
             tools:ignore="HardcodedText,RtlHardcoded" />
 
@@ -71,7 +71,7 @@
             android:layout_marginRight="5sp"
             android:gravity="right|bottom"
             android:paddingBottom="5sp"
-            android:text="15/02/2017"
+            android:text=""
             android:textSize="12sp"
             tools:ignore="HardcodedText,RtlHardcoded" />
 
@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5sp"
                 android:gravity="right"
-                android:text="10120"
+                android:text=""
                 android:textSize="12sp"
                 tools:ignore="HardcodedText,InconsistentLayout,RtlHardcoded" />
             <TextView
@@ -95,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5sp"
                 android:gravity="right"
-                android:text="Views"
+                android:text=""
                 android:textSize="12sp"
                 tools:ignore="HardcodedText,RtlHardcoded" />
         </LinearLayout>

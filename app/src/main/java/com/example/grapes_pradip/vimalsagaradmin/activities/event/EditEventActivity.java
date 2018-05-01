@@ -40,12 +40,16 @@ import com.bumptech.glide.Glide;
 import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.activities.AudioPlayActivity;
 import com.example.grapes_pradip.vimalsagaradmin.activities.audio.EditAudioActivity;
+import com.example.grapes_pradip.vimalsagaradmin.activities.gallery.AllGalleryActivity;
 import com.example.grapes_pradip.vimalsagaradmin.activities.video.VideoFullActivity;
 import com.example.grapes_pradip.vimalsagaradmin.adapters.PhotoAudioVideoAdapter;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
 import com.example.grapes_pradip.vimalsagaradmin.common.JsonParser;
+import com.example.grapes_pradip.vimalsagaradmin.gallery.activities.AlbumSelectActivity;
+import com.example.grapes_pradip.vimalsagaradmin.gallery.helpers.Constants;
+import com.example.grapes_pradip.vimalsagaradmin.gallery.models.Image;
 import com.example.grapes_pradip.vimalsagaradmin.model.PhotoAudioVideoItem;
 import com.example.grapes_pradip.vimalsagaradmin.model.event.EventImage;
 import com.example.grapes_pradip.vimalsagaradmin.util.MarshMallowPermission;
@@ -138,6 +142,7 @@ public class EditEventActivity extends AppCompatActivity implements View.OnClick
     String datetimefull;
     String fulltime;
     String fulldate;
+    ArrayList<String> photoarray = new ArrayList<>();
 
 
     @Override
@@ -403,7 +408,11 @@ public class EditEventActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.txt_photo:
-                checkPermissionImage();
+                photoarray=new ArrayList<>();
+                Intent intent = new Intent(EditEventActivity.this, AlbumSelectActivity.class);
+                intent.putExtra(Constants.INTENT_EXTRA_LIMIT, 20);
+                startActivityForResult(intent, Constants.REQUEST_CODE);
+//                checkPermissionImage();
                 break;
 
             case R.id.txt_audio:
@@ -517,6 +526,25 @@ public class EditEventActivity extends AppCompatActivity implements View.OnClick
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == Constants.REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+            ArrayList<Image> images = data.getParcelableArrayListExtra(Constants.INTENT_EXTRA_IMAGES);
+            StringBuffer stringBuffer = new StringBuffer();
+            for (int i = 0, l = images.size(); i < l; i++) {
+                stringBuffer.append(images.get(i).path + "\n");
+                photoarray.add(images.get(i).path);
+
+                if (i+1==images.size()){
+                    new AddPhoto().execute();
+                }
+            }
+
+            Log.e("image list", "------------" + stringBuffer.toString());
+//            selectedImage.add(stringBuffer.toString());
+//            textView.setText(stringBuffer.toString());
+        }
+
+
         if (resultCode == RESULT_OK) {
             flag = true;
             if (requestCode == 1) {
@@ -1450,9 +1478,20 @@ public class EditEventActivity extends AppCompatActivity implements View.OnClick
                 Log.e("picturepath", "--------------" + picturePath);
                 multipartEntity.addPart("eid", new StringBody(id));
                 Log.e(" else call", "-----------");
-                File file1 = new File(picturePath);
-                FileBody fileBody1 = new FileBody(file1);
-                multipartEntity.addPart("Photo", fileBody1);
+
+                String[] photoArr = new String[photoarray.size()];
+                for (int i = 0; i < photoarray.size(); i++) {
+                    photoArr[i] = photoarray.get(i);
+                    Log.e("photoArr", "--------" + photoArr[i]);
+                    File file1 = new File(photoArr[i]);
+                    FileBody fileBody1 = new FileBody(file1);
+                    multipartEntity.addPart("Photo[" + i + "]", fileBody1);
+
+                }
+
+//                File file1 = new File(picturePath);
+//                FileBody fileBody1 = new FileBody(file1);
+//                multipartEntity.addPart("Photo", fileBody1);
 
 
                 httpPost.setEntity(multipartEntity);
@@ -1482,11 +1521,13 @@ public class EditEventActivity extends AppCompatActivity implements View.OnClick
                     progressDialog.dismiss();
                     e_title.setText("");
                     Toast.makeText(EditEventActivity.this, "Photo added successfully.", Toast.LENGTH_SHORT).show();
+                    photoarray.clear();
 //                    Toast.makeText(AddEventActivity.this, "" + jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
 //                    finish();
                     new GetEventDetail().execute();
 //                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 } else {
+                    photoarray.clear();
                     progressDialog.dismiss();
                     Toast.makeText(EditEventActivity.this, "Photo not added.", Toast.LENGTH_SHORT).show();
 //                    Toast.makeText(AddEventActivity.this, "" + jsonObject.getString("message"), Toast.LENGTH_SHORT).show();

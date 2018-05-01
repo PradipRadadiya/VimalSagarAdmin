@@ -53,6 +53,7 @@ import com.example.grapes_pradip.vimalsagaradmin.fragments.GalleryFragment;
 import com.example.grapes_pradip.vimalsagaradmin.fragments.InformationFragment;
 import com.example.grapes_pradip.vimalsagaradmin.fragments.OpinionPollFragment;
 import com.example.grapes_pradip.vimalsagaradmin.fragments.QuestionAnswerFragment;
+import com.example.grapes_pradip.vimalsagaradmin.fragments.QuestionAnswerTabbingFragment;
 import com.example.grapes_pradip.vimalsagaradmin.fragments.SubAdminListFragment;
 import com.example.grapes_pradip.vimalsagaradmin.fragments.ThoughtFragment;
 import com.example.grapes_pradip.vimalsagaradmin.fragments.UserFragment;
@@ -654,7 +655,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void openQA() {
         Fragment fr = null;
-        fr = new QuestionAnswerFragment();
+        fr = new QuestionAnswerTabbingFragment();
+//        fr = new QuestionAnswerFragment();
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.frame_content, fr);

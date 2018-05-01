@@ -24,6 +24,19 @@
             android:padding="10sp">
 
             <TextView
+                android:id="@+id/txt_userdetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:background="@color/background"
+                android:padding="8dp"
+                android:text="View User"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp"
+
+                />
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Name :"

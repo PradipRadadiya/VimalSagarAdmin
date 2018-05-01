@@ -41,9 +41,13 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.grapes_pradip.vimalsagaradmin.R;
+import com.example.grapes_pradip.vimalsagaradmin.activities.gallery.AllGalleryActivity;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
+import com.example.grapes_pradip.vimalsagaradmin.gallery.activities.AlbumSelectActivity;
+import com.example.grapes_pradip.vimalsagaradmin.gallery.helpers.Constants;
+import com.example.grapes_pradip.vimalsagaradmin.gallery.models.Image;
 import com.example.grapes_pradip.vimalsagaradmin.util.MarshMallowPermission;
 
 import org.json.JSONException;
@@ -294,7 +298,10 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.txt_photo:
-                checkPermissionImage();
+//                checkPermissionImage();
+                Intent intent = new Intent(AddEventActivity.this, AlbumSelectActivity.class);
+                intent.putExtra(Constants.INTENT_EXTRA_LIMIT, 20);
+                startActivityForResult(intent, Constants.REQUEST_CODE);
                 break;
 
             case R.id.txt_audio:
@@ -430,6 +437,26 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         super.onActivityResult(requestCode, resultCode, data);
+
+
+        if (requestCode == Constants.REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+            ArrayList<Image> images = data.getParcelableArrayListExtra(Constants.INTENT_EXTRA_IMAGES);
+            StringBuffer stringBuffer = new StringBuffer();
+            for (int i = 0, l = images.size(); i < l; i++) {
+                stringBuffer.append(images.get(i).path + "\n");
+                photoarray.add(images.get(i).path);
+
+            }
+
+            PhotoAdapter photoAdapter = new PhotoAdapter(AddEventActivity.this, photoarray);
+            recyclerView_photos.setVisibility(View.VISIBLE);
+            recyclerView_photos.setAdapter(photoAdapter);
+
+
+            Log.e("image list", "------------" + stringBuffer.toString());
+//            selectedImage.add(stringBuffer.toString());
+//            textView.setText(stringBuffer.toString());
+        }
 
         if (resultCode == RESULT_OK) {
             flag = true;
@@ -641,7 +668,7 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
                 multipartEntity.addPart("Address", new StringBody(address));
                 multipartEntity.addPart("VideoLink", new StringBody(VideoLink));
 
-                if (picturePath == null) {
+                if (photoarray.isEmpty()) {
                     Log.e("if call", "-----------");
                 } else {
 

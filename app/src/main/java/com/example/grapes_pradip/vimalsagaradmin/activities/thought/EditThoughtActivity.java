@@ -139,8 +139,13 @@ public class EditThoughtActivity extends AppCompatActivity {
 
 
         img_icon.setVisibility(View.VISIBLE);
-        Glide.with(EditThoughtActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.thoughtimage + photos
-                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(img_icon);
+
+        if (!photos.equalsIgnoreCase("")) {
+            Glide.with(EditThoughtActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.thoughtimage + photos
+                    .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(img_icon);
+        }else{
+            img_icon.setVisibility(View.GONE);
+        }
 
 
         txt_photo.setOnClickListener(new View.OnClickListener() {
@@ -290,6 +295,7 @@ public class EditThoughtActivity extends AppCompatActivity {
         edit_title.setText(CommonMethod.decodeEmoji(title));
         edit_description.setText(CommonMethod.decodeEmoji(description));
         e_address.setText(CommonMethod.decodeEmoji(location));
+//        e_address.setText(location);
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -392,7 +398,6 @@ public class EditThoughtActivity extends AppCompatActivity {
 //            Log.e("title", "----------" + CommonMethod.encodeEmoji(title));
             String Photo = "";
 
-
             try {
                 HttpClient httpClient = new DefaultHttpClient();
                 HttpPost httpPost = new HttpPost(CommonURL.Main_url + CommonAPI_Name.editthought);
@@ -405,7 +410,10 @@ public class EditThoughtActivity extends AppCompatActivity {
                 multipartEntity.addPart("Description", new StringBody(params[2]));
                 multipartEntity.addPart("thoughtdate", new StringBody(params[3]));
                 multipartEntity.addPart("Location", new StringBody(params[4]));
-                multipartEntity.addPart("hiddenphoto", new StringBody(photos));
+
+                if (!photos.equalsIgnoreCase("")) {
+                    multipartEntity.addPart("hiddenphoto", new StringBody(photos));
+                }
 
                 Log.e("photo", "----------------" + photo);
 

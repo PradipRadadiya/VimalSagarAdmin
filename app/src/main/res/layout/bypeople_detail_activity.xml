@@ -25,6 +25,20 @@
 
 
             <TextView
+                android:id="@+id/txt_userdetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:background="@color/background"
+                android:padding="8dp"
+                android:text="View User"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp"
+
+                />
+
+
+            <TextView
                 android:id="@+id/ttitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -141,18 +155,18 @@
                 tools:ignore="InconsistentLayout">
 
                 <com.example.jean.jcplayer.JcPlayerView
-                    android:visibility="gone"
                     android:id="@+id/jcplayer_audio"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:visibility="gone" />
 
                 <ImageView
                     android:id="@+id/img_play"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/play"
                     android:layout_centerHorizontal="true"
                     android:padding="50dp"
+                    android:src="@drawable/play"
                     tools:ignore="ContentDescription,InconsistentLayout" />
             </RelativeLayout>
 
@@ -319,6 +333,7 @@
 
 
         </LinearLayout>
+
     </ScrollView>
 
 

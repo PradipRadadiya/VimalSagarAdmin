@@ -751,8 +751,13 @@ public class ThoughtDetailActivity extends AppCompatActivity implements View.OnC
                         txt_views.setText(CommonMethod.decodeEmoji(view));
                         txt_location.setText(CommonMethod.decodeEmoji(location));
 
+
+                        if (!photos.equalsIgnoreCase("")){
                         Glide.with(ThoughtDetailActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.thoughtimage + photos
                                 .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(img_thought);
+                        }else{
+                            img_thought.setVisibility(View.GONE);
+                        }
 
 
 
