@@ -32,7 +32,6 @@ import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
 import com.example.grapes_pradip.vimalsagaradmin.util.MarshMallowPermission;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -54,9 +53,7 @@ import ch.boye.httpclientandroidlib.entity.mime.content.FileBody;
 import ch.boye.httpclientandroidlib.entity.mime.content.StringBody;
 import ch.boye.httpclientandroidlib.impl.client.DefaultHttpClient;
 
-/**
- * Created by Grapes-Pradip on 2/16/2017.
- */
+
 
 @SuppressWarnings("ALL")
 public class EditAudioCategoryActivity extends AppCompatActivity implements View.OnClickListener {
@@ -123,7 +120,7 @@ public class EditAudioCategoryActivity extends AppCompatActivity implements View
 //        Picasso.with(EditAudioCategoryActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.audiocategory + photo.replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(img_category_icon);
 
         Glide.with(EditAudioCategoryActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.audiocategory + photo
-                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(img_category_icon);
+                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).dontAnimate().into(img_category_icon);
 
 
 

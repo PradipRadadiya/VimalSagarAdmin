@@ -35,9 +35,6 @@ import java.util.ArrayList;
 import static com.example.grapes_pradip.vimalsagaradmin.adapters.opinionpoll.RecyclerOpinionPollAdapter.pollid;
 
 
-/**
- * Created by Grapes-Pradip on 2/15/2017.
- */
 
 @SuppressWarnings("ALL")
 public class OpinionPollActivity extends AppCompatActivity implements View.OnClickListener {
@@ -230,7 +227,7 @@ public class OpinionPollActivity extends AppCompatActivity implements View.OnCli
 
         @Override
         protected String doInBackground(String... params) {
-            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallpoll + "?page=" + page_count + "&psize=30");
+            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallpoll + "?page=" + page_count + "&psize=1000");
             return responseJSON;
         }
 

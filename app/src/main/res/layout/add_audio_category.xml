@@ -7,7 +7,6 @@
     android:orientation="vertical">
 
     <include
-        android:id="@+id/toolbar_information"
         layout="@layout/toolbar_back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -24,17 +23,16 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/ititle"
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Category Name"
-                android:textColor="@color/lable"
+                android:textColor="@color/black"
                 android:textSize="18sp"
 
                 tools:ignore="HardcodedText" />
 
-            <TextView
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="*"
@@ -44,30 +42,31 @@
                 tools:ignore="HardcodedText" />
         </LinearLayout>
 
-        <EditText
-            style="@style/edittext"
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomEditText
             android:id="@+id/e_title"
+            style="@style/edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5sp"
             android:background="@drawable/edittext_round"
+            android:hint="Category Name"
             android:inputType="text"
             android:lines="1"
             android:padding="10sp"
-            android:hint="Category Name"
             android:text=""
             tools:ignore="HardcodedText" />
 
+
         <ImageView
             android:id="@+id/img_category_icon"
-            android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="200sp"
+            android:layout_gravity="center"
             android:layout_marginTop="10sp"
             android:visibility="gone"
             tools:ignore="ContentDescription" />
 
-        <TextView
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
             android:id="@+id/txt_photo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -76,7 +75,7 @@
             android:gravity="center"
             android:padding="10sp"
             android:text="Select Photo"
-            android:textColor="@color/lable"
+            android:textColor="@color/black"
             android:textSize="18sp"
             tools:ignore="HardcodedText" />
 
@@ -87,19 +86,20 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20sp"
-            android:background="@color/colorPrimaryDark"
-            android:text="     Submit     "
+            android:background="@drawable/round_rect_shapeoneselect"
+            android:text="Submit"
             android:textColor="@color/white"
             android:textSize="18sp"
             tools:ignore="HardcodedText" />
 
 
         <ProgressBar
-            android:id="@+id/progressBar"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="fill_parent"
             android:layout_height="20dp"
             android:layout_marginBottom="35dp"
-            android:visibility="gone"/>
+            android:visibility="gone" />
+
     </LinearLayout>
+
 </LinearLayout>

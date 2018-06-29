@@ -1,8 +1,6 @@
 package com.example.grapes_pradip.vimalsagaradmin.model.competition;
 
-/**
- * Created by Grapes-Pradip on 3/6/2017.
- */
+
 
 @SuppressWarnings("ALL")
 public class AnswerItem {

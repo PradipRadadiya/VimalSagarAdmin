@@ -180,4 +180,10 @@ class Validator {
         return isValidEmail;
     }
 
+    //Check string is empty or not
+    public static boolean isEmptyString(String text) {
+        return (text == null || text.trim().equals("null") || text.trim()
+                .length() <= 0);
+    }
+
 }

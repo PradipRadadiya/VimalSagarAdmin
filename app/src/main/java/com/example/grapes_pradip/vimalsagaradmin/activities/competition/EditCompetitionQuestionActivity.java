@@ -30,9 +30,6 @@ import java.util.ArrayList;
 import ch.boye.httpclientandroidlib.NameValuePair;
 import ch.boye.httpclientandroidlib.message.BasicNameValuePair;
 
-/**
- * Created by Grapes-Pradip on 2/16/2017.
- */
 
 @SuppressWarnings("ALL")
 public class EditCompetitionQuestionActivity extends AppCompatActivity {
@@ -129,9 +126,11 @@ public class EditCompetitionQuestionActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
             if (progressDialog != null) {
                 progressDialog.dismiss();
             }
+
         }
 
     }

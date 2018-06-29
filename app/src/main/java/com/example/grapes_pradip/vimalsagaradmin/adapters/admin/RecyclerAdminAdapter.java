@@ -29,9 +29,7 @@ import com.example.grapes_pradip.vimalsagaradmin.model.admin.AllAdminItem;
 
 import java.util.ArrayList;
 
-/**
- * Created by Pradip on 1/2/17.
- */
+
 @SuppressWarnings("ALL")
 public class RecyclerAdminAdapter extends RecyclerView.Adapter<RecyclerAdminAdapter.ViewHolder> {
 

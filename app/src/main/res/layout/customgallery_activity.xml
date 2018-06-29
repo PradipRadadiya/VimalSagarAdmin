@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#eeeeee"
+    android:background="@color/bg"
     >
 
     <!-- Grid View fr Custom Gallery  -->
@@ -29,5 +30,6 @@
         android:textSize="15sp"
         android:textStyle="bold"
         android:text="Upload"
-        android:visibility="gone" />
+        android:visibility="gone"
+        tools:ignore="HardcodedText" />
 </RelativeLayout>

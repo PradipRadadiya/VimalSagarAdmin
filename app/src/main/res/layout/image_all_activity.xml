@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/bg"
     android:orientation="vertical"
     tools:ignore="Overdraw">
 
@@ -16,7 +16,7 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <TextView
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextViewBold
             android:id="@+id/txt_h"
             style="@style/allfragmenttextview"
             android:layout_width="0sp"
@@ -25,12 +25,12 @@
             android:text="Images"
             tools:ignore="HardcodedText" />
 
-        <TextView
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
             android:id="@+id/txt_addnew"
             android:layout_width="0sp"
             android:layout_height="wrap_content"
             android:layout_weight="3.5"
-            android:background="@drawable/add_new_round"
+            android:background="@drawable/round_rect_shapeoneselect"
             android:gravity="center"
             android:padding="3sp"
             android:text="Add New"
@@ -52,9 +52,20 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2sp"
+        android:layout_height="1sp"
         android:background="@color/colorPrimary"
         tools:ignore="SmallSp" />
+    <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+        android:id="@+id/txt_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:padding="5dp"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:lineSpacingExtra="5dp"
+        tools:ignore="InconsistentLayout" />
 
     <RelativeLayout
         android:layout_marginLeft="1dp"

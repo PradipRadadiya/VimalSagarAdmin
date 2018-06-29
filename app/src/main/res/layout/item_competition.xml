@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<com.alexandrius.accordionswipelayout.library.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10sp"
+    android:layout_marginRight="10sp"
+    android:layout_marginTop="10sp"
+
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/corner_round_item"
+        android:orientation="vertical"
+        android:padding="8dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/img_audio_category"
+                android:layout_width="0sp"
+                android:layout_height="75sp"
+                android:layout_weight="3"
+                android:padding="5sp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/competition"
+                tools:ignore="ContentDescription" />
+
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextViewBold
+                android:id="@+id/txt_title"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10sp"
+                android:layout_weight="7"
+                android:ellipsize="end"
+                android:lines="1"
+                android:padding="10sp"
+                android:text="Competition-1"
+                android:textColor="@color/lable"
+                android:textSize="16sp"
+                tools:ignore="HardcodedText,RtlHardcoded" />
+
+
+            <CheckBox
+                android:id="@+id/check_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+
+        </LinearLayout>
+
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+            android:id="@+id/txt_timer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:padding="10dp"
+            android:text="30 minute"
+            android:textColor="@color/black"
+
+            tools:ignore="HardcodedText" />
+
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+            android:id="@+id/txt_last_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:padding="10dp"
+            android:text="Last Date- 20-05-2018"
+            android:textColor="@color/black"
+            tools:ignore="HardcodedText" />
+
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+            android:visibility="gone"
+            android:id="@+id/txt_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:padding="10dp"
+            android:text="10:15 am"
+            android:textColor="@color/black"
+            tools:ignore="HardcodedText" />
+
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+            android:id="@+id/txt_total_question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:padding="10dp"
+            android:text="5 questions"
+            android:textColor="@color/black"
+            tools:ignore="HardcodedText" />
+
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+            android:visibility="gone"
+            android:id="@+id/txt_total_participate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:padding="10dp"
+            android:text="Participates User"
+            android:textColor="@color/black"
+            tools:ignore="HardcodedText" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp">
+
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextViewBold
+                android:id="@+id/txt_publish"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/edittext_round"
+                android:padding="5dp"
+                android:text="Publish"
+                android:textColor="@color/black"
+                tools:ignore="HardcodedText" />
+
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextViewBold
+                android:id="@+id/txt_result"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/edittext_round"
+                android:padding="5dp"
+                android:text="View Result"
+                android:textColor="@color/black"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                android:id="@+id/txt_edit"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:layout_weight="1"
+                android:background="@drawable/round_rect_shapeoneselect"
+                android:gravity="center"
+                android:padding="8sp"
+                android:text="Edit"
+                android:textColor="@color/white"
+                tools:ignore="HardcodedText" />
+
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                android:id="@+id/txt_delete"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:layout_weight="1"
+                android:background="@drawable/round_rect_shapeoneselect"
+                android:gravity="center"
+                android:padding="8sp"
+                android:text="Delete"
+                android:textColor="@color/white"
+                tools:ignore="HardcodedText" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</com.alexandrius.accordionswipelayout.library.SwipeLayout>

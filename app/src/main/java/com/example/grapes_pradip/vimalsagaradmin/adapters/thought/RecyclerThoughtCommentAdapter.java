@@ -58,7 +58,7 @@ public class RecyclerThoughtCommentAdapter extends RecyclerView.Adapter<Recycler
 
         if (commentList.getIsApproved().equalsIgnoreCase("1")) {
             holder.lin_approve.setVisibility(View.GONE);
-            holder.lin_delete.setVisibility(View.GONE);
+//            holder.lin_delete.setVisibility(View.GONE);
             holder.rejected.setVisibility(View.GONE);
 
             if (commentList.getName().equalsIgnoreCase("null")) {
@@ -73,10 +73,14 @@ public class RecyclerThoughtCommentAdapter extends RecyclerView.Adapter<Recycler
                 @Override
                 public void onClick(View v) {
                     if (CommonMethod.isInternetConnected(activity)) {
-                        commentList.setIsApproved("R");
-                        itemArrayList.remove(holder.getAdapterPosition());
+//                        itemArrayList.remove(holder.getAdapterPosition());
                         id = commentList.getID();
-//                        new RejectPost().execute();
+                        commentList.setIsApproved("R");
+
+                        new RejectPost().execute();
+                        holder.lin_approve.setVisibility(View.GONE);
+//                        holder.lin_delete.setVisibility(View.GONE);
+                        holder.rejected.setVisibility(View.VISIBLE);
                     }
                 }
             });
@@ -85,7 +89,7 @@ public class RecyclerThoughtCommentAdapter extends RecyclerView.Adapter<Recycler
         if (commentList.getIsApproved().equalsIgnoreCase("0")) {
 
             holder.lin_approve.setVisibility(View.VISIBLE);
-            holder.lin_delete.setVisibility(View.VISIBLE);
+//            holder.lin_delete.setVisibility(View.VISIBLE);
             holder.rejected.setVisibility(View.GONE);
             holder.txt_unm.setText(CommonMethod.decodeEmoji(commentList.getName()));
             holder.txt_post.setText(CommonMethod.decodeEmoji(commentList.getComment()));
@@ -114,7 +118,7 @@ public class RecyclerThoughtCommentAdapter extends RecyclerView.Adapter<Recycler
 
                         new RejectPost().execute();
                         holder.lin_approve.setVisibility(View.GONE);
-                        holder.lin_delete.setVisibility(View.GONE);
+//                        holder.lin_delete.setVisibility(View.GONE);
                         holder.rejected.setVisibility(View.VISIBLE);
                     }
                 }

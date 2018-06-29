@@ -4,10 +4,6 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-/**
- * Created by Grapes-Pradip on 2/8/2017.
- */
-
 @SuppressWarnings("ALL")
 public class NetworkClass {
     private static final int TYPE_WIFI = 1;

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipe"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/back_rect"
+    android:padding="10dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    >
+
+   <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextViewBold
+       android:id="@+id/txt_name"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:text="Name"
+       android:lineSpacingExtra="7dp"
+       android:textSize="18sp"
+       android:textStyle="bold"
+       android:textColor="@color/lable"
+       android:padding="5dp"
+       tools:ignore="HardcodedText" />
+
+    <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+        android:id="@+id/txt_user_marks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Marks"
+        android:lineSpacingExtra="7dp"
+        android:textSize="16sp"
+        android:padding="5dp"
+        android:textColor="@color/black"
+        tools:ignore="HardcodedText" />
+
+    <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+        android:id="@+id/txt_total_marks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Total Marks"
+        android:lineSpacingExtra="7dp"
+        android:padding="5dp"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        tools:ignore="HardcodedText" />
+
+
+</LinearLayout>

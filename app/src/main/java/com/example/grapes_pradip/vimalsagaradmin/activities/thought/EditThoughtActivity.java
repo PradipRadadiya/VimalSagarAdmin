@@ -33,8 +33,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.grapes_pradip.vimalsagaradmin.R;
-import com.example.grapes_pradip.vimalsagaradmin.activities.information.AddInformationActivity;
-import com.example.grapes_pradip.vimalsagaradmin.activities.information.EditInformationActivity;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
@@ -65,9 +63,7 @@ import ch.boye.httpclientandroidlib.entity.mime.content.StringBody;
 import ch.boye.httpclientandroidlib.impl.client.DefaultHttpClient;
 import ch.boye.httpclientandroidlib.message.BasicNameValuePair;
 
-/**
- * Created by Grapes-Pradip on 2/16/2017.
- */
+
 
 @SuppressWarnings("ALL")
 public class EditThoughtActivity extends AppCompatActivity {
@@ -142,7 +138,7 @@ public class EditThoughtActivity extends AppCompatActivity {
 
         if (!photos.equalsIgnoreCase("")) {
             Glide.with(EditThoughtActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.thoughtimage + photos
-                    .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(img_icon);
+                    .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).dontAnimate().into(img_icon);
         }else{
             img_icon.setVisibility(View.GONE);
         }

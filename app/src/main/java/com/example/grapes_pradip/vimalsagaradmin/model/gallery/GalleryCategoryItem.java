@@ -10,13 +10,15 @@ public class GalleryCategoryItem {
     private String name;
     private String categoryIcon;
     private boolean isSelected=false;
+    private String description;
 
 
-    public GalleryCategoryItem(String id, String name, String categoryIcon, boolean isSelected) {
+    public GalleryCategoryItem(String id, String name, String categoryIcon, boolean isSelected, String description) {
         this.id = id;
         this.name = name;
         this.categoryIcon = categoryIcon;
         this.isSelected = isSelected;
+        this.description = description;
     }
 
     public String getId() {
@@ -49,5 +51,13 @@ public class GalleryCategoryItem {
 
     public void setSelected(boolean selected) {
         isSelected = selected;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

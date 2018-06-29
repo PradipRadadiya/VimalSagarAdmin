@@ -52,14 +52,10 @@ import ch.boye.httpclientandroidlib.entity.mime.content.FileBody;
 import ch.boye.httpclientandroidlib.entity.mime.content.StringBody;
 import ch.boye.httpclientandroidlib.impl.client.DefaultHttpClient;
 
-/**
- * Created by Grapes-Pradip on 2/16/2017.
- */
-
 @SuppressWarnings("ALL")
 public class AddGalleryCategoryActivity extends AppCompatActivity implements View.OnClickListener {
     private ProgressDialog progressDialog;
-    private EditText e_title;
+    private EditText e_title,e_description;
     private TextView txt_header;
     private TextView txt_photo;
     private ImageView img_back;
@@ -74,7 +70,7 @@ public class AddGalleryCategoryActivity extends AppCompatActivity implements Vie
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_audio_category);
+        setContentView(R.layout.add_gallery_category);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         permission = new MarshMallowPermission(this);
@@ -91,7 +87,12 @@ public class AddGalleryCategoryActivity extends AppCompatActivity implements Vie
                 if (TextUtils.isEmpty(e_title.getText().toString())) {
                     e_title.setError("Please enter gallery category.");
                     e_title.requestFocus();
-                } else if (picturePath == null) {
+                }
+                else if (TextUtils.isEmpty(e_description.getText().toString())) {
+                    e_description.setError("Please enter description.");
+                    e_description.requestFocus();
+                }
+                else if (picturePath == null) {
                     Toast.makeText(AddGalleryCategoryActivity.this, R.string.uploadcategoryimagegal, Toast.LENGTH_SHORT).show();
                 } else {
                     if (CommonMethod.isInternetConnected(AddGalleryCategoryActivity.this)) {
@@ -102,12 +103,14 @@ public class AddGalleryCategoryActivity extends AppCompatActivity implements Vie
                 }
             }
         });
+
     }
 
 
     @SuppressLint("SetTextI18n")
     private void findID() {
         e_title = (EditText) findViewById(R.id.e_title);
+        e_description = (EditText) findViewById(R.id.e_description);
         txt_header = (TextView) findViewById(R.id.txt_header);
         txt_photo = (TextView) findViewById(R.id.txt_photo);
         img_back = (ImageView) findViewById(R.id.img_back);
@@ -331,6 +334,7 @@ public class AddGalleryCategoryActivity extends AppCompatActivity implements Vie
             Log.e("method", "----------------" + "call");
 
             String title = e_title.getText().toString();
+            String description = e_description.getText().toString();
 
             Log.e("title", "----------" + title);
             String Photo = "";
@@ -344,6 +348,7 @@ public class AddGalleryCategoryActivity extends AppCompatActivity implements Vie
                 FileBody fileBody1 = new FileBody(file1);
                 MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
                 multipartEntity.addPart("Name", new StringBody(CommonMethod.encodeEmoji(title)));
+                multipartEntity.addPart("Description", new StringBody(CommonMethod.encodeEmoji(description)));
                 Log.e("file", "----------------------------" + fileBody1);
                 multipartEntity.addPart("Photo", fileBody1);
 

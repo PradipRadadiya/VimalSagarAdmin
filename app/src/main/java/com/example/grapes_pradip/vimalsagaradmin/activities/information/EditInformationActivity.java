@@ -62,9 +62,7 @@ import ch.boye.httpclientandroidlib.entity.mime.content.StringBody;
 import ch.boye.httpclientandroidlib.impl.client.DefaultHttpClient;
 import ch.boye.httpclientandroidlib.message.BasicNameValuePair;
 
-/**
- * Created by Grapes-Pradip on 2/16/2017.
- */
+
 
 @SuppressWarnings("ALL")
 public class EditInformationActivity extends AppCompatActivity {
@@ -117,7 +115,7 @@ public class EditInformationActivity extends AppCompatActivity {
         img_icon.setVisibility(View.VISIBLE);
         if (!photos.equalsIgnoreCase("")) {
             Glide.with(EditInformationActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.infoimage + photos
-                    .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(img_icon);
+                    .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).dontAnimate().into(img_icon);
         }else{
             img_icon.setVisibility(View.GONE);
         }

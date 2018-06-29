@@ -37,9 +37,6 @@ import java.util.List;
 
 import static com.example.grapes_pradip.vimalsagaradmin.adapters.question.RecyclerQuestionAnswerAdapter.questionid;
 
-/**
- * Created by Grapes-Pradip on 2/15/2017.
- */
 
 @SuppressWarnings("ALL")
 public class QuestionAnswerActivity extends AppCompatActivity implements View.OnClickListener {
@@ -225,7 +222,7 @@ public class QuestionAnswerActivity extends AppCompatActivity implements View.On
 
         @Override
         protected String doInBackground(String... params) {
-            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.viewallappques + "?page=" + page_count + "&psize=30");
+            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.viewallappques + "?page=" + page_count + "&psize=1000");
             return responseJSON;
         }
 

@@ -1,8 +1,6 @@
 package com.example.jean.jcplayer.JCPlayerExceptions;
 
-/**
- * Created by Pradip on 01/09/16.
- */
+
 
 @SuppressWarnings("ALL")
 public class AudioUrlInvalidException extends Exception {

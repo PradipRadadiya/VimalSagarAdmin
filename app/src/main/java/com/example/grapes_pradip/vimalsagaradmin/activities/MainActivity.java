@@ -1,6 +1,7 @@
 package com.example.grapes_pradip.vimalsagaradmin.activities;
 
 import android.app.Dialog;
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -37,6 +38,9 @@ import android.widget.ToggleButton;
 
 import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.activities.admin.LoginActivity;
+import com.example.grapes_pradip.vimalsagaradmin.activities.comment.TablayoutCommentActivity;
+import com.example.grapes_pradip.vimalsagaradmin.activities.competition.AddComptitionQuestion;
+import com.example.grapes_pradip.vimalsagaradmin.activities.vichar.SplashContent;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
@@ -48,15 +52,17 @@ import com.example.grapes_pradip.vimalsagaradmin.fragments.AudioFragment;
 import com.example.grapes_pradip.vimalsagaradmin.fragments.ByPeopleFragment;
 import com.example.grapes_pradip.vimalsagaradmin.fragments.CompetitionFragment;
 import com.example.grapes_pradip.vimalsagaradmin.fragments.DesktopFragment;
-import com.example.grapes_pradip.vimalsagaradmin.fragments.EventFragment;
+import com.example.grapes_pradip.vimalsagaradmin.fragments.EventCategoryFragment;
 import com.example.grapes_pradip.vimalsagaradmin.fragments.GalleryFragment;
 import com.example.grapes_pradip.vimalsagaradmin.fragments.InformationFragment;
+import com.example.grapes_pradip.vimalsagaradmin.fragments.Notes;
 import com.example.grapes_pradip.vimalsagaradmin.fragments.OpinionPollFragment;
-import com.example.grapes_pradip.vimalsagaradmin.fragments.QuestionAnswerFragment;
 import com.example.grapes_pradip.vimalsagaradmin.fragments.QuestionAnswerTabbingFragment;
+import com.example.grapes_pradip.vimalsagaradmin.fragments.SlideImageFragment;
 import com.example.grapes_pradip.vimalsagaradmin.fragments.SubAdminListFragment;
 import com.example.grapes_pradip.vimalsagaradmin.fragments.ThoughtFragment;
 import com.example.grapes_pradip.vimalsagaradmin.fragments.UserFragment;
+import com.example.grapes_pradip.vimalsagaradmin.fragments.VicharKrantiFragment;
 import com.example.grapes_pradip.vimalsagaradmin.fragments.VideoFragment;
 import com.example.grapes_pradip.vimalsagaradmin.util.NetworkChangeReceiver;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -72,6 +78,11 @@ import ch.boye.httpclientandroidlib.message.BasicNameValuePair;
 @SuppressWarnings("ALL")
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, NetworkChangeReceiver.NetworkChange {
     private View headerLayout;
+    private LinearLayout lin_spcontent;
+    private LinearLayout lin_vichar;
+    private LinearLayout lin_slideimage;
+    private LinearLayout lin_comment;
+    private LinearLayout lin_note;
     private LinearLayout lin_home;
     private LinearLayout lin_info;
     private LinearLayout lin_event;
@@ -94,7 +105,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static Context context = null;
     private BroadcastReceiver mRegistrationBroadcastReceiver;
     private NotificationUtils notificationUtils;
-    ToggleButton pushonoff;
+    private ToggleButton pushonoff;
+
+
+    private NotificationManager mManager;
 
     @SuppressWarnings("deprecation")
     @Override
@@ -102,6 +116,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+
+
 //        sharedPreferencesClass = new SharedPreferencesClass(MainActivity.this);
 //        Intent intent = getIntent();
 //        action = intent.getStringExtra("click_action");
@@ -278,6 +295,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void findID() {
         img_home = (ImageView) findViewById(R.id.img_home);
+        lin_spcontent = (LinearLayout) headerLayout.findViewById(R.id.lin_spcontent);
+        lin_vichar = (LinearLayout) headerLayout.findViewById(R.id.lin_vichar);
+        lin_slideimage = (LinearLayout) headerLayout.findViewById(R.id.lin_slideimage);
+        lin_comment = (LinearLayout) headerLayout.findViewById(R.id.lin_comment);
+        lin_note = (LinearLayout) headerLayout.findViewById(R.id.lin_note);
         lin_home = (LinearLayout) headerLayout.findViewById(R.id.lin_home);
         lin_info = (LinearLayout) headerLayout.findViewById(R.id.lin_info);
         lin_event = (LinearLayout) headerLayout.findViewById(R.id.lin_event);
@@ -296,6 +318,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void idClick() {
 
+        lin_slideimage.setOnClickListener(this);
+        lin_spcontent.setOnClickListener(this);
+        lin_vichar.setOnClickListener(this);
+        lin_comment.setOnClickListener(this);
         img_home.setOnClickListener(this);
         lin_home.setOnClickListener(this);
         lin_info.setOnClickListener(this);
@@ -310,6 +336,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         lin_bypeople.setOnClickListener(this);
         lin_user.setOnClickListener(this);
         lin_setting.setOnClickListener(this);
+        lin_note.setOnClickListener(this);
 
     }
 
@@ -357,6 +384,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             openSubAdminList();
             return true;
         }
+
         if (id == R.id.changepwd) {
 //            Toast.makeText(MainActivity.this, "change password", Toast.LENGTH_SHORT).show();
             dialog = new Dialog(MainActivity.this);
@@ -424,6 +452,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         return super.onOptionsItemSelected(item);
+
     }
 
     private void Logout() {
@@ -443,6 +472,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+
+            case R.id.lin_note:
+                openNote();
+                onBackPressed();
+                break;
+
+            case R.id.lin_spcontent:
+                Intent intent2 = new Intent(MainActivity.this, SplashContent.class);
+                startActivity(intent2);
+                onBackPressed();
+                break;
+
+            case R.id.lin_slideimage:
+                openSlide();
+                onBackPressed();
+                break;
+
+
+            case R.id.lin_vichar:
+                openVichar();
+                onBackPressed();
+                break;
+
+            case R.id.lin_comment:
+                openComment();
+                onBackPressed();
+                break;
             case R.id.img_home:
                 openHome();
                 break;
@@ -488,8 +544,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.lin_comp:
                 Log.e("lin_comp", "------------------" + "click");
-                openCompition();
+
+                Intent intent1 = new Intent(MainActivity.this, AddComptitionQuestion.class);
+                startActivity(intent1);
                 onBackPressed();
+//                openCompition();
+//                onBackPressed();
                 break;
             case R.id.lin_op:
                 Log.e("lin_op", "------------------" + "click");
@@ -553,6 +613,48 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    private void openNote() {
+        Fragment fr = null;
+        fr = new Notes();
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_content, fr);
+//        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
+    private void openSlide() {
+        Fragment fr = null;
+        fr = new SlideImageFragment();
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_content, fr);
+//        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
+
+    private void openVichar() {
+        Fragment fr = null;
+        fr = new VicharKrantiFragment();
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_content, fr);
+//        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
+    private void openComment() {
+        Fragment fr = null;
+        fr = new TablayoutCommentActivity();
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_content, fr);
+//        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
+
     private void openSubAdminList() {
         Fragment fr = null;
         fr = new SubAdminListFragment();
@@ -605,7 +707,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void openEvent() {
         Fragment fr = null;
-        fr = new EventFragment();
+        fr = new EventCategoryFragment();
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.frame_content, fr);
@@ -651,6 +753,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fragmentTransaction.replace(R.id.frame_content, fr);
 //        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+
     }
 
     private void openQA() {
@@ -739,7 +842,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
     }
-
 
     @Override
     protected void onResume() {

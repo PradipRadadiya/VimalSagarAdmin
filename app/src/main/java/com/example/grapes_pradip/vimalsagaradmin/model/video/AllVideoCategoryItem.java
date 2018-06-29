@@ -1,8 +1,5 @@
 package com.example.grapes_pradip.vimalsagaradmin.model.video;
 
-/**
- * Created by Grapes-Pradip on 2/18/2017.
- */
 
 @SuppressWarnings("ALL")
 public class AllVideoCategoryItem {

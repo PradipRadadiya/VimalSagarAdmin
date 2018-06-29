@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/toolbar_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10sp"
+            android:orientation="vertical"
+            android:paddingBottom="20sp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Title"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+
+                    tools:ignore="HardcodedText" />
+
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    android:textColor="@color/color3"
+                    android:textSize="18sp"
+
+                    tools:ignore="HardcodedText" />
+            </LinearLayout>
+
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomEditText
+                android:id="@+id/e_title"
+                style="@style/edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5sp"
+                android:background="@drawable/edittext_round"
+                android:hint="Competition Name"
+                android:inputType="text"
+                android:lines="1"
+                android:padding="10sp"
+                android:text=""
+                tools:ignore="HardcodedText" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rules"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    tools:ignore="HardcodedText" />
+
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    android:textColor="@color/color3"
+                    android:textSize="18sp"
+
+                    tools:ignore="HardcodedText" />
+            </LinearLayout>
+
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomEditText
+                android:id="@+id/e_rule"
+                style="@style/edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5sp"
+                android:background="@drawable/edittext_round"
+                android:hint="Competition Rule"
+                android:inputType="textMultiLine"
+                android:padding="10sp"
+                android:text=""
+                tools:ignore="HardcodedText" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Competition Date"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    tools:ignore="HardcodedText" />
+
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    android:textColor="@color/color3"
+                    android:textSize="18sp"
+
+                    tools:ignore="HardcodedText" />
+            </LinearLayout>
+
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomEditText
+                android:id="@+id/e_date"
+                style="@style/edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5sp"
+                android:background="@drawable/edittext_round"
+                android:hint="Competition Last Date"
+                android:inputType="text"
+                android:lines="1"
+                android:padding="10sp"
+                android:text=""
+                tools:ignore="HardcodedText" />
+
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                    android:id="@+id/time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Competition Time"
+                    android:textColor="@color/lable"
+                    android:textSize="18sp"
+                    tools:ignore="HardcodedText" />
+
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    android:textColor="@color/color3"
+                    android:textSize="18sp"
+
+                    tools:ignore="HardcodedText" />
+            </LinearLayout>
+
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomEditText
+                android:visibility="gone"
+                android:id="@+id/e_time"
+                style="@style/edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5sp"
+                android:background="@drawable/edittext_round"
+                android:hint="Competition Time"
+                android:inputType="text"
+                android:lines="1"
+                android:padding="10sp"
+                android:text=""
+                tools:ignore="HardcodedText" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Question"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    tools:ignore="HardcodedText" />
+
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    android:textColor="@color/color3"
+                    android:textSize="18sp"
+
+                    tools:ignore="HardcodedText" />
+            </LinearLayout>
+
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomEditText
+                android:id="@+id/e_total_q"
+                style="@style/edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5sp"
+                android:background="@drawable/edittext_round"
+                android:hint="Total Question"
+                android:inputType="number"
+                android:lines="1"
+                android:padding="10sp"
+                android:text=""
+                tools:ignore="HardcodedText" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Minute"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    tools:ignore="HardcodedText" />
+
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    android:textColor="@color/color3"
+                    android:textSize="18sp"
+
+                    tools:ignore="HardcodedText" />
+            </LinearLayout>
+
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomEditText
+                android:id="@+id/e_total_minute"
+                style="@style/edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5sp"
+                android:background="@drawable/edittext_round"
+                android:hint="Total Minute"
+                android:inputType="number"
+                android:lines="1"
+                android:padding="10sp"
+                android:text=""
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/btn_add"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20sp"
+                android:background="@drawable/round_rect_shapeoneselect"
+                android:text="Submit"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                tools:ignore="HardcodedText" />
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="20dp"
+                android:layout_marginBottom="35dp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

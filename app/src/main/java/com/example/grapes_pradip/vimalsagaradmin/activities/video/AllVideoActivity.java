@@ -93,7 +93,7 @@ public class AllVideoActivity extends AppCompatActivity implements View.OnClickL
                 }
             }
         });
-        recyclerView_all_audio.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        /*recyclerView_all_audio.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -132,7 +132,7 @@ public class AllVideoActivity extends AppCompatActivity implements View.OnClickL
                 }
             }
 
-        });
+        });*/
 
     }
 
@@ -240,7 +240,7 @@ public class AllVideoActivity extends AppCompatActivity implements View.OnClickL
 
         @Override
         protected String doInBackground(String... params) {
-            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getvideobycategoryid + "?cid=" + cid + "&page=" + page_count + "&psize=30");
+            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getvideobycategoryid + "?cid=" + cid + "&page=" + page_count + "&psize=1000");
             return responseJSON;
         }
 
@@ -253,10 +253,10 @@ public class AllVideoActivity extends AppCompatActivity implements View.OnClickL
                 if (jsonObject.getString("status").equalsIgnoreCase("success")) {
                     JSONArray jsonArray = jsonObject.getJSONArray("data");
                     Log.e("json array", "-------------------" + jsonArray);
-                    if (jsonArray.length() < 30 || jsonArray.length() == 0) {
+                   /* if (jsonArray.length() < 30 || jsonArray.length() == 0) {
                         flag_scroll = true;
                         Log.e("length_array_news", flag_scroll + "" + "<30===OR(0)===" + jsonArray.length());
-                    }
+                    }*/
                     for (int i = 0; i < jsonArray.length(); i++) {
 
                         JSONObject jsonObject1 = jsonArray.getJSONObject(i);

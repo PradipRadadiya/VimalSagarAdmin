@@ -19,7 +19,7 @@ import com.pnikosis.materialishprogress.ProgressWheel;
 import java.util.ArrayList;
 
 
-public class ImageSlideEventAdapter extends android.support.v4.view.PagerAdapter {
+class ImageSlideEventAdapter extends android.support.v4.view.PagerAdapter {
     private final Context mcontext;
     private final LayoutInflater layoutInflater;
     private final ArrayList<String> imageItemArrayList;
@@ -45,8 +45,8 @@ public class ImageSlideEventAdapter extends android.support.v4.view.PagerAdapter
         View itemView = layoutInflater.inflate(R.layout.splash_pager_item, container, false);
         Log.e("imahes","------------------"+imageItemArrayList.get(position));
 
-        final SubsamplingScaleImageView imageView = (SubsamplingScaleImageView) itemView.findViewById(R.id.imageView);
-        final ProgressWheel progress_wheel = (ProgressWheel) itemView.findViewById(R.id.progress_wheel);
+        final SubsamplingScaleImageView imageView = itemView.findViewById(R.id.imageView);
+        final ProgressWheel progress_wheel = itemView.findViewById(R.id.progress_wheel);
         if (imageItemArrayList.size() == 0) {
 //            imageView.setImageResource(R.drawable.no_image);
             imageView.setImage(ImageSource.resource(R.drawable.noimageavailable));

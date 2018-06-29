@@ -15,14 +15,13 @@
 
 
     <LinearLayout
-        android:id="@+id/lin_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/corner_round_item"
         android:gravity="center"
         android:orientation="vertical">
 
-        <TextView
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
             android:id="@+id/txt_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

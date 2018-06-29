@@ -17,15 +17,13 @@ import com.example.grapes_pradip.vimalsagaradmin.R;
 
 import static com.example.grapes_pradip.vimalsagaradmin.activities.video.VideoDetailActivity.video_play_url;
 
-/**
- * Created by Grapes-Pradip on 07-Jun-17.
- */
+
 
 public class VideoFullActivity extends AppCompatActivity {
 
-    VideoView videoView;
+    private VideoView videoView;
     // Declare variables
-    ProgressBar progressbar;
+    private ProgressBar progressbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

@@ -13,9 +13,7 @@ import com.example.jean.jcplayer.JCPlayerExceptions.AudioListNullPointerExceptio
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * Created by Pradip on 12/07/16.
- */
+
 
 @SuppressWarnings("ALL")
 public class JcAudioPlayer {

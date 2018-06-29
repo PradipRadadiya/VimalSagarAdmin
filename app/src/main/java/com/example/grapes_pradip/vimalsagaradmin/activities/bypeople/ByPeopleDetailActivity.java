@@ -28,7 +28,6 @@ import com.bumptech.glide.Glide;
 import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.activities.admin.UserViewActivity;
 import com.example.grapes_pradip.vimalsagaradmin.activities.gallery.ImageViewActivity;
-import com.example.grapes_pradip.vimalsagaradmin.activities.video.EditVideoCategoryActivity;
 import com.example.grapes_pradip.vimalsagaradmin.activities.video.VideoFullActivity;
 import com.example.grapes_pradip.vimalsagaradmin.adapters.bypeople.RecyclerByPeopleCommentAdapter;
 import com.example.grapes_pradip.vimalsagaradmin.adapters.information.RecyclerLikeAdapter;
@@ -38,7 +37,6 @@ import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
 import com.example.grapes_pradip.vimalsagaradmin.common.JsonParser;
 import com.example.grapes_pradip.vimalsagaradmin.model.information.LikeList;
 import com.example.jean.jcplayer.JcPlayerView;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -52,9 +50,7 @@ import ch.boye.httpclientandroidlib.message.BasicNameValuePair;
 
 import static com.example.grapes_pradip.vimalsagaradmin.activities.video.VideoDetailActivity.video_play_url;
 
-/**
- * Created by Grapes-Pradip on 2/15/2017.
- */
+
 
 @SuppressWarnings("ALL")
 public class ByPeopleDetailActivity extends AppCompatActivity implements View.OnClickListener {
@@ -154,7 +150,7 @@ public class ByPeopleDetailActivity extends AppCompatActivity implements View.On
             public void onClick(View v) {
 
                 Intent intent1 = new Intent(ByPeopleDetailActivity.this, UserViewActivity.class);
-                intent1.putExtra("uid",uid);
+                intent1.putExtra("uid", uid);
                 startActivity(intent1);
 
             }
@@ -215,7 +211,9 @@ public class ByPeopleDetailActivity extends AppCompatActivity implements View.On
 //            Picasso.with(ByPeopleDetailActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.bypeopleimage + photo.replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(img_photo);
 
             Glide.with(ByPeopleDetailActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.bypeopleimage + photo
-                    .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(img_photo);
+                    .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).dontAnimate().into(img_photo);
+
+            Log.e("photo","--------------------"+CommonURL.ImagePath + CommonAPI_Name.bypeopleimage + photo);
 
 
         }
@@ -546,7 +544,7 @@ public class ByPeopleDetailActivity extends AppCompatActivity implements View.On
 
         @Override
         protected String doInBackground(String... params) {
-            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallusernamesforlikebypeople + "?pid=" + id + "&page=" + page_count + "&psize=30");
+            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallusernamesforlikebypeople + "?pid=" + id + "&page=" + page_count + "&psize=1000");
             return responseJSON;
         }
 
@@ -613,7 +611,7 @@ public class ByPeopleDetailActivity extends AppCompatActivity implements View.On
 
         @Override
         protected String doInBackground(String... params) {
-            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallcommentsforadminbypeople + "?pid=" + id + "&page=" + page_count + "&psize=30");
+            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallcommentsforadminbypeople + "?pid=" + id + "&page=" + page_count + "&psize=1000");
             return responseJSON;
         }
 
@@ -840,7 +838,6 @@ public class ByPeopleDetailActivity extends AppCompatActivity implements View.On
             }
         }
     }
-
 
     @Override
     public void onResume() {

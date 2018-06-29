@@ -5,9 +5,9 @@ import android.os.Parcelable;
 
 
 public class Image implements Parcelable {
-    public long id;
-    public String name;
-    public String path;
+    public final long id;
+    private final String name;
+    public final String path;
     public boolean isSelected;
 
     public Image(long id, String name, String path, boolean isSelected) {

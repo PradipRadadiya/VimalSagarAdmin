@@ -41,9 +41,6 @@ import java.util.Date;
 
 import static com.example.grapes_pradip.vimalsagaradmin.adapters.event.RecyclerEventAdapter.eventid;
 
-/**
- * Created by Grapes-Pradip on 2/15/2017.
- */
 
 @SuppressWarnings("ALL")
 public class EventFragment extends Fragment implements View.OnClickListener {
@@ -88,7 +85,7 @@ public class EventFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-        recyclerView_event.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        /*recyclerView_event.addOnScrollListener(new RecyclerView.OnScrollListener() {
                                                    @Override
                                                    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                                                        super.onScrolled(recyclerView, dx, dy);
@@ -129,7 +126,7 @@ public class EventFragment extends Fragment implements View.OnClickListener {
 
                                                }
 
-        );
+        );*/
         return rootview;
     }
 
@@ -252,7 +249,7 @@ public class EventFragment extends Fragment implements View.OnClickListener {
 
         @Override
         protected String doInBackground(String... params) {
-            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getAllevent + "?page=" + page_count + "&psize=30");
+            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getAllevent + "?page=" + page_count + "&psize=1000");
             return responseJSON;
         }
 
@@ -265,10 +262,10 @@ public class EventFragment extends Fragment implements View.OnClickListener {
                 if (jsonObject.getString("status").equalsIgnoreCase("success")) {
                     JSONArray jsonArray = jsonObject.getJSONArray("data");
                     Log.e("json array", "-------------------" + jsonArray);
-                    if (jsonArray.length() < 30 || jsonArray.length() == 0) {
+                 /*   if (jsonArray.length() < 30 || jsonArray.length() == 0) {
                         flag_scroll = true;
                         Log.e("length_array_news", flag_scroll + "" + "<30===OR(0)===" + jsonArray.length());
-                    }
+                    }*/
                     for (int i = 0; i < jsonArray.length(); i++) {
 
                         JSONObject jsonObject1 = jsonArray.getJSONObject(i);

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.alexandrius.accordionswipelayout.library.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10sp"
+    android:layout_marginRight="10sp"
+    android:layout_marginTop="10sp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/corner_round_item"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="8dp"
+        >
+
+
+        <ImageView
+            android:id="@+id/img_slide"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@drawable/back_gradint"
+
+            android:contentDescription="TODO"
+            tools:ignore="ContentDescription,HardcodedText" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                android:id="@+id/txt_edit"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Edit"
+                android:background="@drawable/round_rect_shapeoneselect"
+                android:textColor="@color/white"
+                android:padding="8sp"
+                android:gravity="center"
+                android:layout_margin="10sp"
+                tools:ignore="HardcodedText" />
+
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                android:id="@+id/txt_delete"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Delete"
+                android:background="@drawable/round_rect_shapeoneselect"
+                android:textColor="@color/white"
+                android:padding="8sp"
+                android:gravity="center"
+                android:layout_margin="10sp"
+                tools:ignore="HardcodedText" />
+        </LinearLayout>
+
+    </LinearLayout>
+</com.alexandrius.accordionswipelayout.library.SwipeLayout>

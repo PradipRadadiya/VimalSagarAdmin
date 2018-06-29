@@ -4,11 +4,7 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 
-/**
- * Created by Pradip on 18-Nov-16.
- */
 
-@SuppressWarnings("ALL")
 public class CustomTextViewBold extends android.support.v7.widget.AppCompatTextView {
     public CustomTextViewBold(Context context) {
         super(context);
@@ -26,9 +22,8 @@ public class CustomTextViewBold extends android.support.v7.widget.AppCompatTextV
     }
 
     private void setFont() {
-        Typeface font = Typeface.createFromAsset(getContext().getAssets(), "fonts/HelveticaNeueLTStd-Lt.otf");
+        Typeface font = Typeface.createFromAsset(getContext().getAssets(), "fonts/calibrib_bold.ttf");
         setTypeface(font, Typeface.BOLD);
     }
-
 
 }

@@ -5,9 +5,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
-/**
- * Created by Pradip on 16-Nov-16.
- */
 
 
 @SuppressWarnings("ALL")

@@ -33,9 +33,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- * Created by Grapes-Pradip on 2/15/2017.
- */
+
 
 @SuppressWarnings("ALL")
 public class ByPeopleFragment extends Fragment {

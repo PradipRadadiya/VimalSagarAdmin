@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<com.alexandrius.accordionswipelayout.library.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipe"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10sp"
+    android:layout_marginRight="10sp"
+    android:layout_marginTop="10sp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/corner_round_item"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/ic_action_user_black"
+                    tools:ignore="ContentDescription,HardcodedText" />
+
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextViewBold
+                    android:id="@+id/txt_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:paddingLeft="10sp"
+                    android:paddingRight="10sp"
+                    android:text="Guru Purnima"
+                    android:textColor="@color/lable"
+                    android:textSize="16sp"
+                    tools:ignore="HardcodedText" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/ic_comment_black_24dp"
+                    android:visibility="gone"
+                    tools:ignore="ContentDescription,HardcodedText" />
+
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextViewBold
+                    android:id="@+id/txt_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:ellipsize="end"
+                    android:lineSpacingExtra="5dp"
+                    android:paddingRight="10sp"
+                    android:text="dfsdfsdfsdfsdfsdf"
+                    android:textColor="@color/color3"
+                    tools:ignore="HardcodedText,RtlSymmetry"
+                    android:paddingEnd="10sp" />
+
+            </LinearLayout>
+
+
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                android:id="@+id/txt_mobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:lineSpacingExtra="5dp"
+                android:paddingLeft="10sp"
+                android:paddingRight="10sp"
+                android:text="dfsdfsdfsdfsdfsdf"
+                android:textColor="@color/black"
+                tools:ignore="HardcodedText" />
+
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                android:id="@+id/txt_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:ellipsize="end"
+                android:lines="1"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10sp"
+                android:paddingRight="10sp"
+                android:text="dfsdfsdfsdfsdfsdf"
+                android:textColor="@color/blue"
+                tools:ignore="HardcodedText" />
+
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                android:id="@+id/txt_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5sp"
+                android:ellipsize="end"
+                android:gravity="right|bottom"
+                android:lines="1"
+                android:paddingBottom="5sp"
+                android:text="15/02/2017"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                tools:ignore="HardcodedText,RtlHardcoded" />
+
+
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                android:id="@+id/txt_delete"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/round_rect_shapeoneselect"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Delete"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+
+                tools:ignore="HardcodedText" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lin_approve"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="2sp"
+            android:background="@color/green"
+            android:visibility="gone"
+            tools:ignore="RtlHardcoded">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_done"
+                tools:ignore="ContentDescription" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lin_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/lin_approve"
+            android:layout_marginTop="2sp"
+            android:background="@color/color3"
+            android:visibility="gone"
+            tools:ignore="RtlHardcoded">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_delete"
+                tools:ignore="ContentDescription" />
+        </LinearLayout>
+
+    </RelativeLayout>
+</com.alexandrius.accordionswipelayout.library.SwipeLayout>

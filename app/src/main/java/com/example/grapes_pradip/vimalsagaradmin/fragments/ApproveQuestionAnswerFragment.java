@@ -26,7 +26,6 @@ import android.widget.Toast;
 import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.activities.thought.AddThoughtActivity;
 import com.example.grapes_pradip.vimalsagaradmin.adapters.question.RecyclerApproveQuestionAnswerAdapter;
-import com.example.grapes_pradip.vimalsagaradmin.adapters.question.RecyclerQuestionAnswerAdapter;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
@@ -42,10 +41,6 @@ import java.util.Date;
 import java.util.List;
 
 import static com.example.grapes_pradip.vimalsagaradmin.adapters.question.RecyclerQuestionAnswerAdapter.questionid;
-
-/**
- * Created by Grapes-Pradip on 2/15/2017.
- */
 
 @SuppressWarnings("ALL")
 public class ApproveQuestionAnswerFragment extends Fragment implements View.OnClickListener {
@@ -69,7 +64,8 @@ public class ApproveQuestionAnswerFragment extends Fragment implements View.OnCl
     private ImageView img_nodata;
     private ImageView delete_data;
     ProgressBar progress_load;
-    private TextView txt_approveQuestion;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -88,7 +84,9 @@ public class ApproveQuestionAnswerFragment extends Fragment implements View.OnCl
             }
         });
 
-        recyclerView_question.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+
+     /*   recyclerView_question.addOnScrollListener(new RecyclerView.OnScrollListener() {
                                                       @Override
                                                       public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                                                           super.onScrolled(recyclerView, dx, dy);
@@ -129,7 +127,7 @@ public class ApproveQuestionAnswerFragment extends Fragment implements View.OnCl
 
                                                   }
 
-        );
+        );*/
         return rootview;
     }
 
@@ -142,7 +140,6 @@ public class ApproveQuestionAnswerFragment extends Fragment implements View.OnCl
     }
 
     private void findID() {
-        txt_approveQuestion = (TextView) rootview.findViewById(R.id.txt_approveQuestion);
         swipe_refresh = (SwipeRefreshLayout) rootview.findViewById(R.id.swipe_refresh);
         recyclerView_question = (RecyclerView) rootview.findViewById(R.id.recyclerView_question);
         recyclerView_question.setLayoutManager(linearLayoutManager);
@@ -151,9 +148,7 @@ public class ApproveQuestionAnswerFragment extends Fragment implements View.OnCl
         delete_data = (ImageView) rootview.findViewById(R.id.delete_data);
         progress_load = (ProgressBar) rootview.findViewById(R.id.progress_load);
         delete_data.setOnClickListener(this);
-        txt_approveQuestion.setOnClickListener(this);
     }
-
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -194,9 +189,7 @@ public class ApproveQuestionAnswerFragment extends Fragment implements View.OnCl
                 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;
 
-            case R.id.txt_approveQuestion:
 
-                break;
             case R.id.delete_data:
                 if (questionid.size() > 0) {
 
@@ -255,7 +248,7 @@ public class ApproveQuestionAnswerFragment extends Fragment implements View.OnCl
 
         @Override
         protected String doInBackground(String... params) {
-            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.viewallappques + "?page=" + page_count + "&psize=30");
+            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.viewallappques + "?page=" + page_count + "&psize=1000");
             return responseJSON;
         }
 
@@ -363,6 +356,7 @@ public class ApproveQuestionAnswerFragment extends Fragment implements View.OnCl
                 questionid.clear();
                 onResume();
             }
+
         }
     }
 
@@ -377,4 +371,6 @@ public class ApproveQuestionAnswerFragment extends Fragment implements View.OnCl
             new GetAllQuestion().execute();
         }
     }
+
+
 }

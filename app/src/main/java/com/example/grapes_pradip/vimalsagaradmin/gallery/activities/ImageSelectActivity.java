@@ -1,5 +1,6 @@
 package com.example.grapes_pradip.vimalsagaradmin.gallery.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -24,7 +25,6 @@ import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.gallery.adapters.CustomImageSelectAdapter;
@@ -102,6 +102,7 @@ public class ImageSelectActivity extends HelperActivity {
         });
     }
 
+    @SuppressLint("HandlerLeak")
     @Override
     protected void onStart() {
         super.onStart();
@@ -234,7 +235,7 @@ public class ImageSelectActivity extends HelperActivity {
         }
     }
 
-    private ActionMode.Callback callback = new ActionMode.Callback() {
+    private final ActionMode.Callback callback = new ActionMode.Callback() {
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
             MenuInflater menuInflater = mode.getMenuInflater();

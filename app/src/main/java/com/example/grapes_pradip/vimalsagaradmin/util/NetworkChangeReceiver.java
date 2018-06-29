@@ -7,9 +7,7 @@ import android.content.Intent;
 
 import com.example.grapes_pradip.vimalsagaradmin.activities.MainActivity;
 
-/**
- * Created by Grapes-Pradip on 2/8/2017.
- */
+
 
 @SuppressWarnings("ALL")
 public class NetworkChangeReceiver extends BroadcastReceiver {

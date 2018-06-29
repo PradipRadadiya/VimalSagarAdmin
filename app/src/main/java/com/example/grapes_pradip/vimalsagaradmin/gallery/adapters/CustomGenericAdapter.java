@@ -8,13 +8,13 @@ import java.util.ArrayList;
 
 
 public abstract class CustomGenericAdapter<T> extends BaseAdapter {
-    protected ArrayList<T> arrayList;
-    protected Context context;
-    protected LayoutInflater layoutInflater;
+    ArrayList<T> arrayList;
+    Context context;
+    final LayoutInflater layoutInflater;
 
-    protected int size;
+    int size;
 
-    public CustomGenericAdapter(Context context, ArrayList<T> arrayList) {
+    CustomGenericAdapter(Context context, ArrayList<T> arrayList) {
         this.arrayList = arrayList;
         this.context = context;
         this.layoutInflater = LayoutInflater.from(this.context);

@@ -2,9 +2,7 @@ package com.example.jean.jcplayer;
 
 import java.io.Serializable;
 
-/**
- * Created by Pradip on 27/06/16.
- */
+
 @SuppressWarnings("ALL")
 public class JcAudio implements Serializable {
 

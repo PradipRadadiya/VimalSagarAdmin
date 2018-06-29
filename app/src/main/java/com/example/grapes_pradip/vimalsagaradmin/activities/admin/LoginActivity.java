@@ -38,9 +38,6 @@ import java.util.ArrayList;
 import ch.boye.httpclientandroidlib.NameValuePair;
 import ch.boye.httpclientandroidlib.message.BasicNameValuePair;
 
-/**
- * Created by Grapes-Pradip on 2/17/2017.
- */
 
 @SuppressWarnings("ALL")
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {

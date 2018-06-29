@@ -9,7 +9,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
 
-public class MyApplication extends Application {
+class MyApplication extends Application {
 
     @Override
     public void onCreate() {
@@ -19,7 +19,7 @@ public class MyApplication extends Application {
 
 
     //Initiate Image Loader Configuration
-    public static void initImageLoader(Context context) {
+    private static void initImageLoader(Context context) {
         ImageLoaderConfiguration.Builder config = new ImageLoaderConfiguration.Builder(
                 context);
         config.threadPriority(Thread.NORM_PRIORITY - 2);

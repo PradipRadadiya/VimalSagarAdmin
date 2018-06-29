@@ -276,7 +276,7 @@ public class EditVideoActivity extends AppCompatActivity implements View.OnClick
 //        Picasso.with(EditVideoActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.videoimage + photo.replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0, 200).into(img_category_icon);
 
         Glide.with(EditVideoActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.videoimage + photo
-                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(img_category_icon);
+                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).dontAnimate().into(img_category_icon);
 
         if (CommonMethod.isInternetConnected(EditVideoActivity.this)) {
 //            new AddInformation().execute(e_title.getText().toString(), e_description.getText().toString(), e_date.getText().toString(), e_address.getText().toString());
@@ -593,10 +593,15 @@ public class EditVideoActivity extends AppCompatActivity implements View.OnClick
                 multipartEntity.addPart("vid", new StringBody(vid));
                 multipartEntity.addPart("duration", new StringBody("5:00"));
                 multipartEntity.addPart("hiddenphoto", new StringBody(photo));
-                multipartEntity.addPart("hiddenvideo", new StringBody(video));
+
                 multipartEntity.addPart("videodate", new StringBody(datetimefull));
                 multipartEntity.addPart("Description", new StringBody(CommonMethod.encodeEmoji(e_description.getText().toString())));
                 multipartEntity.addPart("VideoLink", new StringBody(CommonMethod.encodeEmoji(edit_videolink.getText().toString())));
+
+
+                if (!video.equalsIgnoreCase("")){
+                    multipartEntity.addPart("hiddenvideo", new StringBody(video));
+                }
 
                 if (picturePath == null) {
                     Log.e("if call", "-----------");
@@ -693,4 +698,5 @@ public class EditVideoActivity extends AppCompatActivity implements View.OnClick
         outFile.flush();
         outFile.close();
     }
+
 }

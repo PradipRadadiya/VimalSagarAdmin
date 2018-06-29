@@ -5,16 +5,12 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -24,10 +20,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,14 +44,11 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 import ch.boye.httpclientandroidlib.client.HttpClient;
@@ -71,9 +61,7 @@ import ch.boye.httpclientandroidlib.impl.client.DefaultHttpClient;
 
 import static com.example.grapes_pradip.vimalsagaradmin.adapters.gallery.RecyclerImageAllAdapter.imgid;
 
-/**
- * Created by Grapes-Pradip on 2/15/2017.
- */
+
 
 @SuppressWarnings("ALL")
 public class AllGalleryActivity extends AppCompatActivity implements View.OnClickListener {
@@ -113,6 +101,8 @@ public class AllGalleryActivity extends AppCompatActivity implements View.OnClic
     public static final String CustomGalleryIntentKey = "ImageArray";//Set Intent Key Value
     public static String gallerycid;
     ArrayList<String> selectedImage=new ArrayList<>();
+    private TextView txt_description;
+    private String description;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -123,6 +113,7 @@ public class AllGalleryActivity extends AppCompatActivity implements View.OnClic
         cid = intent.getStringExtra("gallery_category_id");
         gallerycid = cid;
         title = intent.getStringExtra("title");
+        description = intent.getStringExtra("description");
         linearLayoutManager = new LinearLayoutManager(AllGalleryActivity.this);
         gridLayoutManager = new GridLayoutManager(AllGalleryActivity.this, 3);
         findID();
@@ -142,7 +133,7 @@ public class AllGalleryActivity extends AppCompatActivity implements View.OnClic
                 refreshContent();
             }
         });
-        recyclerView_all_images.addOnScrollListener(new RecyclerView.OnScrollListener() {
+       /* recyclerView_all_images.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -181,7 +172,7 @@ public class AllGalleryActivity extends AppCompatActivity implements View.OnClic
                 }
             }
 
-        });
+        });*/
 
     }
 
@@ -194,6 +185,7 @@ public class AllGalleryActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void findID() {
+        txt_description= (TextView) findViewById(R.id.txt_description);
         swipe_refresh_information = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_information);
         recyclerView_all_images = (RecyclerView) findViewById(R.id.recyclerView_all_images);
         recyclerView_all_images.setLayoutManager(gridLayoutManager);
@@ -201,6 +193,7 @@ public class AllGalleryActivity extends AppCompatActivity implements View.OnClic
         txt_header = (TextView) findViewById(R.id.txt_header);
         img_back = (ImageView) findViewById(R.id.img_back);
         txt_header.setText(CommonMethod.decodeEmoji(title));
+        txt_description.setText(CommonMethod.decodeEmoji(description));
         img_nodata = (ImageView) findViewById(R.id.img_nodata);
         delete_data = (ImageView) findViewById(R.id.delete_data);
         progress_load = (ProgressBar) findViewById(R.id.progress_load);
@@ -383,7 +376,7 @@ public class AllGalleryActivity extends AppCompatActivity implements View.OnClic
 
         @Override
         protected String doInBackground(String... params) {
-            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallimagesbycidgallery + "?cid=" + cid + "&page=" + page_count + "&psize=20");
+            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallimagesbycidgallery + "?cid=" + cid + "&page=" + page_count + "&psize=1000");
             return responseJSON;
         }
 
@@ -397,10 +390,10 @@ public class AllGalleryActivity extends AppCompatActivity implements View.OnClic
                     JSONArray jsonArray = jsonObject.getJSONArray("data");
                     Log.e("json array", "-------------------" + jsonArray);
 
-                    if (jsonArray.length() < 20 || jsonArray.length() == 0) {
+                   /* if (jsonArray.length() < 20 || jsonArray.length() == 0) {
                         flag_scroll = true;
                         Log.e("length_array_news", flag_scroll + "" + "<30===OR(0)===" + jsonArray.length());
-                    }
+                    }*/
                     itemSplashArrayList = new ArrayList<>();
                     for (int i = 0; i < jsonArray.length(); i++) {
 

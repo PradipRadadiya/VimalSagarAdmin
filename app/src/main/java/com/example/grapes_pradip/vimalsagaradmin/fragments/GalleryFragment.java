@@ -40,9 +40,6 @@ import java.util.ArrayList;
 
 import static com.example.grapes_pradip.vimalsagaradmin.adapters.gallery.RecyclerGalleryCategoryAdapter.galcatid;
 
-/**
- * Created by Grapes-Pradip on 2/15/2017.
- */
 
 @SuppressWarnings("ALL")
 public class GalleryFragment extends Fragment implements View.OnClickListener {
@@ -216,7 +213,8 @@ public class GalleryFragment extends Fragment implements View.OnClickListener {
                         Log.e("id", "---------------" + id);
                         String name = jsonObject1.getString("Name");
                         String categoryIcon = jsonObject1.getString("CategoryIcon");
-                        galleryCategoryItems.add(new GalleryCategoryItem(id, name, categoryIcon,false));
+                        String description = jsonObject1.getString("Description");
+                        galleryCategoryItems.add(new GalleryCategoryItem(id, name, categoryIcon,false,description));
                     }
                 }
 

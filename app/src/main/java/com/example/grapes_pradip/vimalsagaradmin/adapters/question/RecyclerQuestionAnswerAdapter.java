@@ -25,9 +25,7 @@ import com.example.grapes_pradip.vimalsagaradmin.model.question.QuestiinItem;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Pradip on 1/2/17.
- */
+
 @SuppressWarnings("ALL")
 public class RecyclerQuestionAnswerAdapter extends RecyclerView.Adapter<RecyclerQuestionAnswerAdapter.ViewHolder> {
 
@@ -54,12 +52,12 @@ public class RecyclerQuestionAnswerAdapter extends RecyclerView.Adapter<Recycler
 
         final QuestiinItem questiinItem = itemArrayList.get(i);
 
-            holder.txt_title.setText(CommonMethod.decodeEmoji(questiinItem.getQuestion()));
-            holder.txt_date.setText(CommonMethod.decodeEmoji(questiinItem.getDate()));
-            holder.txt_name.setText(CommonMethod.decodeEmoji(questiinItem.getName()));
-            holder.txt_views.setText(CommonMethod.decodeEmoji(questiinItem.getView()));
-            ((SwipeLayout) holder.itemView).setItemState(SwipeLayout.ITEM_STATE_COLLAPSED, true);
-            holder.checkbox_question.setChecked(questiinItem.isSelected() ? true : false);
+        holder.txt_title.setText(questiinItem.getID() + ") " + CommonMethod.decodeEmoji(questiinItem.getQuestion()));
+        holder.txt_date.setText(CommonMethod.decodeEmoji(questiinItem.getDate()));
+        holder.txt_name.setText(CommonMethod.decodeEmoji(questiinItem.getName()));
+        holder.txt_views.setText(CommonMethod.decodeEmoji(questiinItem.getView()));
+        ((SwipeLayout) holder.itemView).setItemState(SwipeLayout.ITEM_STATE_COLLAPSED, true);
+        holder.checkbox_question.setChecked(questiinItem.isSelected() ? true : false);
 
         holder.txt_edit.setOnClickListener(new View.OnClickListener() {
             @Override

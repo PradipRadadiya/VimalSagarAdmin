@@ -8,52 +8,86 @@
     tools:ignore="Overdraw">
 
     <LinearLayout
+        android:id="@+id/lin_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TextView
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextViewBold
             style="@style/allfragmenttextview"
             android:layout_width="0sp"
             android:layout_height="wrap_content"
-            android:layout_weight="8"
+            android:layout_weight="5"
             android:text="@string/users" />
+
+
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextViewBold
+            android:id="@+id/txt_totaluser"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_weight="5"
+            android:gravity="right"
+            android:text="Total User: 0"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            tools:ignore="HardcodedText,InconsistentLayout,RtlHardcoded" />
 
 
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2sp"
+        android:layout_height="1sp"
+        android:background="@color/colorPrimary"
+        tools:ignore="SmallSp" />
+
+    <SearchView
+        android:id="@+id/user_searchview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+
+        />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1sp"
         android:background="@color/colorPrimary"
         tools:ignore="SmallSp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/swipe_refresh"
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="match_parent">
 
-            >
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerView_users"
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/swipe_refresh"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
 
-        </android.support.v4.widget.SwipeRefreshLayout>
-    <ProgressBar
-        android:id="@+id/progress_load"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        tools:ignore="InconsistentLayout" />
-    </RelativeLayout>
+                >
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView_users"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </android.support.v4.widget.SwipeRefreshLayout>
+
+            <ProgressBar
+                android:id="@+id/progress_load"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                tools:ignore="InconsistentLayout" />
+        </RelativeLayout>
 
         <ImageView
             android:id="@+id/img_nodata"

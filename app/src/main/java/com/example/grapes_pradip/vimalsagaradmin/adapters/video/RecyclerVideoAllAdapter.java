@@ -25,7 +25,6 @@ import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
 import com.example.grapes_pradip.vimalsagaradmin.common.JsonParser;
 import com.example.grapes_pradip.vimalsagaradmin.model.video.AllVideoItem;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -67,7 +66,7 @@ public class RecyclerVideoAllAdapter extends RecyclerView.Adapter<RecyclerVideoA
 //        Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.videoimage + videoItem.getPhoto().replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(holder.img_audio_category);
 
         Glide.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.videoimage + videoItem.getPhoto()
-                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(holder.img_audio_category);
+                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).dontAnimate().into(holder.img_audio_category);
 
 
         holder.checkbox_audio.setChecked(videoItem.isSelected() ? true : false);
@@ -138,6 +137,7 @@ public class RecyclerVideoAllAdapter extends RecyclerView.Adapter<RecyclerVideoA
 
             }
         });
+
         holder.checkbox_audio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

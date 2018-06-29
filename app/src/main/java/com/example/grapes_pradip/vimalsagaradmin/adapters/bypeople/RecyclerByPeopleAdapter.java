@@ -75,7 +75,6 @@ public class RecyclerByPeopleAdapter extends RecyclerView.Adapter<RecyclerByPeop
             alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
 
-
                     id = byPeopleItem.getID();
                     new DeleteByPeople().execute();
                     Log.e("Rejected", "-----------");

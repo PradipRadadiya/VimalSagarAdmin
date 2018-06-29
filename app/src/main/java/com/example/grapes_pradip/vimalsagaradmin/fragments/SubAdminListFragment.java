@@ -1,6 +1,8 @@
 package com.example.grapes_pradip.vimalsagaradmin.fragments;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -37,9 +39,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- * Created by Grapes-Pradip on 2/15/2017.
- */
 
 @SuppressWarnings("ALL")
 public class SubAdminListFragment extends Fragment implements View.OnClickListener {
@@ -55,9 +54,6 @@ public class SubAdminListFragment extends Fragment implements View.OnClickListen
     ProgressBar progress_load;
     SharedPreferencesClass sharedPreferencesClass;
 
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootview = inflater.inflate(R.layout.view_admin, container, false);
@@ -68,8 +64,34 @@ public class SubAdminListFragment extends Fragment implements View.OnClickListen
 
         if (sharedPreferencesClass.getRole().equalsIgnoreCase("main")){
             txt_addnew.setVisibility(View.VISIBLE);
+
         }else {
+
             txt_addnew.setVisibility(View.GONE);
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage("This features only avalable main admin.")
+                    .setCancelable(false)
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            dialog.dismiss();
+                            Fragment fr = null;
+                            fr = new DesktopFragment();
+                            FragmentManager fm = getFragmentManager();
+                            FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                            fragmentTransaction.replace(R.id.frame_content, fr);
+                            fragmentTransaction.commit();
+
+                        }
+                    });
+
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+
+
+
         }
 
         swipe_refresh_information.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -236,6 +258,8 @@ public class SubAdminListFragment extends Fragment implements View.OnClickListen
 
         }
     }
+
+
 
     @Override
     public void onResume() {

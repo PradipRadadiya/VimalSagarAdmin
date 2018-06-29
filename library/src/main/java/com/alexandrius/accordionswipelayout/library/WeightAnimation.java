@@ -4,9 +4,6 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 
-/**
- * Created by alex on 12/10/2016
- */
 
 @SuppressWarnings("ALL")
 class WeightAnimation extends Animation {

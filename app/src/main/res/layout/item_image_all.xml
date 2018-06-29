@@ -8,7 +8,6 @@
 
 
     <RelativeLayout
-        android:id="@+id/lin_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/corner_round_item"
@@ -23,7 +22,6 @@
             android:layout_width="match_parent"
             android:layout_height="110sp"
             android:scaleType="centerCrop"
-            android:src="@drawable/logo"
             tools:ignore="ContentDescription"
             android:adjustViewBounds="true"
             />

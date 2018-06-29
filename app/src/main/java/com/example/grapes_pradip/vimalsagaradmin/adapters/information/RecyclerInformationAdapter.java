@@ -60,6 +60,7 @@ public class RecyclerInformationAdapter extends RecyclerView.Adapter<RecyclerInf
         holder.txt_location.setText(CommonMethod.decodeEmoji(orderItem.getAddress()));
         holder.txt_views.setText(CommonMethod.decodeEmoji(orderItem.getView()));
         ((SwipeLayout) holder.itemView).setItemState(SwipeLayout.ITEM_STATE_COLLAPSED, true);
+
         holder.check_delete.setChecked(orderItem.isSelected() ? true : false);
 
 
@@ -128,7 +129,9 @@ public class RecyclerInformationAdapter extends RecyclerView.Adapter<RecyclerInf
         holder.check_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 orderItem.setSelected(!orderItem.isSelected());
+
                 holder.check_delete.setChecked(orderItem.isSelected() ? true : false);
 
                 if (orderItem.isSelected()) {

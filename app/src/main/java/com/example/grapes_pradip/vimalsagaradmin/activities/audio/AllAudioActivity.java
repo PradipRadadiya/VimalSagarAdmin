@@ -86,7 +86,7 @@ public class AllAudioActivity extends AppCompatActivity implements View.OnClickL
                 }
             }
         });
-        recyclerView_all_audio.addOnScrollListener(new RecyclerView.OnScrollListener() {
+       /* recyclerView_all_audio.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -125,7 +125,7 @@ public class AllAudioActivity extends AppCompatActivity implements View.OnClickL
                 }
             }
 
-        });
+        });*/
 
     }
 
@@ -141,6 +141,7 @@ public class AllAudioActivity extends AppCompatActivity implements View.OnClickL
         swipe_refresh_information = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_information);
         recyclerView_all_audio = (RecyclerView) findViewById(R.id.recyclerView_all_audio);
         recyclerView_all_audio.setLayoutManager(linearLayoutManager);
+
         txt_addnew = (TextView) findViewById(R.id.txt_addnew);
         txt_header = (TextView) findViewById(R.id.txt_header);
         img_back = (ImageView) findViewById(R.id.img_back);
@@ -232,7 +233,7 @@ public class AllAudioActivity extends AppCompatActivity implements View.OnClickL
 
         @Override
         protected String doInBackground(String... params) {
-            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getaudiobycategoryid + "?cid=" + cid + "&page=" + page_count + "&psize=30");
+            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getaudiobycategoryid + "?cid=" + cid + "&page=" + page_count + "&psize=1000");
             return responseJSON;
         }
 
@@ -245,11 +246,11 @@ public class AllAudioActivity extends AppCompatActivity implements View.OnClickL
                 if (jsonObject.getString("status").equalsIgnoreCase("success")) {
                     JSONArray jsonArray = jsonObject.getJSONArray("data");
                     Log.e("json array", "-------------------" + jsonArray);
-
+/*
                     if (jsonArray.length() < 30 || jsonArray.length() == 0) {
                         flag_scroll = true;
                         Log.e("length_array_news", flag_scroll + "" + "<30===OR(0)===" + jsonArray.length());
-                    }
+                    }*/
                     for (int i = 0; i < jsonArray.length(); i++) {
 
                         JSONObject jsonObject1 = jsonArray.getJSONObject(i);
@@ -298,8 +299,12 @@ public class AllAudioActivity extends AppCompatActivity implements View.OnClickL
             progress_load.setVisibility(View.GONE);
             recyclerView_all_audio.setVisibility(View.VISIBLE);
             if (recyclerView_all_audio != null) {
+
+                Log.e("if size","---------------"+allAudioItems);
                 recyclerAudioAllAdapter = new RecyclerAudioAllAdapter(AllAudioActivity.this, allAudioItems);
                 if (recyclerAudioAllAdapter.getItemCount() != 0) {
+
+
                     recyclerView_all_audio.setVisibility(View.VISIBLE);
                     img_nodata.setVisibility(View.GONE);
                     recyclerView_all_audio.setAdapter(recyclerAudioAllAdapter);

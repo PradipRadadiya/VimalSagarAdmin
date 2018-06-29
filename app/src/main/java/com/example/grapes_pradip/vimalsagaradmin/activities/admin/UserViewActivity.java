@@ -23,8 +23,10 @@ import ch.boye.httpclientandroidlib.NameValuePair;
 import ch.boye.httpclientandroidlib.message.BasicNameValuePair;
 
 public class UserViewActivity extends AppCompatActivity {
-    TextView name, email, mobile;
-    ProgressDialog progressDialog;
+    private TextView name;
+    private TextView email;
+    private TextView mobile;
+    private ProgressDialog progressDialog;
     private String uid;
 
     @Override
@@ -38,7 +40,7 @@ public class UserViewActivity extends AppCompatActivity {
         new ViewUser().execute();
     }
 
-
+    @SuppressLint("StaticFieldLeak")
     private class ViewUser extends AsyncTask<String, Void, String> {
         String responseJSON = "";
 

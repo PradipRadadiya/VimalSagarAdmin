@@ -1,5 +1,6 @@
 package com.example.grapes_pradip.vimalsagaradmin.activities.video;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -47,18 +48,18 @@ public class CommentListVideo extends AppCompatActivity {
     private int firstVisibleItem;
     private int visibleItemCount;
     private int totalItemCount;
-    LinearLayoutManager linearLayoutManager;
-    RecyclerView recyclerView_comments;
-    EditText edit_comment;
-    ImageView img_send;
-    ImageView img_nodata;
-    ProgressDialog progressDialog;
+    private LinearLayoutManager linearLayoutManager;
+    private RecyclerView recyclerView_comments;
+    private EditText edit_comment;
+    private ImageView img_send;
+    private ImageView img_nodata;
+    private ProgressDialog progressDialog;
     private String aid;
     private String audioname;
     private String cid;
-    RecyclerVideoCommentAdapter recyclerCommentAdapter;
+    private RecyclerVideoCommentAdapter recyclerCommentAdapter;
 
-    ArrayList<com.example.grapes_pradip.vimalsagaradmin.model.information.CommentList> commentLists = new ArrayList<>();
+    private ArrayList<com.example.grapes_pradip.vimalsagaradmin.model.information.CommentList> commentLists = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -144,6 +145,7 @@ public class CommentListVideo extends AppCompatActivity {
 
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class CommentList extends AsyncTask<String, Void, String> {
         String responseJSON = "";
 
@@ -159,7 +161,7 @@ public class CommentListVideo extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallcommentsforadmin + "?vid=" + aid + "&page=" + page_count + "&psize=30");
+            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallcommentsforadmin + "?vid=" + aid + "&page=" + page_count + "&psize=1000");
             return responseJSON;
         }
 
@@ -236,6 +238,7 @@ public class CommentListVideo extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class AdminComment extends AsyncTask<String, Void, String> {
         String responseJSON = "";
 

@@ -17,6 +17,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
+import android.widget.TextView;
 
 import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.adapters.users.RecyclerUsersAdapter;
@@ -33,9 +35,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- * Created by Grapes-Pradip on 2/15/2017.
- */
+import ch.boye.httpclientandroidlib.NameValuePair;
+import ch.boye.httpclientandroidlib.message.BasicNameValuePair;
+
+
 
 @SuppressWarnings("ALL")
 public class UserFragment extends Fragment {
@@ -57,6 +60,8 @@ public class UserFragment extends Fragment {
     private ProgressDialog progressDialog;
     private ImageView img_nodata;
     ProgressBar progress_load;
+    private TextView txt_totaluser;
+    private SearchView user_searchview;
 
 
     @Override
@@ -65,21 +70,57 @@ public class UserFragment extends Fragment {
         linearLayoutManager = new LinearLayoutManager(getActivity());
         findID();
 //        linearLayoutManager=new LinearLayoutManager(getActivity());
+
         recyclerView_users = (RecyclerView) rootview.findViewById(R.id.recyclerView_users);
         recyclerView_users.setLayoutManager(linearLayoutManager);
 
-        recyclerUsersAdapter = new RecyclerUsersAdapter(getActivity(),usersItems);
+        recyclerUsersAdapter = new RecyclerUsersAdapter(getActivity(), usersItems);
         recyclerView_users.setAdapter(recyclerUsersAdapter);
+
+        user_searchview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                Log.e("submit", "------------" + query);
+
+                new GetSearchUser().execute(query);
+                /*if (query.equalsIgnoreCase("")){
+                    if (CommonMethod.isInternetConnected(getActivity())) {
+                        usersItems.clear();
+                        page_count = 1;
+                        new GetAllUser().execute();
+                    }
+                }*/
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Log.e("newText", "------------" + newText);
+
+                new GetSearchUser().execute(newText);
+               /* if (newText.equalsIgnoreCase("")){
+                    if (CommonMethod.isInternetConnected(getActivity())) {
+                        usersItems.clear();
+                        page_count = 1;
+                        new GetAllUser().execute();
+                    }
+                }*/
+                return false;
+            }
+        });
 
 //        usersItems = new ArrayList<>();
 
         swipe_refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+
+                swipe_refresh.setRefreshing(false);
                 if (CommonMethod.isInternetConnected(getActivity())) {
-                    refreshContent();
+                    //refreshContent();
                 } else {
-                    swipe_refresh.setRefreshing(false);
+                    //swipe_refresh.setRefreshing(false);
                 }
             }
         });
@@ -138,17 +179,20 @@ public class UserFragment extends Fragment {
 
     private void refreshContent() {
 
+        usersItems.clear();
         page_count = 1;
         swipe_refresh.setRefreshing(false);
         new GetAllUser().execute();
     }
 
     private void findID() {
+        txt_totaluser = (TextView) rootview.findViewById(R.id.txt_totaluser);
         swipe_refresh = (SwipeRefreshLayout) rootview.findViewById(R.id.swipe_refresh);
 //        recyclerView_users = (RecyclerView) rootview.findViewById(R.id.recyclerView_users);
 //        recyclerView_users.setLayoutManager(linearLayoutManager);
         img_nodata = (ImageView) rootview.findViewById(R.id.img_nodata);
         progress_load = (ProgressBar) rootview.findViewById(R.id.progress_load);
+        user_searchview = rootview.findViewById(R.id.user_searchview);
 
     }
 
@@ -207,6 +251,12 @@ public class UserFragment extends Fragment {
             try {
                 JSONObject jsonObject = new JSONObject(s);
                 if (jsonObject.getString("status").equalsIgnoreCase("success")) {
+
+
+                    JSONArray jsonArray1 = jsonObject.getJSONArray("total");
+                    JSONObject jsonObject2 = jsonArray1.getJSONObject(0);
+
+                    txt_totaluser.setText("Total User: " + jsonObject2.getString("total"));
 //                    usersItems=new ArrayList<>();
                     JSONArray jsonArray = jsonObject.getJSONArray("data");
                     Log.e("json array", "-------------------" + jsonArray);
@@ -273,6 +323,103 @@ public class UserFragment extends Fragment {
                     img_nodata.setVisibility(View.VISIBLE);
                 }
             }*/
+
+        }
+    }
+
+    private class GetSearchUser extends AsyncTask<String, Void, String> {
+        String responseJSON = "";
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+//            progressDialog = new ProgressDialog(getActivity());
+//            progressDialog.setMessage(getResources().getString(R.string.progressmsg));
+//            progressDialog.show();
+//            progressDialog.setCancelable(false);
+            progress_load.setVisibility(View.VISIBLE);
+//            recyclerView_users.setVisibility(View.GONE);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            ArrayList<NameValuePair> nameValuePairs = new ArrayList<>();
+            nameValuePairs.add(new BasicNameValuePair("term", params[0]));
+
+
+            responseJSON = JsonParser.postStringResponse(CommonURL.Main_url + "admin/searchuser", nameValuePairs, getActivity());
+//            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallusers);
+            return responseJSON;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            Log.e("response", "---------------------" + s);
+            try {
+                JSONObject jsonObject = new JSONObject(s);
+                usersItems = new ArrayList<>();
+                if (jsonObject.getString("status").equalsIgnoreCase("success")) {
+
+
+                    JSONArray jsonArray = jsonObject.getJSONArray("data");
+                    Log.e("json array", "-------------------" + jsonArray);
+                   /* if (jsonArray.length() < 20 || jsonArray.length() == 0) {
+                        flag_scroll = true;
+                        Log.e("length_array_news", flag_scroll + "" + "<30===OR(0)===" + jsonArray.length());
+                    }*/
+
+                    flag_scroll=true;
+
+
+                    for (int i = 0; i < jsonArray.length(); i++) {
+
+                        JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                        String id = jsonObject1.getString("ID");
+                        Log.e("id", "---------------" + id);
+                        String name = jsonObject1.getString("Name");
+                        String email = jsonObject1.getString("EmailID");
+                        String phone = jsonObject1.getString("Phone");
+                        String address = jsonObject1.getString("Address");
+                        String date = jsonObject1.getString("RegDate");
+
+                        String[] string = date.split(" ");
+                        Log.e("str1", "--------" + string[0]);
+                        Log.e("str2", "--------" + string[1]);
+
+                        Date dt = CommonMethod.convert_date(date);
+                        Log.e("Convert date is", "------------------" + dt);
+                        String dayOfTheWeek = (String) android.text.format.DateFormat.format("EEEE", dt);//Thursday
+                        String stringMonth = (String) android.text.format.DateFormat.format("MMM", dt); //Jun
+                        String intMonth = (String) android.text.format.DateFormat.format("MM", dt); //06
+                        String year = (String) android.text.format.DateFormat.format("yyyy", dt); //2013
+                        String day = (String) android.text.format.DateFormat.format("dd", dt); //20
+
+                        Log.e("dayOfTheWeek", "-----------------" + dayOfTheWeek);
+                        Log.e("stringMonth", "-----------------" + stringMonth);
+                        Log.e("intMonth", "-----------------" + intMonth);
+                        Log.e("year", "-----------------" + year);
+                        Log.e("day", "-----------------" + day);
+
+                        String fulldate = dayOfTheWeek + ", " + day + "/" + intMonth + "/" + year + " " + string[1];
+                        usersItems.add(new UsersItem(email, address, "", "", "", phone, fulldate, id, name));
+                    }
+//                    recyclerUsersAdapter.notifyDataSetChanged();
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+//            if (progressDialog != null) {
+//                progressDialog.dismiss();
+//            }
+            progress_load.setVisibility(View.GONE);
+            recyclerView_users.setVisibility(View.VISIBLE);
+            recyclerUsersAdapter = new RecyclerUsersAdapter(getActivity(), usersItems);
+            recyclerView_users.setAdapter(recyclerUsersAdapter);
+
 
         }
     }

@@ -24,9 +24,7 @@ import com.example.grapes_pradip.vimalsagaradmin.model.opinionpoll.OpinionItem;
 
 import java.util.ArrayList;
 
-/**
- * Created by Pradip on 1/2/17.
- */
+
 @SuppressWarnings("ALL")
 public class RecyclerOpinionPollAdapter extends RecyclerView.Adapter<RecyclerOpinionPollAdapter.ViewHolder> {
 
@@ -55,6 +53,7 @@ public class RecyclerOpinionPollAdapter extends RecyclerView.Adapter<RecyclerOpi
         holder.txt_title.setText(opinionItem.getQues());
         ((SwipeLayout) holder.itemView).setItemState(SwipeLayout.ITEM_STATE_COLLAPSED, true);
         holder.checkbox_delete.setChecked(opinionItem.isSelected() ? true : false);
+
         holder.txt_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

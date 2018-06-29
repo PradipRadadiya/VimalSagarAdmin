@@ -58,7 +58,7 @@ public class RecyclerByPeopleCommentAdapter extends RecyclerView.Adapter<Recycle
 
         if (commentList.getIsApproved().equalsIgnoreCase("1")) {
             holder.lin_approve.setVisibility(View.GONE);
-            holder.lin_delete.setVisibility(View.GONE);
+//            holder.lin_delete.setVisibility(View.GONE);
             holder.rejected.setVisibility(View.GONE);
 
             if (commentList.getName().equalsIgnoreCase("null")) {
@@ -73,10 +73,13 @@ public class RecyclerByPeopleCommentAdapter extends RecyclerView.Adapter<Recycle
                 @Override
                 public void onClick(View v) {
                     if (CommonMethod.isInternetConnected(activity)) {
-                        commentList.setIsApproved("R");
-                        itemArrayList.remove(holder.getAdapterPosition());
+//                        itemArrayList.remove(holder.getAdapterPosition());
                         id = commentList.getID();
-//                        new RejectPost().execute();
+                        commentList.setIsApproved("R");
+                        new RejectPost().execute();
+                        holder.lin_approve.setVisibility(View.GONE);
+//                        holder.lin_delete.setVisibility(View.GONE);
+                        holder.rejected.setVisibility(View.VISIBLE);
                     }
                 }
             });
@@ -85,7 +88,7 @@ public class RecyclerByPeopleCommentAdapter extends RecyclerView.Adapter<Recycle
         if (commentList.getIsApproved().equalsIgnoreCase("0")) {
 
             holder.lin_approve.setVisibility(View.VISIBLE);
-            holder.lin_delete.setVisibility(View.VISIBLE);
+//            holder.lin_delete.setVisibility(View.VISIBLE);
             holder.rejected.setVisibility(View.GONE);
             holder.txt_unm.setText(CommonMethod.decodeEmoji(commentList.getName()));
             holder.txt_post.setText(CommonMethod.decodeEmoji(commentList.getComment()));
@@ -98,7 +101,7 @@ public class RecyclerByPeopleCommentAdapter extends RecyclerView.Adapter<Recycle
                         commentList.setIsApproved("1");
                         new ApprovePost().execute();
                         holder.lin_approve.setVisibility(View.GONE);
-                        holder.lin_delete.setVisibility(View.GONE);
+//                        holder.lin_delete.setVisibility(View.GONE);
                         holder.rejected.setVisibility(View.GONE);
                     }
                 }
@@ -112,7 +115,7 @@ public class RecyclerByPeopleCommentAdapter extends RecyclerView.Adapter<Recycle
                         commentList.setIsApproved("R");
                         new RejectPost().execute();
                         holder.lin_approve.setVisibility(View.GONE);
-                        holder.lin_delete.setVisibility(View.GONE);
+//                        holder.lin_delete.setVisibility(View.GONE);
                         holder.rejected.setVisibility(View.VISIBLE);
                     }
                 }

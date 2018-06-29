@@ -33,9 +33,7 @@ import java.util.regex.Pattern;
 import ch.boye.httpclientandroidlib.NameValuePair;
 import ch.boye.httpclientandroidlib.message.BasicNameValuePair;
 
-/**
- * Created by Grapes-Pradip on 2/16/2017.
- */
+
 
 @SuppressWarnings("ALL")
 public class EditAdminActivity extends AppCompatActivity {

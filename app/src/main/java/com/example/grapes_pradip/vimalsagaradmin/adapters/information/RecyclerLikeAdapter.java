@@ -13,9 +13,7 @@ import com.example.grapes_pradip.vimalsagaradmin.model.information.LikeList;
 
 import java.util.ArrayList;
 
-/**
- * Created by Pradip on 1/2/17.
- */
+
 @SuppressWarnings("ALL")
 public class RecyclerLikeAdapter extends RecyclerView.Adapter<RecyclerLikeAdapter.ViewHolder> {
 

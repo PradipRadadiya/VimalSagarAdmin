@@ -19,9 +19,7 @@ import ch.boye.httpclientandroidlib.client.methods.HttpPost;
 import ch.boye.httpclientandroidlib.impl.client.DefaultHttpClient;
 import ch.boye.httpclientandroidlib.util.EntityUtils;
 
-/**
- * Created by Pradip on 16-Nov-16.
- */
+
 @SuppressWarnings("ALL")
 public class JsonParser {
 

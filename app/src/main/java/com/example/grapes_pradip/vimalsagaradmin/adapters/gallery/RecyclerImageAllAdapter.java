@@ -16,7 +16,6 @@ import com.example.grapes_pradip.vimalsagaradmin.activities.gallery.SlidingGalle
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
 import com.example.grapes_pradip.vimalsagaradmin.model.gallery.AllImageItem;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -52,7 +51,7 @@ public class RecyclerImageAllAdapter extends RecyclerView.Adapter<RecyclerImageA
 //        Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.Gallery + imageItem.getPhoto().replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(holder.img_photos);
 
         Glide.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.Gallery + imageItem.getPhoto()
-                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(holder.img_photos);
+                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).dontAnimate().into(holder.img_photos);
 
         holder.check_image.setChecked(imageItem.isSelected() ? true : false);
         holder.img_photos.setOnClickListener(new View.OnClickListener() {

@@ -8,7 +8,7 @@
     <include layout="@layout/toolbar_back" />
 
 
-    <TextView
+    <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
         style="@style/dwawertextview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
         android:textSize="18sp"
         tools:ignore="HardcodedText,RtlHardcoded,RtlSymmetry" />
 
-    <EditText
+    <com.example.grapes_pradip.vimalsagaradmin.util.CustomEditText
         style="@style/edittext"
         android:id="@+id/editText_question"
         android:layout_width="match_parent"
@@ -28,7 +28,8 @@
         android:inputType="textMultiLine"
         android:padding="10sp"
         android:ellipsize="end"
-        android:textColor="@color/green" />
+        android:textColor="@color/green"
+        tools:ignore="LabelFor" />
 
 
     <View

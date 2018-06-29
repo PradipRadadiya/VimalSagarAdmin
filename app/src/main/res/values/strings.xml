@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">Nayi Soach</string>
+    <string name="app_name">Nayi Soch,Sahi Disha</string>
     <!--<string name="title_activity_main2">Aacharya Vimalsagarsooriji</string>-->
     <string name="title_activity_main2">Nayi Soch Sahi Disha</string>
 
@@ -46,17 +46,14 @@
     <string name="addvideocategory">Please upload video category image.</string>
     <string name="videoenter">Please enter video name.</string>
     <string name="videoimage">Please upload image.</string>
-    <string name="videoupload">Please upload video.</string>
     <string name="videocatimage">Please upload image.</string>
     <string name="thoughttitle">Please enter thought title.</string>
     <string name="thoughtdes">Please enter thought description.</string>
     <string name="questionreply">Please enter reply question.</string>
-    <string name="competitioncategory">Please enter competition category.</string>
-    <string name="competitioncategoryimage">Please upload image.</string>
+    <string name="competitioncategory" tools:keep="@string/competitioncategory">Please enter competition category.</string>
     <string name="opinionpollquestion">Please enter opinion question.</string>
     <string name="questionerror">Please enter question.</string>
     <string name="sendnotification">Send Notification</string>
-
 
 
     <!--Gallery-->
@@ -65,7 +62,7 @@
 
     <string name="add">ADD</string>
     <string name="selected">selected</string>
-    <string name="limit_exceeded">Can select a maximum of %d images</string>
+    <string name="limit_exceeded" tools:ignore="PluralsCandidate">Can select a maximum of %d images</string>
 
     <string name="error_null_cursor">Oops, something went wrong!</string>
 
@@ -75,5 +72,10 @@
     <string name="permission_ok">OK</string>
     <string name="permission_settings">Settings</string>
     <string name="permission_package">package</string>
+    <string name="slide_image">Sliding Image</string>
+    <string name="comment_detail">Comment Detail</string>
+    <string name="splash_content">Vichar Kranti</string>
+    <string name="vichar_kranti">View Vichar Kranti</string>
+    <string name="add_vichar_kranti">Add Vichar Kranti</string>
 
 </resources>

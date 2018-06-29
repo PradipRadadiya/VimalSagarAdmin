@@ -11,16 +11,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.grapes_pradip.vimalsagaradmin.R;
-import com.example.grapes_pradip.vimalsagaradmin.activities.AudioPlayActivity;
+import com.example.grapes_pradip.vimalsagaradmin.activities.audio.AudioPlayActivity;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
 import com.example.grapes_pradip.vimalsagaradmin.model.PhotoAudioVideoItem;
 
 import java.util.ArrayList;
 
-/**
- * Created by Grapes-Pradip on 04-Oct-17.
- */
+
 
 public class AudioListAdapter extends RecyclerView.Adapter<AudioListAdapter.ViewHolder> {
 
@@ -85,15 +83,16 @@ public class AudioListAdapter extends RecyclerView.Adapter<AudioListAdapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
-        ImageView img_item, img_play;
-        TextView txt_audioname;
+        final ImageView img_item;
+        final ImageView img_play;
+        final TextView txt_audioname;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
 
-            img_item = (ImageView) itemView.findViewById(R.id.img_item);
-            img_play = (ImageView) itemView.findViewById(R.id.img_play);
-            txt_audioname = (TextView) itemView.findViewById(R.id.txt_audioname);
+            img_item = itemView.findViewById(R.id.img_item);
+            img_play = itemView.findViewById(R.id.img_play);
+            txt_audioname = itemView.findViewById(R.id.txt_audioname);
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
         }

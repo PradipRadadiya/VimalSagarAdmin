@@ -5,7 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="false"
+    android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
     <include
@@ -18,8 +18,53 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="#EEEEEE"
+        android:background="@color/bg"
         android:fitsSystemWindows="false"
-        app:headerLayout="@layout/dwawer" />
+        app:headerLayout="@layout/dwawer">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:background="@drawable/back_gradiant"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:src="@drawable/slidebar_image"
+                android:contentDescription="TODO" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+
+                    <ImageView
+
+                        android:layout_width="154dp"
+                        android:layout_height="140dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="-10dp"
+                        android:layout_marginTop="11dp"
+                        android:src="@drawable/drawer_logo"
+                        tools:ignore="ContentDescription"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="-10dp" />
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>

@@ -3,7 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/homepage_back"
+    >
+
+
+
+
+
 
     <LinearLayout
         android:layout_marginTop="2dp"
@@ -12,15 +19,18 @@
         android:layout_weight="2"
         android:baselineAligned="false"
         android:orientation="horizontal">
+
         <LinearLayout
             android:id="@+id/lin_event"
             android:layout_width="0sp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/corner"
+            style="@style/lin_style"
+            android:background="@drawable/round_rect_shape"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="10sp">
+            android:padding="10sp"
+            tools:ignore="NestedWeights">
 
             <ImageView
                 android:background="?android:attr/selectableItemBackground"
@@ -29,7 +39,7 @@
                 android:src="@drawable/event"
                 tools:ignore="ContentDescription" />
 
-            <TextView
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextViewBold
                 style="@style/dwawertextview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -41,12 +51,14 @@
             android:layout_width="0sp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/corner"
+            style="@style/lin_style"
+            android:background="@drawable/round_rect_shape"
             android:gravity="center"
             android:orientation="vertical"
             android:padding="10sp"
-
-            tools:ignore="NestedWeights">
+            android:layout_marginRight="10dp"
+            tools:ignore="NestedWeights"
+            android:layout_marginEnd="10dp">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -55,7 +67,7 @@
                 android:background="?android:attr/selectableItemBackground"
                 tools:ignore="ContentDescription" />
 
-            <TextView
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextViewBold
                 style="@style/dwawertextview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -78,7 +90,8 @@
             android:layout_width="0sp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/corner"
+            style="@style/lin_style"
+            android:background="@drawable/round_rect_shape"
             android:gravity="center"
             android:orientation="vertical"
             android:padding="10sp"
@@ -92,7 +105,7 @@
                 android:background="?android:attr/selectableItemBackground"
                 tools:ignore="ContentDescription" />
 
-            <TextView
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextViewBold
                 style="@style/dwawertextview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -105,10 +118,13 @@
             android:layout_width="0sp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/corner"
+            style="@style/lin_style"
+            android:background="@drawable/round_rect_shape"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="10sp">
+            android:layout_marginRight="10dp"
+            android:padding="10sp"
+            android:layout_marginEnd="10dp">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -117,7 +133,7 @@
                 android:background="?android:attr/selectableItemBackground"
                 tools:ignore="ContentDescription" />
 
-            <TextView
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextViewBold
                 style="@style/dwawertextview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -139,7 +155,8 @@
             android:layout_width="0sp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/corner"
+            style="@style/lin_style"
+            android:background="@drawable/round_rect_shape"
             android:gravity="center"
             android:orientation="vertical"
             android:padding="10sp"
@@ -152,7 +169,7 @@
                 android:background="?android:attr/selectableItemBackground"
                 tools:ignore="ContentDescription" />
 
-            <TextView
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextViewBold
                 style="@style/dwawertextview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -166,10 +183,13 @@
             android:layout_width="0sp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/corner"
+            style="@style/lin_style"
+            android:background="@drawable/round_rect_shape"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="10sp">
+            android:layout_marginRight="10dp"
+            android:padding="10sp"
+            android:layout_marginEnd="10dp">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -178,7 +198,7 @@
                 android:background="?android:attr/selectableItemBackground"
                 tools:ignore="ContentDescription" />
 
-            <TextView
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextViewBold
                 style="@style/dwawertextview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -200,7 +220,8 @@
             android:layout_width="0sp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/corner"
+            style="@style/lin_style"
+            android:background="@drawable/round_rect_shape"
             android:gravity="center"
             android:orientation="vertical"
             android:padding="10sp"
@@ -214,7 +235,7 @@
                 android:background="?android:attr/selectableItemBackground"
                 tools:ignore="ContentDescription" />
 
-            <TextView
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextViewBold
                 style="@style/dwawertextview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -227,10 +248,13 @@
             android:layout_width="0sp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/corner"
+            style="@style/lin_style"
+            android:background="@drawable/round_rect_shape"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="10sp">
+            android:layout_marginRight="10dp"
+            android:padding="10sp"
+            android:layout_marginEnd="10dp">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -239,7 +263,7 @@
                 android:background="?android:attr/selectableItemBackground"
                 tools:ignore="ContentDescription" />
 
-            <TextView
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextViewBold
                 style="@style/dwawertextview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -254,14 +278,17 @@
         android:layout_height="0sp"
         android:layout_weight="2"
         android:baselineAligned="false"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp"
+        >
 
         <LinearLayout
             android:id="@+id/lin_op"
             android:layout_width="0sp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/corner"
+            style="@style/lin_style"
+            android:background="@drawable/round_rect_shape"
             android:gravity="center"
             android:orientation="vertical"
             android:padding="10sp"
@@ -275,7 +302,7 @@
                 android:background="?android:attr/selectableItemBackground"
                 tools:ignore="ContentDescription" />
 
-            <TextView
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextViewBold
                 style="@style/dwawertextview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -288,10 +315,13 @@
             android:layout_width="0sp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/corner"
+            style="@style/lin_style"
+            android:background="@drawable/round_rect_shape"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="10sp">
+            android:layout_marginRight="10dp"
+            android:padding="10sp"
+            android:layout_marginEnd="10dp">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -300,7 +330,7 @@
                 android:background="?android:attr/selectableItemBackground"
                 tools:ignore="ContentDescription" />
 
-            <TextView
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextViewBold
                 style="@style/dwawertextview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

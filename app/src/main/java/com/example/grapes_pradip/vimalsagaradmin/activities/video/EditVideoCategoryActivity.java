@@ -28,12 +28,10 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.grapes_pradip.vimalsagaradmin.R;
-import com.example.grapes_pradip.vimalsagaradmin.activities.audio.EditAudioCategoryActivity;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
 import com.example.grapes_pradip.vimalsagaradmin.util.MarshMallowPermission;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -121,7 +119,7 @@ public class EditVideoCategoryActivity extends AppCompatActivity implements View
 //        Picasso.with(EditVideoCategoryActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.videocategory + photo.replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(img_category_icon);
 
         Glide.with(EditVideoCategoryActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.videocategory + photo
-                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(img_category_icon);
+                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).dontAnimate().into(img_category_icon);
 
 
         if (CommonMethod.isInternetConnected(EditVideoCategoryActivity.this)) {
@@ -165,9 +163,10 @@ public class EditVideoCategoryActivity extends AppCompatActivity implements View
     }
 
     private void checkPermissionImage() {
-            selectImage();
+        selectImage();
 
     }
+
     private void selectImage() {
         final CharSequence[] options = {"Take Photo", "Choose from Gallery", "Cancel"};
 
@@ -206,10 +205,6 @@ public class EditVideoCategoryActivity extends AppCompatActivity implements View
                     }
 
 
-
-
-
-
                 } else if (options[item].equals("Choose from Gallery"))
 
                 {
@@ -219,19 +214,12 @@ public class EditVideoCategoryActivity extends AppCompatActivity implements View
 
                         startActivityForResult(intent, 1);
                     } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        if (!permission.checkPermissionForExternalStorage()) {
-                            permission.requestPermissionForExternalStorage();
-                        } else {
-                            Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
-                            startActivityForResult(intent, 1);
-                        }
+                        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+                        startActivityForResult(intent, 1);
+
                     }
-
-
-
-
-
 
                 } else if (options[item].equals("Cancel")) {
 
@@ -244,9 +232,8 @@ public class EditVideoCategoryActivity extends AppCompatActivity implements View
         });
 
         builder.show();
-
-
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -264,9 +251,9 @@ public class EditVideoCategoryActivity extends AppCompatActivity implements View
                 int columnIndex = c.getColumnIndex(filePath[0]);
                 picturePath = c.getString(columnIndex);
                 c.close();
-                String imagepath = picturePath.substring(picturePath.lastIndexOf("/")+1);
+                String imagepath = picturePath.substring(picturePath.lastIndexOf("/") + 1);
                 Log.e("result", "--------------" + imagepath);
-                txt_photo.setText("Selected photo : "+imagepath);
+                txt_photo.setText("Selected photo : " + imagepath);
                 //Log.w("path of image from gallery......******************.........", picturePath + "");
                 try {
                     decodeFile(picturePath);
@@ -277,8 +264,7 @@ public class EditVideoCategoryActivity extends AppCompatActivity implements View
                 //Log.w("path of image from gallery......******************.........", picturePath + "");
                 img_category_icon.setVisibility(View.VISIBLE);
                 img_category_icon.setImageBitmap(thumbnail);*/
-            }
-            else if (requestCode == 2) {
+            } else if (requestCode == 2) {
                 flag = true;
 
                 File f = new File(Environment.getExternalStorageDirectory().toString());
@@ -311,15 +297,15 @@ public class EditVideoCategoryActivity extends AppCompatActivity implements View
                     dir.mkdirs();
                     String pic = CommonMethod.getRandomString(30);
                     File file = new File(dir, String.valueOf(pic + ".jpg"));
-                    picturePath=picturePath+String.valueOf(pic) + ".jpg";
+                    picturePath = picturePath + String.valueOf(pic) + ".jpg";
                     try {
                         outFile = new FileOutputStream(file);
                         bitmap.compress(Bitmap.CompressFormat.JPEG, 40, outFile);
                         outFile.flush();
                         outFile.close();
-                        String imagepath = picturePath.substring(picturePath.lastIndexOf("/")+1);
+                        String imagepath = picturePath.substring(picturePath.lastIndexOf("/") + 1);
                         Log.e("result", "--------------" + imagepath);
-                        txt_photo.setText("Selected photo : "+imagepath);
+                        txt_photo.setText("Selected photo : " + imagepath);
 
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
@@ -331,7 +317,6 @@ public class EditVideoCategoryActivity extends AppCompatActivity implements View
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
 
 
                 //Log.w("path of image from gallery......******************.........", picturePath + "");
@@ -437,6 +422,7 @@ public class EditVideoCategoryActivity extends AppCompatActivity implements View
             progressDialog.dismiss();
         }
     }
+
     public void decodeFile(String filePath) throws IOException {
 
         // Decode image size
@@ -466,7 +452,7 @@ public class EditVideoCategoryActivity extends AppCompatActivity implements View
         img_category_icon.setVisibility(View.VISIBLE);
         img_category_icon.setImageBitmap(thumbnail);
         OutputStream outFile = null;
-        File file=new File(picturePath);
+        File file = new File(picturePath);
         outFile = new FileOutputStream(file);
         thumbnail.compress(Bitmap.CompressFormat.JPEG, 40, outFile);
         outFile.flush();

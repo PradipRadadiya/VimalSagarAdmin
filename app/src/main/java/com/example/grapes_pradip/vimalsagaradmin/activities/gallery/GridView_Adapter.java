@@ -18,12 +18,12 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import java.util.ArrayList;
 
 
-public class GridView_Adapter extends BaseAdapter {
-    private Context context;
-    private ArrayList<String> imageUrls;
-    private SparseBooleanArray mSparseBooleanArray;//Variable to store selected Images
-    private DisplayImageOptions options;
-    private boolean isCustomGalleryActivity;//Variable to check if gridview is to setup for Custom Gallery or not
+class GridView_Adapter extends BaseAdapter {
+    private final Context context;
+    private final ArrayList<String> imageUrls;
+    private final SparseBooleanArray mSparseBooleanArray;//Variable to store selected Images
+    private final DisplayImageOptions options;
+    private final boolean isCustomGalleryActivity;//Variable to check if gridview is to setup for Custom Gallery or not
 
     public GridView_Adapter(Context context, ArrayList<String> imageUrls, boolean isCustomGalleryActivity) {
         this.context = context;
@@ -41,7 +41,7 @@ public class GridView_Adapter extends BaseAdapter {
 
     //Method to return selected Images
     public ArrayList<String> getCheckedItems() {
-        ArrayList<String> mTempArry = new ArrayList<String>();
+        ArrayList<String> mTempArry = new ArrayList<>();
 
         for (int i = 0; i < imageUrls.size(); i++) {
             if (mSparseBooleanArray.get(i)) {
@@ -73,8 +73,8 @@ public class GridView_Adapter extends BaseAdapter {
         if (view == null)
             view = inflater.inflate(R.layout.customgridview_item, viewGroup, false);//Inflate layout
 
-        CheckBox mCheckBox = (CheckBox) view.findViewById(R.id.selectCheckBox);
-        final ImageView imageView = (ImageView) view.findViewById(R.id.galleryImageView);
+        CheckBox mCheckBox = view.findViewById(R.id.selectCheckBox);
+        final ImageView imageView = view.findViewById(R.id.galleryImageView);
 
         //If Context is MainActivity then hide checkbox
         if (!isCustomGalleryActivity)
@@ -88,7 +88,7 @@ public class GridView_Adapter extends BaseAdapter {
         return view;
     }
 
-    CompoundButton.OnCheckedChangeListener mCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
+    private final CompoundButton.OnCheckedChangeListener mCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
 
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

@@ -19,7 +19,6 @@ import android.widget.Toast;
 
 import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.adapters.competition.RecyclerCompetitionQuestionAllAdapter;
-import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
 import com.example.grapes_pradip.vimalsagaradmin.common.JsonParser;
@@ -30,6 +29,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import ch.boye.httpclientandroidlib.NameValuePair;
+import ch.boye.httpclientandroidlib.message.BasicNameValuePair;
 
 /**
  * Created by Grapes-Pradip on 2/15/2017.
@@ -58,7 +60,7 @@ public class AllCompetionQuestionActivity extends AppCompatActivity implements V
     private int firstVisibleItem;
     private int visibleItemCount;
     private int totalItemCount;
-    ProgressBar progress_load;
+    private ProgressBar progress_load;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -75,12 +77,13 @@ public class AllCompetionQuestionActivity extends AppCompatActivity implements V
             public void onRefresh() {
                 if (CommonMethod.isInternetConnected(AllCompetionQuestionActivity.this)) {
                     refreshContent();
-                }else {
+                } else {
                     swipe_refresh_information.setRefreshing(false);
                 }
             }
         });
-        recyclerView_all_competition.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+        /*recyclerView_all_competition.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -110,6 +113,7 @@ public class AllCompetionQuestionActivity extends AppCompatActivity implements V
 
                             page_count++;
                             new GetAllCompetitionCategory().execute();
+
                         }  else {
                             Toast.makeText(AllCompetionQuestionActivity.this,R.string.internet,Toast.LENGTH_SHORT).show();
                         }
@@ -119,12 +123,12 @@ public class AllCompetionQuestionActivity extends AppCompatActivity implements V
             }
 
         });
-
+*/
     }
 
     private void refreshContent() {
 
-        page_count=1;
+        page_count = 1;
         competitionQuestionItems = new ArrayList<>();
         swipe_refresh_information.setRefreshing(false);
         new GetAllCompetitionCategory().execute();
@@ -181,7 +185,11 @@ public class AllCompetionQuestionActivity extends AppCompatActivity implements V
 
         @Override
         protected String doInBackground(String... params) {
-            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallquestionsbycidforadmin + "?cid=" + cid + "&page=" + page_count + "&psize=30");
+            ArrayList<NameValuePair> nameValuePairs = new ArrayList<>();
+            nameValuePairs.add(new BasicNameValuePair("cid", cid));
+
+            responseJSON = JsonParser.postStringResponse(CommonURL.Main_url + "competition/getquestionbycid", nameValuePairs, AllCompetionQuestionActivity.this);
+
             return responseJSON;
         }
 
@@ -194,27 +202,42 @@ public class AllCompetionQuestionActivity extends AppCompatActivity implements V
                 if (jsonObject.getString("status").equalsIgnoreCase("success")) {
                     JSONArray jsonArray = jsonObject.getJSONArray("data");
                     Log.e("json array", "-------------------" + jsonArray);
-                    if (jsonArray.length() < 30 || jsonArray.length() == 0) {
-                        flag_scroll = true;
-                        Log.e("length_array_news", flag_scroll + "" + "<30===OR(0)===" + jsonArray.length());
-                    }
+
                     for (int i = 0; i < jsonArray.length(); i++) {
 
                         JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                        String id = jsonObject1.getString("ID");
+                        String id = jsonObject1.getString("id");
                         Log.e("id", "---------------" + id);
-                        String question = jsonObject1.getString("Question");
+                        String question = jsonObject1.getString("question");
+                        String answer = jsonObject1.getString("answer");
 
-                        String questiontype = jsonObject1.getString("QType");
-                        String qtype = null;
-                        if (questiontype.equalsIgnoreCase("Radio")){
-                            qtype="Option";
-                        }else {
-                            qtype = jsonObject1.getString("QType");
+                        String questiontype = jsonObject1.getString("qtype");
+                        String competition_id = jsonObject1.getString("competition_id");
+
+//                        String qtype = null;
+//                        if (questiontype.equalsIgnoreCase("Radio")){
+//                            qtype="Option";
+//                        }else {
+//                            qtype = jsonObject1.getString("QType");
+//                        }
+
+                        String categoryid = jsonObject1.getString("answer");
+                        JSONArray jsonArray1 = jsonObject1.getJSONArray("options");
+                        ArrayList<String> optionArrayList = new ArrayList<>();
+                        for (int j = 0; j < jsonArray1.length(); j++) {
+                            optionArrayList.add(jsonArray1.getString(j));
+                            Log.e("option", "---------------------" + optionArrayList);
                         }
-                        String categoryid = jsonObject1.getString("CategoryID");
-                        String option = jsonObject1.getString("Options");
-                        competitionQuestionItems.add(new CompetitionQuestionItem(categoryid, option, qtype, question, id));
+
+                        String listString = "";
+
+                        for (String str : optionArrayList) {
+                            listString += str + ",";
+                        }
+
+                        competitionQuestionItems.add(new CompetitionQuestionItem(id, question, questiontype, competition_id, answer, listString));
+
+
                     }
                 }
 
@@ -251,11 +274,9 @@ public class AllCompetionQuestionActivity extends AppCompatActivity implements V
         if (CommonMethod.isInternetConnected(AllCompetionQuestionActivity.this)) {
             page_count = 1;
             new GetAllCompetitionCategory().execute();
-        }
-        else {
-            Toast.makeText(AllCompetionQuestionActivity.this,R.string.internet,Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(AllCompetionQuestionActivity.this, R.string.internet, Toast.LENGTH_SHORT).show();
         }
     }
-
 
 }

@@ -15,7 +15,7 @@
         android:layout_marginTop="10sp"
         android:orientation="horizontal">
 
-        <TextView
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
             style="@style/TextviewStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
             android:textColor="@color/lable"
             tools:ignore="HardcodedText" />
 
-        <TextView
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="*"
@@ -33,7 +33,7 @@
             />
     </LinearLayout>
 
-    <EditText
+    <com.example.grapes_pradip.vimalsagaradmin.util.CustomEditText
         style="@style/edittext"
         android:id="@+id/edit_question"
         android:layout_width="match_parent"
@@ -51,7 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20sp"
-        android:background="@drawable/add_new_round"
+        android:background="@drawable/round_rect_shapeoneselect"
         android:text="Update"
         android:textColor="@color/white"
         android:textSize="18sp"

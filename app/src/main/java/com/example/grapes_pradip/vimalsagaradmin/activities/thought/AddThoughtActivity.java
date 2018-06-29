@@ -33,7 +33,6 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.grapes_pradip.vimalsagaradmin.R;
-import com.example.grapes_pradip.vimalsagaradmin.activities.information.AddInformationActivity;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
@@ -63,9 +62,7 @@ import ch.boye.httpclientandroidlib.entity.mime.content.StringBody;
 import ch.boye.httpclientandroidlib.impl.client.DefaultHttpClient;
 import ch.boye.httpclientandroidlib.message.BasicNameValuePair;
 
-/**
- * Created by Grapes-Pradip on 2/16/2017.
- */
+
 
 @SuppressWarnings("ALL")
 public class AddThoughtActivity extends AppCompatActivity {

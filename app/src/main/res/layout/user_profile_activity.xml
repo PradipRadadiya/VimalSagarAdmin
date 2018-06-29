@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/detailinfo_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <include
-        android:id="@+id/toolbar_information"
         layout="@layout/toolbar_back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -17,14 +15,14 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10sp"
             android:text="Name"
             tools:ignore="HardcodedText" />
 
-        <EditText
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomEditText
             android:id="@+id/edit_user_name"
             style="@style/edittext"
             android:layout_width="match_parent"
@@ -37,7 +35,7 @@
 
             tools:ignore="TextFields" />
 
-        <TextView
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10sp"
@@ -45,7 +43,7 @@
 
             tools:ignore="HardcodedText" />
 
-        <EditText
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomEditText
             android:id="@+id/edit_user_email"
             style="@style/edittext"
             android:layout_width="match_parent"
@@ -58,14 +56,14 @@
 
             tools:ignore="TextFields" />
 
-        <TextView
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10sp"
             android:text="Phone"
             tools:ignore="HardcodedText" />
 
-        <EditText
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomEditText
             android:id="@+id/edit_user_phone"
             style="@style/edittext"
             android:layout_width="match_parent"
@@ -78,14 +76,14 @@
 
             tools:ignore="TextFields" />
 
-        <TextView
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10sp"
             android:text="Location"
             tools:ignore="HardcodedText" />
 
-        <EditText
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomEditText
             android:id="@+id/edit_user_address"
             style="@style/edittext"
             android:layout_width="match_parent"
@@ -96,16 +94,16 @@
             android:lines="1"
             android:padding="10sp"
 
-            tools:ignore="TextFields" />
+            tools:ignore="LabelFor,TextFields" />
 
-        <TextView
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10sp"
             android:text="RegDate"
             tools:ignore="HardcodedText" />
 
-        <EditText
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomEditText
             android:id="@+id/edit_user_date"
             style="@style/edittext"
             android:layout_width="match_parent"

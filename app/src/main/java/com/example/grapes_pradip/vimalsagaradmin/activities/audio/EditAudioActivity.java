@@ -33,13 +33,10 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.grapes_pradip.vimalsagaradmin.R;
-import com.example.grapes_pradip.vimalsagaradmin.activities.event.EditEventActivity;
-import com.example.grapes_pradip.vimalsagaradmin.activities.video.EditVideoActivity;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
 import com.example.grapes_pradip.vimalsagaradmin.util.MarshMallowPermission;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -64,9 +61,7 @@ import ch.boye.httpclientandroidlib.entity.mime.content.StringBody;
 import ch.boye.httpclientandroidlib.impl.client.DefaultHttpClient;
 
 
-/**
- * Created by Grapes-Pradip on 2/16/2017.
- */
+
 
 @SuppressWarnings("ALL")
 public class EditAudioActivity extends AppCompatActivity implements View.OnClickListener {
@@ -297,7 +292,7 @@ public class EditAudioActivity extends AppCompatActivity implements View.OnClick
 //        Picasso.with(EditAudioActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.audioimage + photo.replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0, 200).into(img_category_icon);
 
         Glide.with(EditAudioActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.audioimage + photo
-                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(img_category_icon);
+                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).dontAnimate().into(img_category_icon);
 
         if (CommonMethod.isInternetConnected(EditAudioActivity.this)) {
 //            new AddInformation().execute(e_title.getText().toString(), e_description.getText().toString(), e_date.getText().toString(), e_address.getText().toString());
@@ -358,17 +353,34 @@ public class EditAudioActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void checkPermissionAudio() {
+
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             intent = new Intent(Intent.ACTION_PICK, MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(intent, 2);
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        }
+
+        else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!permission.checkPermissionForExternalStorage()) {
+                permission.requestPermissionForExternalStorage();
+            } else {
+                Intent intent = new Intent()
+                        .setType("*/*")
+                        .setAction(Intent.ACTION_GET_CONTENT);
+
+                startActivityForResult(Intent.createChooser(intent, "Select a file"), 2);
+//                intent = new Intent(Intent.ACTION_PICK, MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
+//                startActivityForResult(intent, 2);
+            }
+        }
+
+       /* else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!permission.checkPermissionForExternalStorage()) {
                 permission.requestPermissionForExternalStorage();
             } else {
                 intent = new Intent(Intent.ACTION_PICK, MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, 2);
             }
-        }
+        }*/
     }
 
     private void selectImage() {

@@ -59,6 +59,7 @@ public class RecyclerThoughtAdapter extends RecyclerView.Adapter<RecyclerThought
         holder.txt_views.setText(CommonMethod.decodeEmoji(thoughtItem.getView()));
         ((SwipeLayout) holder.itemView).setItemState(SwipeLayout.ITEM_STATE_COLLAPSED, true);
         holder.checkbox_thought.setChecked(thoughtItem.isSelected() ? true : false);
+
         holder.txt_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,6 +74,7 @@ public class RecyclerThoughtAdapter extends RecyclerView.Adapter<RecyclerThought
                 activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
+
 
         holder.txt_delete.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -3,14 +3,18 @@ package com.example.grapes_pradip.vimalsagaradmin.activities.splash;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.activities.MainActivity;
 import com.example.grapes_pradip.vimalsagaradmin.activities.admin.LoginActivity;
+import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.SharedPreferencesClass;
+
+import java.util.Arrays;
+import java.util.List;
 
 import permission.auron.com.marshmallowpermissionhelper.ActivityManagePermission;
 import permission.auron.com.marshmallowpermissionhelper.PermissionResult;
@@ -28,9 +32,14 @@ public class Splash_Activity3 extends ActivityManagePermission {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.splash_activity3);
         sharedPreferencesClass = new SharedPreferencesClass(Splash_Activity3.this);
+
+
+
     }
 
     @Override

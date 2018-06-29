@@ -25,7 +25,6 @@ import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
 import com.example.grapes_pradip.vimalsagaradmin.common.JsonParser;
 import com.example.grapes_pradip.vimalsagaradmin.model.audio.AllAudioItem;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -66,7 +65,7 @@ public class RecyclerAudioAllAdapter extends RecyclerView.Adapter<RecyclerAudioA
         holder.txt_views.setText(CommonMethod.decodeEmoji(audioItem.getView()));
 //        Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.audioimage + audioItem.getPhoto().replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(holder.img_audio_category);
         Glide.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.audioimage + audioItem.getPhoto()
-                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(holder.img_audio_category);
+                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).dontAnimate().into(holder.img_audio_category);
 
         holder.check_delete.setChecked(audioItem.isSelected() ? true : false);
 

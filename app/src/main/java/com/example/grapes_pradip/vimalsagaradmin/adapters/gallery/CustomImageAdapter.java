@@ -46,8 +46,8 @@ public class CustomImageAdapter extends android.support.v4.view.PagerAdapter {
         View itemView = layoutInflater.inflate(R.layout.splash_pager_item, container, false);
         ImageItemSplash item = imageItemArrayList.get(position);
 
-        final SubsamplingScaleImageView imageView = (SubsamplingScaleImageView) itemView.findViewById(R.id.imageView);
-        final ProgressWheel progress_wheel = (ProgressWheel) itemView.findViewById(R.id.progress_wheel);
+        final SubsamplingScaleImageView imageView = itemView.findViewById(R.id.imageView);
+        final ProgressWheel progress_wheel = itemView.findViewById(R.id.progress_wheel);
         if (imageItemArrayList.size() == 0) {
 //            imageView.setImageResource(R.drawable.no_image);
             imageView.setImage(ImageSource.resource(R.drawable.noimageavailable));
@@ -83,4 +83,5 @@ public class CustomImageAdapter extends android.support.v4.view.PagerAdapter {
     public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView((RelativeLayout) object);
     }
+
 }

@@ -3,43 +3,170 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EEEEEE"
+    android:background="@color/bg"
     android:orientation="vertical"
     tools:ignore="Overdraw">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:paddingBottom="15sp"
-        android:paddingTop="15sp">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_3"
-            tools:ignore="ContentDescription" />
-
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="10sp"
-        android:text="@string/title_activity_main2"
-        android:textColor="@color/colorPrimary"
-        android:textSize="26sp" />
-
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="180dp"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+
+            <LinearLayout
+                android:id="@+id/lin_spcontent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10sp"
+                tools:ignore="InconsistentLayout,UseCompoundDrawables"
+
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_action_picture"
+                    tools:ignore="ContentDescription" />
+
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                    style="@style/TextviewStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/add_vichar_kranti" />
+
+            </LinearLayout>
+            <View
+                style="@style/ViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="1sp"
+                tools:ignore="SmallSp" />
+
+            <LinearLayout
+                android:id="@+id/lin_vichar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10sp"
+                tools:ignore="InconsistentLayout,UseCompoundDrawables"
+
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_action_picture"
+                    tools:ignore="ContentDescription" />
+
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                    style="@style/TextviewStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/vichar_kranti" />
+
+            </LinearLayout>
+            <View
+                style="@style/ViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="1sp"
+                tools:ignore="SmallSp" />
+
+
+            <LinearLayout
+                android:id="@+id/lin_slideimage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10sp"
+                tools:ignore="InconsistentLayout,UseCompoundDrawables">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_action_picture"
+                    tools:ignore="ContentDescription" />
+
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                    style="@style/TextviewStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/slide_image" />
+
+            </LinearLayout>
+
+            <View
+                style="@style/ViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="1sp"
+                tools:ignore="SmallSp" />
+
+            <LinearLayout
+                android:id="@+id/lin_comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10sp"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_action_phone_black"
+                    tools:ignore="ContentDescription" />
+
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                    style="@style/TextviewStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="Comment List" />
+
+            </LinearLayout>
+
+            <View
+                style="@style/ViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="1sp"
+                tools:ignore="SmallSp" />
+
+            <LinearLayout
+                android:id="@+id/lin_note"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10sp"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_latestposts"
+                    tools:ignore="ContentDescription" />
+
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                    style="@style/TextviewStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="Alert"
+                    tools:ignore="HardcodedText" />
+
+            </LinearLayout>
+
+            <View
+                style="@style/ViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="1sp"
+                tools:ignore="SmallSp" />
 
             <LinearLayout
                 android:id="@+id/lin_user"
@@ -52,16 +179,15 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_action_user"
+                    android:src="@drawable/ic_action_user_black"
                     tools:ignore="ContentDescription" />
 
-                <TextView
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                     style="@style/TextviewStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="@string/user"
-                    />
+                    android:text="@string/user" />
 
             </LinearLayout>
 
@@ -82,10 +208,10 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_action_home"
+                    android:src="@drawable/ic_action_location_black"
                     tools:ignore="ContentDescription" />
 
-                <TextView
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                     style="@style/TextviewStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -115,7 +241,7 @@
                     android:src="@drawable/ic_action_event"
                     tools:ignore="ContentDescription" />
 
-                <TextView
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                     style="@style/TextviewStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -145,7 +271,7 @@
                     android:src="@drawable/ic_action_edit"
                     tools:ignore="ContentDescription" />
 
-                <TextView
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                     style="@style/TextviewStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -175,7 +301,7 @@
                     android:src="@drawable/ic_action_music"
                     tools:ignore="ContentDescription" />
 
-                <TextView
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                     style="@style/TextviewStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -205,7 +331,7 @@
                     android:src="@drawable/ic_action_video"
                     tools:ignore="ContentDescription" />
 
-                <TextView
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                     style="@style/TextviewStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -235,7 +361,7 @@
                     android:src="@drawable/ic_action_info"
                     tools:ignore="ContentDescription" />
 
-                <TextView
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                     style="@style/TextviewStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -266,7 +392,7 @@
                     android:src="@drawable/ic_action_picture"
                     tools:ignore="ContentDescription" />
 
-                <TextView
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                     style="@style/TextviewStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -296,7 +422,7 @@
                     android:src="@drawable/ic_action_help"
                     tools:ignore="ContentDescription" />
 
-                <TextView
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                     style="@style/TextviewStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -326,7 +452,7 @@
                     android:src="@drawable/ic_action_paste"
                     tools:ignore="ContentDescription" />
 
-                <TextView
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                     style="@style/TextviewStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -356,7 +482,7 @@
                     android:src="@drawable/ic_action_opinion"
                     tools:ignore="ContentDescription" />
 
-                <TextView
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                     style="@style/TextviewStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -386,7 +512,7 @@
                     android:src="@drawable/ic_action_users"
                     tools:ignore="ContentDescription" />
 
-                <TextView
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                     style="@style/TextviewStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -416,7 +542,7 @@
                     android:src="@drawable/ic_action_setting"
                     tools:ignore="ContentDescription" />
 
-                <TextView
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                     style="@style/TextviewStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -432,6 +558,7 @@
                 android:layout_height="1sp"
                 tools:ignore="SmallSp" />
         </LinearLayout>
+
     </ScrollView>
 
 

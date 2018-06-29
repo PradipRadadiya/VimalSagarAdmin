@@ -35,9 +35,7 @@ import java.util.ArrayList;
 import ch.boye.httpclientandroidlib.NameValuePair;
 import ch.boye.httpclientandroidlib.message.BasicNameValuePair;
 
-/**
- * Created by Grapes-Pradip on 2/15/2017.
- */
+
 
 @SuppressWarnings("ALL")
 public class QuestionDetailActivity extends AppCompatActivity implements View.OnClickListener {
@@ -51,7 +49,7 @@ public class QuestionDetailActivity extends AppCompatActivity implements View.On
     private String name;
     private String view;
     private TextView txt_views;
-    private TextView txt_title;
+    private EditText txt_title;
     private TextView txt_date;
     private TextView txt_header;
     private TextView txt_name;
@@ -99,7 +97,7 @@ public class QuestionDetailActivity extends AppCompatActivity implements View.On
     private void findID() {
         txt_userdetail = (TextView) findViewById(R.id.txt_userdetail);
         txt_name = (TextView) findViewById(R.id.txt_unm);
-        txt_title = (TextView) findViewById(R.id.txt_titles);
+        txt_title = (EditText) findViewById(R.id.txt_titles);
         txt_date = (TextView) findViewById(R.id.txt_date);
         txt_header = (TextView) findViewById(R.id.txt_header);
         txt_approve = (TextView) findViewById(R.id.txt_approve);
@@ -159,7 +157,7 @@ public class QuestionDetailActivity extends AppCompatActivity implements View.On
                 } else {
                     if (CommonMethod.isInternetConnected(QuestionDetailActivity.this)) {
                         answer = edit_answer.getText().toString();
-                        new ReplyAnswer().execute(qid, edit_answer.getText().toString());
+                        new ReplyAnswer().execute(qid,CommonMethod.encodeEmoji(txt_title.getText().toString()), CommonMethod.encodeEmoji(edit_answer.getText().toString()));
                     } else {
                         Toast.makeText(QuestionDetailActivity.this, R.string.internet, Toast.LENGTH_SHORT).show();
                     }
@@ -241,7 +239,8 @@ public class QuestionDetailActivity extends AppCompatActivity implements View.On
 
             ArrayList<NameValuePair> nameValuePairs = new ArrayList<>();
             nameValuePairs.add(new BasicNameValuePair("qid", params[0]));
-            nameValuePairs.add(new BasicNameValuePair("Answer", params[1]));
+            nameValuePairs.add(new BasicNameValuePair("Question", params[1]));
+            nameValuePairs.add(new BasicNameValuePair("Answer", params[2]));
 
             responseJSON = JsonParser.postStringResponse(CommonURL.Main_url + CommonAPI_Name.questionanswer, nameValuePairs, QuestionDetailActivity.this);
             return responseJSON;

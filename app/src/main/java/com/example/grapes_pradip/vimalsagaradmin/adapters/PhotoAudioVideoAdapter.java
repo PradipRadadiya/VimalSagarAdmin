@@ -11,11 +11,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.activities.gallery.SlidingGalleryImage;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -47,39 +47,26 @@ public class PhotoAudioVideoAdapter extends RecyclerView.Adapter<PhotoAudioVideo
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
-        Log.e("images", "---------------" + CommonURL.ImagePath + CommonAPI_Name.eventimage + itemArrayList.get(position));
+        Log.e("images path adapet", "---------------" + CommonURL.ImagePath + CommonAPI_Name.eventimage + itemArrayList.get(position));
 //        Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.eventimage + itemArrayList.get(position).replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).into(holder.img_item);
         Glide.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.eventimage + itemArrayList.get(position)
-                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(holder.img_item);
+                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).dontAnimate().skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE).into(holder.img_item);
 
 
         holder.img_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(activity, SlidingGalleryImage.class);
                 intent.putExtra("position", String.valueOf(position));
                 intent.putExtra("cid", "");
 //                intent.putExtra("imagePath", CommonURL.ImagePath + CommonAPI_Name.eventimage + itemArrayList.get(position).replaceAll(" ", "%20"));
+
                 activity.startActivity(intent);
                 activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
             }
         });
-        /*if (photoAudioVideoItem.getSpecification().equalsIgnoreCase("photo")) {
-            holder.img_play.setVisibility(View.GONE);
-            Log.e("url","-----------"+photoAudioVideoItem.getUrl());
-//            intent=new Intent(activity, ImageViewActivity.class);
-//            intent.putExtra("imagePath",photoAudioVideoItem.getUrl());
-//            activity.startActivity(intent);
-        } else if (photoAudioVideoItem.getSpecification().equalsIgnoreCase("audio")) {
-
-
-        } else if (photoAudioVideoItem.getSpecification().equalsIgnoreCase("video")) {
-//            intent=new Intent(activity, VideoFullActivity.class);
-//            intent.putExtra("videopath",photoAudioVideoItem.getUrl());
-//            activity.startActivity(intent);
-
-        }*/
-
 
     }
 
@@ -90,16 +77,18 @@ public class PhotoAudioVideoAdapter extends RecyclerView.Adapter<PhotoAudioVideo
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
-        ImageView img_item, img_play;
+        final ImageView img_item;
+        final ImageView img_play;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
 
-            img_item = (ImageView) itemView.findViewById(R.id.img_item);
-            img_play = (ImageView) itemView.findViewById(R.id.img_play);
+            img_item = itemView.findViewById(R.id.img_item);
+            img_play = itemView.findViewById(R.id.img_play);
 
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
+
         }
 
         @Override

@@ -38,9 +38,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.grapes_pradip.vimalsagaradmin.R;
-import com.example.grapes_pradip.vimalsagaradmin.activities.AudioPlayActivity;
-import com.example.grapes_pradip.vimalsagaradmin.activities.audio.EditAudioActivity;
-import com.example.grapes_pradip.vimalsagaradmin.activities.gallery.AllGalleryActivity;
+import com.example.grapes_pradip.vimalsagaradmin.activities.audio.AudioPlayActivity;
 import com.example.grapes_pradip.vimalsagaradmin.activities.video.VideoFullActivity;
 import com.example.grapes_pradip.vimalsagaradmin.adapters.PhotoAudioVideoAdapter;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
@@ -53,7 +51,6 @@ import com.example.grapes_pradip.vimalsagaradmin.gallery.models.Image;
 import com.example.grapes_pradip.vimalsagaradmin.model.PhotoAudioVideoItem;
 import com.example.grapes_pradip.vimalsagaradmin.model.event.EventImage;
 import com.example.grapes_pradip.vimalsagaradmin.util.MarshMallowPermission;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -82,9 +79,7 @@ import ch.boye.httpclientandroidlib.impl.client.DefaultHttpClient;
 import static com.example.grapes_pradip.vimalsagaradmin.activities.gallery.AllGalleryActivity.itemSplashArrayList;
 import static com.example.grapes_pradip.vimalsagaradmin.activities.video.VideoDetailActivity.video_play_url;
 
-/**
- * Created by Grapes-Pradip on 2/16/2017.
- */
+
 
 @SuppressWarnings("ALL")
 public class EditEventActivity extends AppCompatActivity implements View.OnClickListener {
@@ -1260,7 +1255,7 @@ public class EditEventActivity extends AppCompatActivity implements View.OnClick
 //                Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.eventimage + eventImage.getPhoto().replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0, 200).into(holder.img_item);
 
                 Glide.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.eventimage + eventImage.getPhoto()
-                        .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(holder.img_item);
+                        .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).dontAnimate().into(holder.img_item);
 
 
 
@@ -1440,6 +1435,7 @@ public class EditEventActivity extends AppCompatActivity implements View.OnClick
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+
                         Log.e("Date---", "DATE SELECTED " + dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
 //                        fulldate = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
                         fulldate = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;

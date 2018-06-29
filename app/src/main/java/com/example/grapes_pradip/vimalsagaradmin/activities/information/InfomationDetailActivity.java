@@ -59,7 +59,6 @@ public class InfomationDetailActivity extends AppCompatActivity implements View.
     private String photos;
     private String isodate;
 
-
     private TextView txt_title;
     private TextView txt_date;
     private TextView txt_description;
@@ -423,7 +422,7 @@ public class InfomationDetailActivity extends AppCompatActivity implements View.
 
         @Override
         protected String doInBackground(String... params) {
-            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallusernamesforlike + "?infoid=" + id + "&page=" + page_count + "&psize=30");
+            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallusernamesforlike + "?infoid=" + id + "&page=" + page_count + "&psize=1000");
             return responseJSON;
         }
 
@@ -490,7 +489,7 @@ public class InfomationDetailActivity extends AppCompatActivity implements View.
 
         @Override
         protected String doInBackground(String... params) {
-            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallcomments + "?infoid=" + id + "&page=" + page_count + "&psize=30");
+            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallcomments + "?infoid=" + id + "&page=" + page_count + "&psize=1000");
             return responseJSON;
         }
 
@@ -691,7 +690,7 @@ public class InfomationDetailActivity extends AppCompatActivity implements View.
 
                         if (!photos.equalsIgnoreCase("")) {
                             Glide.with(InfomationDetailActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.infoimage + photos
-                                    .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(img_info);
+                                    .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).dontAnimate().into(img_info);
                         }else{
                             img_info.setVisibility(View.GONE);
                         }

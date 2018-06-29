@@ -1,8 +1,6 @@
 package com.example.grapes_pradip.vimalsagaradmin.model.gallery;
 
-/**
- * Created by Grapes-Pradip on 12/27/2016.
- */
+
 
 @SuppressWarnings("ALL")
 public class ImageItemSplash {

@@ -12,9 +12,6 @@ import android.widget.LinearLayout;
 
 import com.example.grapes_pradip.vimalsagaradmin.R;
 
-/**
- * Created by Grapes-Pradip on 2/15/2017.
- */
 
 @SuppressWarnings("ALL")
 public class DesktopFragment extends Fragment implements View.OnClickListener {
@@ -122,7 +119,7 @@ public class DesktopFragment extends Fragment implements View.OnClickListener {
 
     private void openEvent() {
         Fragment fr = null;
-        fr = new EventFragment();
+        fr = new EventCategoryFragment();
         FragmentManager fm = getFragmentManager();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.frame_content, fr);
@@ -172,7 +169,8 @@ public class DesktopFragment extends Fragment implements View.OnClickListener {
 
     private void openQA() {
         Fragment fr = null;
-        fr = new QuestionAnswerFragment();
+        fr = new QuestionAnswerTabbingFragment();
+//        fr = new QuestionAnswerFragment();
         FragmentManager fm = getFragmentManager();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.frame_content, fr);

@@ -12,9 +12,7 @@ import android.widget.TextView;
 
 import com.example.grapes_pradip.vimalsagaradmin.R;
 
-/**
- * Created by Grapes-Pradip on 3/28/2017.
- */
+
 
 @SuppressWarnings("DefaultFileTemplate")
 public class UserDetailActivity extends AppCompatActivity {

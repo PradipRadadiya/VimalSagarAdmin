@@ -16,9 +16,7 @@ import com.example.grapes_pradip.vimalsagaradmin.adapters.gallery.CustomImageAda
 
 import static com.example.grapes_pradip.vimalsagaradmin.activities.gallery.AllGalleryActivity.itemSplashArrayList;
 
-/**
- * Created by Pradip-PC on 11/17/2016.
- */
+
 
 @SuppressWarnings("ALL")
 public class SlidingGalleryImage extends AppCompatActivity {
@@ -58,7 +56,7 @@ public class SlidingGalleryImage extends AppCompatActivity {
         pos = intent.getStringExtra("position");
 //        cid = intent.getStringExtra("cid");
         Log.e("position", "------------------" + pos);
-        String u = "drawable/noimageavailable.png";
+//        String u = "drawable/noimageavailable.png";
 
         Log.e("itemSplashArrayList","----------------"+itemSplashArrayList);
 

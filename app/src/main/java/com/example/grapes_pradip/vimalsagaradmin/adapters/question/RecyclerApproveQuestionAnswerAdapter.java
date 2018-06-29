@@ -25,9 +25,7 @@ import com.example.grapes_pradip.vimalsagaradmin.model.question.QuestiinItem;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Pradip on 1/2/17.
- */
+
 @SuppressWarnings("ALL")
 public class RecyclerApproveQuestionAnswerAdapter extends RecyclerView.Adapter<RecyclerApproveQuestionAnswerAdapter.ViewHolder> {
 
@@ -55,7 +53,7 @@ public class RecyclerApproveQuestionAnswerAdapter extends RecyclerView.Adapter<R
         final QuestiinItem questiinItem = itemArrayList.get(i);
 
         if (questiinItem.getIsApproved().equalsIgnoreCase("1")) {
-            holder.txt_title.setText(CommonMethod.decodeEmoji(questiinItem.getQuestion()));
+            holder.txt_title.setText(questiinItem.getID()+") "+CommonMethod.decodeEmoji(questiinItem.getQuestion()));
             holder.txt_date.setText(CommonMethod.decodeEmoji(questiinItem.getDate()));
             holder.txt_name.setText(CommonMethod.decodeEmoji(questiinItem.getName()));
             holder.txt_views.setText(CommonMethod.decodeEmoji(questiinItem.getView()));

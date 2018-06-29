@@ -27,11 +27,12 @@ import com.google.firebase.messaging.RemoteMessage;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+@SuppressWarnings({"UnnecessaryLocalVariable", "SameParameterValue"})
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = MyFirebaseMessagingService.class.getSimpleName();
     private NotificationUtils notificationUtils;
-    SharedPreferencesClass sharedPreferencesClass;
+    private SharedPreferencesClass sharedPreferencesClass;
     public static String questionid;
 
 
@@ -163,6 +164,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     } else {
                         Toast.makeText(getApplicationContext(), "Push notification off", Toast.LENGTH_LONG).show();
                     }
+
+
                 } else if (click_action.equalsIgnoreCase("competition_item_click")) {
                     Intent resultIntent = new Intent(getApplicationContext(), AllQuestionAnswerActivity.class);
 
@@ -344,6 +347,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                         Toast.makeText(getApplicationContext(), "Push notification off", Toast.LENGTH_LONG).show();
                     }
                 } else {
+
                     sharedPreferencesClass.saveActionClick("main_click");
                     Intent resultIntent = new Intent(getApplicationContext(), MainActivity.class);
                     resultIntent.putExtra("message", message);
@@ -434,6 +438,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     } else {
                         Toast.makeText(getApplicationContext(), "Push notification off", Toast.LENGTH_LONG).show();
                     }
+
                 } else if (click_action.equalsIgnoreCase("bypeople_click")) {
                     sharedPreferencesClass.saveActionClick("bypeople_click");
                     Intent resultIntent = new Intent(getApplicationContext(), ByPeopleActivity.class);

@@ -25,7 +25,6 @@ import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
 import com.example.grapes_pradip.vimalsagaradmin.common.JsonParser;
 import com.example.grapes_pradip.vimalsagaradmin.model.gallery.GalleryCategoryItem;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -64,7 +63,7 @@ public class RecyclerGalleryCategoryAdapter extends RecyclerView.Adapter<Recycle
         holder.txt_title.setText(CommonMethod.decodeEmoji(galleryCategoryItem.getName()));
 //        Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.gallerycategory + galleryCategoryItem.getCategoryIcon().replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(holder.img_audio_category);
 
-        Glide.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.gallerycategory + galleryCategoryItem.getCategoryIcon().replaceAll(" ", "%20")).crossFade().into(holder.img_audio_category);
+        Glide.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.gallerycategory + galleryCategoryItem.getCategoryIcon().replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).dontAnimate().into(holder.img_audio_category);
 
         Log.e("image","------------------"+CommonURL.ImagePath + CommonAPI_Name.gallerycategory + galleryCategoryItem.getCategoryIcon().replaceAll(" ", "%20"));
         ((SwipeLayout) holder.itemView).setItemState(SwipeLayout.ITEM_STATE_COLLAPSED, true);
@@ -76,6 +75,7 @@ public class RecyclerGalleryCategoryAdapter extends RecyclerView.Adapter<Recycle
                 intent.putExtra("cid", itemArrayList.get(holder.getAdapterPosition()).getId());
                 intent.putExtra("name", itemArrayList.get(holder.getAdapterPosition()).getName());
                 intent.putExtra("photo", itemArrayList.get(holder.getAdapterPosition()).getCategoryIcon());
+                intent.putExtra("description", itemArrayList.get(holder.getAdapterPosition()).getDescription());
                 activity.startActivity(intent);
                 activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
@@ -193,6 +193,7 @@ public class RecyclerGalleryCategoryAdapter extends RecyclerView.Adapter<Recycle
             intent.putExtra("gallery_category_id", itemArrayList.get(getAdapterPosition()).getId());
             intent.putExtra("title", itemArrayList.get(getAdapterPosition()).getName());
             intent.putExtra("icon", itemArrayList.get(getAdapterPosition()).getCategoryIcon());
+            intent.putExtra("description", itemArrayList.get(getAdapterPosition()).getDescription());
             v.getContext().startActivity(intent);
             activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }

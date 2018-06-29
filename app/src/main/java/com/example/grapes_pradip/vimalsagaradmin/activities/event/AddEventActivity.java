@@ -41,7 +41,6 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.grapes_pradip.vimalsagaradmin.R;
-import com.example.grapes_pradip.vimalsagaradmin.activities.gallery.AllGalleryActivity;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
@@ -72,9 +71,7 @@ import ch.boye.httpclientandroidlib.entity.mime.content.FileBody;
 import ch.boye.httpclientandroidlib.entity.mime.content.StringBody;
 import ch.boye.httpclientandroidlib.impl.client.DefaultHttpClient;
 
-/**
- * Created by Grapes-Pradip on 2/16/2017.
- */
+
 
 @SuppressWarnings("ALL")
 public class AddEventActivity extends AppCompatActivity implements View.OnClickListener {
@@ -113,6 +110,7 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
     String datetimefull;
     String fulltime;
     String notify = "0";
+    private String cid;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -121,6 +119,7 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         permission = new MarshMallowPermission(this);
+        cid = getIntent().getStringExtra("cid");
         findID();
 //        edit_date.setVisibility(View.GONE);
 
@@ -195,8 +194,6 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
                 mTimePicker.show();
             }
         });
-
-
 
 
         idClick();
@@ -642,7 +639,7 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
             Log.e("method", "----------------" + "call");
 
             String title = CommonMethod.encodeEmoji(e_title.getText().toString());
-            String description =CommonMethod.encodeEmoji(e_description.getText().toString());
+            String description = CommonMethod.encodeEmoji(e_description.getText().toString());
             String date = CommonMethod.encodeEmoji(edit_date.getText().toString());
             String address = CommonMethod.encodeEmoji(e_address.getText().toString());
             String VideoLink = CommonMethod.encodeEmoji(edit_videolink.getText().toString());
@@ -662,11 +659,15 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
                 HttpClient httpClient = new DefaultHttpClient();
                 HttpPost httpPost = new HttpPost(CommonURL.Main_url + CommonAPI_Name.addevent);
                 MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
+                multipartEntity.addPart("cid", new StringBody(cid));
                 multipartEntity.addPart("Title", new StringBody(title));
                 multipartEntity.addPart("Description", new StringBody(description));
                 multipartEntity.addPart("Date", new StringBody(CommonMethod.encodeEmoji(datetimefull)));
                 multipartEntity.addPart("Address", new StringBody(address));
                 multipartEntity.addPart("VideoLink", new StringBody(VideoLink));
+
+
+
 
                 if (photoarray.isEmpty()) {
                     Log.e("if call", "-----------");
@@ -692,6 +693,7 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
 
                     String[] audioArr = new String[audioarray.size()];
                     for (int i = 0; i < audioarray.size(); i++) {
+
                         audioArr[i] = audioarray.get(i);
                         Log.e("audioArr", "--------" + audioArr[i]);
                         File file2 = new File(audioArr[i]);
@@ -718,6 +720,7 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
                         FileBody fileBody3 = new FileBody(file3);
                         multipartEntity.addPart("Video[" + i + "]", fileBody3);
                     }
+
 
                     /*File file3 = new File(videoPath);
                     FileBody fileBody3 = new FileBody(file3);
@@ -869,7 +872,6 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
             this.itemArrayList = itemArrayList;
         }
 
-
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
             View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.photo_item, viewGroup, false);
@@ -878,7 +880,6 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
 
         @Override
         public void onBindViewHolder(final ViewHolder holder, int i) {
-
 
             String path = itemArrayList.get(i);
             thumb = (BitmapFactory.decodeFile(path));
@@ -1058,7 +1059,7 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
         img_category_icon.setVisibility(View.VISIBLE);
         img_category_icon.setImageBitmap(thumbnail);
         OutputStream outFile = null;
-        File file=new File(picturePath);
+        File file = new File(picturePath);
         outFile = new FileOutputStream(file);
         thumbnail.compress(Bitmap.CompressFormat.JPEG, 40, outFile);
         outFile.flush();

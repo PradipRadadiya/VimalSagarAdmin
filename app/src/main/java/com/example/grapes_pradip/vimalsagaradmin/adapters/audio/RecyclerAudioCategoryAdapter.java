@@ -25,7 +25,6 @@ import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
 import com.example.grapes_pradip.vimalsagaradmin.common.JsonParser;
 import com.example.grapes_pradip.vimalsagaradmin.model.audio.AllAudioCategoryItem;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -69,7 +68,7 @@ public class RecyclerAudioCategoryAdapter extends RecyclerView.Adapter<RecyclerA
 //            Picasso.with(activity).load(path).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(holder.img_audio_category);
 
             Glide.with(activity).load(path
-                    .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(holder.img_audio_category);
+                    .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).dontAnimate().into(holder.img_audio_category);
 
         }
 

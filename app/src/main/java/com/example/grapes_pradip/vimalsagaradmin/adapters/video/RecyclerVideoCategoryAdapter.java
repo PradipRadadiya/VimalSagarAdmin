@@ -25,7 +25,6 @@ import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
 import com.example.grapes_pradip.vimalsagaradmin.common.JsonParser;
 import com.example.grapes_pradip.vimalsagaradmin.model.video.AllVideoCategoryItem;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -64,7 +63,7 @@ public class RecyclerVideoCategoryAdapter extends RecyclerView.Adapter<RecyclerV
 //        Picasso.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.videocategory + videoCategoryItem.getCategoryicon().replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(holder.img_video_category);
 
         Glide.with(activity).load(CommonURL.ImagePath + CommonAPI_Name.videocategory + videoCategoryItem.getCategoryicon()
-                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(holder.img_video_category);
+                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).dontAnimate().into(holder.img_video_category);
 
 
 

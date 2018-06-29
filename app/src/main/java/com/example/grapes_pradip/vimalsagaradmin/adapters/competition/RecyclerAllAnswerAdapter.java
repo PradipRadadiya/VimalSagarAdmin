@@ -12,9 +12,7 @@ import com.example.grapes_pradip.vimalsagaradmin.model.competition.AnswerItem;
 
 import java.util.ArrayList;
 
-/**
- * Created by Pradip on 1/2/17.
- */
+
 @SuppressWarnings("ALL")
 public class RecyclerAllAnswerAdapter extends RecyclerView.Adapter<RecyclerAllAnswerAdapter.ViewHolder> {
 

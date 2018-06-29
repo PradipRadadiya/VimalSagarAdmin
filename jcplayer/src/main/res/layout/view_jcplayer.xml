@@ -8,7 +8,6 @@ tools:context="com.example.jean.jcplayer.JcPlayerView">
         android:layout_width="match_parent"
         android:background="@drawable/bg_player_white"
         android:layout_height="@dimen/player_height"
-        android:id="@+id/relativeLayout"
         tools:ignore="UselessParent">
 
         <LinearLayout
@@ -17,10 +16,9 @@ tools:context="com.example.jean.jcplayer.JcPlayerView">
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:layout_marginTop="50dp"
-            android:orientation="horizontal"
-            android:id="@+id/linearLayout">
+            android:orientation="horizontal">
 
-            <TextView
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                 android:id="@+id/txt_current_duration"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -38,7 +36,7 @@ tools:context="com.example.jean.jcplayer.JcPlayerView">
                 android:layout_height="match_parent"
                 android:layout_weight="1"/>
 
-            <TextView
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                 android:id="@+id/txt_total_duration"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -98,7 +96,7 @@ tools:context="com.example.jean.jcplayer.JcPlayerView">
             android:layout_marginLeft="16dp"
             tools:ignore="ContentDescription" />
 
-        <TextView
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
             android:id="@+id/txt_current_music"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

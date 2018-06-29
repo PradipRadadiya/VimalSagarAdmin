@@ -1,5 +1,6 @@
 package com.example.grapes_pradip.vimalsagaradmin.activities.event;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -32,9 +33,7 @@ import java.util.Date;
 import ch.boye.httpclientandroidlib.NameValuePair;
 import ch.boye.httpclientandroidlib.message.BasicNameValuePair;
 
-/**
- * Created by Grapes-Pradip on 06-Oct-17.
- */
+
 
 public class CommentListEvent extends AppCompatActivity {
 
@@ -47,19 +46,19 @@ public class CommentListEvent extends AppCompatActivity {
     private int firstVisibleItem;
     private int visibleItemCount;
     private int totalItemCount;
-    LinearLayoutManager linearLayoutManager;
-    RecyclerView recyclerView_comments;
-    EditText edit_comment;
-    ImageView img_send;
-    ImageView img_nodata;
-    ProgressDialog progressDialog;
+    private LinearLayoutManager linearLayoutManager;
+    private RecyclerView recyclerView_comments;
+    private EditText edit_comment;
+    private ImageView img_send;
+    private ImageView img_nodata;
+    private ProgressDialog progressDialog;
     private String aid;
     private String audioname;
     private String cid;
     private String categoryname;
-    RecyclerEventCommentAdapter recyclerCommentAdapter;
+    private RecyclerEventCommentAdapter recyclerCommentAdapter;
 
-    ArrayList<com.example.grapes_pradip.vimalsagaradmin.model.information.CommentList> commentLists=new ArrayList<>();
+    private ArrayList<com.example.grapes_pradip.vimalsagaradmin.model.information.CommentList> commentLists=new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -143,6 +142,7 @@ public class CommentListEvent extends AppCompatActivity {
 
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class CommentList extends AsyncTask<String, Void, String> {
         String responseJSON = "";
 
@@ -158,7 +158,7 @@ public class CommentListEvent extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallcommentsevent + "?eid="  + aid + "&page=" + page_count + "&psize=30");
+            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallcommentsevent + "?eid="  + aid + "&page=" + page_count + "&psize=1000");
             return responseJSON;
         }
 
@@ -235,6 +235,7 @@ public class CommentListEvent extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class AdminComment extends AsyncTask<String, Void, String> {
         String responseJSON = "";
 

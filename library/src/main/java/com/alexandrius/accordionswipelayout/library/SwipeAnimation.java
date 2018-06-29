@@ -6,9 +6,7 @@ import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Transformation;
 
-/**
- * Created by Alexander Pataridze on 18/11/2016.
- */
+
 @SuppressWarnings("ALL")
 class SwipeAnimation extends Animation {
     private final int width;

@@ -5,10 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="2sp"
-    android:layout_marginLeft="2sp"
-    android:layout_marginRight="2sp"
-    android:layout_marginTop="2sp"
+    android:layout_marginLeft="10sp"
+    android:layout_marginRight="10sp"
+    android:layout_marginTop="10sp"
 
     >
 
@@ -16,10 +15,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@drawable/corner_round_item">
+        android:background="@drawable/corner_round_item"
+        android:padding="8dp"
+        >
 
         <LinearLayout
-            android:id="@+id/lin_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -31,11 +31,10 @@
                 android:layout_height="75sp"
                 android:layout_weight="3"
                 android:padding="5sp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/logo"
+                android:scaleType="centerCrop"
                 tools:ignore="ContentDescription" />
 
-            <TextView
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                 android:id="@+id/txt_title"
                 android:layout_width="0sp"
                 android:layout_height="wrap_content"
@@ -62,26 +61,26 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                 android:id="@+id/txt_edit"
                 android:layout_width="0sp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10sp"
                 android:layout_weight="1"
-                android:background="@drawable/approve"
+                android:background="@drawable/round_rect_shapeoneselect"
                 android:gravity="center"
                 android:padding="8sp"
                 android:text="Edit"
                 android:textColor="@color/white"
                 tools:ignore="HardcodedText" />
 
-            <TextView
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                 android:id="@+id/txt_delete"
                 android:layout_width="0sp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10sp"
                 android:layout_weight="1"
-                android:background="@drawable/reject"
+                android:background="@drawable/round_rect_shapeoneselect"
                 android:gravity="center"
                 android:padding="8sp"
                 android:text="Delete"

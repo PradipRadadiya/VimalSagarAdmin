@@ -486,7 +486,7 @@ public class ThoughtDetailActivity extends AppCompatActivity implements View.OnC
 
         @Override
         protected String doInBackground(String... params) {
-            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallusernamesforlikethought + "?tid=" + tid + "&page=" + page_count + "&psize=30");
+            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallusernamesforlikethought + "?tid=" + tid + "&page=" + page_count + "&psize=1000");
             return responseJSON;
         }
 
@@ -552,7 +552,7 @@ public class ThoughtDetailActivity extends AppCompatActivity implements View.OnC
 
         @Override
         protected String doInBackground(String... params) {
-            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallcommentsthought + "?tid=" + tid + "&page=" + page_count + "&psize=30");
+            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallcommentsthought + "?tid=" + tid + "&page=" + page_count + "&psize=1000");
             return responseJSON;
         }
 
@@ -754,7 +754,7 @@ public class ThoughtDetailActivity extends AppCompatActivity implements View.OnC
 
                         if (!photos.equalsIgnoreCase("")){
                         Glide.with(ThoughtDetailActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.thoughtimage + photos
-                                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(img_thought);
+                                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).dontAnimate().into(img_thought);
                         }else{
                             img_thought.setVisibility(View.GONE);
                         }

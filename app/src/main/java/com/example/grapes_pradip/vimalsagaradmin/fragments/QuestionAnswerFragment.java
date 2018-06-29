@@ -68,7 +68,6 @@ public class QuestionAnswerFragment extends Fragment implements View.OnClickList
     private ImageView img_nodata;
     private ImageView delete_data;
     ProgressBar progress_load;
-    private TextView txt_approveQuestion;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -87,7 +86,7 @@ public class QuestionAnswerFragment extends Fragment implements View.OnClickList
             }
         });
 
-        recyclerView_question.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        /*recyclerView_question.addOnScrollListener(new RecyclerView.OnScrollListener() {
                                                       @Override
                                                       public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                                                           super.onScrolled(recyclerView, dx, dy);
@@ -128,7 +127,7 @@ public class QuestionAnswerFragment extends Fragment implements View.OnClickList
 
                                                   }
 
-        );
+        );*/
         return rootview;
     }
 
@@ -141,7 +140,7 @@ public class QuestionAnswerFragment extends Fragment implements View.OnClickList
     }
 
     private void findID() {
-        txt_approveQuestion = (TextView) rootview.findViewById(R.id.txt_approveQuestion);
+
         swipe_refresh = (SwipeRefreshLayout) rootview.findViewById(R.id.swipe_refresh);
         recyclerView_question = (RecyclerView) rootview.findViewById(R.id.recyclerView_question);
         recyclerView_question.setLayoutManager(linearLayoutManager);
@@ -150,7 +149,7 @@ public class QuestionAnswerFragment extends Fragment implements View.OnClickList
         delete_data = (ImageView) rootview.findViewById(R.id.delete_data);
         progress_load = (ProgressBar) rootview.findViewById(R.id.progress_load);
         delete_data.setOnClickListener(this);
-        txt_approveQuestion.setOnClickListener(this);
+
     }
 
 
@@ -189,16 +188,7 @@ public class QuestionAnswerFragment extends Fragment implements View.OnClickList
                 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;
 
-            case R.id.txt_approveQuestion:
 
-                Fragment fr = null;
-                fr = new ApproveQuestionAnswerFragment();
-                FragmentManager fm = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fm.beginTransaction();
-                fragmentTransaction.replace(R.id.frame_content, fr);
-//        fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-                break;
             case R.id.delete_data:
                 if (questionid.size() > 0) {
 
@@ -257,7 +247,7 @@ public class QuestionAnswerFragment extends Fragment implements View.OnClickList
 
         @Override
         protected String doInBackground(String... params) {
-            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.viewallappques + "?page=" + page_count + "&psize=30");
+            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.viewallappques + "?page=" + page_count + "&psize=1000");
             return responseJSON;
         }
 
@@ -270,10 +260,10 @@ public class QuestionAnswerFragment extends Fragment implements View.OnClickList
                 if (jsonObject.getString("status").equalsIgnoreCase("success")) {
                     JSONArray jsonArray = jsonObject.getJSONArray("data");
                     Log.e("json array", "-------------------" + jsonArray);
-                    if (jsonArray.length() < 30 || jsonArray.length() == 0) {
+                   /* if (jsonArray.length() < 30 || jsonArray.length() == 0) {
                         flag_scroll = true;
                         Log.e("length_array_news", flag_scroll + "" + "<30===OR(0)===" + jsonArray.length());
-                    }
+                    }*/
                     for (int i = 0; i < jsonArray.length(); i++) {
 
                         JSONObject jsonObject1 = jsonArray.getJSONObject(i);

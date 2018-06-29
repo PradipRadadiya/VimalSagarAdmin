@@ -52,7 +52,6 @@ public class AllQuestionAnswerActivity extends AppCompatActivity implements View
     private String qid;
     private String question;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +61,7 @@ public class AllQuestionAnswerActivity extends AppCompatActivity implements View
         linearLayoutManager = new LinearLayoutManager(AllQuestionAnswerActivity.this);
         findID();
         idClick();
+
         /*if (CommonMethod.isInternetConnected(AllQuestionAnswerActivity.this)) {
             new GetAllAnswer().execute();
         }

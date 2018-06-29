@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -10,22 +11,23 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TextView
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.6"
             android:padding="10dp"
             android:text="Name"
-            android:textSize="18dp" />
+            android:textSize="18sp"
+            tools:ignore="HardcodedText" />
 
-        <TextView
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
             android:id="@+id/name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:padding="10dp"
             android:text="name"
-            android:textSize="18dp" />
+            android:textSize="18sp" />
     </LinearLayout>
 
 
@@ -34,15 +36,15 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TextView
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.6"
             android:padding="10dp"
             android:text="Email"
-            android:textSize="18dp" />
+            android:textSize="18sp" />
 
-        <TextView
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
             android:id="@+id/email"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -50,7 +52,8 @@
             android:autoLink="email"
             android:padding="10dp"
             android:text="email"
-            android:textSize="18dp" />
+            android:textSize="18sp"
+            tools:ignore="HardcodedText" />
     </LinearLayout>
 
 
@@ -59,15 +62,15 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TextView
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.6"
             android:padding="10dp"
             android:text="Mobile"
-            android:textSize="18dp" />
+            android:textSize="18sp" />
 
-        <TextView
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
             android:id="@+id/mobile"
             android:layout_width="0dp"
             android:layout_weight="2"
@@ -75,7 +78,7 @@
             android:autoLink="phone"
             android:padding="10dp"
             android:text="mobile"
-            android:textSize="18dp" />
+            android:textSize="18sp" />
     </LinearLayout>
 
 </LinearLayout>

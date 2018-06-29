@@ -16,7 +16,9 @@
         android:layout_gravity="right"
         android:background="?android:attr/selectableItemBackground"
         android:padding="5dp"
-        android:src="@drawable/ic_dialogcancel" />
+        android:src="@drawable/ic_dialogcancel"
+        android:contentDescription="TODO"
+        tools:ignore="ContentDescription,HardcodedText,InconsistentLayout,RtlHardcoded" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -24,7 +26,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:orientation="vertical">
 
@@ -35,7 +37,7 @@
                 android:background="@drawable/corner_round_item"
                 android:orientation="horizontal">
 
-                <TextView
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                     android:layout_width="0sp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -45,7 +47,7 @@
                     android:textSize="18sp"
                     tools:ignore="HardcodedText" />
 
-                <TextView
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                     android:id="@+id/txt_id"
                     android:layout_width="0sp"
                     android:layout_height="wrap_content"
@@ -63,7 +65,7 @@
                 android:background="@drawable/corner_round_item"
                 android:orientation="horizontal">
 
-                <TextView
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                     android:layout_width="0sp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -73,7 +75,7 @@
                     android:textSize="18sp"
                     tools:ignore="HardcodedText" />
 
-                <TextView
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                     android:id="@+id/txt_name"
                     android:layout_width="0sp"
                     android:layout_height="wrap_content"
@@ -91,7 +93,7 @@
                 android:background="@drawable/corner_round_item"
                 android:orientation="horizontal">
 
-                <TextView
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                     android:layout_width="0sp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -101,7 +103,7 @@
                     android:textSize="18sp"
                     tools:ignore="HardcodedText" />
 
-                <TextView
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                     android:id="@+id/txt_email"
                     android:layout_width="0sp"
                     android:layout_height="wrap_content"
@@ -119,7 +121,7 @@
                 android:background="@drawable/corner_round_item"
                 android:orientation="horizontal">
 
-                <TextView
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                     android:layout_width="0sp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -129,7 +131,7 @@
                     android:textSize="18sp"
                     tools:ignore="HardcodedText" />
 
-                <TextView
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                     android:id="@+id/txt_mobile"
                     android:layout_width="0sp"
                     android:layout_height="wrap_content"
@@ -148,7 +150,7 @@
                 android:background="@drawable/corner_round_item"
                 android:orientation="horizontal">
 
-                <TextView
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                     android:layout_width="0sp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -158,7 +160,7 @@
                     android:textSize="18sp"
                     tools:ignore="HardcodedText" />
 
-                <TextView
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                     android:id="@+id/txt_usename"
                     android:layout_width="0sp"
                     android:layout_height="wrap_content"
@@ -176,7 +178,7 @@
                 android:background="@drawable/corner_round_item"
                 android:orientation="horizontal">
 
-                <TextView
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                     android:layout_width="0sp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -186,7 +188,7 @@
                     android:textSize="18sp"
                     tools:ignore="HardcodedText" />
 
-                <TextView
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                     android:id="@+id/txt_password"
                     android:layout_width="0sp"
                     android:layout_height="wrap_content"
@@ -204,7 +206,7 @@
                 android:background="@drawable/corner_round_item"
                 android:orientation="horizontal">
 
-                <TextView
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                     android:layout_width="0sp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -214,7 +216,7 @@
                     android:textSize="18sp"
                     tools:ignore="HardcodedText" />
 
-                <TextView
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                     android:id="@+id/last_update"
                     android:layout_width="0sp"
                     android:layout_height="wrap_content"
@@ -232,7 +234,7 @@
                 android:background="@drawable/corner_round_item"
                 android:orientation="horizontal">
 
-                <TextView
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                     android:layout_width="0sp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -242,7 +244,7 @@
                     android:textSize="18sp"
                     tools:ignore="HardcodedText" />
 
-                <TextView
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                     android:id="@+id/txt_role"
                     android:layout_width="0sp"
                     android:layout_height="wrap_content"

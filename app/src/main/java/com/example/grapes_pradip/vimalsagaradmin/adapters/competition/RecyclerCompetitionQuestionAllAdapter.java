@@ -17,9 +17,10 @@ import android.widget.Toast;
 import com.alexandrius.accordionswipelayout.library.SwipeLayout;
 import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.activities.competition.AllQuestionAnswerActivity;
-import com.example.grapes_pradip.vimalsagaradmin.activities.competition.AllQuestionOptionActivity;
 import com.example.grapes_pradip.vimalsagaradmin.activities.competition.EditCompetitionQuestionActivity;
+import com.example.grapes_pradip.vimalsagaradmin.activities.competition.EditComptitionQuestionActivity;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
+import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
 import com.example.grapes_pradip.vimalsagaradmin.common.JsonParser;
 import com.example.grapes_pradip.vimalsagaradmin.model.competition.CompetitionQuestionItem;
@@ -60,7 +61,23 @@ public class RecyclerCompetitionQuestionAllAdapter extends RecyclerView.Adapter<
 
         final CompetitionQuestionItem competitionQuestionItem = itemArrayList.get(i);
 
-        if (competitionQuestionItem.getQType().equalsIgnoreCase("Option")) {
+//        holder.img_option.setVisibility(View.VISIBLE);
+        holder.txt_index.setText(String.valueOf(i + 1) + ")");
+        holder.txt_title.setText(CommonMethod.decodeEmoji(competitionQuestionItem.getQuestion()));
+        holder.txt_type.setText(CommonMethod.decodeEmoji(competitionQuestionItem.getQtype()));
+        holder.txt_answer.setText(CommonMethod.decodeEmoji(competitionQuestionItem.getAnswer()));
+
+        String[] options;
+        options = null;
+        options = competitionQuestionItem.getOptions().split(",");
+        holder.txt_option.setText("");
+
+        for (int j = 0; j < options.length; j++) {
+            holder.txt_option.append(options[j] + "\n");
+        }
+
+
+       /* if (competitionQuestionItem.getQType().equalsIgnoreCase("Option")) {
             holder.img_option.setVisibility(View.VISIBLE);
             holder.txt_title.setText(competitionQuestionItem.getQuestion());
             holder.txt_type.setText(competitionQuestionItem.getQType());
@@ -70,9 +87,8 @@ public class RecyclerCompetitionQuestionAllAdapter extends RecyclerView.Adapter<
                 @Override
                 public void onClick(View v) {
 
-
                     Intent intent = new Intent(activity, AllQuestionOptionActivity.class);
-                    intent.putExtra("QID", competitionQuestionItem.getID());
+                    intent.putExtra("QID", competitionQuestionItem.getId());
                     intent.putExtra("Question", competitionQuestionItem.getQuestion());
                     intent.putExtra("QType", competitionQuestionItem.getQType());
                     intent.putExtra("CategoryID", competitionQuestionItem.getCategoryID());
@@ -86,14 +102,14 @@ public class RecyclerCompetitionQuestionAllAdapter extends RecyclerView.Adapter<
             holder.txt_title.setText(competitionQuestionItem.getQuestion());
             holder.txt_type.setText(competitionQuestionItem.getQType());
             ((SwipeLayout) holder.itemView).setItemState(SwipeLayout.ITEM_STATE_COLLAPSED, true);
-        }
+        }*/
 
         holder.img_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(activity, AllQuestionAnswerActivity.class);
-                questionid=competitionQuestionItem.getID();
-                intent.putExtra("QID", competitionQuestionItem.getID());
+                questionid = competitionQuestionItem.getId();
+                intent.putExtra("QID", competitionQuestionItem.getId());
                 intent.putExtra("Question", competitionQuestionItem.getQuestion());
                 activity.startActivity(intent);
 
@@ -103,9 +119,12 @@ public class RecyclerCompetitionQuestionAllAdapter extends RecyclerView.Adapter<
         holder.txt_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(activity, EditCompetitionQuestionActivity.class);
-                intent.putExtra("ID", itemArrayList.get(holder.getAdapterPosition()).getID());
+                Intent intent = new Intent(activity, EditComptitionQuestionActivity.class);
+                intent.putExtra("qid", itemArrayList.get(holder.getAdapterPosition()).getId());
                 intent.putExtra("Question", itemArrayList.get(holder.getAdapterPosition()).getQuestion());
+                intent.putExtra("Answer", itemArrayList.get(holder.getAdapterPosition()).getAnswer());
+                intent.putExtra("Option", itemArrayList.get(holder.getAdapterPosition()).getOptions());
+                intent.putExtra("QType", itemArrayList.get(holder.getAdapterPosition()).getQtype());
                 activity.startActivity(intent);
                 activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
@@ -128,7 +147,7 @@ public class RecyclerCompetitionQuestionAllAdapter extends RecyclerView.Adapter<
                 // Setting Positive "Yes" Button
                 alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        id = itemArrayList.get(holder.getAdapterPosition()).getID();
+                        id = itemArrayList.get(holder.getAdapterPosition()).getId();
                         Log.e("id", "-----------------------" + id);
                         new DeleteCompetitionQuestion().execute();
                         int pos = holder.getAdapterPosition();
@@ -168,6 +187,11 @@ public class RecyclerCompetitionQuestionAllAdapter extends RecyclerView.Adapter<
         final ImageView img_audio_category;
         final TextView txt_title;
         final TextView txt_type;
+        final TextView txt_answer;
+        final TextView txt_option;
+        final TextView txt_index;
+
+
         final TextView txt_edit;
         final TextView txt_delete;
         final SwipeLayout swipeLayout;
@@ -176,8 +200,11 @@ public class RecyclerCompetitionQuestionAllAdapter extends RecyclerView.Adapter<
 
         public ViewHolder(View itemView) {
             super(itemView);
+            txt_index = (TextView) itemView.findViewById(R.id.txt_index);
             txt_title = (TextView) itemView.findViewById(R.id.txt_title);
             txt_type = (TextView) itemView.findViewById(R.id.txt_type);
+            txt_answer = (TextView) itemView.findViewById(R.id.txt_answer);
+            txt_option = (TextView) itemView.findViewById(R.id.txt_option);
             img_audio_category = (ImageView) itemView.findViewById(R.id.img_audio_category);
             swipeLayout = (SwipeLayout) itemView.findViewById(R.id.swipe);
             img_option = (ImageView) itemView.findViewById(R.id.img_option);
@@ -209,27 +236,23 @@ public class RecyclerCompetitionQuestionAllAdapter extends RecyclerView.Adapter<
         public void onSwipeItemClick(boolean left, final int index) {
             if (index == 0) {
                 Intent intent = new Intent(activity, EditCompetitionQuestionActivity.class);
-                intent.putExtra("ID", itemArrayList.get(getAdapterPosition()).getID());
+                intent.putExtra("ID", itemArrayList.get(getAdapterPosition()).getId());
                 intent.putExtra("Question", itemArrayList.get(getAdapterPosition()).getQuestion());
                 activity.startActivity(intent);
                 activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             } else if (index == 1) {
 
                 final AlertDialog.Builder alertDialog = new AlertDialog.Builder(activity);
-
                 // Setting Dialog Title
                 alertDialog.setTitle("Confirm Delete...");
-
                 // Setting Dialog Message
                 alertDialog.setMessage("Are you sure you want to delete?.");
-
                 // Setting Icon to Dialog
                 alertDialog.setIcon(R.drawable.ic_warning);
-
                 // Setting Positive "Yes" Button
                 alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        id = itemArrayList.get(getAdapterPosition()).getID();
+                        id = itemArrayList.get(getAdapterPosition()).getId();
                         Log.e("id", "-----------------------" + id);
                         new DeleteCompetitionQuestion().execute();
                         Log.e("pos", "----------" + index);
@@ -240,7 +263,6 @@ public class RecyclerCompetitionQuestionAllAdapter extends RecyclerView.Adapter<
 //                            Toast.makeText(activity, "You clicked on YES", Toast.LENGTH_SHORT).show();
                     }
                 });
-
                 // Setting Negative "NO" Button
                 alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -250,10 +272,7 @@ public class RecyclerCompetitionQuestionAllAdapter extends RecyclerView.Adapter<
                         notifyDataSetChanged();
                     }
                 });
-
                 alertDialog.show();
-
-
 //                    Toast.makeText(itemView.getContext(), "Trash" + id, Toast.LENGTH_SHORT).show();
             }
 
@@ -282,9 +301,13 @@ public class RecyclerCompetitionQuestionAllAdapter extends RecyclerView.Adapter<
             try {
                 JSONObject jsonObject = new JSONObject(s);
                 if (jsonObject.getString("status").equalsIgnoreCase("success")) {
-                } else {
-                    Toast.makeText(activity, "Competition question not delete." , Toast.LENGTH_SHORT).show();
+
                 }
+
+                else {
+                    Toast.makeText(activity, "Competition question not delete.", Toast.LENGTH_SHORT).show();
+                }
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }

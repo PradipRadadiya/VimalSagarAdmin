@@ -16,7 +16,7 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <TextView
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
             android:id="@+id/txt_usename"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
             android:ellipsize="end"
             tools:ignore="HardcodedText" />
 
-        <TextView
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
             android:id="@+id/txt_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
             android:textSize="12sp"
             tools:ignore="RtlHardcoded" />
 
-        <TextView
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
             android:id="@+id/txt_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                 android:id="@+id/txt_edit"
                 android:layout_width="0sp"
                 android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
                 android:layout_margin="10sp"
                 tools:ignore="HardcodedText" />
 
-            <TextView
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                 android:id="@+id/txt_delete"
                 android:layout_width="0sp"
                 android:layout_height="wrap_content"

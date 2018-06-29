@@ -3,9 +3,6 @@ package com.alexandrius.accordionswipelayout.library;
 import android.view.View;
 import android.widget.LinearLayout;
 
-/**
- * Created by alex on 12/11/2016
- */
 
 class Utils {
     static float getViewWeight(View view) {

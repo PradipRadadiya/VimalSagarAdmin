@@ -1,6 +1,8 @@
 package com.example.grapes_pradip.vimalsagaradmin.activities.audio;
 
 
+import android.support.annotation.NonNull;
+
 import java.io.FilterOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -15,7 +17,7 @@ import ch.boye.httpclientandroidlib.entity.mime.MultipartEntity;
  */
 
 @SuppressWarnings("deprecation")
-public class AndroidMultiPartEntity extends MultipartEntity
+class AndroidMultiPartEntity extends MultipartEntity
 
 {
     private final ProgressListener listener;
@@ -42,23 +44,23 @@ public class AndroidMultiPartEntity extends MultipartEntity
         super.writeTo(new CountingOutputStream(outstream, this.listener));
     }
 
-    public static interface ProgressListener {
+    interface ProgressListener {
         void transferred(long num);
     }
 
-    public static class CountingOutputStream extends FilterOutputStream {
+    static class CountingOutputStream extends FilterOutputStream {
 
         private final ProgressListener listener;
         private long transferred;
 
-        public CountingOutputStream(final OutputStream out,
-                                    final ProgressListener listener) {
+        CountingOutputStream(final OutputStream out,
+                             final ProgressListener listener) {
             super(out);
             this.listener = listener;
             this.transferred = 0;
         }
 
-        public void write(byte[] b, int off, int len) throws IOException {
+        public void write(@NonNull byte[] b, int off, int len) throws IOException {
             out.write(b, off, len);
             this.transferred += len;
             this.listener.transferred(this.transferred);

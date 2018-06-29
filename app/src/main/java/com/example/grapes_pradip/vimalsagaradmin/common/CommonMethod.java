@@ -1,9 +1,27 @@
 package com.example.grapes_pradip.vimalsagaradmin.common;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
+import android.net.Uri;
+import android.os.Build;
+import android.provider.MediaStore;
+import android.provider.Settings;
+import android.util.Log;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -11,17 +29,18 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Random;
 
-
-/**
- * Created by Pradip on 16-Nov-16.
- */
 
 @SuppressWarnings("ALL")
 public class CommonMethod {
     @SuppressLint("SimpleDateFormat")
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+    private static ProgressDialog progressDialog;
+
+    private static final String ALLOWED_CHARACTERS = "0123456789qwertyuiopasdfghjklzxcvbnm";
 
     public static boolean isInternetConnected(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -43,8 +62,8 @@ public class CommonMethod {
         return sdf.format(cal.getTime());
     }
 
-    private static final String ALLOWED_CHARACTERS = "0123456789qwertyuiopasdfghjklzxcvbnm";
 
+    //Genrate random string
     public static String getRandomString(final int sizeOfRandomString) {
         final Random random = new Random();
         final StringBuilder sb = new StringBuilder(sizeOfRandomString);
@@ -53,7 +72,9 @@ public class CommonMethod {
         return sb.toString();
     }
 
-    public static String encodeEmoji (String message) {
+
+    //String encode
+    public static String encodeEmoji(String message) {
         try {
             return URLEncoder.encode(message,
                     "UTF-8");
@@ -63,8 +84,9 @@ public class CommonMethod {
     }
 
 
-    public static String decodeEmoji (String message) {
-        String myString= null;
+    //String decode
+    public static String decodeEmoji(String message) {
+        String myString = null;
         try {
             return URLDecoder.decode(
                     message, "UTF-8");
@@ -72,4 +94,201 @@ public class CommonMethod {
             return message;
         }
     }
+
+
+    //Random color genrate
+    public static int getRandomColor() {
+        Random rand = new Random();
+        return Color.argb(100, rand.nextInt(256), rand.nextInt(256), rand.nextInt(256));
+    }
+
+
+    //Log print
+    public static void logPrint(String tag, String message) {
+        Log.e(tag, message);
+    }
+
+
+    //Show toast
+    public static final void showToastShort(Context context, String message) {
+
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+    }
+
+    public static final void showToastLong(Context context, String message) {
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+    }
+
+    //Get Device id
+    public static final String getDeviceID(Context context) {
+        return Settings.Secure.getString(context.getContentResolver(),
+                Settings.Secure.ANDROID_ID);
+    }
+
+    //Get version name
+    public static final String getVersionName(Context context) {
+
+        PackageInfo pInfo = null;
+        try {
+            pInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return pInfo.versionName;
+
+    }
+
+    //Set Button Background color set
+    public static void setButtonBackgroundColor(Context context, Button button, int color) {
+
+        if (Build.VERSION.SDK_INT >= 23) {
+            button.setBackgroundColor(context.getResources().getColor(color, null));
+        } else {
+            button.setBackgroundColor(context.getResources().getColor(color));
+        }
+    }
+
+
+    //Set Button text color set
+    public static void setButtonTextColor(Context context, Button button, int color) {
+
+        if (Build.VERSION.SDK_INT >= 23) {
+            button.setTextColor(context.getResources().getColor(color, null));
+        } else {
+            button.setTextColor(context.getResources().getColor(color));
+        }
+    }
+
+    //Set TextView text color set
+    public static void setTextViewTextColor(Context context, TextView textView, int color) {
+
+        if (Build.VERSION.SDK_INT >= 23) {
+            textView.setTextColor(context.getResources().getColor(color, null));
+        } else {
+            textView.setTextColor(context.getResources().getColor(color));
+        }
+    }
+
+    //Set TextView Background color set
+    public static void setTextViewBackgroundColor(Context context, TextView textView, int color) {
+
+        if (Build.VERSION.SDK_INT >= 23) {
+            textView.setBackgroundColor(context.getResources().getColor(color, null));
+        } else {
+            textView.setBackgroundColor(context.getResources().getColor(color));
+        }
+    }
+
+
+    //Delete File
+    public static boolean delete(final Context context, final File file) {
+        final String where = MediaStore.MediaColumns.DATA + "=?";
+        Log.e("getAbsolutePath", "------------------" + file.getAbsolutePath());
+        final String[] selectionArgs = new String[]{
+                file.getAbsolutePath()
+        };
+
+        final ContentResolver contentResolver = context.getContentResolver();
+        final Uri filesUri = MediaStore.Files.getContentUri("external");
+
+        contentResolver.delete(filesUri, where, selectionArgs);
+
+        if (file.exists()) {
+
+            contentResolver.delete(filesUri, where, selectionArgs);
+        }
+        Log.e("returnn value", "------------" + !file.exists());
+        return !file.exists();
+    }
+
+
+    // convert from byte array to bitmap
+    public static Bitmap getPhoto(byte[] image) {
+        return BitmapFactory.decodeByteArray(image, 0, image.length);
+    }
+
+
+    //Show Dialog
+    public static void showDialog(Context context, int messageResourceId) {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+
+        int style;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            style = android.R.style.Theme_Material_Light_Dialog;
+        } else {
+            //noinspection deprecation
+            style = ProgressDialog.THEME_HOLO_LIGHT;
+        }
+
+        progressDialog = new ProgressDialog(context, style);
+        progressDialog.setMessage(context.getResources().getString(messageResourceId));
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+    }
+
+    public static void dismissDialog() {
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+            progressDialog = null;
+        }
+    }
+
+
+    //Hashmap to string convert
+    public static String hashMap2String(HashMap<String, String> params) {
+        StringBuilder st = new StringBuilder();
+        for (String key : params.keySet()) {
+            st.append(key).append("=").append(params.get(key)).append("&");
+        }
+        st.deleteCharAt(st.lastIndexOf("&"));
+        return st.toString();
+    }
+
+    //String to Hashmap convert
+    public static HashMap<String, String> string2HashMap(String paramString) {
+        HashMap<String, String> params = new HashMap<>();
+        // Split String on basis of separator used, here '&'
+        for (String keyValue : paramString.split(" *& *")) {
+
+            // Here the each part is futher splitted taking in account the equal
+            // sign '=' which demarcates the key
+            // and valuefor the hashmap
+            String[] pairs = keyValue.split(" *= *", 2);
+
+            // Those key and values are then put into hashmap
+            params.put(pairs[0], pairs.length == 1 ? "" : pairs[1]);
+        }
+        return params;
+    }
+
+
+    //    isFileExist or not
+    public static boolean isFileExist(String filePath) {
+        if (StringUtils.isBlank(filePath)) {
+            return false;
+        }
+        File file = new File(filePath);
+        return (file.exists() && file.isFile());
+    }
+
+    //character capital of white space
+    public static String capitalizeString(String string) {
+        char[] chars = string.toLowerCase().toCharArray();
+        boolean found = false;
+        for (int i = 0; i < chars.length; i++) {
+            if (!found && Character.isLetter(chars[i])) {
+                chars[i] = Character.toUpperCase(chars[i]);
+                found = true;
+            } else if (Character.isWhitespace(chars[i]) || chars[i]=='.' || chars[i]=='\'') { // You can add other chars here
+                found = false;
+            }
+        }
+        return String.valueOf(chars);
+    }
+
+
+
+
 }

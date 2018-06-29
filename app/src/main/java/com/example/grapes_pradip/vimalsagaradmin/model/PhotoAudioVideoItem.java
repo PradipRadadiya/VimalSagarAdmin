@@ -1,12 +1,12 @@
 package com.example.grapes_pradip.vimalsagaradmin.model;
 
-/**
- * Created by Grapes-Pradip on 10-Oct-17.
- */
+
 
 public class PhotoAudioVideoItem {
 
-    String url, name, specification;
+    private String url;
+    private String name;
+    private String specification;
 
     public PhotoAudioVideoItem(String url, String name, String specification) {
         this.url = url;

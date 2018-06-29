@@ -1,8 +1,6 @@
 package com.example.grapes_pradip.vimalsagaradmin.model.admin;
 
-/**
- * Created by Grapes-Pradip on 2/16/2017.
- */
+
 
 @SuppressWarnings("ALL")
 public class AllAdminItem {

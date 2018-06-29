@@ -40,11 +40,6 @@ import java.util.ArrayList;
 
 import static com.example.grapes_pradip.vimalsagaradmin.adapters.video.RecyclerVideoCategoryAdapter.videiocatid;
 
-
-/**
- * Created by Grapes-Pradip on 2/15/2017.
- */
-
 @SuppressWarnings("ALL")
 public class VideoFragment extends Fragment implements View.OnClickListener {
     private View rootview;
@@ -218,7 +213,9 @@ public class VideoFragment extends Fragment implements View.OnClickListener {
                         String name = jsonObject1.getString("Name");
                         String categoryIcon = jsonObject1.getString("CategoryIcon");
                         videoCategoryItems.add(new AllVideoCategoryItem(id, name, categoryIcon,false));
+
                     }
+
                 }
 
             } catch (JSONException e) {
@@ -299,5 +296,6 @@ public class VideoFragment extends Fragment implements View.OnClickListener {
             }
 
         }
+
     }
 }

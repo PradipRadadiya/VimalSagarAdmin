@@ -41,10 +41,6 @@ import java.util.ArrayList;
 import static com.example.grapes_pradip.vimalsagaradmin.adapters.opinionpoll.RecyclerOpinionPollAdapter.pollid;
 
 
-/**
- * Created by Grapes-Pradip on 2/15/2017.
- */
-
 @SuppressWarnings("ALL")
 public class OpinionPollFragment extends Fragment implements View.OnClickListener {
     private View rootview;
@@ -86,7 +82,7 @@ public class OpinionPollFragment extends Fragment implements View.OnClickListene
             }
         });
 
-        recyclerView_op.addOnScrollListener(new RecyclerView.OnScrollListener() {
+      /*  recyclerView_op.addOnScrollListener(new RecyclerView.OnScrollListener() {
                                                 @Override
                                                 public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                                                     super.onScrolled(recyclerView, dx, dy);
@@ -126,7 +122,7 @@ public class OpinionPollFragment extends Fragment implements View.OnClickListene
 
                                             }
 
-        );
+        );*/
         return rootview;
     }
 
@@ -247,7 +243,7 @@ public class OpinionPollFragment extends Fragment implements View.OnClickListene
 
         @Override
         protected String doInBackground(String... params) {
-            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallpoll + "?page=" + page_count + "&psize=30");
+            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallpoll + "?page=" + page_count + "&psize=1000");
             return responseJSON;
         }
 
@@ -260,10 +256,12 @@ public class OpinionPollFragment extends Fragment implements View.OnClickListene
                 if (jsonObject.getString("status").equalsIgnoreCase("success")) {
                     JSONArray jsonArray = jsonObject.getJSONArray("data");
                     Log.e("json array", "-------------------" + jsonArray);
-                    if (jsonArray.length() < 30 || jsonArray.length() == 0) {
+
+                    /*if (jsonArray.length() < 30 || jsonArray.length() == 0) {
                         flag_scroll = true;
                         Log.e("length_array_news", flag_scroll + "" + "<30===OR(0)===" + jsonArray.length());
-                    }
+                    }*/
+
                     for (int i = 0; i < jsonArray.length(); i++) {
 
                         JSONObject jsonObject1 = jsonArray.getJSONObject(i);
@@ -272,8 +270,11 @@ public class OpinionPollFragment extends Fragment implements View.OnClickListene
                         String totalPolls = jsonObject1.getString("total_polls");
                         String yes_polls = jsonObject1.getString("yes_polls");
                         String no_polls = jsonObject1.getString("no_polls");
+
                         opinionItemArrayList.add(new OpinionItem(totalPolls, que, no_polls, yes_polls, id,false));
+
                     }
+
                 }
 
             } catch (JSONException e) {

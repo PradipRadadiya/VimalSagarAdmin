@@ -1,14 +1,15 @@
 package com.example.grapes_pradip.vimalsagaradmin.util;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.support.media.ExifInterface;
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.support.media.ExifInterface;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,9 +19,11 @@ import java.io.IOException;
 /**
  * Created by HP-HP on 03-07-2015.
  */
-public class ImageCompression extends AsyncTask<String, Void, String> {
+@SuppressWarnings({"UnnecessaryLocalVariable", "ResultOfMethodCallIgnored"})
+@SuppressLint("StaticFieldLeak")
+class ImageCompression extends AsyncTask<String, Void, String> {
 
-    private Context context;
+    private final Context context;
     private static final float maxHeight = 1280.0f;
     private static final float maxWidth = 1280.0f;
 
@@ -42,7 +45,7 @@ public class ImageCompression extends AsyncTask<String, Void, String> {
     }
 
 
-    public String compressImage(String imagePath) {
+    private String compressImage(String imagePath) {
         Bitmap scaledBitmap = null;
 
         BitmapFactory.Options options = new BitmapFactory.Options();
@@ -122,7 +125,7 @@ public class ImageCompression extends AsyncTask<String, Void, String> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        FileOutputStream out = null;
+        FileOutputStream out;
         String filepath = getFilename();
         try {
             out = new FileOutputStream(filepath);
@@ -137,7 +140,7 @@ public class ImageCompression extends AsyncTask<String, Void, String> {
         return filepath;
     }
 
-    public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
+    private static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
         final int height = options.outHeight;
         final int width = options.outWidth;
         int inSampleSize = 1;
@@ -157,7 +160,7 @@ public class ImageCompression extends AsyncTask<String, Void, String> {
         return inSampleSize;
     }
 
-    public String getFilename() {
+    private String getFilename() {
         File mediaStorageDir = new File(Environment.getExternalStorageDirectory()
                 + "/Android/data/"
                 + context.getApplicationContext().getPackageName()

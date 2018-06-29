@@ -32,7 +32,6 @@ import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
 import com.example.grapes_pradip.vimalsagaradmin.util.MarshMallowPermission;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -54,14 +53,11 @@ import ch.boye.httpclientandroidlib.entity.mime.content.FileBody;
 import ch.boye.httpclientandroidlib.entity.mime.content.StringBody;
 import ch.boye.httpclientandroidlib.impl.client.DefaultHttpClient;
 
-/**
- * Created by Grapes-Pradip on 2/16/2017.
- */
 
 @SuppressWarnings("ALL")
 public class EditGalleryCategoryActivity extends AppCompatActivity implements View.OnClickListener {
     private ProgressDialog progressDialog;
-    private EditText e_title;
+    private EditText e_title,e_description;
     private TextView txt_header;
     private TextView txt_photo;
     private ImageView img_back;
@@ -74,13 +70,14 @@ public class EditGalleryCategoryActivity extends AppCompatActivity implements Vi
     private String cid;
     private String name;
     private String photo;
+    private String description;
     private MarshMallowPermission permission;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_audio_category);
+        setContentView(R.layout.add_gallery_category);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         permission = new MarshMallowPermission(this);
@@ -88,6 +85,7 @@ public class EditGalleryCategoryActivity extends AppCompatActivity implements Vi
         cid = intent.getStringExtra("cid");
         name = intent.getStringExtra("name");
         photo = intent.getStringExtra("photo");
+        description = intent.getStringExtra("description");
         findID();
         idClick();
         setContent();
@@ -103,7 +101,12 @@ public class EditGalleryCategoryActivity extends AppCompatActivity implements Vi
                 if (TextUtils.isEmpty(e_title.getText().toString())) {
                     e_title.setError("Please enter category name.");
                     e_title.requestFocus();
-                } else {
+                }
+                else if (TextUtils.isEmpty(e_title.getText().toString())) {
+                    e_title.setError("Please enter wdescription.");
+                    e_title.requestFocus();
+                }
+                else {
                     if (CommonMethod.isInternetConnected(EditGalleryCategoryActivity.this)) {
                         new UpdateGalleryCategory().execute();
                     } else {
@@ -118,12 +121,13 @@ public class EditGalleryCategoryActivity extends AppCompatActivity implements Vi
 
 
     private void setContent() {
-        e_title.setText(name);
+        e_title.setText(CommonMethod.decodeEmoji(name));
+        e_description.setText(CommonMethod.decodeEmoji(description));
         img_category_icon.setVisibility(View.VISIBLE);
 //        Picasso.with(EditGalleryCategoryActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.gallerycategory + photo.replaceAll(" ", "%20")).placeholder(R.drawable.loading_bar).resize(0,200).error(R.drawable.noimageavailable).into(img_category_icon);
 
         Glide.with(EditGalleryCategoryActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.gallerycategory + photo.replaceAll(" ", "%20"))
-               .crossFade().placeholder(R.drawable.loading_bar).into(img_category_icon);
+               .crossFade().placeholder(R.drawable.loading_bar).dontAnimate().into(img_category_icon);
 
         if (CommonMethod.isInternetConnected(EditGalleryCategoryActivity.this)) {
 //            new AddInformation().execute(e_title.getText().toString(), e_description.getText().toString(), e_date.getText().toString(), e_address.getText().toString());
@@ -133,6 +137,7 @@ public class EditGalleryCategoryActivity extends AppCompatActivity implements Vi
     @SuppressLint("SetTextI18n")
     private void findID() {
         e_title = (EditText) findViewById(R.id.e_title);
+        e_description = (EditText) findViewById(R.id.e_description);
         txt_header = (TextView) findViewById(R.id.txt_header);
         txt_photo = (TextView) findViewById(R.id.txt_photo);
         img_back = (ImageView) findViewById(R.id.img_back);
@@ -277,6 +282,7 @@ public class EditGalleryCategoryActivity extends AppCompatActivity implements Vi
             Log.e("method", "----------------" + "call");
 
             String title = e_title.getText().toString();
+            String description = e_description.getText().toString();
 
             Log.e("title", "----------" + title);
             String Photo = "";
@@ -286,10 +292,12 @@ public class EditGalleryCategoryActivity extends AppCompatActivity implements Vi
                 HttpClient httpClient = new DefaultHttpClient();
                 HttpPost httpPost = new HttpPost(CommonURL.Main_url + CommonAPI_Name.dupdatecategorygallery);
 
+                Log.e("description","------------------"+description);
 
                 MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
                 multipartEntity.addPart("cid", new StringBody(cid));
-                multipartEntity.addPart("Name", new StringBody(title));
+                multipartEntity.addPart("Name", new StringBody(CommonMethod.encodeEmoji(title)));
+                multipartEntity.addPart("Description", new StringBody(CommonMethod.encodeEmoji(description)));
                 multipartEntity.addPart("hiddenphoto", new StringBody(photo));
 
 

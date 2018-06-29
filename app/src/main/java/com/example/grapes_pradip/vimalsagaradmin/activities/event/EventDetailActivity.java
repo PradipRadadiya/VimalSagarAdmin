@@ -55,9 +55,7 @@ import ch.boye.httpclientandroidlib.message.BasicNameValuePair;
 
 import static com.example.grapes_pradip.vimalsagaradmin.activities.gallery.AllGalleryActivity.itemSplashArrayList;
 
-/**
- * Created by Grapes-Pradip on 2/15/2017.
- */
+
 
 @SuppressWarnings("ALL")
 public class EventDetailActivity extends AppCompatActivity implements View.OnClickListener {
@@ -666,7 +664,7 @@ public class EventDetailActivity extends AppCompatActivity implements View.OnCli
 
         @Override
         protected String doInBackground(String... params) {
-            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallusernamesforlikeevent + "?eid=" + id + "&page=" + page_count + "&psize=30");
+            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallusernamesforlikeevent + "?eid=" + id + "&page=" + page_count + "&psize=1000");
             return responseJSON;
         }
 
@@ -733,7 +731,7 @@ public class EventDetailActivity extends AppCompatActivity implements View.OnCli
 
         @Override
         protected String doInBackground(String... params) {
-            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallcommentsevent + "?eid=" + id + "&page=" + page_count + "&psize=30");
+            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallcommentsevent + "?eid=" + id + "&page=" + page_count + "&psize=1000");
             return responseJSON;
         }
 
@@ -1047,12 +1045,13 @@ public class EventDetailActivity extends AppCompatActivity implements View.OnCli
                         }
                     }
                     JSONArray jsonArray1 = jsonObject.getJSONArray("Photo");
+                    itemSplashArrayList=new ArrayList<>();
                     photo = "null";
                     for (int i = 0; i < jsonArray1.length(); i++) {
                         JSONObject object = jsonArray1.getJSONObject(i);
                         photo = object.getString("Photo");
                         photolist.add(photo);
-                        itemSplashArrayList.add(new ImageItemSplash(CommonURL.ImagePath + CommonAPI_Name.eventimage + photo, CommonURL.ImagePath + CommonAPI_Name.eventimage + photo, false));
+                        itemSplashArrayList.add(new ImageItemSplash(CommonURL.ImagePath + CommonAPI_Name.eventimage + photo.replaceAll(" ","%20"), CommonURL.ImagePath + CommonAPI_Name.eventimage + photo.replaceAll(" ","%20"), false));
                         Log.e("size", "------------------" + itemSplashArrayList.size());
 //                        setPhotos();
 //                        Log.e("photo","------------------"+photo);
@@ -1074,13 +1073,7 @@ public class EventDetailActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onResume() {
         super.onResume();
-        // put your code here...
 
-        /*if (CommonMethod.isInternetConnected(EventDetailActivity.this)) {
-            new GetEventDetail().execute();
-        } else {
-            Toast.makeText(EventDetailActivity.this, R.string.internet, Toast.LENGTH_SHORT).show();
-        }*/
     }
 
 

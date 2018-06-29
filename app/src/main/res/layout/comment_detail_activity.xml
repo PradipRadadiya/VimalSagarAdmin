@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_back" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:padding="15dp"
+            android:orientation="vertical"
+            android:background="@drawable/back_rect"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_action_user_black"
+                    tools:ignore="ContentDescription,HardcodedText"
+                    android:contentDescription="TODO" />
+
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                    android:id="@+id/txt_unm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pradip Radadiya"
+                    android:textColor="@color/lable"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="18sp"
+                    android:layout_marginStart="5dp"
+                    tools:ignore="HardcodedText" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_comment_black_24dp"
+                    tools:ignore="ContentDescription,HardcodedText"
+                    android:contentDescription="TODO" />
+
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                    android:id="@+id/txt_comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingExtra="5dp"
+                    android:text="Mathen Vandami guruji,maharaj namaste good of the app for all type of knowledge transfer."
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="16sp"
+                    android:layout_marginStart="5dp"
+                    tools:ignore="HardcodedText" />
+            </LinearLayout>
+
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                android:id="@+id/txt_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="5dp"
+                android:padding="8dp"
+                android:text="Nayo Soch Sahi Disha"
+                android:textColor="@color/green"
+                android:textSize="17sp"
+                tools:ignore="HardcodedText" />
+
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextViewBold
+                android:id="@+id/txt_module"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="Information"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="17sp"
+                tools:ignore="HardcodedText" />
+
+
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomEditText
+                android:id="@+id/edit_comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edittext_round"
+                android:hint="Enter Commemnt"
+                android:padding="10dp"
+
+                tools:ignore="HardcodedText" />
+
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomButton
+                android:id="@+id/btn_send"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_gravity="right"
+                android:layout_marginTop="10dp"
+                android:text="Send"
+                android:background="@color/green"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textSize="17sp"
+                tools:ignore="HardcodedText,RtlHardcoded" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

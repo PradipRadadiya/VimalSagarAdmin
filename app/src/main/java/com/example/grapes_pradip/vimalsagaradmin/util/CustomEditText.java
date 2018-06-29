@@ -1,6 +1,7 @@
 package com.example.grapes_pradip.vimalsagaradmin.util;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 
@@ -26,9 +27,12 @@ public class CustomEditText extends android.support.v7.widget.AppCompatEditText 
     }
 
     private void setFont() {
-        Typeface font = Typeface.createFromAsset(getContext().getAssets(), "fonts/HelveticaNeueLTStd-Lt.otf");
+        Typeface font = Typeface.createFromAsset(getContext().getAssets(), "fonts/calibri_regular.ttf");
         setTypeface(font, Typeface.NORMAL);
+        setTextColor(Color.BLACK);
+
     }
+
 
 
 }

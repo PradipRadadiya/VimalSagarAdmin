@@ -7,7 +7,6 @@
     android:orientation="vertical">
 
     <include
-        android:id="@+id/toolbar_information"
         layout="@layout/toolbar_back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -17,9 +16,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        >
+        tools:ignore="InconsistentLayout">
 
-        <TextView
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/sendnotification"
@@ -48,16 +47,15 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/ititle"
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Question"
-                android:textColor="@color/lable"
+                android:textColor="@color/black"
                 android:textSize="18sp"
                 tools:ignore="HardcodedText" />
 
-            <TextView
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="*"
@@ -66,7 +64,7 @@
                 tools:ignore="HardcodedText" />
         </LinearLayout>
 
-        <EditText
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomEditText
             android:id="@+id/edit_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -84,7 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20sp"
-            android:background="@color/colorPrimaryDark"
+            android:background="@drawable/round_rect_shapeoneselect"
             android:text="Submit"
             android:textColor="@color/white"
             android:textSize="18sp"

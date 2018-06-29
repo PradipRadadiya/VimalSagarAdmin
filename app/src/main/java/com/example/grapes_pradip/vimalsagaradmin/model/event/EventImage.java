@@ -2,15 +2,15 @@ package com.example.grapes_pradip.vimalsagaradmin.model.event;
 
 import android.graphics.Bitmap;
 
-/**
- * Created by Grapes-Pradip on 17-Oct-17.
- */
+
 
 public class EventImage {
 
-    String ID, EventID, Photo;
-    Bitmap bitmap;
-    private boolean isSelected = false;
+    private String ID;
+    private String EventID;
+    private String Photo;
+    private Bitmap bitmap;
+    private boolean isSelected;
 
     public EventImage(String ID, String eventID, String photo, Bitmap bitmap, boolean isSelected) {
         this.ID = ID;

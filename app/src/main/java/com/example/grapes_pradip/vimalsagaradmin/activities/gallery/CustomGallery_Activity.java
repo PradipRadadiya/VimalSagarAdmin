@@ -1,7 +1,7 @@
 package com.example.grapes_pradip.vimalsagaradmin.activities.gallery;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -18,7 +18,6 @@ import android.widget.Toast;
 
 import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
-import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
 
 import org.json.JSONException;
@@ -38,12 +37,12 @@ import ch.boye.httpclientandroidlib.entity.mime.content.FileBody;
 import ch.boye.httpclientandroidlib.entity.mime.content.StringBody;
 import ch.boye.httpclientandroidlib.impl.client.DefaultHttpClient;
 
-import static com.example.grapes_pradip.vimalsagaradmin.activities.gallery.AllGalleryActivity.CustomGalleryIntentKey;
 import static com.example.grapes_pradip.vimalsagaradmin.activities.gallery.AllGalleryActivity.gallerycid;
 
 
 public class CustomGallery_Activity extends AppCompatActivity implements View.OnClickListener {
     private static Button selectImages;
+    @SuppressLint("StaticFieldLeak")
     private static GridView galleryImagesGridView;
     private static ArrayList<String> galleryImageUrls;
     private static GridView_Adapter imagesAdapter;
@@ -52,6 +51,7 @@ public class CustomGallery_Activity extends AppCompatActivity implements View.On
     private TextView txt_header;
     private ArrayList<String> selectedImage = new ArrayList<>();
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,11 +83,11 @@ public class CustomGallery_Activity extends AppCompatActivity implements View.On
     private void fetchGalleryImages() {
         final String[] columns = {MediaStore.Images.Media.DATA, MediaStore.Images.Media._ID};//get all columns of type images
         final String orderBy = MediaStore.Images.Media.DATE_TAKEN;//order data by date
-        Cursor imagecursor = managedQuery(
+        @SuppressWarnings("deprecation") Cursor imagecursor = managedQuery(
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI, columns, null,
                 null, orderBy + " DESC");//get all data in Cursor by sorting in DESC order
 
-        galleryImageUrls = new ArrayList<String>();//Init array
+        galleryImageUrls = new ArrayList<>();//Init array
 
 
         //Loop to cursor count
@@ -113,6 +113,7 @@ public class CustomGallery_Activity extends AppCompatActivity implements View.On
     }
 
     //Show hide select button if images are selected or deselected
+    @SuppressLint("SetTextI18n")
     public void showSelectButton() {
         ArrayList<String> selectedItems = imagesAdapter.getCheckedItems();
         if (selectedItems.size() > 0) {
@@ -151,6 +152,7 @@ public class CustomGallery_Activity extends AppCompatActivity implements View.On
 
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class AddImage extends AsyncTask<String, Void, String> {
         String responseJSON = "";
 

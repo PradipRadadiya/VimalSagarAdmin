@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"/>
 
-    <TextView
+    <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
         android:id="@+id/text_view_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,4 +33,5 @@
         android:paddingLeft="1dp"
         android:paddingRight="1dp"
         android:stretchMode="columnWidth"/>
+
 </RelativeLayout>

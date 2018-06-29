@@ -37,9 +37,7 @@ import java.util.ArrayList;
 import ch.boye.httpclientandroidlib.NameValuePair;
 import ch.boye.httpclientandroidlib.message.BasicNameValuePair;
 
-/**
- * Created by Pradip on 1/2/17.
- */
+
 @SuppressWarnings("ALL")
 public class RecyclerAllOptionAdapter extends RecyclerView.Adapter<RecyclerAllOptionAdapter.ViewHolder> {
 

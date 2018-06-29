@@ -13,7 +13,6 @@
 
     <LinearLayout
 
-        android:id="@+id/lin_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/corner_round_item"
@@ -23,7 +22,7 @@
 
         >
 
-        <TextView
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
             android:id="@+id/txt_name"
             android:layout_width="0sp"
             android:layout_height="wrap_content"

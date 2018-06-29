@@ -37,7 +37,6 @@ import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
 import com.example.grapes_pradip.vimalsagaradmin.common.JsonParser;
 import com.example.grapes_pradip.vimalsagaradmin.model.information.LikeList;
 import com.example.jean.jcplayer.JcPlayerView;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -521,7 +520,7 @@ public class AudioDetailActivity extends AppCompatActivity implements View.OnCli
 //                        Picasso.with(AudioDetailActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.audioimage + jsonObject1.getString("Photo").replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).into(img_photo);
 
                         Glide.with(AudioDetailActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.audioimage + jsonObject1.getString("Photo")
-                                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(img_photo);
+                                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).dontAnimate().into(img_photo);
 
                         jcplayer_audio.playAudio(CommonURL.AudioPath + CommonAPI_Name.audios + jsonObject1.getString("Audio").replaceAll(" ", "%20"), CommonMethod.decodeEmoji(jsonObject1.getString("AudioName")));
 
@@ -722,7 +721,7 @@ public class AudioDetailActivity extends AppCompatActivity implements View.OnCli
 
         @Override
         protected String doInBackground(String... params) {
-            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallusernamesforlikeaudio + "?aid=" + aid + "&page=" + page_count + "&psize=30");
+            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallusernamesforlikeaudio + "?aid=" + aid + "&page=" + page_count + "&psize=1000");
             return responseJSON;
         }
 
@@ -789,7 +788,7 @@ public class AudioDetailActivity extends AppCompatActivity implements View.OnCli
 
         @Override
         protected String doInBackground(String... params) {
-            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallappcommentsaudio + "?aid=" + aid + "&page=" + page_count + "&psize=30");
+            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallappcommentsaudio + "?aid=" + aid + "&page=" + page_count + "&psize=1000");
             return responseJSON;
         }
 

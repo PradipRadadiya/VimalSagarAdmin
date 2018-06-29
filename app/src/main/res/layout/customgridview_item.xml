@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="#ffffff"
@@ -10,7 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="170dp"
         android:src="@mipmap/ic_launcher"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        android:contentDescription="TODO"
+        tools:ignore="ContentDescription,HardcodedText" />
 
     <CheckBox
         android:id="@+id/selectCheckBox"
@@ -20,6 +23,6 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:background="@color/white"
-        />
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

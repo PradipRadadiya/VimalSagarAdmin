@@ -1,6 +1,7 @@
 package com.example.grapes_pradip.vimalsagaradmin.gallery.activities;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -16,13 +17,14 @@ import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.gallery.helpers.Constants;
 
 
+@SuppressLint("Registered")
 public class HelperActivity extends AppCompatActivity {
-    protected View view;
+    private View view;
 
     private final int maxLines = 4;
     private final String[] permissions = new String[]{ Manifest.permission.WRITE_EXTERNAL_STORAGE };
 
-    protected void checkPermission() {
+    void checkPermission() {
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
             permissionGranted();
@@ -100,16 +102,16 @@ public class HelperActivity extends AppCompatActivity {
         }
     }
 
-    protected void permissionGranted() {}
+    void permissionGranted() {}
 
     private void permissionDenied() {
         hideViews();
         requestPermission();
     }
 
-    protected void hideViews() {}
+    void hideViews() {}
 
-    protected void setView(View view) {
+    void setView(View view) {
         this.view = view;
     }
 }

@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TextView
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
             style="@style/allfragmenttextview"
             android:layout_width="0sp"
             android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
             android:src="@drawable/ic_deletes"
             tools:ignore="ContentDescription" />
 
-        <TextView
+        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
             android:id="@+id/txt_addnew"
             android:layout_width="0sp"
             android:layout_height="wrap_content"

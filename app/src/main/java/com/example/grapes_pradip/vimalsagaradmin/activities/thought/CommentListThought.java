@@ -1,5 +1,6 @@
 package com.example.grapes_pradip.vimalsagaradmin.activities.thought;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -32,10 +33,9 @@ import java.util.Date;
 import ch.boye.httpclientandroidlib.NameValuePair;
 import ch.boye.httpclientandroidlib.message.BasicNameValuePair;
 
-/**
- * Created by Grapes-Pradip on 06-Oct-17.
- */
 
+
+@SuppressWarnings("ConstantConditions")
 public class CommentListThought extends AppCompatActivity {
 
     //page count
@@ -47,19 +47,19 @@ public class CommentListThought extends AppCompatActivity {
     private int firstVisibleItem;
     private int visibleItemCount;
     private int totalItemCount;
-    LinearLayoutManager linearLayoutManager;
-    RecyclerView recyclerView_comments;
-    EditText edit_comment;
-    ImageView img_send;
-    ImageView img_nodata;
-    ProgressDialog progressDialog;
+    private LinearLayoutManager linearLayoutManager;
+    private RecyclerView recyclerView_comments;
+    private EditText edit_comment;
+    private ImageView img_send;
+    private ImageView img_nodata;
+    private ProgressDialog progressDialog;
     private String aid;
     private String audioname;
     private String cid;
     private String categoryname;
-    RecyclerThoughtCommentAdapter recyclerCommentAdapter;
+    private RecyclerThoughtCommentAdapter recyclerCommentAdapter;
 
-    ArrayList<com.example.grapes_pradip.vimalsagaradmin.model.information.CommentList> commentLists=new ArrayList<>();
+    private ArrayList<com.example.grapes_pradip.vimalsagaradmin.model.information.CommentList> commentLists=new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -145,6 +145,7 @@ public class CommentListThought extends AppCompatActivity {
 
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class CommentList extends AsyncTask<String, Void, String> {
         String responseJSON = "";
 
@@ -160,7 +161,7 @@ public class CommentListThought extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallcommentsthought + "?tid=" + aid + "&page=" + page_count + "&psize=30");
+            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallcommentsthought + "?tid=" + aid + "&page=" + page_count + "&psize=1000");
             return responseJSON;
         }
 
@@ -237,6 +238,7 @@ public class CommentListThought extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class AdminComment extends AsyncTask<String, Void, String> {
         String responseJSON = "";
 

@@ -38,11 +38,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import ch.boye.httpclientandroidlib.NameValuePair;
+import ch.boye.httpclientandroidlib.message.BasicNameValuePair;
+
 import static com.example.grapes_pradip.vimalsagaradmin.adapters.competition.RecyclerCompetitionCategoryAdapter.compcatid;
 
-/**
- * Created by Grapes-Pradip on 2/15/2017.
- */
 
 @SuppressWarnings("ALL")
 public class CompetitionFragment extends Fragment implements View.OnClickListener {
@@ -75,6 +75,8 @@ public class CompetitionFragment extends Fragment implements View.OnClickListene
         findID();
         idClick();
 
+
+
         swipe_refresh_information.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -87,7 +89,7 @@ public class CompetitionFragment extends Fragment implements View.OnClickListene
             }
         });
 
-        recyclerView_comptition_category.addOnScrollListener(new RecyclerView.OnScrollListener() {
+       /* recyclerView_comptition_category.addOnScrollListener(new RecyclerView.OnScrollListener() {
                                                                  @Override
                                                                  public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                                                                      super.onScrolled(recyclerView, dx, dy);
@@ -116,7 +118,7 @@ public class CompetitionFragment extends Fragment implements View.OnClickListene
                                                                                  Log.e("total count", "--------------------" + page_count);
 
                                                                                  page_count++;
-                                                                                 new GetAllCompetitionCategory().execute();
+//                                                                                 new GetAllCompetitionCategory().execute();
                                                                              } else {
                                                                                  //internet not connected
                                                                              }
@@ -128,7 +130,7 @@ public class CompetitionFragment extends Fragment implements View.OnClickListene
                                                              }
 
         );
-
+*/
 
         return rootview;
     }
@@ -220,7 +222,6 @@ public class CompetitionFragment extends Fragment implements View.OnClickListene
                             // Write your code here to invoke NO event
 //                            Toast.makeText(activity, "You clicked on NO", Toast.LENGTH_SHORT).show();
                             dialog.cancel();
-
                         }
                     });
 
@@ -248,33 +249,50 @@ public class CompetitionFragment extends Fragment implements View.OnClickListene
 
         @Override
         protected String doInBackground(String... params) {
-            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallCompetitioncategory + "?page=" + page_count + "&psize=30");
+
+            ArrayList<NameValuePair> nameValuePairs = new ArrayList<>();
+            nameValuePairs.add(new BasicNameValuePair("page", "1"));
+            nameValuePairs.add(new BasicNameValuePair("psize", "1000"));
+
+
+            responseJSON = JsonParser.postStringResponse(CommonURL.Main_url + "competition/getallcompetition/", nameValuePairs, getActivity());
             return responseJSON;
         }
 
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            Log.e("response", "---------------------" + s);
+            Log.e("response competition", "---------------------" + s);
             try {
                 JSONObject jsonObject = new JSONObject(s);
                 competitionItemArrayList = new ArrayList<>();
                 if (jsonObject.getString("status").equalsIgnoreCase("success")) {
                     JSONArray jsonArray = jsonObject.getJSONArray("data");
-                    if (jsonArray.length() < 30 || jsonArray.length() == 0) {
+                   /* if (jsonArray.length() < 30 || jsonArray.length() == 0) {
                         flag_scroll = true;
                         Log.e("length_array_news", flag_scroll + "" + "<30===OR(0)===" + jsonArray.length());
-                    }
+                    }*/
                     Log.e("json array", "-------------------" + jsonArray);
                     for (int i = 0; i < jsonArray.length(); i++) {
 
                         JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                        String id = jsonObject1.getString("ID");
+                        String id = jsonObject1.getString("id");
                         Log.e("id", "---------------" + id);
-                        String name = jsonObject1.getString("Name");
-                        String categoryIcon = jsonObject1.getString("CategoryIcon").replaceAll(" ", "%20");
-                        competitionItemArrayList.add(new CompetitionItem(categoryIcon, id, name,false));
+                        String title = jsonObject1.getString("title");
+                        String rules = jsonObject1.getString("rules");
+                        String date = jsonObject1.getString("date");
+                        String time = jsonObject1.getString("time");
+                        String total_question = jsonObject1.getString("total_question");
+                        String total_minute = jsonObject1.getString("total_minute");
+                        String is_open = jsonObject1.getString("status");
+                        String participated_users = jsonObject1.getString("participated_users");
+                        String status = jsonObject1.getString("status");
+
+                        competitionItemArrayList.add(new CompetitionItem(id, title, rules, date, time, total_question, total_minute, is_open, participated_users, false,status));
+
                     }
+
+                    Log.e("size","--------------------"+competitionItemArrayList.size());
                 }
 
             } catch (JSONException e) {
@@ -297,7 +315,6 @@ public class CompetitionFragment extends Fragment implements View.OnClickListene
                     recyclerView_comptition_category.setVisibility(View.GONE);
                 }
             }
-
 
         }
     }
@@ -350,11 +367,18 @@ public class CompetitionFragment extends Fragment implements View.OnClickListene
     public void onResume() {
         super.onResume();
         // put your code here...
-        compcatid.clear();
+//        compcatid.clear();
+        /*competitionItemArrayList = new ArrayList<>();
+        page_count = 1;
+        if (CommonMethod.isInternetConnected(getActivity())) {
+            new GetAllCompetitionCategory().execute();
+        }*/
+
         competitionItemArrayList = new ArrayList<>();
         page_count = 1;
         if (CommonMethod.isInternetConnected(getActivity())) {
             new GetAllCompetitionCategory().execute();
         }
+
     }
 }

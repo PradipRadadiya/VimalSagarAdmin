@@ -1,8 +1,6 @@
 package com.example.grapes_pradip.vimalsagaradmin.model.thought;
 
-/**
- * Created by Grapes-Pradip on 2/20/2017.
- */
+
 
 @SuppressWarnings("ALL")
 public class AllThoughtItem {

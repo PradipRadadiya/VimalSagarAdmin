@@ -13,50 +13,47 @@ import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.common.SharedPreferencesClass;
 
 
-/**
- * Created by Grapes-Pradip on 26-Oct-17.
- */
 
 public class SettingActivity extends AppCompatActivity {
-    SharedPreferencesClass sharedpreferance;
+  private SharedPreferencesClass sharedpreferance;
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.dialog_setting);
-        sharedpreferance = new SharedPreferencesClass(SettingActivity.this);
+  @Override
+  protected void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.dialog_setting);
+    sharedpreferance = new SharedPreferencesClass(SettingActivity.this);
 
-        final ToggleButton pushonoff = (ToggleButton) findViewById(R.id.pushonoff);
-        ImageView img_back = (ImageView) findViewById(R.id.img_back);
+    final ToggleButton pushonoff = (ToggleButton) findViewById(R.id.pushonoff);
+    ImageView img_back = (ImageView) findViewById(R.id.img_back);
 
-        img_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        if (sharedpreferance.getPushNotification().equalsIgnoreCase("pushon")) {
-            pushonoff.setChecked(true);
-        } else {
-            pushonoff.setChecked(false);
-        }
-        pushonoff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                if (isChecked) {
-                    // The toggle is enabled
-                    sharedpreferance.savePushNotification("pushon");
-                    pushonoff.setChecked(true);
-                    Toast.makeText(SettingActivity.this, "Push notification on.", Toast.LENGTH_SHORT).show();
-                } else {
-                    // The toggle is disabled
-                    sharedpreferance.savePushNotification("pushoff");
-                    pushonoff.setChecked(false);
-                    Toast.makeText(SettingActivity.this, "Push notification off.", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
+    img_back.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        finish();
+      }
+    });
+    if (sharedpreferance.getPushNotification().equalsIgnoreCase("pushon")) {
+      pushonoff.setChecked(true);
+    } else {
+      pushonoff.setChecked(false);
     }
+    pushonoff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+      @Override
+      public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+        if (isChecked) {
+          // The toggle is enabled
+          sharedpreferance.savePushNotification("pushon");
+          pushonoff.setChecked(true);
+          Toast.makeText(SettingActivity.this, "Push notification on.", Toast.LENGTH_SHORT).show();
+        } else {
+          // The toggle is disabled
+          sharedpreferance.savePushNotification("pushoff");
+          pushonoff.setChecked(false);
+          Toast.makeText(SettingActivity.this, "Push notification off.", Toast.LENGTH_SHORT).show();
+        }
+      }
+    });
+
+  }
 }

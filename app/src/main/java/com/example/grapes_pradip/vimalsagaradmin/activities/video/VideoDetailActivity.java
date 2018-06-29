@@ -37,7 +37,6 @@ import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
 import com.example.grapes_pradip.vimalsagaradmin.common.JsonParser;
 import com.example.grapes_pradip.vimalsagaradmin.model.information.LikeList;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -184,7 +183,7 @@ public class VideoDetailActivity extends AppCompatActivity implements View.OnCli
 //        Picasso.with(VideoDetailActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.videoimage + photo.replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(img_photo);
 
         Glide.with(VideoDetailActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.videoimage + photo
-                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).into(img_photo);
+                .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).dontAnimate().into(img_photo);
 
 
         Log.e("image path","------------------"+CommonURL.ImagePath + CommonAPI_Name.videoimage + photo.replaceAll(" ", "%20"));
@@ -542,7 +541,7 @@ public class VideoDetailActivity extends AppCompatActivity implements View.OnCli
 
         @Override
         protected String doInBackground(String... params) {
-            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallusernamesforlikevideo + "?vid=" + vid + "&page=" + page_count + "&psize=30");
+            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallusernamesforlikevideo + "?vid=" + vid + "&page=" + page_count + "&psize=1000");
             return responseJSON;
         }
 
@@ -610,7 +609,7 @@ public class VideoDetailActivity extends AppCompatActivity implements View.OnCli
 
         @Override
         protected String doInBackground(String... params) {
-            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallcommentsforadmin + "?vid=" + vid + "&page=" + page_count + "&psize=30");
+            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.getallcommentsforadmin + "?vid=" + vid + "&page=" + page_count + "&psize=1000");
             return responseJSON;
         }
 

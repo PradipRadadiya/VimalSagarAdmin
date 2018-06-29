@@ -29,9 +29,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
- * Created by Pradip on 1/2/17.
- */
 @SuppressWarnings("ALL")
 public class RecyclerEventAdapter extends RecyclerView.Adapter<RecyclerEventAdapter.ViewHolder> {
 

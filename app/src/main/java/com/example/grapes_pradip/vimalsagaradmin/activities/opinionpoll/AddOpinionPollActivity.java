@@ -32,10 +32,6 @@ import java.util.ArrayList;
 import ch.boye.httpclientandroidlib.NameValuePair;
 import ch.boye.httpclientandroidlib.message.BasicNameValuePair;
 
-/**
- * Created by Grapes-Pradip on 2/16/2017.
- */
-
 @SuppressWarnings("ALL")
 public class AddOpinionPollActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
@@ -101,12 +97,14 @@ public class AddOpinionPollActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             }
         });
+
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setContent();
             }
         });
+
     }
 
     private class AddOpinionQuestion extends AsyncTask<String, Void, String> {
@@ -121,13 +119,16 @@ public class AddOpinionPollActivity extends AppCompatActivity {
             progressDialog.setCancelable(false);
         }
 
+
         @Override
         protected String doInBackground(String... params) {
             try {
+
                 ArrayList<NameValuePair> nameValuePairs = new ArrayList<>();
                 nameValuePairs.add(new BasicNameValuePair("Ques", params[0]));
                 nameValuePairs.add(new BasicNameValuePair("Is_notify", params[1]));
                 responseJSON = JsonParser.postStringResponse(CommonURL.Main_url + CommonAPI_Name.addpoll, nameValuePairs, AddOpinionPollActivity.this);
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -152,10 +153,13 @@ public class AddOpinionPollActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
             if (progressDialog != null) {
                 progressDialog.dismiss();
             }
+
         }
+
     }
 
     @Override
@@ -164,6 +168,5 @@ public class AddOpinionPollActivity extends AppCompatActivity {
         finish();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
-
 
 }

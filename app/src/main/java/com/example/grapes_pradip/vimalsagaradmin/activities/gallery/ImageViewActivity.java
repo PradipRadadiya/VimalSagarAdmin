@@ -24,9 +24,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/**
- * Created by Grapes-Pradip on 12/30/2016.
- */
+
 @SuppressWarnings("ALL")
 public class ImageViewActivity extends AppCompatActivity {
     private RelativeLayout rel_full_img;

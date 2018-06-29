@@ -1,6 +1,7 @@
 package com.example.grapes_pradip.vimalsagaradmin.activities.information;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
@@ -10,6 +11,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -18,9 +20,15 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -33,12 +41,13 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.grapes_pradip.vimalsagaradmin.R;
-import com.example.grapes_pradip.vimalsagaradmin.activities.audio.AddAudioActivity;
-import com.example.grapes_pradip.vimalsagaradmin.activities.audio.AddAudioCategoryActivity;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
 import com.example.grapes_pradip.vimalsagaradmin.common.JsonParser;
+import com.example.grapes_pradip.vimalsagaradmin.gallery.activities.AlbumSelectActivity;
+import com.example.grapes_pradip.vimalsagaradmin.gallery.helpers.Constants;
+import com.example.grapes_pradip.vimalsagaradmin.gallery.models.Image;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,8 +59,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Random;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 import ch.boye.httpclientandroidlib.NameValuePair;
@@ -63,6 +74,7 @@ import ch.boye.httpclientandroidlib.entity.mime.content.FileBody;
 import ch.boye.httpclientandroidlib.entity.mime.content.StringBody;
 import ch.boye.httpclientandroidlib.impl.client.DefaultHttpClient;
 import ch.boye.httpclientandroidlib.message.BasicNameValuePair;
+import id.zelory.compressor.Compressor;
 
 /**
  * Created by Grapes-Pradip on 2/16/2017.
@@ -93,6 +105,13 @@ public class AddInformationActivity extends AppCompatActivity {
     private String fulldate;
     String datetimefull;
 
+
+    private File actualImage;
+    private File compressedImage;
+    ArrayList<String> photoarray = new ArrayList<>();
+    private RecyclerView recyclerView_photos;
+    LinearLayoutManager linearLayoutManager;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,7 +122,12 @@ public class AddInformationActivity extends AppCompatActivity {
         txt_photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectImage();
+
+                photoarray = new ArrayList<>();
+                Intent intent = new Intent(AddInformationActivity.this, AlbumSelectActivity.class);
+                intent.putExtra(Constants.INTENT_EXTRA_LIMIT, 1);
+                startActivityForResult(intent, Constants.REQUEST_CODE);
+//                selectImage();
             }
         });
 
@@ -131,7 +155,6 @@ public class AddInformationActivity extends AppCompatActivity {
                 openDatePicker();
             }
         });
-
 
         edit_time.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -204,6 +227,7 @@ public class AddInformationActivity extends AppCompatActivity {
     }
 
     private void setContent() {
+
         if (TextUtils.isEmpty(e_title.getText().toString())) {
             e_title.setError(getResources().getString(R.string.infotitle));
             e_title.requestFocus();
@@ -213,17 +237,13 @@ public class AddInformationActivity extends AppCompatActivity {
         } else if (TextUtils.isEmpty(e_address.getText().toString())) {
             e_address.setError(getResources().getString(R.string.infoaddress));
             e_address.requestFocus();
-        }
-        else if (TextUtils.isEmpty(edit_date.getText().toString())) {
+        } else if (TextUtils.isEmpty(edit_date.getText().toString())) {
             edit_date.setError("Please enter date.");
             edit_date.requestFocus();
-        }
-
-        else if (TextUtils.isEmpty(edit_time.getText().toString())) {
+        } else if (TextUtils.isEmpty(edit_time.getText().toString())) {
             edit_time.setError("Please enter time");
             edit_time.requestFocus();
-        }
-        else {
+        } else {
             if (CommonMethod.isInternetConnected(AddInformationActivity.this)) {
 //                new AddInformation().execute(CommonMethod.encodeEmoji(e_title.getText().toString()), CommonMethod.encodeEmoji(e_description.getText().toString()), CommonMethod.encodeEmoji(e_date.getText().toString()), CommonMethod.encodeEmoji(e_address.getText().toString()), notify);
                 new AddInfo().execute();
@@ -231,10 +251,15 @@ public class AddInformationActivity extends AppCompatActivity {
                 Toast.makeText(AddInformationActivity.this, R.string.internet, Toast.LENGTH_SHORT).show();
             }
         }
+
     }
 
     @SuppressLint("SetTextI18n")
     private void findID() {
+        linearLayoutManager = new LinearLayoutManager(AddInformationActivity.this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recyclerView_photos = (RecyclerView) findViewById(R.id.recyclerView_photos);
+        recyclerView_photos.setLayoutManager(linearLayoutManager);
         edit_date = (EditText) findViewById(R.id.edit_date);
         edit_time = (EditText) findViewById(R.id.edit_time);
         e_title = (EditText) findViewById(R.id.e_title);
@@ -395,6 +420,28 @@ public class AddInformationActivity extends AppCompatActivity {
                 multipartEntity.addPart("Is_notify", new StringBody(notify));
 
 
+                if (photoarray.isEmpty()) {
+                    Log.e("if call", "-----------");
+                } else {
+
+                    String[] photoArr = new String[photoarray.size()];
+                    for (int i = 0; i < photoarray.size(); i++) {
+                        photoArr[i] = photoarray.get(i);
+                        Log.e("photoArr", "--------" + photoArr[i]);
+                        File file1 = new File(photoArr[i]);
+                        FileBody fileBody1 = new FileBody(file1);
+//                        multipartEntity.addPart("Photo", fileBody1);
+                        multipartEntity.addPart("Photo", fileBody1);
+//                        multipartEntity.addPart("Photo[" + i + "]", fileBody1);
+
+                    }
+                    /*Log.e(" else call", "-----------");
+                    File file1 = new File(picturePath);
+                    FileBody fileBody1 = new FileBody(file1);
+                    multipartEntity.addPart("Photo", fileBody1);*/
+                }
+
+/*
 
                 if (picturePath == null){
 
@@ -404,6 +451,7 @@ public class AddInformationActivity extends AppCompatActivity {
                     Log.e("file", "----------------------------" + fileBody1);
                     multipartEntity.addPart("Photo", fileBody1);
                 }
+*/
 
 
                 httpPost.setEntity(multipartEntity);
@@ -491,7 +539,6 @@ public class AddInformationActivity extends AppCompatActivity {
     private void selectImage() {
         final CharSequence[] options = {"Take Photo", "Choose from Gallery", "Cancel"};
 
-
         AlertDialog.Builder builder = new AlertDialog.Builder(AddInformationActivity.this);
 
         builder.setTitle("Add Photo!");
@@ -561,6 +608,33 @@ public class AddInformationActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == Constants.REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+            ArrayList<Image> images = data.getParcelableArrayListExtra(Constants.INTENT_EXTRA_IMAGES);
+            StringBuffer stringBuffer = new StringBuffer();
+            for (int i = 0, l = images.size(); i < l; i++) {
+                stringBuffer.append(images.get(i).path + "\n");
+
+                photoarray.add(images.get(i).path);
+
+//                img_icon.setVisibility(View.VISIBLE);
+
+                PhotoAdapter photoAdapter = new PhotoAdapter(AddInformationActivity.this, photoarray);
+                recyclerView_photos.setVisibility(View.VISIBLE);
+                recyclerView_photos.setAdapter(photoAdapter);
+
+
+//                Glide.with(AddInformationActivity.this).load(images.get(i).path
+//                        .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).dontAnimate().into(img_icon);
+
+            }
+
+
+            Log.e("image list", "------------" + stringBuffer.toString());
+//            selectedImage.add(stringBuffer.toString());
+//            textView.setText(stringBuffer.toString());
+        }
+
 
         if (resultCode == RESULT_OK) {
             flag = true;
@@ -652,6 +726,143 @@ public class AddInformationActivity extends AppCompatActivity {
 
             }
         }
+    }
+
+
+    public void customCompressImage(View view) {
+        if (actualImage == null) {
+        } else {
+            // Compress image in main thread using custom Compressor
+            try {
+                compressedImage = new Compressor(this)
+                        .setMaxWidth(640)
+                        .setMaxHeight(480)
+                        .setQuality(75)
+                        .setCompressFormat(Bitmap.CompressFormat.WEBP)
+                        .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
+                                Environment.DIRECTORY_PICTURES).getAbsolutePath())
+                        .compressToFile(actualImage);
+
+                setCompressedImage();
+            } catch (IOException e) {
+                e.printStackTrace();
+//                showError(e.getMessage());
+            }
+
+        }
+
+    }
+
+
+    private void setCompressedImage() {
+        img_icon.setImageBitmap(BitmapFactory.decodeFile(compressedImage.getAbsolutePath()));
+
+        Log.e("size", "-------------------" + getReadableFileSize(compressedImage.length()));
+//        compressedSizeTextView.setText(String.format("Size : %s", getReadableFileSize(compressedImage.length())));
+
+        Toast.makeText(this, "Compressed image save in " + compressedImage.getPath(), Toast.LENGTH_LONG).show();
+        Log.d("Compressor", "Compressed image save in " + compressedImage.getPath());
+    }
+
+
+    public String getReadableFileSize(long size) {
+        if (size <= 0) {
+            return "0";
+        }
+        final String[] units = new String[]{"B", "KB", "MB", "GB", "TB"};
+        int digitGroups = (int) (Math.log10(size) / Math.log10(1024));
+        return new DecimalFormat("#,##0.#").format(size / Math.pow(1024, digitGroups)) + " " + units[digitGroups];
+    }
+
+
+    private int getRandomColor() {
+        Random rand = new Random();
+        return Color.argb(100, rand.nextInt(256), rand.nextInt(256), rand.nextInt(256));
+    }
+
+    //Photo Adapter
+    public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> {
+
+
+        private final Activity activity;
+        private final ArrayList<String> itemArrayList;
+        private String id;
+        Bitmap thumb;
+
+        public PhotoAdapter(Activity activity, ArrayList<String> itemArrayList) {
+            super();
+            this.activity = activity;
+            this.itemArrayList = itemArrayList;
+        }
+
+
+        @Override
+        public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.photo_item, viewGroup, false);
+            return new ViewHolder(v);
+        }
+
+        @Override
+        public void onBindViewHolder(final ViewHolder holder, int i) {
+
+            String path = itemArrayList.get(i);
+            thumb = (BitmapFactory.decodeFile(path));
+            Log.e("adapetr path", "----------" + itemArrayList.get(i));
+            Log.e("thumbnail", "--------------------" + thumb);
+            holder.photo.setImageBitmap(thumb);
+
+            holder.photo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    PopupMenu popup = new PopupMenu(AddInformationActivity.this, holder.photo);
+                    //Inflating the Popup using xml file
+                    popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
+
+                    //registering popup with OnMenuItemClickListener
+                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        public boolean onMenuItemClick(MenuItem item) {
+                            Toast.makeText(AddInformationActivity.this, "You Clicked : " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                            return true;
+                        }
+                    });
+
+                    popup.show();//showing popup menu
+                }
+
+            });
+
+        }
+
+        @Override
+        public int getItemCount() {
+
+            return itemArrayList.size();
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
+
+            ImageView photo;
+
+            public ViewHolder(View itemView) {
+                super(itemView);
+                photo = (ImageView) itemView.findViewById(R.id.photo_scroll);
+
+
+            }
+
+            @Override
+            public void onClick(View v) {
+
+            }
+
+            @Override
+            public boolean onLongClick(View v) {
+                return false;
+            }
+
+        }
+
     }
 
 

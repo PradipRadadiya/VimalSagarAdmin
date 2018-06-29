@@ -1,5 +1,6 @@
 package com.example.grapes_pradip.vimalsagaradmin.gallery.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -21,7 +22,6 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 
 import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.gallery.adapters.CustomAlbumSelectAdapter;
@@ -92,6 +92,7 @@ public class AlbumSelectActivity extends HelperActivity {
         });
     }
 
+    @SuppressLint("HandlerLeak")
     @Override
     protected void onStart() {
         super.onStart();
@@ -162,6 +163,7 @@ public class AlbumSelectActivity extends HelperActivity {
             handler.removeCallbacksAndMessages(null);
             handler = null;
         }
+
     }
 
     @Override
@@ -333,3 +335,4 @@ public class AlbumSelectActivity extends HelperActivity {
         gridView.setVisibility(View.INVISIBLE);
     }
 }
+
