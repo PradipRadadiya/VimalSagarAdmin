@@ -62,6 +62,18 @@ public class CommonMethod {
         return sdf.format(cal.getTime());
     }
 
+    public static String convertDate(Date dt) {
+        String fulldate = null;
+
+        String dayOfTheWeek = (String) android.text.format.DateFormat.format("EEEE", dt);//Thursday
+        String stringMonth = (String) android.text.format.DateFormat.format("MMM", dt); //Jun
+        String intMonth = (String) android.text.format.DateFormat.format("MM", dt); //06
+        String year = (String) android.text.format.DateFormat.format("yyyy", dt); //2013
+        String day = (String) android.text.format.DateFormat.format("dd", dt); //20
+        fulldate = dayOfTheWeek + "," + stringMonth + "," + intMonth + "," + year + "," + day;
+        return fulldate;
+    }
+
 
     //Genrate random string
     public static String getRandomString(final int sizeOfRandomString) {
@@ -94,7 +106,6 @@ public class CommonMethod {
             return message;
         }
     }
-
 
     //Random color genrate
     public static int getRandomColor() {
@@ -281,14 +292,40 @@ public class CommonMethod {
             if (!found && Character.isLetter(chars[i])) {
                 chars[i] = Character.toUpperCase(chars[i]);
                 found = true;
-            } else if (Character.isWhitespace(chars[i]) || chars[i]=='.' || chars[i]=='\'') { // You can add other chars here
+            } else if (Character.isWhitespace(chars[i]) || chars[i] == '.' || chars[i] == '\'') { // You can add other chars here
                 found = false;
             }
         }
         return String.valueOf(chars);
     }
 
+    public static String replacer(StringBuffer outBuffer) {
 
+        String data = outBuffer.toString();
+        try {
+            StringBuffer tempBuffer = new StringBuffer();
+            int incrementor = 0;
+            int dataLength = data.length();
+            while (incrementor < dataLength) {
+                char charecterAt = data.charAt(incrementor);
+                if (charecterAt == '%') {
+                    tempBuffer.append("<percentage>");
+                } else if (charecterAt == '+') {
+                    tempBuffer.append("<plus>");
+                } else {
+                    tempBuffer.append(charecterAt);
+                }
+                incrementor++;
+            }
+            data = tempBuffer.toString();
+            data = URLDecoder.decode(data, "utf-8");
+            data = data.replaceAll("<percentage>", "%");
+            data = data.replaceAll("<plus>", "+");
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
 
 
 }

@@ -28,9 +28,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
- * Created by Pradip on 1/2/17.
- */
+
 @SuppressWarnings("ALL")
 public class RecyclerByPeopleAdapter extends RecyclerView.Adapter<RecyclerByPeopleAdapter.ViewHolder> {
 
@@ -103,7 +101,7 @@ public class RecyclerByPeopleAdapter extends RecyclerView.Adapter<RecyclerByPeop
         if (byPeopleItem.getIsApproved().equalsIgnoreCase("1")) {
             holder.lin_approve.setVisibility(View.GONE);
             holder.lin_delete.setVisibility(View.VISIBLE);
-            holder.txt_title.setText(byPeopleItem.getTitle());
+            holder.txt_title.setText(CommonMethod.decodeEmoji(byPeopleItem.getTitle()));
             holder.txt_post.setText(CommonMethod.decodeEmoji(byPeopleItem.getPost()));
             holder.txt_unm.setText(CommonMethod.decodeEmoji(byPeopleItem.getName()));
             holder.txt_date.setText(CommonMethod.decodeEmoji(byPeopleItem.getDate()));

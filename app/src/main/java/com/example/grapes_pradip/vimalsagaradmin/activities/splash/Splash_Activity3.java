@@ -81,6 +81,7 @@ public class Splash_Activity3 extends ActivityManagePermission {
         });
     }
     private void askforLogin() {
+
         askCompactPermissions(new String[]{PermissionUtils.Manifest_WRITE_EXTERNAL_STORAGE, PermissionUtils.Manifest_READ_EXTERNAL_STORAGE, PermissionUtils.Manifest_CAMERA}, new PermissionResult() {
             @Override
             public void permissionGranted() {
@@ -113,7 +114,6 @@ public class Splash_Activity3 extends ActivityManagePermission {
         @Override
         public void onFinish() {
             if (sharedPreferencesClass.getUser_Id().equalsIgnoreCase("")) {
-
                 askforLogin();
 
             } else {

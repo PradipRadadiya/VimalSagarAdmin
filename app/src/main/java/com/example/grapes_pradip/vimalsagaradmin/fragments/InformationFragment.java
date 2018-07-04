@@ -26,11 +26,14 @@ import android.widget.Toast;
 import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.activities.information.AddInformationActivity;
 import com.example.grapes_pradip.vimalsagaradmin.adapters.information.RecyclerInformationAdapter;
+import com.example.grapes_pradip.vimalsagaradmin.bean.AllInformationModel;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
 import com.example.grapes_pradip.vimalsagaradmin.common.JsonParser;
 import com.example.grapes_pradip.vimalsagaradmin.model.information.AllInformationItem;
+import com.example.grapes_pradip.vimalsagaradmin.retrofit.APIClient;
+import com.example.grapes_pradip.vimalsagaradmin.retrofit.ApiInterface;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,6 +41,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Date;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.example.grapes_pradip.vimalsagaradmin.adapters.information.RecyclerInformationAdapter.infoid;
 
@@ -136,6 +143,7 @@ public class InformationFragment extends Fragment implements View.OnClickListene
         allInformationItems = new ArrayList<>();
         swipe_refresh_information.setRefreshing(false);
         new GetAllInformation().execute();
+//        getInformation();
     }
 
     private void findID() {
@@ -287,7 +295,11 @@ public class InformationFragment extends Fragment implements View.OnClickListene
                         Log.e("str2", "--------" + string[1]);
 
                         Date dt = CommonMethod.convert_date(date);
+
+//                        String fulldateis=CommonMethod.convertDate(dt);
                         Log.e("Convert date is", "------------------" + dt);
+//                        Log.e("full date is", "------------------" + fulldateis);
+
                         String dayOfTheWeek = (String) android.text.format.DateFormat.format("EEEE", dt);//Thursday
                         String stringMonth = (String) android.text.format.DateFormat.format("MMM", dt); //Jun
                         String intMonth = (String) android.text.format.DateFormat.format("MM", dt); //06
@@ -340,6 +352,7 @@ public class InformationFragment extends Fragment implements View.OnClickListene
             progressDialog.setMessage(getResources().getString(R.string.progressmsg));
 //            progressDialog.setCancelable(false);
             progressDialog.show();
+
         }
 
         @Override
@@ -364,6 +377,38 @@ public class InformationFragment extends Fragment implements View.OnClickListene
 
         }
     }
+
+    private void getInformation() {
+        ApiInterface apiInterface = APIClient.getClient().create(ApiInterface.class);
+        Call<AllInformationModel> callAPI = apiInterface.getAllInfo(String.valueOf(page_count), "20");
+        callAPI.enqueue(new Callback<AllInformationModel>() {
+            @Override
+            public void onResponse(Call<AllInformationModel> call, Response<AllInformationModel> response) {
+                Log.e("getInformation size", "------------------------" + response.body().getData().size());
+                Log.e("selected", "------------------------" + response.body().getData().get(0).isSelected());
+
+               /* if (response.isSuccessful()) {
+
+                    recyclerInformationAdapter = new RecyclerInformationAdapter(getActivity(), response.body().getData());
+                    recyclerView_information.setAdapter(recyclerInformationAdapter);
+
+                } else {
+                    Log.e("else", "----------------");
+                }*/
+
+
+            }
+
+            @Override
+            public void onFailure(Call<AllInformationModel> call, Throwable t) {
+                Log.e("error", "------------------------" + t.getMessage());
+
+            }
+        });
+
+
+    }
+
 
     @Override
     public void onResume() {

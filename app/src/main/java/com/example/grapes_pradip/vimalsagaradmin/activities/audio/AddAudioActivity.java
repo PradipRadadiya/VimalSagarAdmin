@@ -223,12 +223,10 @@ public class AddAudioActivity extends AppCompatActivity implements View.OnClickL
                 } else if (TextUtils.isEmpty(edit_time.getText().toString())) {
                     edit_time.setError(getResources().getString(R.string.selecttime));
                     edit_audio_name.requestFocus();
-                }
-                else if (TextUtils.isEmpty(e_description.getText().toString())) {
+                } else if (TextUtils.isEmpty(e_description.getText().toString())) {
                     e_description.setError("Please enter description.");
                     e_description.requestFocus();
-                }
-                else {
+                } else {
                     if (CommonMethod.isInternetConnected(AddAudioActivity.this)) {
                         datetimefull = fulldate + " " + fulltime;
                         new AddAudio().execute();
@@ -366,10 +364,7 @@ public class AddAudioActivity extends AppCompatActivity implements View.OnClickL
                         }
                     }
 
-
-                } else if (options[item].equals("Choose from Gallery"))
-
-                {
+                } else if (options[item].equals("Choose from Gallery")) {
 
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
                         Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -384,7 +379,6 @@ public class AddAudioActivity extends AppCompatActivity implements View.OnClickL
                             startActivityForResult(intent, 1);
                         }
                     }
-
 
                 } else if (options[item].equals("Cancel")) {
 
@@ -496,8 +490,8 @@ public class AddAudioActivity extends AppCompatActivity implements View.OnClickL
                     e.printStackTrace();
                 }
 
-
                 //Log.w("path of image from gallery......******************.........", picturePath + "");
+
                 Log.e("picturepath", "--------------" + picturePath);
                 Log.e("audioPath", "--------------" + audioPath);
             }

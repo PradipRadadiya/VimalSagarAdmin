@@ -105,9 +105,11 @@
         <activity
             android:name=".activities.audio.EditAudioCategoryActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".activities.audio.AllAudioActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".activities.audio.AudioDetailActivity"
             android:screenOrientation="portrait">

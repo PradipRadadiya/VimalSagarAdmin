@@ -54,6 +54,7 @@ public class JsonParser {
 
 
         HttpPost httppost = new HttpPost(url);
+//        httppost.addHeader("","");
         Log.e("url postStringResponse", "" + url);
 
         String responseStr;

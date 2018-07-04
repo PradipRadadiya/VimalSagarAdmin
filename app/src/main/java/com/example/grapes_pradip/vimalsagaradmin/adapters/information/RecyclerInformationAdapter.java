@@ -26,9 +26,7 @@ import com.example.grapes_pradip.vimalsagaradmin.model.information.AllInformatio
 
 import java.util.ArrayList;
 
-/**
- * Created by Pradip on 1/2/17.
- */
+
 @SuppressWarnings("ALL")
 public class RecyclerInformationAdapter extends RecyclerView.Adapter<RecyclerInformationAdapter.ViewHolder> {
 

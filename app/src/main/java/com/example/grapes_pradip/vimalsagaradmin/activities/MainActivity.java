@@ -76,7 +76,8 @@ import ch.boye.httpclientandroidlib.NameValuePair;
 import ch.boye.httpclientandroidlib.message.BasicNameValuePair;
 
 @SuppressWarnings("ALL")
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, NetworkChangeReceiver.NetworkChange {
+public class
+MainActivity extends AppCompatActivity implements View.OnClickListener, NetworkChangeReceiver.NetworkChange {
     private View headerLayout;
     private LinearLayout lin_spcontent;
     private LinearLayout lin_vichar;

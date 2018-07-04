@@ -795,7 +795,6 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
         @Override
         public void onBindViewHolder(final ViewHolder holder, int i) {
 
-
             String path = itemArrayList.get(i);
             thumb = (BitmapFactory.decodeFile(path));
             Log.e("adapetr path", "----------" + itemArrayList.get(i));
@@ -805,7 +804,6 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
             holder.photo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
 
                     PopupMenu popup = new PopupMenu(AddEventActivity.this, holder.photo);
                     //Inflating the Popup using xml file
@@ -891,7 +889,6 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
                 @Override
                 public void onClick(View v) {
 
-
                     PopupMenu popup = new PopupMenu(AddEventActivity.this, holder.photo);
                     //Inflating the Popup using xml file
                     popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
@@ -968,7 +965,6 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
         @Override
         public void onBindViewHolder(final ViewHolder holder, int i) {
 
-
             String path = itemArrayList.get(i);
             thumb = (BitmapFactory.decodeFile(path));
             Log.e("adapetr path", "----------" + itemArrayList.get(i));
@@ -978,7 +974,6 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
             holder.photo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
 
                     PopupMenu popup = new PopupMenu(AddEventActivity.this, holder.photo);
                     //Inflating the Popup using xml file
@@ -1064,6 +1059,7 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
         thumbnail.compress(Bitmap.CompressFormat.JPEG, 40, outFile);
         outFile.flush();
         outFile.close();
+
     }
 
 
