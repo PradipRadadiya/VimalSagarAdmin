@@ -107,8 +107,6 @@ MainActivity extends AppCompatActivity implements View.OnClickListener, NetworkC
     private BroadcastReceiver mRegistrationBroadcastReceiver;
     private NotificationUtils notificationUtils;
     private ToggleButton pushonoff;
-
-
     private NotificationManager mManager;
 
     @SuppressWarnings("deprecation")
@@ -146,6 +144,7 @@ MainActivity extends AppCompatActivity implements View.OnClickListener, NetworkC
 //            openDesktop();
 //        }
 
+
         sharedPreferencesClass = new SharedPreferencesClass(MainActivity.this);
         Log.e("action", "---------------" + sharedPreferencesClass.getActionClick());
         if (sharedPreferencesClass.getActionClick().equalsIgnoreCase("main_click")) {
@@ -173,7 +172,7 @@ MainActivity extends AppCompatActivity implements View.OnClickListener, NetworkC
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-// checking for type intent filter
+        // checking for type intent filter
                 if (intent.getAction().equals(Config.REGISTRATION_COMPLETE)) {
                     // gcm successfully registered
                     // now subscribe to `global` topic to receive app wide notifications
@@ -184,7 +183,6 @@ MainActivity extends AppCompatActivity implements View.OnClickListener, NetworkC
                 } else if (intent.getAction().equals(Config.PUSH_NOTIFICATION)) {
                     // new push notification is received
                     Intent resultIntent = new Intent(getApplicationContext(), MainActivity.class);
-
                     String action1 = intent.getStringExtra("click_action");
                     String message = intent.getStringExtra("message");
 //                    showNotificationMessage(MainActivity.this, "Vimalsagarji", message, "", resultIntent);

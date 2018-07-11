@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.media.MediaMetadataRetriever;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Build;
@@ -60,6 +61,23 @@ public class CommonMethod {
     public static String giveDate(String time) {
         Calendar cal = Calendar.getInstance();
         return sdf.format(cal.getTime());
+    }
+
+    public static String giveTime(String time)  {
+
+        String convert_time;
+        SimpleDateFormat _24HourSDF = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat _12HourSDF = new SimpleDateFormat("hh:mm a");
+        Date _24HourDt = null;
+        try {
+            _24HourDt = _24HourSDF.parse(time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        System.out.println(_24HourDt);
+        System.out.println(_12HourSDF.format(_24HourDt));
+        convert_time=_12HourSDF.format(_24HourDt);
+        return convert_time;
     }
 
     public static String convertDate(Date dt) {
@@ -321,11 +339,48 @@ public class CommonMethod {
             data = URLDecoder.decode(data, "utf-8");
             data = data.replaceAll("<percentage>", "%");
             data = data.replaceAll("<plus>", "+");
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return data;
     }
+
+
+    public static Bitmap retriveVideoFrameFromVideo(String videoPath)
+            throws Throwable {
+        Bitmap bitmap = null;
+        MediaMetadataRetriever mediaMetadataRetriever = null;
+        try {
+            mediaMetadataRetriever = new MediaMetadataRetriever();
+            if (Build.VERSION.SDK_INT >= 14)
+                mediaMetadataRetriever.setDataSource(videoPath, new HashMap<String, String>());
+            else
+                mediaMetadataRetriever.setDataSource(videoPath);
+
+            bitmap = mediaMetadataRetriever.getFrameAtTime(1, MediaMetadataRetriever.OPTION_CLOSEST);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Throwable(
+                    "Exception in retriveVideoFrameFromVideo(String videoPath)"
+                            + e.getMessage());
+
+        } finally {
+            if (mediaMetadataRetriever != null) {
+                mediaMetadataRetriever.release();
+            }
+        }
+        return bitmap;
+    }
+
+    //its use
+   /* Bitmap bitmap;
+    bitmap =ImageUtil.retriveVideoFrameFromVideo(YOUR_VIDEO_PATH);
+    if(bitmap !=null)
+
+    {
+        bitmap = Bitmap.createScaledBitmap(bitmap, 240, 240, false);
+        YOUR_IMAGE_VIEW.setImageBitmap(bitmap);
+    }*/
 
 
 }

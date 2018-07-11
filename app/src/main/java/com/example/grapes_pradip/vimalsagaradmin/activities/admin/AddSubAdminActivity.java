@@ -33,7 +33,6 @@ import ch.boye.httpclientandroidlib.NameValuePair;
 import ch.boye.httpclientandroidlib.message.BasicNameValuePair;
 
 
-
 @SuppressWarnings("ALL")
 public class AddSubAdminActivity extends AppCompatActivity {
 
@@ -68,7 +67,7 @@ public class AddSubAdminActivity extends AppCompatActivity {
         register = (Button) findViewById(R.id.register);
         txt_header = (TextView) findViewById(R.id.txt_header);
         img_back = (ImageView) findViewById(R.id.img_back);
-        txt_header.setText("Add Admin");
+        txt_header.setText(R.string.add_admin);
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,32 +79,31 @@ public class AddSubAdminActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (TextUtils.isEmpty(entername.getText().toString())) {
-                    entername.setError("Please enter name.");
+                    entername.setError(getString(R.string.enter_name));
                     entername.requestFocus();
                 } else if (TextUtils.isEmpty(eemail.getText().toString())) {
-                    eemail.setError("Please enter email.");
+                    eemail.setError(getString(R.string.enter_email));
                 } else if (!isValidEmail(eemail.getText().toString().trim())) {
-                    eemail.setError("Please enter valid email address.");
+                    eemail.setError(getString(R.string.valid_email));
                     eemail.requestFocus();
                 } else if (TextUtils.isEmpty(emobile.getText().toString())) {
-                    emobile.setError("Please enter mobile mo.");
+                    emobile.setError(getString(R.string.enter_mobile));
                     emobile.requestFocus();
                 } else if (emobile.getText().toString().trim().length() < 10) {
-                    emobile.setError("Please enter 10 digit.");
+                    emobile.setError(getString(R.string.ten_digit));
                     emobile.requestFocus();
                 } else if (TextUtils.isEmpty(eusername.getText().toString())) {
-                    eusername.setError("Please enter username.");
+                    eusername.setError(getString(R.string.enter_username));
                     eusername.requestFocus();
                 } else if (TextUtils.isEmpty(epassword.getText().toString())) {
-                    epassword.setError("Please enter password.");
+                    epassword.setError(getString(R.string.enter_password));
                     epassword.requestFocus();
-
                 } else if (TextUtils.isEmpty(ecpassword.getText().toString())) {
-                    ecpassword.setError("Please enter confirm password.");
+                    ecpassword.setError(getString(R.string.confirm_password));
                     ecpassword.requestFocus();
 
-                }else if (!epassword.getText().toString().equalsIgnoreCase(ecpassword.getText().toString())) {
-                    ecpassword.setError("Confirm password not same.");
+                } else if (!epassword.getText().toString().equalsIgnoreCase(ecpassword.getText().toString())) {
+                    ecpassword.setError(getString(R.string.password_not_same));
                     ecpassword.requestFocus();
 
                 } else {

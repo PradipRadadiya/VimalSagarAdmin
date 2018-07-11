@@ -262,8 +262,9 @@ public class VicharKrantiFragment extends Fragment {
 
                         String[] time = date.split("\\s+");
                         Log.e("time", "-----------------------" + time[1]);
-
-                        vicharItems.add(new VicharItem(id, quote, fulldate));
+                        Log.e("time", "-----------------------" + CommonMethod.giveTime(time[1]));
+                        String con_time=CommonMethod.giveTime(time[1]);
+                        vicharItems.add(new VicharItem(id, quote, fulldate+", "+con_time));
 //                        vicharItems.add(new VicharItem(id,quote, fulldate + ", " + time[1]));
 
                     }

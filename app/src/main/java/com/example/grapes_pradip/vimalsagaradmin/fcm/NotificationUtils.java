@@ -51,10 +51,6 @@ public class NotificationUtils {
     private static final String NOTIFICATION_CHANNEL_ID = "10001";
     private NotificationManager mNotificationManager;
 
-
-
-
-
     public NotificationUtils(Context mContext) {
         this.mContext = mContext;
     }
@@ -62,11 +58,9 @@ public class NotificationUtils {
     @SuppressWarnings("StatementWithEmptyBody")
     public void showNotificationMessage(String title, String message, String timeStamp, Intent intent) {
         showNotificationMessage(title, message, timeStamp, intent, null);
-        createNotification(title,message);
+//        createNotification(title,message);
 
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O){
 
-        }
 
     }
 
@@ -227,6 +221,7 @@ public class NotificationUtils {
         }
 
         return isInBackground;
+
     }
 
     // Clears notification tray messages

@@ -77,5 +77,15 @@
     <string name="splash_content">Vichar Kranti</string>
     <string name="vichar_kranti">View Vichar Kranti</string>
     <string name="add_vichar_kranti">Add Vichar Kranti</string>
+    <string name="add_admin">Add Admin</string>
+    <string name="enter_name">Please enter name.</string>
+    <string name="enter_email">Please enter email.</string>
+    <string name="valid_email">Please enter valid email address.</string>
+    <string name="enter_mobile">Please enter mobile mo.</string>
+    <string name="ten_digit">Please enter 10 digit.</string>
+    <string name="enter_username">Please enter username.</string>
+    <string name="enter_password">Please enter password.</string>
+    <string name="confirm_password">Please enter confirm password.</string>
+    <string name="password_not_same">Confirm password not same.</string>
 
 </resources>
