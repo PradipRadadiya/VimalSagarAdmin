@@ -138,7 +138,6 @@ public class CommonAPI_Name {
   public static final String rejectques = "questionanswer/rejectques/";
 
   //    User
-
   public static final String deleteuser = "userregistration/deleteuser/";
   public static final String getallusers = "userregistration/getallusers/";
   public static final String approveuser = "userregistration/approveuser/";
@@ -178,7 +177,6 @@ public class CommonAPI_Name {
   public static final String updateoption = "competition/updateoption/";
   public static final String deleteoption = "competition/deleteoption/";
   public static final String getallanswersbyqid = "competition/getallanswersbyqid/";
-
 
 
   //  Gallery

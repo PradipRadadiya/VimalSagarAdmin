@@ -24,13 +24,14 @@
             android:layout_width="0sp"
             android:layout_height="wrap_content"
             android:layout_weight="3.5"
-            android:background="@drawable/add_new_round"
+            android:background="@drawable/round_rect_shapeoneselect"
             android:gravity="center"
             android:padding="3sp"
             android:text="Add New"
             android:textColor="@color/white"
             android:textSize="18sp"
             tools:ignore="HardcodedText" />
+
     </LinearLayout>
 
     <View

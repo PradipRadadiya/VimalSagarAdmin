@@ -33,11 +33,9 @@ public class Splash_Activity3 extends ActivityManagePermission {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.splash_activity3);
         sharedPreferencesClass = new SharedPreferencesClass(Splash_Activity3.this);
-
 
 
     }

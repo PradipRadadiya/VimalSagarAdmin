@@ -73,8 +73,6 @@ public class AudioFragment extends Fragment implements View.OnClickListener {
                 }
             }
         });
-
-
         return rootview;
     }
 

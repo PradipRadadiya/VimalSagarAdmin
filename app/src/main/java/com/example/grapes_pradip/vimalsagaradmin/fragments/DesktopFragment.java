@@ -1,5 +1,6 @@
 package com.example.grapes_pradip.vimalsagaradmin.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,6 +12,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.example.grapes_pradip.vimalsagaradmin.R;
+import com.example.grapes_pradip.vimalsagaradmin.activities.MainActivity;
+import com.example.grapes_pradip.vimalsagaradmin.activities.comment.TablayoutCommentActivity;
+import com.example.grapes_pradip.vimalsagaradmin.activities.vichar.SplashContent;
 
 
 @SuppressWarnings("ALL")
@@ -26,6 +30,12 @@ public class DesktopFragment extends Fragment implements View.OnClickListener {
     private LinearLayout lin_comp;
     private LinearLayout lin_op;
     private LinearLayout lin_bypeople;
+
+    private LinearLayout lin_alerts;
+    private LinearLayout lin_comments;
+    private LinearLayout lin_banner;
+    private LinearLayout lin_vichar;
+    private LinearLayout lin_user;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,6 +56,12 @@ public class DesktopFragment extends Fragment implements View.OnClickListener {
         lin_comp = (LinearLayout) rootview.findViewById(R.id.lin_comp);
         lin_op = (LinearLayout) rootview.findViewById(R.id.lin_op);
         lin_bypeople = (LinearLayout) rootview.findViewById(R.id.lin_bypeople);
+
+        lin_alerts = (LinearLayout) rootview.findViewById(R.id.lin_alerts);
+        lin_comments = (LinearLayout) rootview.findViewById(R.id.lin_comments);
+        lin_banner = (LinearLayout) rootview.findViewById(R.id.lin_banner);
+        lin_vichar = (LinearLayout) rootview.findViewById(R.id.lin_vichar);
+        lin_user = (LinearLayout) rootview.findViewById(R.id.lin_user);
     }
 
     private void idClick() {
@@ -59,6 +75,11 @@ public class DesktopFragment extends Fragment implements View.OnClickListener {
         lin_comp.setOnClickListener(this);
         lin_op.setOnClickListener(this);
         lin_bypeople.setOnClickListener(this);
+        lin_alerts.setOnClickListener(this);
+        lin_comments.setOnClickListener(this);
+        lin_banner.setOnClickListener(this);
+        lin_vichar.setOnClickListener(this);
+        lin_user.setOnClickListener(this);
     }
 
     @Override
@@ -104,9 +125,62 @@ public class DesktopFragment extends Fragment implements View.OnClickListener {
                 Log.e("lin_bypeople", "------------------" + "click");
                 openByPeople();
                 break;
+            case R.id.lin_alerts:
+                openAlert();
+                break;
+            case R.id.lin_comments:
+                openComment();
+                break;
+            case R.id.lin_banner:
+                openSlide();
+                break;
+            case R.id.lin_vichar:
+                Intent intent2 = new Intent(getActivity(), SplashContent.class);
+                startActivity(intent2);
+                break;
+            case R.id.lin_user:
+                openUser();
+                break;
         }
     }
 
+    private void openAlert() {
+        Fragment fr = null;
+        fr = new Notes();
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_content, fr);
+//        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+    private void openUser() {
+        Fragment fr = null;
+        fr = new UserFragment();
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_content, fr);
+//        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+    private void openComment() {
+        Fragment fr = null;
+        fr = new TablayoutCommentActivity();
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_content, fr);
+//        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
+    private void openSlide() {
+        Fragment fr = null;
+        fr = new SlideImageFragment();
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_content, fr);
+//        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
     private void openInformation() {
         Fragment fr = null;
         fr = new InformationFragment();

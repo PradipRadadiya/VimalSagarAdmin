@@ -50,8 +50,6 @@ import ch.boye.httpclientandroidlib.message.BasicNameValuePair;
 
 import static com.example.grapes_pradip.vimalsagaradmin.activities.video.VideoDetailActivity.video_play_url;
 
-
-
 @SuppressWarnings("ALL")
 public class ByPeopleDetailActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -69,12 +67,14 @@ public class ByPeopleDetailActivity extends AppCompatActivity implements View.On
     private String name;
     private String photo;
     private String view;
-    private TextView txt_title;
+
+    private EditText txt_title;
     private TextView txt_date;
-    private TextView txt_description;
+    private EditText txt_description;
     private TextView txt_address;
     private TextView txt_header;
-    private TextView txt_videolink;
+    private EditText txt_videolink;
+
     private TextView txt_views;
     private ImageView img_back;
     private ImageView img_photo;
@@ -115,11 +115,13 @@ public class ByPeopleDetailActivity extends AppCompatActivity implements View.On
     String action_click;
     RelativeLayout rel_video;
     private TextView txt_userdetail;
+    private Button btn_update;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bypeople_detail_activity);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         final Intent intent = getIntent();
 
@@ -164,11 +166,11 @@ public class ByPeopleDetailActivity extends AppCompatActivity implements View.On
         txt_img = (TextView) findViewById(R.id.txt_img);
         txt_views = (TextView) findViewById(R.id.txt_views);
         txt_header = (TextView) findViewById(R.id.txt_header);
-        txt_title = (TextView) findViewById(R.id.txt_titles);
+        txt_title = (EditText) findViewById(R.id.txt_titles);
         txt_date = (TextView) findViewById(R.id.txt_date);
-        txt_description = (TextView) findViewById(R.id.txt_description);
+        txt_description = (EditText) findViewById(R.id.txt_description);
         txt_address = (TextView) findViewById(R.id.txt_address);
-        txt_videolink = (TextView) findViewById(R.id.txt_videolink);
+        txt_videolink = (EditText) findViewById(R.id.txt_videolink);
         detaillike = (TextView) findViewById(R.id.detaillike);
         infolike = (Button) findViewById(R.id.infolike);
         img_back = (ImageView) findViewById(R.id.img_back);
@@ -185,6 +187,7 @@ public class ByPeopleDetailActivity extends AppCompatActivity implements View.On
         audio_text = (TextView) findViewById(R.id.audio_text);
         video_text = (TextView) findViewById(R.id.video_text);
         detailcomment = (TextView) findViewById(R.id.detailcomment);
+        btn_update=findViewById(R.id.btn_update);
     }
 
     private void idClick() {
@@ -192,6 +195,7 @@ public class ByPeopleDetailActivity extends AppCompatActivity implements View.On
         btn_delete.setOnClickListener(this);
         infolike.setOnClickListener(this);
         infocomment.setOnClickListener(this);
+//        btn_update.setOnClickListener(this);
     }
 
 
@@ -272,6 +276,13 @@ public class ByPeopleDetailActivity extends AppCompatActivity implements View.On
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+
+            case R.id.btn_update:
+
+
+
+                break;
+
             case R.id.img_back:
 
                 jcplayer_audio.kill();
@@ -491,43 +502,31 @@ public class ByPeopleDetailActivity extends AppCompatActivity implements View.On
         }
     }
 
-   /* private class CountLike extends AsyncTask<String, Void, String> {
-        String responseJSON = "";
 
+    private class UpdatePost extends AsyncTask<String,Void,String>{
+        String responseJson="";
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = new ProgressDialog(ByPeopleDetailActivity.this);
-            progressDialog.setMessage(getResources().getString(R.string.progressmsg));
-            progressDialog.setCancelable(false);
-            progressDialog.dismiss();
         }
 
         @Override
-        protected String doInBackground(String... params) {
-            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.countlikesbypeople + "?pid=" + id);
-            return responseJSON;
+        protected String doInBackground(String... strings) {
+            ArrayList<NameValuePair> nameValuePairs=new ArrayList<>();
+            nameValuePairs.add(new BasicNameValuePair("id","1"));
+            nameValuePairs.add(new BasicNameValuePair("title","1"));
+            nameValuePairs.add(new BasicNameValuePair("post","1"));
+            nameValuePairs.add(new BasicNameValuePair("videolink","1"));
+            responseJson=JsonParser.postStringResponse(CommonURL.Main_url,nameValuePairs,ByPeopleDetailActivity.this);
+            return responseJson;
         }
-
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            try {
-                JSONObject jsonObject = new JSONObject(s);
-                if (jsonObject.getString("status").equalsIgnoreCase("success")) {
-                    JSONArray jsonArray = jsonObject.getJSONArray("data");
-                    String likecount = jsonArray.getString(0);
-                    Log.e("like", "-----------------" + likecount);
-                    detaillike.setText(likecount);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            if (progressDialog != null) {
-                progressDialog.dismiss();
-            }
         }
-    }*/
+
+    }
+
 
     private class LikeUserList extends AsyncTask<String, Void, String> {
         String responseJSON = "";

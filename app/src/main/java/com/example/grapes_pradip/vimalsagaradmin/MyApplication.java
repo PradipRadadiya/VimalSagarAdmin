@@ -14,12 +14,12 @@ class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        initImageLoader(getApplicationContext());
+//        initImageLoader(getApplicationContext());
     }
 
 
     //Initiate Image Loader Configuration
-    private static void initImageLoader(Context context) {
+   /* private static void initImageLoader(Context context) {
         ImageLoaderConfiguration.Builder config = new ImageLoaderConfiguration.Builder(
                 context);
         config.threadPriority(Thread.NORM_PRIORITY - 2);
@@ -32,7 +32,7 @@ class MyApplication extends Application {
         // Initialize ImageLoader with configuration.
         ImageLoader.getInstance().init(config.build());
 
-    }
+    }*/
 
 
 }

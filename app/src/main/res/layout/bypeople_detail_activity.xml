@@ -45,11 +45,12 @@
 
                 tools:ignore="HardcodedText" />
 
-            <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomEditText
                 style="@style/textsizeall"
                 android:id="@+id/txt_titles"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/edittext_round"
                 android:padding="8sp" />
 
             <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextViewBold
@@ -61,13 +62,14 @@
                 android:textSize="18sp"
                 tools:ignore="HardcodedText" />
 
-            <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomEditText
                 style="@style/textsizeall"
                 android:id="@+id/txt_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8sp"
-
+                android:inputType="textMultiLine"
+                android:background="@drawable/edittext_round"
                 />
 
             <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextViewBold
@@ -111,13 +113,14 @@
                 android:textSize="18sp"
                 tools:ignore="HardcodedText" />
 
-            <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomEditText
                 style="@style/textsizeall"
                 android:id="@+id/txt_videolink"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autoLink="web"
                 android:padding="8sp"
+                android:background="@drawable/edittext_round"
                 android:text="" />
 
             <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextViewBold
@@ -168,6 +171,7 @@
                     android:padding="50dp"
                     android:src="@drawable/play"
                     tools:ignore="ContentDescription,InconsistentLayout" />
+
             </RelativeLayout>
 
             <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextViewBold
@@ -210,8 +214,6 @@
                     android:text="Like :"
                     android:textColor="@color/lable"
                     android:textSize="18sp"
-
-
                     tools:ignore="HardcodedText" />
 
                 <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
@@ -224,7 +226,6 @@
                     android:text="0"
                     android:textColor="@color/color3"
                     android:textSize="20sp"
-
                     tools:ignore="HardcodedText" />
 
                 <Button
@@ -254,7 +255,6 @@
                     android:text="Comment:"
                     android:textColor="@color/lable"
                     android:textSize="18sp"
-
                     tools:ignore="HardcodedText" />
 
                 <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
@@ -266,7 +266,6 @@
                     android:text="0"
                     android:textColor="@color/color3"
                     android:textSize="20sp"
-
                     tools:ignore="HardcodedText" />
 
                 <Button
@@ -278,6 +277,7 @@
                     android:text="View"
                     android:textColor="@color/colorPrimaryDark"
                     tools:ignore="HardcodedText" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -306,27 +306,39 @@
                     android:text="Views"
                     android:textSize="16sp"
                     tools:ignore="HardcodedText,RtlHardcoded" />
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15sp"
-                android:gravity="right"
                 android:orientation="horizontal"
-                tools:ignore="RtlHardcoded">
-
-
+                android:padding="10sp"
+                android:gravity="right"
+                >
                 <Button
+
                     android:id="@+id/btn_delete"
-                    android:layout_width="wrap_content"
+                    android:layout_width="100sp"
                     android:layout_height="40sp"
-                    android:layout_marginLeft="5sp"
-                    android:background="@color/colorPrimaryDark"
+                    android:background="@color/color3"
                     android:text="Delete"
                     android:textColor="@color/white"
-                    tools:ignore="HardcodedText,RtlHardcoded" />
+                    android:layout_marginRight="5dp"
+                    />
+
+                <Button
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/btn_update"
+                    android:layout_width="100sp"
+                    android:layout_height="40sp"
+                    android:background="@color/green"
+                    android:text="Update"
+                    android:textColor="@color/white" />
             </LinearLayout>
+
+
+
 
 
         </LinearLayout>

@@ -36,6 +36,7 @@ import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
+import com.example.grapes_pradip.vimalsagaradmin.common.FilePath;
 import com.example.grapes_pradip.vimalsagaradmin.util.MarshMallowPermission;
 
 import org.json.JSONException;
@@ -354,12 +355,12 @@ public class EditAudioActivity extends AppCompatActivity implements View.OnClick
 
     private void checkPermissionAudio() {
 
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            intent = new Intent(Intent.ACTION_PICK, MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
-            startActivityForResult(intent, 2);
-        }
-
-        else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+//            intent = new Intent(Intent.ACTION_PICK, MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
+//            startActivityForResult(intent, 2);
+//        }
+//
+//        else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!permission.checkPermissionForExternalStorage()) {
                 permission.requestPermissionForExternalStorage();
             } else {
@@ -371,7 +372,7 @@ public class EditAudioActivity extends AppCompatActivity implements View.OnClick
 //                intent = new Intent(Intent.ACTION_PICK, MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
 //                startActivityForResult(intent, 2);
             }
-        }
+//        }
 
        /* else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!permission.checkPermissionForExternalStorage()) {
@@ -487,7 +488,21 @@ public class EditAudioActivity extends AppCompatActivity implements View.OnClick
                 img_category_icon.setVisibility(View.VISIBLE);
                 img_category_icon.setImageBitmap(thumbnail);*/
             } else if (requestCode == 2) {
-                Uri selectedImage = data.getData();
+
+                Uri selectedFileUri = data.getData();
+                audioPath = FilePath.getPath(this,selectedFileUri);
+                Log.e("Selected File Path:","-------------------" + audioPath);
+
+
+                if(audioPath != null && !audioPath.equals("")){
+                    txt_audio.setText(audioPath);
+                }else{
+                    Toast.makeText(this,"Cannot select file to server",Toast.LENGTH_SHORT).show();
+                }
+
+
+
+               /* Uri selectedImage = data.getData();
                 String[] filePath = {MediaStore.Audio.Media.DATA};
                 flag = true;
                 Cursor c = EditAudioActivity.this.getContentResolver().query(selectedImage, filePath, null, null, null);
@@ -498,7 +513,7 @@ public class EditAudioActivity extends AppCompatActivity implements View.OnClick
                 c.close();
                 String audiopath = audioPath.substring(audioPath.lastIndexOf("/") + 1);
                 Log.e("result", "--------------" + audiopath);
-                txt_audio.setText("Selected audio : " + audiopath);
+                txt_audio.setText("Selected audio : " + audiopath);*/
                 //Log.w("path of image from gallery......******************.........", picturePath + "");
             } else if (requestCode == 3) {
                 flag = true;

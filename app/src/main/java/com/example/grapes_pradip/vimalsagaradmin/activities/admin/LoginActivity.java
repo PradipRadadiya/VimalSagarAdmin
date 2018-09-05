@@ -265,4 +265,5 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
         super.onPause();
     }
+
 }

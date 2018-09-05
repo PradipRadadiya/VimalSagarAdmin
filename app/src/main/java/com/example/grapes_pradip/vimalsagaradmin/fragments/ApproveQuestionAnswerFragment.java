@@ -128,7 +128,16 @@ public class ApproveQuestionAnswerFragment extends Fragment implements View.OnCl
                                                   }
 
         );*/
+
+
+        questionid.clear();
+        responseArrayList = new ArrayList<>();
+        page_count = 1;
+        if (CommonMethod.isInternetConnected(getActivity())) {
+            new GetAllQuestion().execute();
+        }
         return rootview;
+
     }
 
     private void refreshContent() {
@@ -364,12 +373,7 @@ public class ApproveQuestionAnswerFragment extends Fragment implements View.OnCl
     public void onResume() {
         super.onResume();
         // put your code here...
-        questionid.clear();
-        responseArrayList = new ArrayList<>();
-        page_count = 1;
-        if (CommonMethod.isInternetConnected(getActivity())) {
-            new GetAllQuestion().execute();
-        }
+
     }
 
 

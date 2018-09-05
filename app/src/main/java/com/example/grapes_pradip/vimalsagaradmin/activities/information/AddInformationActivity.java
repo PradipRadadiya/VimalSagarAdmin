@@ -76,10 +76,6 @@ import ch.boye.httpclientandroidlib.impl.client.DefaultHttpClient;
 import ch.boye.httpclientandroidlib.message.BasicNameValuePair;
 import id.zelory.compressor.Compressor;
 
-/**
- * Created by Grapes-Pradip on 2/16/2017.
- */
-
 @SuppressWarnings("ALL")
 public class AddInformationActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;

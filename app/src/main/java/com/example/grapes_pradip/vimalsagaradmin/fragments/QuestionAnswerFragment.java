@@ -128,6 +128,14 @@ public class QuestionAnswerFragment extends Fragment implements View.OnClickList
                                                   }
 
         );*/
+
+        questionid.clear();
+        responseArrayList = new ArrayList<>();
+        page_count = 1;
+        if (CommonMethod.isInternetConnected(getActivity())) {
+            new GetAllQuestion().execute();
+        }
+
         return rootview;
     }
 
@@ -362,11 +370,6 @@ public class QuestionAnswerFragment extends Fragment implements View.OnClickList
     public void onResume() {
         super.onResume();
         // put your code here...
-        questionid.clear();
-        responseArrayList = new ArrayList<>();
-        page_count = 1;
-        if (CommonMethod.isInternetConnected(getActivity())) {
-            new GetAllQuestion().execute();
-        }
+
     }
 }
