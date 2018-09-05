@@ -239,6 +239,7 @@ public class AddInformationActivity extends AppCompatActivity {
         } else if (TextUtils.isEmpty(edit_time.getText().toString())) {
             edit_time.setError("Please enter time");
             edit_time.requestFocus();
+
         } else {
             if (CommonMethod.isInternetConnected(AddInformationActivity.this)) {
 //                new AddInformation().execute(CommonMethod.encodeEmoji(e_title.getText().toString()), CommonMethod.encodeEmoji(e_description.getText().toString()), CommonMethod.encodeEmoji(e_date.getText().toString()), CommonMethod.encodeEmoji(e_address.getText().toString()), notify);
