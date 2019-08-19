@@ -14,25 +14,24 @@
         android:layout_height="match_parent"
         android:background="@drawable/corner_round_item"
         android:orientation="vertical"
-        android:padding="8dp"
-        >
+        android:padding="8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:baselineAligned="false"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <RelativeLayout
-                android:layout_width="0sp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="3">
+                >
 
                 <ImageView
                     android:id="@+id/img_audio_category"
                     android:layout_width="match_parent"
-                    android:layout_height="75sp"
+                    android:layout_height="175sp"
                     android:padding="5sp"
                     android:scaleType="centerCrop"
                     tools:ignore="ContentDescription" />
@@ -45,12 +44,20 @@
                     android:src="@drawable/play"
                     tools:ignore="ContentDescription" />
 
+                <CheckBox
+                    android:id="@+id/checkbox_audio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/customdrawablecheckbox"
+                    android:padding="8sp"
+                    android:layout_alignParentRight="true"
+                    />
+
             </RelativeLayout>
 
             <LinearLayout
-                android:layout_width="0sp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="7"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -63,32 +70,28 @@
                         android:id="@+id/txt_title"
                         android:layout_width="0sp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10sp"
                         android:layout_weight="9"
                         android:ellipsize="end"
-                        android:lines="1"
-                        android:padding="10sp"
+                        android:padding="8sp"
+                        android:maxLines="3"
+                        android:lineSpacingExtra="7sp"
                         android:text="Guru Purnima"
                         android:textColor="@color/lable"
-                        android:textSize="16sp"
+                        android:textSize="17sp"
                         tools:ignore="HardcodedText,RtlHardcoded" />
 
-                    <CheckBox
-                        android:id="@+id/checkbox_audio"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
 
-                        />
                 </LinearLayout>
 
                 <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                     android:id="@+id/txt_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5sp"
                     android:gravity="right"
                     android:lines="1"
                     android:text="22/10/2016"
+                    android:textSize="17sp"
+                    android:textColor="@color/colorPrimary"
                     tools:ignore="HardcodedText,RtlHardcoded" />
 
                 <LinearLayout
@@ -106,19 +109,19 @@
                         android:gravity="right"
                         android:lines="1"
                         android:text="10120"
-                        android:textSize="12sp"
+                        android:textSize="17sp"
                         tools:ignore="HardcodedText,InconsistentLayout,RtlHardcoded" />
 
                     <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="5sp"
                         android:gravity="right"
                         android:lines="1"
                         android:text="Views"
-                        android:textSize="12sp"
+                        android:textSize="17sp"
                         tools:ignore="HardcodedText,RtlHardcoded" />
                 </LinearLayout>
+
             </LinearLayout>
 
 
@@ -139,6 +142,7 @@
                 android:gravity="center"
                 android:padding="8sp"
                 android:text="Edit"
+                android:textSize="17sp"
                 android:textColor="@color/white"
                 tools:ignore="HardcodedText" />
 
@@ -152,8 +156,11 @@
                 android:gravity="center"
                 android:padding="8sp"
                 android:text="Delete"
+                android:textSize="17sp"
                 android:textColor="@color/white"
                 tools:ignore="HardcodedText" />
         </LinearLayout>
+
     </LinearLayout>
+
 </com.alexandrius.accordionswipelayout.library.SwipeLayout>

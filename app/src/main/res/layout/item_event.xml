@@ -32,7 +32,8 @@
                 android:padding="10sp"
                 android:text="Guru Purnima"
                 android:textColor="@color/lable"
-                android:textSize="16sp"
+                android:textSize="17sp"
+                android:layout_centerVertical="true"
                 tools:ignore="HardcodedText" />
 
             <CheckBox
@@ -40,6 +41,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
+                android:button="@drawable/customdrawablecheckbox"
+                android:layout_centerVertical="true"
                 tools:ignore="RtlHardcoded" />
         </RelativeLayout>
 
@@ -50,11 +53,11 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="5sp"
             android:ellipsize="end"
-            android:maxLines="2"
+            android:maxLines="3"
+            android:lineSpacingExtra="7sp"
             android:padding="10sp"
             android:text="The three types used by an asynchronous task are the following.The three types used by an asynchronous task are the following.The three types used by an asynchronous task are the following"
-            android:textSize="15sp"
-
+            android:textSize="17sp"
             tools:ignore="HardcodedText,RtlHardcoded" />
 
         <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
@@ -67,7 +70,9 @@
             android:gravity="right"
             android:lines="1"
             android:text="15/02/2017"
-            android:textSize="12sp"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginTop="5sp"
+            android:textSize="17sp"
             tools:ignore="HardcodedText,RtlHardcoded" />
 
         <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
@@ -79,9 +84,10 @@
             android:ellipsize="end"
             android:gravity="right"
             android:lines="1"
-            android:maxLength="25"
             android:text="Ahmedabad,Gujrat,India"
-            android:textSize="12sp"
+            android:textSize="17sp"
+            android:textColor="@color/color3"
+            android:layout_marginTop="5sp"
             tools:ignore="HardcodedText,RtlHardcoded" />
 
         <LinearLayout
@@ -98,18 +104,17 @@
                 android:layout_marginRight="5sp"
                 android:gravity="right"
                 android:text="10120"
-                android:textSize="12sp"
+                android:textSize="17sp"
                 tools:ignore="HardcodedText,InconsistentLayout,RtlHardcoded" />
 
             <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5sp"
                 android:ellipsize="end"
                 android:gravity="right"
                 android:lines="1"
                 android:text="Views"
-                android:textSize="12sp"
+                android:textSize="17sp"
                 tools:ignore="HardcodedText,RtlHardcoded" />
         </LinearLayout>
 
@@ -127,6 +132,7 @@
                 android:background="@drawable/round_rect_shapeoneselect"
                 android:gravity="center"
                 android:padding="8sp"
+                android:textSize="18sp"
                 android:text="Edit"
                 android:textColor="@color/white"
                 tools:ignore="HardcodedText" />
@@ -141,6 +147,7 @@
                 android:gravity="center"
                 android:padding="8sp"
                 android:text="Delete"
+                android:textSize="18sp"
                 android:textColor="@color/white"
                 tools:ignore="HardcodedText" />
         </LinearLayout>

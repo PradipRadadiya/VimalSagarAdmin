@@ -55,53 +55,72 @@
         android:layout_height="1sp"
         android:background="@color/colorPrimary"
         tools:ignore="SmallSp" />
-    <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
-        android:id="@+id/txt_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:padding="5dp"
-        android:textSize="16sp"
-        android:textColor="@color/black"
-        android:lineSpacingExtra="5dp"
-        tools:ignore="InconsistentLayout" />
 
-    <RelativeLayout
-        android:layout_marginLeft="1dp"
-        android:layout_marginRight="1dp"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_information"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/swipe_refresh_information"
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/nestedScrollview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:fillViewport="true"
+
             >
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerView_all_images"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-        </android.support.v4.widget.SwipeRefreshLayout>
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                    android:id="@+id/txt_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:lineSpacingExtra="7dp"
+                    android:padding="5dp"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    tools:ignore="InconsistentLayout" />
 
-        <ProgressBar
-            android:id="@+id/progress_load"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            tools:ignore="InconsistentLayout" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp">
 
-        <ImageView
-            android:id="@+id/img_nodata"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:scaleType="fitXY"
-            android:src="@drawable/nodataavi"
-            android:visibility="gone"
-            tools:ignore="ContentDescription" />
-    </RelativeLayout>
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerView_all_images"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+
+                    <ProgressBar
+                        android:id="@+id/progress_load"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        tools:ignore="InconsistentLayout" />
+
+                    <ImageView
+                        android:id="@+id/img_nodata"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/nodataavi"
+                        android:visibility="gone"
+                        tools:ignore="ContentDescription" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 
 </LinearLayout>

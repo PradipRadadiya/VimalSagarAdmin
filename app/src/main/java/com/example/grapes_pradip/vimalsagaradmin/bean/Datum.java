@@ -1,6 +1,7 @@
 
 package com.example.grapes_pradip.vimalsagaradmin.bean;
 
+import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -32,6 +33,8 @@ public class Datum {
     private String viewedUser;
 
     private boolean isSelected = false;
+
+
 
     public String getID() {
         return iD;

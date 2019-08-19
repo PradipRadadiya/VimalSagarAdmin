@@ -33,7 +33,7 @@
                 android:textColor="@color/lable"
                 android:lines="1"
                 android:ellipsize="end"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 tools:ignore="HardcodedText" />
 
             <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
@@ -54,6 +54,7 @@
                 android:layout_height="wrap_content"
                 android:lines="1"
                 android:text=""
+                android:textSize="18sp"
                 android:ellipsize="end"
                 android:paddingLeft="10sp"
                 android:textColor="@color/black"
@@ -80,7 +81,7 @@
                 android:gravity="right|bottom"
                 android:paddingBottom="5sp"
                 android:text="15/02/2017"
-                android:textSize="12sp"
+                android:textSize="18sp"
                 android:lines="1"
                 android:textColor="@color/black"
                 android:ellipsize="end"

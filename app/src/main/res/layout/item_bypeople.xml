@@ -39,7 +39,7 @@
                     android:padding="8sp"
                     android:text="Guru Purnima"
                     android:textColor="@color/lable"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     tools:ignore="HardcodedText" />
 
                 <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
@@ -47,10 +47,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:lines="2"
+                    android:textSize="18sp"
                     android:textColor="@color/lable"
                     android:paddingLeft="10sp"
                     android:paddingRight="10sp" />
-
 
             </LinearLayout>
 
@@ -112,7 +112,7 @@
                 android:gravity="right"
                 android:lines="1"
                 android:text="10120"
-                android:textSize="12sp"
+                android:textSize="18sp"
                 tools:ignore="HardcodedText,InconsistentLayout,RtlHardcoded" />
 
             <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
@@ -121,7 +121,7 @@
                 android:layout_marginRight="5sp"
                 android:gravity="right"
                 android:text="Views"
-                android:textSize="12sp"
+                android:textSize="18sp"
                 tools:ignore="HardcodedText,RtlHardcoded" />
         </LinearLayout>
 
@@ -143,7 +143,7 @@
                 android:lines="1"
                 android:paddingBottom="5sp"
                 android:text="Pradip"
-                android:textSize="12sp"
+                android:textSize="18sp"
                 tools:ignore="HardcodedText,RtlHardcoded" />
 
             <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
@@ -157,7 +157,7 @@
                 android:lines="1"
                 android:paddingBottom="5sp"
                 android:text="15/02/2017"
-                android:textSize="12sp"
+                android:textSize="18sp"
                 tools:ignore="HardcodedText,RtlHardcoded" />
 
         </LinearLayout>

@@ -146,7 +146,7 @@ public class ParticularUserResultDetail extends AppCompatActivity {
                         String listString = "";
 
                         for (String str : optionArrayList) {
-                            listString += str + ",";
+                            listString += str + "|";
                         }
 
 
@@ -176,7 +176,6 @@ public class ParticularUserResultDetail extends AppCompatActivity {
                     recycleview_comp_result.setVisibility(View.GONE);
                 }
             }
-
 
         }
     }

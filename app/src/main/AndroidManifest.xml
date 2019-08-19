@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!--suppress ALL -->
+<?xml version="1.0" encoding="utf-8"?><!-- suppress ALL -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.grapes_pradip.vimalsagaradmin">
@@ -17,10 +17,24 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/push_notification"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="@string/file_provider_authorities"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider_paths" />
+        </provider>
+
+        <activity
+            android:name=".activities.slide.EditSlideImageActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.splash.Splash_Activity3"
             android:screenOrientation="portrait">
@@ -30,7 +44,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activities.splash.Splash_Activity2"
             android:screenOrientation="portrait" />
@@ -176,6 +189,7 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="bypeople_comment_click" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -251,16 +265,15 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activities.opinionpoll.OpinionPollActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="opinionPoll_click" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activities.question.QuestionAnswerActivity"
             android:screenOrientation="portrait">
@@ -339,14 +352,12 @@
         <activity
             android:name=".activities.competition.EditComptitionQuestionActivity"
             android:screenOrientation="portrait" />
-
-
-       <activity android:name=".activities.vichar.SplashContent"
-           android:screenOrientation="portrait"/>
-
-        <activity android:name=".activities.comment.CommentDetailActivity"
-            android:screenOrientation="portrait"/>
-
+        <activity
+            android:name=".activities.vichar.SplashContent"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.comment.CommentDetailActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.SplashContent"
             android:screenOrientation="portrait" />
@@ -369,11 +380,9 @@
         <service
             android:name=".fcm.MyFirebaseMessagingService"
             tools:ignore="ExportedService">
-
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
-
         </service>
         <service
             android:name=".fcm.MyFirebaseInstanceIDService"
@@ -387,16 +396,52 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@mipmap/ic_launcher" />
+
         <!--
              Set color used with incoming notification messages. This is used when no color is set for the incoming
              notification message. See README(https://goo.gl/6BKBk7) for more.
         -->
+
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
 
-        <activity android:name=".activities.competition.ViewResultActivity" />
-        <activity android:name=".activities.competition.ParticularUserResultDetail"></activity>
+        <activity
+            android:name=".activities.competition.ViewResultActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.competition.ParticularUserResultDetail"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.jainism.AddJainism"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.jainism.EditJainism"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.SelectPhotoActivity" />
+        <activity
+            android:name=".activities.SampleActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ResultActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".activities.jainism.CommentListJainism" />
+
+        <meta-data
+            android:name="firebase_crashlytics_collection_enabled"
+            android:value="false" />
+
+        <activity android:name=".activities.jainism.AudioPlayActivity" />
+        <activity
+            android:name=".BottonActivity"
+            android:label="@string/title_activity_botton" />
+        <activity android:name=".activities.competition.SpecificDateWiseResultDeclareActivity" />
+        <activity android:name=".activities.competition.WinnerListActivity" />
+        <activity android:name=".activities.competition.CompetitionFinalResultHint"></activity>
     </application>
 
 </manifest>

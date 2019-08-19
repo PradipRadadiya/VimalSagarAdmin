@@ -22,7 +22,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50sp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
@@ -40,17 +40,20 @@
                 android:padding="8sp"
                 android:text=""
                 android:textColor="@color/lable"
-                android:textSize="16sp"
+                android:textSize="17sp"
                 android:layout_weight="9"
-                android:lines="1"
+                android:lineSpacingExtra="7sp"
+                android:maxLines="3"
                 android:ellipsize="end"
-                android:maxLines="1"
                 tools:ignore="HardcodedText" />
 
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/checkbox_question" />
+                android:button="@drawable/customdrawablecheckbox"
+                android:id="@+id/checkbox_question"
+                />
+
         </LinearLayout>
 
         <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
@@ -61,7 +64,8 @@
             android:gravity="right|bottom"
             android:paddingBottom="5sp"
             android:text=""
-            android:textSize="12sp"
+            android:textSize="16sp"
+            android:textColor="@color/color3"
             tools:ignore="HardcodedText,RtlHardcoded" />
 
         <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
@@ -72,7 +76,8 @@
             android:gravity="right|bottom"
             android:paddingBottom="5sp"
             android:text=""
-            android:textSize="12sp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="17sp"
             tools:ignore="HardcodedText,RtlHardcoded" />
 
         <LinearLayout
@@ -81,6 +86,7 @@
             android:orientation="horizontal"
             android:gravity="right"
             tools:ignore="RtlHardcoded">
+
             <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                 android:id="@+id/txt_views"
                 android:layout_width="wrap_content"
@@ -88,15 +94,16 @@
                 android:layout_marginRight="5sp"
                 android:gravity="right"
                 android:text=""
-                android:textSize="12sp"
+                android:textSize="17sp"
                 tools:ignore="HardcodedText,InconsistentLayout,RtlHardcoded" />
+
             <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5sp"
                 android:gravity="right"
                 android:text=""
-                android:textSize="12sp"
+                android:textSize="18sp"
                 tools:ignore="HardcodedText,RtlHardcoded" />
         </LinearLayout>
 
@@ -114,6 +121,7 @@
                 android:background="@drawable/round_rect_shapeoneselect"
                 android:textColor="@color/white"
                 android:padding="8sp"
+                android:textSize="18sp"
                 android:gravity="center"
                 android:layout_margin="10sp"
                 tools:ignore="HardcodedText" />
@@ -128,6 +136,7 @@
                 android:textColor="@color/white"
                 android:padding="8sp"
                 android:gravity="center"
+                android:textSize="18sp"
                 android:layout_margin="10sp"
                 tools:ignore="HardcodedText" />
         </LinearLayout>

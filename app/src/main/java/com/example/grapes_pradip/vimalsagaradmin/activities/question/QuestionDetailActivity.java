@@ -3,6 +3,7 @@ package com.example.grapes_pradip.vimalsagaradmin.activities.question;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -35,8 +36,6 @@ import java.util.ArrayList;
 import ch.boye.httpclientandroidlib.NameValuePair;
 import ch.boye.httpclientandroidlib.message.BasicNameValuePair;
 
-
-
 @SuppressWarnings("ALL")
 public class QuestionDetailActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -63,6 +62,7 @@ public class QuestionDetailActivity extends AppCompatActivity implements View.On
     private int status;
     private ProgressDialog progressDialog;
     private TextView txt_userdetail;
+    private ImageView img_copy;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -91,10 +91,31 @@ public class QuestionDetailActivity extends AppCompatActivity implements View.On
                 startActivity(intent1);
             }
         });
+
+
+        img_copy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setClipboard(QuestionDetailActivity.this,CommonMethod.decodeEmoji(answer));
+            }
+        });
     }
 
+    private void setClipboard(Context context, String text) {
+        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.HONEYCOMB) {
+            android.text.ClipboardManager clipboard = (android.text.ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+            clipboard.setText(text);
+            Toast.makeText(context, "Text Copied.", Toast.LENGTH_SHORT).show();
+        } else {
+            android.content.ClipboardManager clipboard = (android.content.ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+            android.content.ClipData clip = android.content.ClipData.newPlainText("Copied Text", text);
+            clipboard.setPrimaryClip(clip);
+            Toast.makeText(context, "Text Copied.", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     private void findID() {
+        img_copy=findViewById(R.id.img_copy);
         txt_userdetail = (TextView) findViewById(R.id.txt_userdetail);
         txt_name = (TextView) findViewById(R.id.txt_unm);
         txt_title = (EditText) findViewById(R.id.txt_titles);

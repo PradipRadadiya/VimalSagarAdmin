@@ -36,9 +36,17 @@ import ch.boye.httpclientandroidlib.message.BasicNameValuePair;
 
 public class EditNote extends AppCompatActivity {
 
-    private EditText edit_title, edit_date, edit_time, edit_description;
+    private EditText edit_title, edit_date, edit_time, edit_description, edit_date_time;
     private Button btn_add;
     private String fulldate;
+
+    String date_time = "";
+    int mYear;
+    int mMonth;
+    int mDay;
+
+    int mHour;
+    int mMinute;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,9 +60,9 @@ public class EditNote extends AppCompatActivity {
         final String id = intent.getStringExtra("id");
         edit_title.setText(CommonMethod.decodeEmoji(intent.getStringExtra("title")));
         edit_date.setText(CommonMethod.decodeEmoji(intent.getStringExtra("date")));
+        edit_date_time.setText(CommonMethod.decodeEmoji(intent.getStringExtra("date")));
         edit_time.setText(CommonMethod.decodeEmoji(intent.getStringExtra("time")));
         edit_description.setText(CommonMethod.decodeEmoji(intent.getStringExtra("description")));
-
 
         edit_date.setCursorVisible(false);
         edit_date.setFocusableInTouchMode(false);
@@ -66,7 +74,6 @@ public class EditNote extends AppCompatActivity {
             }
         });
 
-
         edit_time.setCursorVisible(false);
         edit_time.setFocusableInTouchMode(false);
         edit_time.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +83,17 @@ public class EditNote extends AppCompatActivity {
                 getCurrentTime();
             }
         });
+
+        edit_date_time.setCursorVisible(false);
+        edit_date_time.setFocusableInTouchMode(false);
+        edit_date_time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+                datePicker();
+            }
+        });
+
 
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,7 +106,7 @@ public class EditNote extends AppCompatActivity {
                     edit_description.setError("Please enter descriotion.");
                     edit_description.requestFocus();
                 } else {
-                    new NoteEdit().execute(CommonMethod.encodeEmoji(edit_title.getText().toString()), CommonMethod.encodeEmoji(edit_date.getText().toString()), CommonMethod.encodeEmoji(edit_time.getText().toString()), CommonMethod.encodeEmoji(edit_description.getText().toString()), id);
+                    new NoteEdit().execute(CommonMethod.encodeEmoji(edit_title.getText().toString()), edit_date_time.getText().toString(), CommonMethod.encodeEmoji(edit_time.getText().toString()), CommonMethod.encodeEmoji(edit_description.getText().toString()), id);
                 }
 
             }
@@ -164,7 +182,6 @@ public class EditNote extends AppCompatActivity {
 
     }
 
-
     @SuppressLint("SetTextI18n")
     private void toolbarClick() {
         ImageView img_back = (ImageView) findViewById(R.id.img_back);
@@ -183,6 +200,7 @@ public class EditNote extends AppCompatActivity {
     private void bindId() {
         edit_title = (EditText) findViewById(R.id.edit_title);
         edit_date = (EditText) findViewById(R.id.edit_date);
+        edit_date_time = (EditText) findViewById(R.id.edit_date_time);
         edit_time = (EditText) findViewById(R.id.edit_time);
         edit_description = (EditText) findViewById(R.id.edit_description);
         btn_add = (Button) findViewById(R.id.btn_add);
@@ -207,41 +225,113 @@ public class EditNote extends AppCompatActivity {
 
             ArrayList<NameValuePair> nameValuePairs = new ArrayList<>();
             nameValuePairs.add(new BasicNameValuePair("Title", strings[0]));
-            nameValuePairs.add(new BasicNameValuePair("Date", strings[1]));
+            nameValuePairs.add(new BasicNameValuePair("Datetime", strings[1]));
             nameValuePairs.add(new BasicNameValuePair("Time", strings[2]));
             nameValuePairs.add(new BasicNameValuePair("Description", strings[3]));
             nameValuePairs.add(new BasicNameValuePair("qid", strings[4]));
             responseJson = JsonParser.postStringResponse(CommonURL.Main_url + "competition/editcompetitionnote", nameValuePairs, EditNote.this);
-
-
             return responseJson;
         }
 
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-
             Log.e("response", "------------------" + s);
-
             try {
                 JSONObject jsonObject = new JSONObject(s);
                 if (jsonObject.getString("status").equalsIgnoreCase("success")) {
                     progressDialog.dismiss();
                     finish();
-
                 } else {
                     progressDialog.dismiss();
                 }
-
-
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-
         }
 
+    }
 
+    private void datePicker() {
+
+        // Get Current Date
+        final Calendar c = Calendar.getInstance();
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+
+                        date_time = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+                        //*************Call Time Picker Here ********************
+                        tiemPicker();
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.show();
+    }
+
+    private void tiemPicker() {
+        // Get Current Time
+        final Calendar c = Calendar.getInstance();
+        mHour = c.get(Calendar.HOUR_OF_DAY);
+        mMinute = c.get(Calendar.MINUTE);
+
+        // Launch Time Picker Dialog
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this,
+                new TimePickerDialog.OnTimeSetListener() {
+
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+
+                        mHour = hourOfDay;
+                        mMinute = minute;
+
+
+                        String status = "AM";
+
+                        if (hourOfDay > 11) {
+                            // If the hour is greater than or equal to 12
+                            // Then the current AM PM status is PM
+                            status = "PM";
+                        }
+
+                        // Initialize a new variable to hold 12 hour format hour value
+                        int hour_of_12_hour_format;
+
+                        if (hourOfDay > 11) {
+                            // If the hour is greater than or equal to 12
+                            // Then we subtract 12 from the hour to make it 12 hour format time
+                            hour_of_12_hour_format = hourOfDay - 12;
+                        } else {
+                            hour_of_12_hour_format = hourOfDay;
+                        }
+
+
+
+                        int length = String.valueOf(minute).length();
+                        Log.e("length","----"+length);
+                        String min;
+                        if (length==1){
+                            Log.e("if","----call");
+                            Log.e("if","----call-----"+"0"+String.valueOf(minute));
+                            min="0"+String.valueOf(minute);
+                        }else{
+                            Log.e("else","----call");
+                            min=String.valueOf(minute);
+                        }
+
+                        if (hour_of_12_hour_format==0){
+                            hour_of_12_hour_format=12;
+                        }
+                        edit_date_time.setText(date_time + " " + hour_of_12_hour_format + ":" + min + " " + status);
+
+                    }
+                }, mHour, mMinute, false);
+        timePickerDialog.show();
     }
 
 }

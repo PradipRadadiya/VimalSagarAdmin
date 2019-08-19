@@ -118,7 +118,6 @@ public class AddInformationActivity extends AppCompatActivity {
         txt_photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 photoarray = new ArrayList<>();
                 Intent intent = new Intent(AddInformationActivity.this, AlbumSelectActivity.class);
                 intent.putExtra(Constants.INTENT_EXTRA_LIMIT, 1);
@@ -126,6 +125,12 @@ public class AddInformationActivity extends AppCompatActivity {
 //                selectImage();
             }
         });
+
+
+
+
+
+
 
         edit_date.setCursorVisible(false);
         edit_date.setFocusableInTouchMode(false);
@@ -266,7 +271,6 @@ public class AddInformationActivity extends AppCompatActivity {
         txt_header = (TextView) findViewById(R.id.txt_header);
         img_back = (ImageView) findViewById(R.id.img_back);
         btn_add = (Button) findViewById(R.id.btn_add);
-
         img_icon = (ImageView) findViewById(R.id.img_icon);
         txt_photo = (TextView) findViewById(R.id.txt_photo);
 
@@ -399,7 +403,6 @@ public class AddInformationActivity extends AppCompatActivity {
             Log.e("loc", "----------" + loc);
 
             String Photo = "";
-
             Log.e("picturePath add", "----------------" + "picturePath");
 
             try {

@@ -162,6 +162,7 @@ public class InfomationDetailActivity extends AppCompatActivity implements View.
             case R.id.img_info:
                 Log.e("image","-------------");
                 break;
+
             case R.id.btn_edit:
                 Intent intent = new Intent(InfomationDetailActivity.this, EditInformationActivity.class);
                 intent.putExtra("info_id", id);
@@ -175,6 +176,7 @@ public class InfomationDetailActivity extends AppCompatActivity implements View.
                 finish();
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;
+
             case R.id.btn_delete:
                 if (CommonMethod.isInternetConnected(InfomationDetailActivity.this)) {
 
@@ -214,6 +216,7 @@ public class InfomationDetailActivity extends AppCompatActivity implements View.
                     Toast.makeText(InfomationDetailActivity.this, R.string.internet, Toast.LENGTH_SHORT).show();
                 }
                 break;
+
             case R.id.infolike:
                 likeLists = new ArrayList<>();
                 page_count = 1;

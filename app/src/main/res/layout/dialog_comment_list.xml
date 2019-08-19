@@ -95,6 +95,7 @@
                 android:inputType="text"
                 android:lines="1"
                 android:padding="10sp"
+                android:textSize="18sp"
                 tools:ignore="HardcodedText" />
 
             <ImageView

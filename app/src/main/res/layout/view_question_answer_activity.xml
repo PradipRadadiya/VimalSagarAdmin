@@ -27,6 +27,7 @@
         android:enabled="false"
         android:inputType="textMultiLine"
         android:padding="10sp"
+        android:textSize="18sp"
         android:ellipsize="end"
         android:textColor="@color/green"
         tools:ignore="LabelFor" />

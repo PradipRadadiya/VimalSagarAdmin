@@ -57,7 +57,7 @@ public class EditComptitionQuestionActivity extends AppCompatActivity implements
     TextView txt_sel_answer;
     String qid, title;
     String[] optarr;
-    String[] arr = {"a", "b", "c", "d"};
+    String[] arr = {"A", "B", "C", "D"};
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,14 +72,14 @@ public class EditComptitionQuestionActivity extends AppCompatActivity implements
         String Answer = intent.getStringExtra("Answer");
         String Option = intent.getStringExtra("Option");
         final String QType = intent.getStringExtra("QType");
-        optarr = Option.split(",");
+        optarr = Option.split("\\|");
 
 
         e_title.setText(CommonMethod.decodeEmoji(Question));
 
         List<String> qtype = new ArrayList<>();
-        qtype.add("yes_no");
         qtype.add("Option");
+        qtype.add("yes_no");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, qtype);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -87,15 +87,27 @@ public class EditComptitionQuestionActivity extends AppCompatActivity implements
 
 
         final List<String> howmanyquestion = new ArrayList<>();
+
 //        howmanyquestion.add("2");
 //        qtype.add("Radio");
+
         howmanyquestion.add("Select Option");
         howmanyquestion.add("4");
+
+
         ArrayAdapter<String> dataAdapter1 = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, howmanyquestion);
         dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_option.setAdapter(dataAdapter1);
 
+        if (QType.equalsIgnoreCase("Option")){
+            spinner_option.setSelection(1);
+        }else{
+            spiner_qtype.setSelection(1);
+        }
+
+        spiner_qtype.setEnabled(false);
+        spiner_qtype.setClickable(false);
 
         spinner_option.setVisibility(View.GONE);
         spinner_q_answer.setVisibility(View.GONE);
@@ -114,11 +126,14 @@ public class EditComptitionQuestionActivity extends AppCompatActivity implements
 //                    strings = null;
                     removeLine();
                     spinner_option.setVisibility(View.VISIBLE);
+                    spinner_q_answer.setVisibility(View.GONE);
                     txt_sel_answer.setVisibility(View.VISIBLE);
+
                 } else {
 //                    strings = null;
                     removeLine();
                     spinner_option.setVisibility(View.GONE);
+                    spinner_option.setSelection(0);
                 }
             }
 
@@ -172,8 +187,8 @@ public class EditComptitionQuestionActivity extends AppCompatActivity implements
                 if (spiner_qtype.getSelectedItem().toString().equalsIgnoreCase("yes_no")) {
 
                     strings = new String[2];
-                    strings[0] = arr[0] + ") " +"YES";
-                    strings[1] = arr[1] + ") " +"NO";
+                    strings[0] = arr[0] + ") " + "YES";
+                    strings[1] = arr[1] + ") " + "NO";
 
                     spinner_q_answer.setVisibility(View.VISIBLE);
 
@@ -193,7 +208,8 @@ public class EditComptitionQuestionActivity extends AppCompatActivity implements
                     strings = new String[allEds.size()];
 
                     for (int i = 0; i < allEds.size(); i++) {
-                        strings[i] = arr[i] + ") " +allEds.get(i).getText().toString();
+                        strings[i] = allEds.get(i).getText().toString();
+//                        strings[i] = arr[i] + ") " +allEds.get(i).getText().toString();
                         Log.e("edittext value", "-------------" + strings[i]);
                     }
 
@@ -222,8 +238,8 @@ public class EditComptitionQuestionActivity extends AppCompatActivity implements
         if (spiner_qtype.getSelectedItem().toString().equalsIgnoreCase("yes_no")) {
 
             strings = new String[2];
-            strings[0] = arr[0] + ") " +"YES";
-            strings[1] = arr[1] + ") " +"NO";
+            strings[0] = arr[0] + ") " + "YES";
+            strings[1] = arr[1] + ") " + "NO";
 
             spinner_q_answer.setVisibility(View.VISIBLE);
 
@@ -243,7 +259,8 @@ public class EditComptitionQuestionActivity extends AppCompatActivity implements
             strings = new String[allEds.size()];
 
             for (int i = 0; i < allEds.size(); i++) {
-                strings[i] = arr[i] + ") " +allEds.get(i).getText().toString();
+                strings[i] = allEds.get(i).getText().toString();
+//                strings[i] = arr[i] + ") " +allEds.get(i).getText().toString();
                 Log.e("edittext value", "-------------" + strings[i]);
             }
 
@@ -337,7 +354,6 @@ public class EditComptitionQuestionActivity extends AppCompatActivity implements
 //            et.setText("");
             et.setId(numberOfLines + 1);
             ll.addView(et);
-
             numberOfLines++;
 
         }
@@ -445,12 +461,11 @@ public class EditComptitionQuestionActivity extends AppCompatActivity implements
             nameValuePairs.add(new BasicNameValuePair("QType", params[3]));
 
 
-
-            Log.e("array size","---------------------"+strings.length);
+            Log.e("array size", "---------------------" + strings.length);
 
 
             for (int i = 0; i < strings.length; i++) {
-                Log.e("array value","---------------------"+strings[i]);
+                Log.e("array value", "---------------------" + strings[i]);
 
                 nameValuePairs.add(new BasicNameValuePair("Options[" + String.valueOf(i) + "]", strings[i]));
             }

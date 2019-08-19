@@ -34,7 +34,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 
-
 @SuppressWarnings("ALL")
 public class ByPeopleFragment extends Fragment {
     private View rootview;
@@ -62,8 +61,6 @@ public class ByPeopleFragment extends Fragment {
                 } else {
                     swipe_refresh.setRefreshing(false);
                 }
-
-
             }
         });
 
@@ -90,7 +87,6 @@ public class ByPeopleFragment extends Fragment {
         recyclerView_bypeople.setLayoutManager(linearLayoutManager);
         progress_load = (ProgressBar) rootview.findViewById(R.id.progress_load);
     }
-
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {

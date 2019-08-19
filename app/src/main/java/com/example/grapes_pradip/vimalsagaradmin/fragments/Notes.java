@@ -181,15 +181,12 @@ public class Notes extends Fragment {
                         Log.e("id", "---------------" + id);
                         String title = jsonObject1.getString("title");
                         String description = jsonObject1.getString("description");
-                        String date = jsonObject1.getString("date");
-                        String time = jsonObject1.getString("time");
-
-
-                        usersItems.add(new NoteItem(id, title, description, date, time));
+                        String date = jsonObject1.getString("datetime");
+//                        String time = jsonObject1.getString("datetime");
+                        usersItems.add(new NoteItem(id, title, description, date, ""));
 
                     }
 //                    recyclerUsersAdapter.notifyDataSetChanged();
-
                     recyclerUsersAdapter = new RecyclerNoteAdapter(getActivity(), usersItems);
                     recyclerView_users.setAdapter(recyclerUsersAdapter);
 
@@ -200,9 +197,9 @@ public class Notes extends Fragment {
             }
 
             progress_load.setVisibility(View.GONE);
-            if (usersItems.isEmpty()){
+            if (usersItems.isEmpty()) {
                 img_nodata.setVisibility(View.VISIBLE);
-            }else{
+            } else {
                 img_nodata.setVisibility(View.GONE);
             }
 

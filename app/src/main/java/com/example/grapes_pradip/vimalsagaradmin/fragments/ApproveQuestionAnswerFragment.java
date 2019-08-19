@@ -18,8 +18,11 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,15 +42,17 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import static com.example.grapes_pradip.vimalsagaradmin.adapters.question.RecyclerQuestionAnswerAdapter.questionid;
 
 @SuppressWarnings("ALL")
-public class ApproveQuestionAnswerFragment extends Fragment implements View.OnClickListener {
+public class ApproveQuestionAnswerFragment extends Fragment implements View.OnClickListener,Filterable {
     private View rootview;
     private SwipeRefreshLayout swipe_refresh;
     private RecyclerView recyclerView_question;
     private LinearLayoutManager linearLayoutManager;
+    private List<QuestiinItem> list;
     private List<QuestiinItem> responseArrayList = new ArrayList<>();
     private RecyclerApproveQuestionAnswerAdapter recyclerQuestionAnswerAdapter;
     private TextView txt_addnew;
@@ -64,6 +69,7 @@ public class ApproveQuestionAnswerFragment extends Fragment implements View.OnCl
     private ImageView img_nodata;
     private ImageView delete_data;
     ProgressBar progress_load;
+    SearchView searchView;
 
 
 
@@ -72,6 +78,26 @@ public class ApproveQuestionAnswerFragment extends Fragment implements View.OnCl
         rootview = inflater.inflate(R.layout.approve_question_fragment, container, false);
         linearLayoutManager = new LinearLayoutManager(getActivity());
         findID();
+
+        recyclerQuestionAnswerAdapter = new RecyclerApproveQuestionAnswerAdapter(getActivity(), responseArrayList);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                getFilter().filter(CommonMethod.encodeEmoji(query));
+
+//                getFilter().filter(CommonMethod.encodeEmoji(query));
+                return true;
+
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+//                getFilter().filter(CommonMethod.encodeEmoji(newText));
+
+                getFilter().filter(CommonMethod.encodeEmoji(newText));
+                return true;
+            }
+        });
 
         swipe_refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -149,6 +175,7 @@ public class ApproveQuestionAnswerFragment extends Fragment implements View.OnCl
     }
 
     private void findID() {
+        searchView=rootview.findViewById(R.id.searchView);
         swipe_refresh = (SwipeRefreshLayout) rootview.findViewById(R.id.swipe_refresh);
         recyclerView_question = (RecyclerView) rootview.findViewById(R.id.recyclerView_question);
         recyclerView_question.setLayoutManager(linearLayoutManager);
@@ -240,6 +267,8 @@ public class ApproveQuestionAnswerFragment extends Fragment implements View.OnCl
                 break;
         }
     }
+
+
 
     private class GetAllQuestion extends AsyncTask<String, Void, String> {
         String responseJSON = "";
@@ -369,11 +398,61 @@ public class ApproveQuestionAnswerFragment extends Fragment implements View.OnCl
         }
     }
 
+
+
     @Override
     public void onResume() {
         super.onResume();
         // put your code here...
 
+    }
+
+    @Override
+    public Filter getFilter() {
+        Filter filter = new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                FilterResults results = new FilterResults();
+
+                if (constraint == null || constraint.length() == 0) { // if your editText field is empty, return full list of FriendItem
+                    results.count = responseArrayList.size();
+                    results.values = responseArrayList;
+                } else {
+                    List<QuestiinItem> filteredList = new ArrayList<>();
+
+                    constraint = constraint.toString().toLowerCase(); // if we ignore case
+                    for (QuestiinItem item : responseArrayList) {
+                        String firstName = item.getQuestion().toLowerCase(); // if we ignore case
+                        String lastName = item.getAnswer().toLowerCase(); // if we ignore case
+                        if (firstName.contains(constraint.toString()) || lastName.contains(constraint.toString())) {
+                            filteredList.add(item); // added item witch contains our text in EditText
+                        }
+                    }
+
+                    results.count = filteredList.size(); // set count of filtered list
+                    results.values = filteredList; // set filtered list
+                }
+                return results; // return our filtered list
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+
+                list = (List<QuestiinItem>) results.values; // replace list to filtered list
+                recyclerQuestionAnswerAdapter = new RecyclerApproveQuestionAnswerAdapter(getActivity(), list);
+                recyclerView_question.setAdapter(recyclerQuestionAnswerAdapter);
+//                notifyDataSetChanged(); // refresh adapter
+
+                if (!list.isEmpty()) {
+
+                    Log.e("list", "---------------" + CommonMethod.decodeEmoji(list.get(0).getAnswer()));
+                    Log.e("list", "---------------" + CommonMethod.decodeEmoji(list.get(0).getQuestion()));
+                }
+
+
+            }
+        };
+        return filter;
     }
 
 

@@ -13,6 +13,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewCompat;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -61,8 +63,6 @@ import ch.boye.httpclientandroidlib.impl.client.DefaultHttpClient;
 
 import static com.example.grapes_pradip.vimalsagaradmin.adapters.gallery.RecyclerImageAllAdapter.imgid;
 
-
-
 @SuppressWarnings("ALL")
 public class AllGalleryActivity extends AppCompatActivity implements View.OnClickListener {
     private SwipeRefreshLayout swipe_refresh_information;
@@ -103,6 +103,7 @@ public class AllGalleryActivity extends AppCompatActivity implements View.OnClic
     ArrayList<String> selectedImage=new ArrayList<>();
     private TextView txt_description;
     private String description;
+    private NestedScrollView nestedScrollview;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -115,7 +116,7 @@ public class AllGalleryActivity extends AppCompatActivity implements View.OnClic
         title = intent.getStringExtra("title");
         description = intent.getStringExtra("description");
         linearLayoutManager = new LinearLayoutManager(AllGalleryActivity.this);
-        gridLayoutManager = new GridLayoutManager(AllGalleryActivity.this, 3);
+        gridLayoutManager = new GridLayoutManager(AllGalleryActivity.this, 2);
         findID();
         idClick();
 
@@ -185,10 +186,13 @@ public class AllGalleryActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void findID() {
+        nestedScrollview=findViewById(R.id.nestedScrollview);
         txt_description= (TextView) findViewById(R.id.txt_description);
         swipe_refresh_information = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_information);
         recyclerView_all_images = (RecyclerView) findViewById(R.id.recyclerView_all_images);
         recyclerView_all_images.setLayoutManager(gridLayoutManager);
+        ViewCompat.setNestedScrollingEnabled(recyclerView_all_images,false);
+//        recyclerView_all_images.setNestedScrollingEnabled(true);
         txt_addnew = (TextView) findViewById(R.id.txt_addnew);
         txt_header = (TextView) findViewById(R.id.txt_header);
         img_back = (ImageView) findViewById(R.id.img_back);
@@ -792,7 +796,9 @@ public class AllGalleryActivity extends AppCompatActivity implements View.OnClic
             imgid.clear();
             if (progressDialog != null) {
                 progressDialog.dismiss();
-                onResume();
+                imageItems = new ArrayList<>();
+                new GetAllImageCategory().execute();
+//                onResume();
             }
         }
     }

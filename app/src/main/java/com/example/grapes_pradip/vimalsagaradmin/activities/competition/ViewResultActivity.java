@@ -21,6 +21,7 @@ public class ViewResultActivity extends AppCompatActivity {
     private TextView txt_pending_qa, txt_approve_qa;
     private String cid;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

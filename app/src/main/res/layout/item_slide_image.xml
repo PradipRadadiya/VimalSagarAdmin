@@ -17,14 +17,14 @@
         android:padding="8dp"
         >
 
-
         <ImageView
             android:id="@+id/img_slide"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="175dp"
             android:background="@drawable/back_gradint"
-
             android:contentDescription="TODO"
+            android:layout_centerHorizontal="true"
+            android:scaleType="fitXY"
             tools:ignore="ContentDescription,HardcodedText" />
 
         <LinearLayout
@@ -42,6 +42,7 @@
                 android:textColor="@color/white"
                 android:padding="8sp"
                 android:gravity="center"
+                android:textSize="18sp"
                 android:layout_margin="10sp"
                 tools:ignore="HardcodedText" />
 
@@ -55,9 +56,11 @@
                 android:textColor="@color/white"
                 android:padding="8sp"
                 android:gravity="center"
+                android:textSize="18sp"
                 android:layout_margin="10sp"
                 tools:ignore="HardcodedText" />
         </LinearLayout>
 
     </LinearLayout>
+
 </com.alexandrius.accordionswipelayout.library.SwipeLayout>

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/bg"
     android:orientation="vertical"
     tools:ignore="Overdraw">
@@ -24,7 +25,9 @@
             android:text="All User Result list"
             android:textColor="@color/black"
             android:textSize="18sp"
-            tools:ignore="HardcodedText" />
+            tools:ignore="HardcodedText"
+            android:visibility="gone"
+            />
 
         <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextViewBold
             android:visibility="gone"

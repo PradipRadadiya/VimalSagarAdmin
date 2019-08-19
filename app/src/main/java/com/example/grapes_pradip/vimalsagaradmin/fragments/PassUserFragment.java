@@ -10,10 +10,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -38,16 +43,18 @@ import java.util.List;
 import ch.boye.httpclientandroidlib.NameValuePair;
 import ch.boye.httpclientandroidlib.message.BasicNameValuePair;
 
+import static android.content.Context.INPUT_METHOD_SERVICE;
 import static com.example.grapes_pradip.vimalsagaradmin.adapters.question.RecyclerQuestionAnswerAdapter.questionid;
 
 
 
 @SuppressWarnings("ALL")
-public class PassUserFragment extends Fragment implements View.OnClickListener {
+public class PassUserFragment extends Fragment implements View.OnClickListener,Filterable {
     private View rootview;
     private SwipeRefreshLayout swipe_refresh;
     private RecyclerView recyclerView_question;
     private LinearLayoutManager linearLayoutManager;
+    private List<PassFailtem> list;
     private List<PassFailtem> responseArrayList = new ArrayList<>();
     private RecyclerPassFailUserAdapter recyclerPassFailUserAdapter;
     private TextView txt_addnew;
@@ -65,6 +72,7 @@ public class PassUserFragment extends Fragment implements View.OnClickListener {
     ProgressBar progress_load;
     private String cid;
     private TextView txt_participateuser;
+    private SearchView searchView_results;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -74,7 +82,6 @@ public class PassUserFragment extends Fragment implements View.OnClickListener {
 
         Bundle bundle = this.getArguments();
         cid = bundle.getString("cid");
-
 
         if (CommonMethod.isInternetConnected(getActivity())) {
             new GetAllResult().execute(cid);
@@ -87,9 +94,27 @@ public class PassUserFragment extends Fragment implements View.OnClickListener {
                 } else {
                     swipe_refresh.setRefreshing(false);
                 }
-
             }
         });
+
+
+        recyclerPassFailUserAdapter = new RecyclerPassFailUserAdapter(getActivity(), responseArrayList);
+        searchView_results.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                getFilter().filter(CommonMethod.encodeEmoji(s));
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                getFilter().filter(CommonMethod.encodeEmoji(s));
+
+                return false;
+            }
+        });
+
 
 
         /*recyclerView_question.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -137,6 +162,12 @@ public class PassUserFragment extends Fragment implements View.OnClickListener {
         return rootview;
     }
 
+
+    public void onClicks(View v) {
+        InputMethodManager im = ((InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE));
+        im.showSoftInput(searchView_results, 0);
+    }
+
     private void refreshContent() {
         page_count = 1;
         questionid.clear();
@@ -146,6 +177,7 @@ public class PassUserFragment extends Fragment implements View.OnClickListener {
     }
 
     private void findID() {
+        searchView_results=rootview.findViewById(R.id.searchView_results);
         txt_participateuser=(TextView)rootview.findViewById(R.id.txt_participateuser);
         swipe_refresh = (SwipeRefreshLayout) rootview.findViewById(R.id.swipe_refresh);
         recyclerView_question = (RecyclerView) rootview.findViewById(R.id.recyclerView_question);
@@ -153,12 +185,21 @@ public class PassUserFragment extends Fragment implements View.OnClickListener {
         txt_addnew = (TextView) rootview.findViewById(R.id.txt_addnew);
         img_nodata = (ImageView) rootview.findViewById(R.id.img_nodata);
         progress_load = (ProgressBar) rootview.findViewById(R.id.progress_load);
-    }
 
+
+
+
+        EditText searchEditText = (EditText) searchView_results.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        searchEditText.setTextColor(getResources().getColor(R.color.white));
+        searchEditText.setHintTextColor(getResources().getColor(R.color.white));
+
+
+    }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+
             case R.id.txt_addnew:
                 Intent intent = new Intent(getActivity(), AddThoughtActivity.class);
                 startActivity(intent);
@@ -206,6 +247,55 @@ public class PassUserFragment extends Fragment implements View.OnClickListener {
                 }
                 break;
         }
+    }
+
+    @Override
+    public Filter getFilter() {
+        Filter filter = new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                FilterResults results = new FilterResults();
+
+                if (constraint == null || constraint.length() == 0) { // if your editText field is empty, return full list of FriendItem
+                    results.count = responseArrayList.size();
+                    results.values = responseArrayList;
+                } else {
+                    List<PassFailtem> filteredList = new ArrayList<>();
+
+                    constraint = constraint.toString().toLowerCase(); // if we ignore case
+                    for (PassFailtem item : responseArrayList) {
+                        String firstName = item.getName().toLowerCase(); // if we ignore case
+                        String lastName = item.getTaken_time().toLowerCase(); // if we ignore case
+                        if (firstName.contains(constraint.toString()) || lastName.contains(constraint.toString())) {
+                            filteredList.add(item); // added item witch contains our text in EditText
+                        }
+                    }
+
+                    results.count = filteredList.size(); // set count of filtered list
+                    results.values = filteredList; // set filtered list
+                }
+                return results; // return our filtered list
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+
+                list = (List<PassFailtem>) results.values; // replace list to filtered list
+                recyclerPassFailUserAdapter = new RecyclerPassFailUserAdapter(getActivity(), list);
+                recyclerView_question.setAdapter(recyclerPassFailUserAdapter);
+//                notifyDataSetChanged(); // refresh adapter
+
+                if (!list.isEmpty()) {
+
+                    Log.e("list","----------------------"+list.get(0).getName());
+//                    Log.e("list", "---------------" + CommonMethod.decodeEmoji(list.get(0).getAnswer()));
+//                    Log.e("list", "---------------" + CommonMethod.decodeEmoji(list.get(0).getQuestion()));
+                }
+
+
+            }
+        };
+        return filter;
     }
 
     private class GetAllResult extends AsyncTask<String, Void, String> {

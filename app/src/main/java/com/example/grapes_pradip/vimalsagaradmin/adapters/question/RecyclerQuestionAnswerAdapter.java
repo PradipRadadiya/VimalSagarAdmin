@@ -51,11 +51,10 @@ public class RecyclerQuestionAnswerAdapter extends RecyclerView.Adapter<Recycler
     public void onBindViewHolder(final ViewHolder holder, final int i) {
 
         final QuestiinItem questiinItem = itemArrayList.get(i);
-
-        holder.txt_title.setText(questiinItem.getID() + ") " + CommonMethod.decodeEmoji(questiinItem.getQuestion()));
+        holder.txt_title.setText(String.valueOf(itemArrayList.size()-i) + ") " + CommonMethod.decodeEmoji(questiinItem.getQuestion()));
         holder.txt_date.setText(CommonMethod.decodeEmoji(questiinItem.getDate()));
         holder.txt_name.setText(CommonMethod.decodeEmoji(questiinItem.getName()));
-        holder.txt_views.setText(CommonMethod.decodeEmoji(questiinItem.getView()));
+        holder.txt_views.setText(CommonMethod.decodeEmoji(questiinItem.getView())+" Views");
         ((SwipeLayout) holder.itemView).setItemState(SwipeLayout.ITEM_STATE_COLLAPSED, true);
         holder.checkbox_question.setChecked(questiinItem.isSelected() ? true : false);
 

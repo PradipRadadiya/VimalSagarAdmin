@@ -54,7 +54,7 @@
                     android:text="Mathen Vandami guruji,maharaj namaste good of the app for all type of knowledge transfer."
                     android:textColor="@color/black"
                     android:layout_marginLeft="5dp"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     tools:ignore="HardcodedText"
                     android:layout_marginStart="5dp" />
             </LinearLayout>

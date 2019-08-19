@@ -50,12 +50,13 @@
                 android:padding="8sp"
                 android:lines="1"
                 android:ellipsize="end"
+
                 android:text="" />
 
             <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextViewBold
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5sp"
+                android:layout_marginTop="10sp"
                 android:text="Question :"
                 android:textColor="@color/lable"
                 android:textSize="18sp"
@@ -74,7 +75,7 @@
             <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextViewBold
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5sp"
+                android:layout_marginTop="10sp"
                 android:text="Date :"
                 android:textColor="@color/lable"
                 android:textSize="18sp"
@@ -126,7 +127,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:visibility="gone"
+                android:visibility="visible"
                 android:id="@+id/lin_replay_answer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -134,15 +135,29 @@
                 android:orientation="vertical"
                 android:paddingBottom="20sp">
 
-                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5sp"
-                    android:text="Answer :"
-                    android:textColor="@color/lable"
-                    android:textSize="18sp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10sp"
+                    >
+                    <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5sp"
+                        android:text="Answer :"
+                        android:textColor="@color/lable"
+                        android:textSize="18sp"
+                        tools:ignore="HardcodedText" />
 
-                    tools:ignore="HardcodedText" />
+                    <ImageView
+                        android:id="@+id/img_copy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_action_copy"
+                        />
+                </LinearLayout>
+
 
                 <com.example.grapes_pradip.vimalsagaradmin.util.CustomEditText
                     style="@style/edittext"
@@ -184,7 +199,7 @@
                     android:layout_marginRight="5sp"
                     android:gravity="right"
                     android:text="10120"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     tools:ignore="HardcodedText,InconsistentLayout,RtlHardcoded" />
                 <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                     android:layout_width="wrap_content"
@@ -192,7 +207,7 @@
                     android:layout_marginRight="5sp"
                     android:gravity="right"
                     android:text="Views"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     tools:ignore="HardcodedText,RtlHardcoded" />
             </LinearLayout>
 

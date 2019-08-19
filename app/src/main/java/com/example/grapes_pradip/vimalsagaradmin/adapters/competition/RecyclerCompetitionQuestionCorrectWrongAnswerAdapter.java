@@ -60,7 +60,9 @@ public class RecyclerCompetitionQuestionCorrectWrongAnswerAdapter extends Recycl
 
         String[] options;
         options = null;
-        options=competitionQuestionItem.getOptions().split(",");
+        options=competitionQuestionItem.getOptions().split("\\|");
+
+
 
         holder.txt_option.setText("");
         Log.e("option lenght","--------------"+options.length);
@@ -90,7 +92,7 @@ public class RecyclerCompetitionQuestionCorrectWrongAnswerAdapter extends Recycl
 
         public ViewHolder(View itemView) {
             super(itemView);
-            txt_index = (TextView) itemView.findViewById(R.id.txt_index);
+            txt_index = (TextView) itemView.findViewById(R.id.txt_index_count);
             txt_title = (TextView) itemView.findViewById(R.id.txt_title);
             txt_type = (TextView) itemView.findViewById(R.id.txt_type);
             txt_answer = (TextView) itemView.findViewById(R.id.txt_answer);

@@ -210,7 +210,6 @@ public class AllCompetionQuestionActivity extends AppCompatActivity implements V
                         Log.e("id", "---------------" + id);
                         String question = jsonObject1.getString("question");
                         String answer = jsonObject1.getString("answer");
-
                         String questiontype = jsonObject1.getString("qtype");
                         String competition_id = jsonObject1.getString("competition_id");
 
@@ -230,9 +229,8 @@ public class AllCompetionQuestionActivity extends AppCompatActivity implements V
                         }
 
                         String listString = "";
-
                         for (String str : optionArrayList) {
-                            listString += str + ",";
+                            listString += str + "|";
                         }
 
                         competitionQuestionItems.add(new CompetitionQuestionItem(id, question, questiontype, competition_id, answer, listString));

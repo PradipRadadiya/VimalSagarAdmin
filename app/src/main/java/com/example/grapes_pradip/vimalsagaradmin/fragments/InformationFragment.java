@@ -376,6 +376,7 @@ public class InformationFragment extends Fragment implements View.OnClickListene
 
 
         }
+
     }
 
     private void getInformation() {

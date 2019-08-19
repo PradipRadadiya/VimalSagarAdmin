@@ -23,7 +23,7 @@
             android:padding="5sp"
             android:text="Confirmation:"
             android:textColor="@color/white"
-            android:textSize="18sp"
+            android:textSize="19sp"
             tools:ignore="HardcodedText" />
 
     </LinearLayout>
@@ -35,7 +35,7 @@
         android:layout_marginTop="20sp"
         android:text="Are you sure want to logout?"
         android:textColor="@color/color3"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         tools:ignore="HardcodedText" />
 

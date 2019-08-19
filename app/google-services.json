@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "290689272007-r1nctfcnjdsfsec6an8qk5i8g2s9gcp3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.grapes_pradip.vimalsagaradmin",
+            "certificate_hash": "16afcfad6c9f20d0d321753f6e3f4d60b88093bf"
+          }
+        },
+        {
           "client_id": "290689272007-75i690o23cf2cobcsn363p73lhp668tr.apps.googleusercontent.com",
           "client_type": 3
         }

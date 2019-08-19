@@ -54,14 +54,15 @@
                 android:inputType="text"
                 android:lines="1"
                 android:maxLines="1"
+                android:textSize="18sp"
                 android:padding="10sp"
                 tools:ignore="HardcodedText" />
 
             <LinearLayout
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                     android:layout_width="wrap_content"
@@ -82,7 +83,6 @@
             </LinearLayout>
 
             <com.example.grapes_pradip.vimalsagaradmin.util.CustomEditText
-                android:visibility="gone"
                 android:id="@+id/edit_date"
                 style="@style/edittext"
                 android:layout_width="match_parent"
@@ -94,13 +94,14 @@
                 android:lines="1"
                 android:maxLines="1"
                 android:padding="10sp"
+                android:visibility="gone"
                 tools:ignore="HardcodedText" />
 
             <LinearLayout
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                     android:layout_width="wrap_content"
@@ -120,7 +121,6 @@
             </LinearLayout>
 
             <com.example.grapes_pradip.vimalsagaradmin.util.CustomEditText
-                android:visibility="gone"
                 android:id="@+id/edit_time"
                 style="@style/edittext"
                 android:layout_width="match_parent"
@@ -132,11 +132,13 @@
                 android:lines="1"
                 android:maxLines="1"
                 android:padding="10sp"
+                android:visibility="gone"
                 tools:ignore="HardcodedText" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10sp"
                 android:orientation="horizontal">
 
                 <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
@@ -166,6 +168,44 @@
                 android:hint="Enter Description"
                 android:inputType="textMultiLine"
                 android:padding="10sp"
+                android:textSize="18sp"
+                tools:ignore="HardcodedText" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10sp"
+                android:orientation="horizontal">
+
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Date &amp; Time"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    tools:ignore="HardcodedText" />
+
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    android:textColor="@color/color3"
+                    android:textSize="18sp"
+                    tools:ignore="HardcodedText" />
+
+            </LinearLayout>
+
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomEditText
+                android:id="@+id/edit_date_time"
+                style="@style/edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5sp"
+                android:background="@drawable/edittext_round"
+                android:hint="Select Date &amp; Time"
+                android:inputType="textMultiLine"
+                android:padding="10sp"
+                android:textSize="18sp"
                 tools:ignore="HardcodedText" />
 
 

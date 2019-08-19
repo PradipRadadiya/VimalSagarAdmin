@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -36,7 +37,10 @@ import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
 import com.example.grapes_pradip.vimalsagaradmin.common.JsonParser;
 import com.example.grapes_pradip.vimalsagaradmin.model.information.LikeList;
+import com.example.grapes_pradip.vimalsagaradmin.retrofit.APIClient;
+import com.example.grapes_pradip.vimalsagaradmin.retrofit.ApiInterface;
 import com.example.jean.jcplayer.JcPlayerView;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,6 +51,9 @@ import java.util.Date;
 
 import ch.boye.httpclientandroidlib.NameValuePair;
 import ch.boye.httpclientandroidlib.message.BasicNameValuePair;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.example.grapes_pradip.vimalsagaradmin.activities.video.VideoDetailActivity.video_play_url;
 
@@ -116,6 +123,7 @@ public class ByPeopleDetailActivity extends AppCompatActivity implements View.On
     RelativeLayout rel_video;
     private TextView txt_userdetail;
     private Button btn_update;
+    private TextView txt_link;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -150,11 +158,9 @@ public class ByPeopleDetailActivity extends AppCompatActivity implements View.On
         txt_userdetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent1 = new Intent(ByPeopleDetailActivity.this, UserViewActivity.class);
                 intent1.putExtra("uid", uid);
                 startActivity(intent1);
-
             }
         });
     }
@@ -187,7 +193,8 @@ public class ByPeopleDetailActivity extends AppCompatActivity implements View.On
         audio_text = (TextView) findViewById(R.id.audio_text);
         video_text = (TextView) findViewById(R.id.video_text);
         detailcomment = (TextView) findViewById(R.id.detailcomment);
-        btn_update=findViewById(R.id.btn_update);
+        btn_update = findViewById(R.id.btn_update);
+        txt_link = findViewById(R.id.txt_link);
     }
 
     private void idClick() {
@@ -195,7 +202,7 @@ public class ByPeopleDetailActivity extends AppCompatActivity implements View.On
         btn_delete.setOnClickListener(this);
         infolike.setOnClickListener(this);
         infocomment.setOnClickListener(this);
-//        btn_update.setOnClickListener(this);
+        btn_update.setOnClickListener(this);
     }
 
 
@@ -207,17 +214,17 @@ public class ByPeopleDetailActivity extends AppCompatActivity implements View.On
         txt_address.setText(CommonMethod.decodeEmoji(name));
         txt_videolink.setText(CommonMethod.decodeEmoji(videoLink));
         txt_views.setText(CommonMethod.decodeEmoji(view));
+        txt_link.setText(CommonMethod.decodeEmoji(videoLink));
 
         if (photo.equalsIgnoreCase("null")) {
             txt_img.setVisibility(View.GONE);
             img_photo.setVisibility(View.GONE);
         } else {
-//            Picasso.with(ByPeopleDetailActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.bypeopleimage + photo.replaceAll(" ", "%20")).error(R.drawable.noimageavailable).placeholder(R.drawable.loading_bar).resize(0,200).into(img_photo);
 
             Glide.with(ByPeopleDetailActivity.this).load(CommonURL.ImagePath + CommonAPI_Name.bypeopleimage + photo
                     .replaceAll(" ", "%20")).crossFade().placeholder(R.drawable.loading_bar).dontAnimate().into(img_photo);
 
-            Log.e("photo","--------------------"+CommonURL.ImagePath + CommonAPI_Name.bypeopleimage + photo);
+            Log.e("photo", "--------------------" + CommonURL.ImagePath + CommonAPI_Name.bypeopleimage + photo);
 
 
         }
@@ -278,13 +285,15 @@ public class ByPeopleDetailActivity extends AppCompatActivity implements View.On
         switch (v.getId()) {
 
             case R.id.btn_update:
-
-
-
+                Log.e("Title", "-----------------" + txt_title.getText().toString());
+                Log.e("Post", "-----------------" + txt_description.getText().toString());
+                Log.e("pid", "-----------------" + id);
+                Log.e("VideoLink", "-----------------" + txt_videolink.getText().toString());
+                editPost(CommonMethod.encodeEmoji(txt_title.getText().toString()), CommonMethod.encodeEmoji(txt_description.getText().toString()), id, txt_videolink.getText().toString());
+//                new EditPost().execute(txt_title.getText().toString(), txt_description.getText().toString(), id, txt_videolink.getText().toString());
                 break;
 
             case R.id.img_back:
-
                 jcplayer_audio.kill();
                 onPause();
                 finish();
@@ -292,16 +301,15 @@ public class ByPeopleDetailActivity extends AppCompatActivity implements View.On
                 break;
 
             case R.id.btn_delete:
-
                 jcplayer_audio.kill();
                 onPause();
-
                 if (CommonMethod.isInternetConnected(ByPeopleDetailActivity.this)) {
                     new DeletePost().execute();
                 } else {
                     Toast.makeText(ByPeopleDetailActivity.this, R.string.internet, Toast.LENGTH_SHORT).show();
                 }
                 break;
+
             case R.id.infolike:
                 likeLists = new ArrayList<>();
                 page_count = 1;
@@ -328,6 +336,7 @@ public class ByPeopleDetailActivity extends AppCompatActivity implements View.On
                 } else {
                     Toast.makeText(ByPeopleDetailActivity.this, R.string.internet, Toast.LENGTH_SHORT).show();
                 }
+
                 recyclerView_likes.addOnScrollListener(new RecyclerView.OnScrollListener() {
                     @Override
                     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -361,8 +370,6 @@ public class ByPeopleDetailActivity extends AppCompatActivity implements View.On
                                     Toast.makeText(ByPeopleDetailActivity.this, R.string.internet, Toast.LENGTH_SHORT).show();
                                 }
                                 loading = true;
-
-
                             }
                         }
                     }
@@ -501,32 +508,6 @@ public class ByPeopleDetailActivity extends AppCompatActivity implements View.On
 
         }
     }
-
-
-    private class UpdatePost extends AsyncTask<String,Void,String>{
-        String responseJson="";
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected String doInBackground(String... strings) {
-            ArrayList<NameValuePair> nameValuePairs=new ArrayList<>();
-            nameValuePairs.add(new BasicNameValuePair("id","1"));
-            nameValuePairs.add(new BasicNameValuePair("title","1"));
-            nameValuePairs.add(new BasicNameValuePair("post","1"));
-            nameValuePairs.add(new BasicNameValuePair("videolink","1"));
-            responseJson=JsonParser.postStringResponse(CommonURL.Main_url,nameValuePairs,ByPeopleDetailActivity.this);
-            return responseJson;
-        }
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-        }
-
-    }
-
 
     private class LikeUserList extends AsyncTask<String, Void, String> {
         String responseJSON = "";
@@ -733,7 +714,7 @@ public class ByPeopleDetailActivity extends AppCompatActivity implements View.On
                         Toast.makeText(ByPeopleDetailActivity.this, "Comment added successfully.", Toast.LENGTH_SHORT).show();
 //                        dialog.dismiss();
 //                        Toast.makeText(ByPeopleDetailActivity.this, "" + jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
-                        ;
+
                     } else {
                         Toast.makeText(ByPeopleDetailActivity.this, "Comment not added.", Toast.LENGTH_SHORT).show();
 //                        Toast.makeText(ByPeopleDetailActivity.this, "" + jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
@@ -829,6 +810,7 @@ public class ByPeopleDetailActivity extends AppCompatActivity implements View.On
 
 
                 }
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -845,4 +827,73 @@ public class ByPeopleDetailActivity extends AppCompatActivity implements View.On
         new GetPostDetail().execute();
     }
 
+    //Using for edit post
+
+    private void editPost(String title, String post, String pid, String link) {
+        final ProgressDialog progressDialog = new ProgressDialog(ByPeopleDetailActivity.this);
+        progressDialog.setMessage("Please wait..");
+        progressDialog.show();
+        ApiInterface apiInterface = APIClient.getClient().create(ApiInterface.class);
+        Call<JsonObject> callApi = apiInterface.editPost(title, post, pid, link);
+        callApi.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
+                progressDialog.dismiss();
+                Log.e("reponse", "-----------------" + response.body());
+                if (response.isSuccessful()) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response.body().toString());
+                        if (jsonObject.getString("status").equalsIgnoreCase("success")) {
+                            Toast.makeText(ByPeopleDetailActivity.this, "Post update successfully.", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
+                progressDialog.dismiss();
+                Toast.makeText(ByPeopleDetailActivity.this, R.string.reopen, Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+    }
+
+
+    private class EditPost extends AsyncTask<String, Void, String> {
+
+        String response = "";
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            ArrayList<NameValuePair> nameValuePairs = new ArrayList<>();
+            nameValuePairs.add(new BasicNameValuePair("Title", strings[0]));
+            nameValuePairs.add(new BasicNameValuePair("Post", strings[1]));
+            nameValuePairs.add(new BasicNameValuePair("pid", strings[2]));
+            nameValuePairs.add(new BasicNameValuePair("VideoLink", strings[3]));
+            response = JsonParser.postStringResponse(CommonURL.Main_url+"bypeople/editpost", nameValuePairs, ByPeopleDetailActivity.this);
+            return response;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            Log.e("response", "-----------" + response);
+        }
+
+    }
+
 }
+
+

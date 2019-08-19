@@ -25,9 +25,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
- * Created by Pradip on 1/2/17.
- */
+import ch.boye.httpclientandroidlib.NameValuePair;
+import ch.boye.httpclientandroidlib.message.BasicNameValuePair;
+
 @SuppressWarnings("ALL")
 public class RecyclerCommentAdapter extends RecyclerView.Adapter<RecyclerCommentAdapter.ViewHolder> {
 
@@ -73,10 +73,13 @@ public class RecyclerCommentAdapter extends RecyclerView.Adapter<RecyclerComment
                 @Override
                 public void onClick(View v) {
                     id = commentList.getID();
-                    new RejectPost().execute();
+                    new DeletePost().execute();
                     holder.lin_approve.setVisibility(View.GONE);
                     holder.lin_delete.setVisibility(View.GONE);
-                    holder.rejected.setVisibility(View.VISIBLE);
+                    holder.rejected.setVisibility(View.GONE);
+                    int pos = holder.getAdapterPosition();
+                    itemArrayList.remove(pos);
+                    notifyItemRemoved(pos);
                 }
             });
         }
@@ -108,10 +111,15 @@ public class RecyclerCommentAdapter extends RecyclerView.Adapter<RecyclerComment
                     if (CommonMethod.isInternetConnected(activity)) {
 //                        itemArrayList.remove(holder.getAdapterPosition());
                         id = commentList.getID();
-                        new RejectPost().execute();
+                        new DeletePost().execute();
                         holder.lin_approve.setVisibility(View.GONE);
                         holder.lin_delete.setVisibility(View.GONE);
-                        holder.rejected.setVisibility(View.VISIBLE);
+                        holder.rejected.setVisibility(View.GONE);
+
+                        int pos = holder.getAdapterPosition();
+                        itemArrayList.remove(pos);
+                        notifyItemRemoved(pos);
+
                     }
                 }
             });
@@ -173,7 +181,6 @@ public class RecyclerCommentAdapter extends RecyclerView.Adapter<RecyclerComment
 
     }
 
-
     private class ApprovePost extends AsyncTask<String, Void, String> {
         String responseJSON = "";
 
@@ -212,7 +219,7 @@ public class RecyclerCommentAdapter extends RecyclerView.Adapter<RecyclerComment
         }
     }
 
-    private class RejectPost extends AsyncTask<String, Void, String> {
+    private class DeletePost extends AsyncTask<String, Void, String> {
         String responseJSON = "";
 
         @Override
@@ -226,7 +233,10 @@ public class RecyclerCommentAdapter extends RecyclerView.Adapter<RecyclerComment
 
         @Override
         protected String doInBackground(String... params) {
-            responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.rejectcomment + "?commentid=" + id);
+
+            ArrayList<NameValuePair> nameValuePairs=new ArrayList<>();
+            nameValuePairs.add(new BasicNameValuePair("jid",id));
+            responseJSON = JsonParser.postStringResponse(CommonURL.Main_url + "jainaism/removecomment",nameValuePairs,activity);
             return responseJSON;
         }
 
@@ -251,4 +261,5 @@ public class RecyclerCommentAdapter extends RecyclerView.Adapter<RecyclerComment
             }
         }
     }
+
 }

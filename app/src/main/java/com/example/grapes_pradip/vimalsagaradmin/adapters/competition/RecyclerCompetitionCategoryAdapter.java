@@ -57,7 +57,6 @@ public class RecyclerCompetitionCategoryAdapter extends RecyclerView.Adapter<Rec
         this.itemArrayList = itemArrayList;
     }
 
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_competition, viewGroup, false);
@@ -68,17 +67,14 @@ public class RecyclerCompetitionCategoryAdapter extends RecyclerView.Adapter<Rec
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int i) {
-
-
         final CompetitionItem competitionItem = itemArrayList.get(i);
         holder.txt_title.setText(CommonMethod.decodeEmoji(competitionItem.getTitle()));
         holder.txt_timer.setText(CommonMethod.decodeEmoji(competitionItem.getTotal_minute() + " minute"));
-        holder.txt_last_date.setText(CommonMethod.decodeEmoji(competitionItem.getDate()));
-        holder.txt_time.setText(CommonMethod.decodeEmoji(competitionItem.getTime()));
+        holder.txt_last_date.setText("Start Time : "+competitionItem.getDate());
+        holder.txt_time.setText("End Time : "+competitionItem.getTime());
         holder.txt_total_question.setText(CommonMethod.decodeEmoji(competitionItem.getTotal_question() + " Question"));
         holder.check_delete.setChecked(competitionItem.isSelected() ? true : false);
         holder.txt_total_participate.setText(CommonMethod.decodeEmoji("Participated User : " + competitionItem.getParticipated_users()));
-
 
         if (competitionItem.getStatus().equalsIgnoreCase("2")) {
             holder.txt_publish.setVisibility(View.GONE);
@@ -127,7 +123,6 @@ public class RecyclerCompetitionCategoryAdapter extends RecyclerView.Adapter<Rec
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .show();
 
-
             }
         });
 
@@ -154,6 +149,7 @@ public class RecyclerCompetitionCategoryAdapter extends RecyclerView.Adapter<Rec
                 intent.putExtra("time", itemArrayList.get(holder.getAdapterPosition()).getTime());
                 intent.putExtra("total_question", itemArrayList.get(holder.getAdapterPosition()).getTotal_question());
                 intent.putExtra("total_minute", itemArrayList.get(holder.getAdapterPosition()).getTotal_minute());
+                intent.putExtra("description", itemArrayList.get(holder.getAdapterPosition()).getDescription());
                 activity.startActivity(intent);
                 activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 

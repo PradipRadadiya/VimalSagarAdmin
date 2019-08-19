@@ -3,6 +3,7 @@ package com.example.grapes_pradip.vimalsagaradmin.activities.competition;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
@@ -34,6 +35,7 @@ import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
 import com.example.grapes_pradip.vimalsagaradmin.util.MarshMallowPermission;
+import com.mcsoft.timerangepickerdialog.RangeTimePickerDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -55,10 +57,8 @@ import ch.boye.httpclientandroidlib.entity.mime.MultipartEntity;
 import ch.boye.httpclientandroidlib.entity.mime.content.StringBody;
 import ch.boye.httpclientandroidlib.impl.client.DefaultHttpClient;
 
-
-
 @SuppressWarnings("ALL")
-public class AddCompetitionCategoryActivity extends AppCompatActivity implements View.OnClickListener {
+public class AddCompetitionCategoryActivity extends AppCompatActivity implements View.OnClickListener, RangeTimePickerDialog.ISelectedTime {
     private ProgressDialog progressDialog;
     private EditText e_title, e_rule, e_date, e_time, e_total_q, e_total_minute;
     private TextView txt_header;
@@ -71,6 +71,7 @@ public class AddCompetitionCategoryActivity extends AppCompatActivity implements
     private Bitmap thumbnail;
     private MarshMallowPermission permission;
     private String fulldate;
+    private EditText e_description;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -92,7 +93,6 @@ public class AddCompetitionCategoryActivity extends AppCompatActivity implements
             }
         });*/
 
-
         e_date.setCursorVisible(false);
         e_date.setFocusableInTouchMode(false);
         e_date.setOnClickListener(new View.OnClickListener() {
@@ -109,8 +109,13 @@ public class AddCompetitionCategoryActivity extends AppCompatActivity implements
         e_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-                getCurrentTime();
+//                getCurrentTime();
+
+                showCustomDialogTimePicker();
+
+
             }
         });
 
@@ -138,11 +143,15 @@ public class AddCompetitionCategoryActivity extends AppCompatActivity implements
                     e_total_minute.requestFocus();
                 } else {
                     if (CommonMethod.isInternetConnected(AddCompetitionCategoryActivity.this)) {
-                        new AddACompetitionCategory().execute(CommonMethod.encodeEmoji(e_title.getText().toString()), CommonMethod.encodeEmoji(e_rule.getText().toString()), CommonMethod.encodeEmoji(e_date.getText().toString()), "10:30 AM", CommonMethod.encodeEmoji(e_total_q.getText().toString()), CommonMethod.encodeEmoji(e_total_minute.getText().toString()));
+                        Log.e("date","--------"+e_date.getText().toString());
+                        Log.e("date","--------"+e_time.getText().toString());
+                        new AddACompetitionCategory().execute(CommonMethod.encodeEmoji(e_title.getText().toString()), CommonMethod.encodeEmoji(e_rule.getText().toString()), e_date.getText().toString(), e_time.getText().toString(), CommonMethod.encodeEmoji(e_total_q.getText().toString()), CommonMethod.encodeEmoji(e_total_minute.getText().toString()),CommonMethod.encodeEmoji(e_description.getText().toString()));
                     } else {
                         Toast.makeText(AddCompetitionCategoryActivity.this, R.string.internet, Toast.LENGTH_SHORT).show();
                     }
+
                 }
+
             }
         });
     }
@@ -161,8 +170,9 @@ public class AddCompetitionCategoryActivity extends AppCompatActivity implements
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         Log.e("Date---", "DATE SELECTED " + dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
 //                        fulldate = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
-                        fulldate = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
-                        e_date.setText(fulldate);
+                        fulldate = year + "-" +(monthOfYear + 1)  + "-" + dayOfMonth;
+//                        e_date.setText(fulldate);
+                        showCustomDialogTimePicker();
 
 //                        edit_time.requestFocus();
                     }
@@ -215,7 +225,6 @@ public class AddCompetitionCategoryActivity extends AppCompatActivity implements
 
     }
 
-
     private void setContent() {
         if (CommonMethod.isInternetConnected(AddCompetitionCategoryActivity.this)) {
 //            new AddInformation().execute(e_title.getText().toString(), e_description.getText().toString(), e_date.getText().toString(), e_address.getText().toString());
@@ -224,6 +233,7 @@ public class AddCompetitionCategoryActivity extends AppCompatActivity implements
 
     @SuppressLint("SetTextI18n")
     private void findID() {
+        e_description = (EditText) findViewById(R.id.e_description);
         e_title = (EditText) findViewById(R.id.e_title);
         e_rule = (EditText) findViewById(R.id.e_rule);
         e_date = (EditText) findViewById(R.id.e_date);
@@ -406,6 +416,102 @@ public class AddCompetitionCategoryActivity extends AppCompatActivity implements
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
+    @Override
+    public void onSelectedTime(int hourStart, int minuteStart, int hourEnd, int minuteEnd) {
+        Toast.makeText(AddCompetitionCategoryActivity.this, "\"Start: \"+hourStart+" + hourStart + "\":\"+minuteStart+\"\\nEnd: \"+hourEnd+\":\"+minuteEnd", Toast.LENGTH_SHORT).show();
+        CommonMethod.logPrint("hourStart", "----------------" + hourStart);
+        CommonMethod.logPrint("minuteStart", "----------------" + minuteStart);
+        CommonMethod.logPrint("hourEnd", "----------------" + hourEnd);
+        CommonMethod.logPrint("minuteEnd", "----------------" + minuteEnd);
+
+        final Calendar c = Calendar.getInstance();
+        final int[] mHour = {c.get(Calendar.HOUR_OF_DAY)};
+        int mMinute = c.get(Calendar.MINUTE);
+
+        String status = "AM";
+        if (hourStart > 11) {
+            // If the hour is greater than or equal to 12
+            // Then the current AM PM status is PM
+            status = "PM";
+        }
+        // Initialize a new variable to hold 12 hour format hour value
+        int hour_of_12_hour_format;
+
+        if (hourStart > 11) {
+
+            // If the hour is greater than or equal to 12
+            // Then we subtract 12 from the hour to make it 12 hour format time
+            hour_of_12_hour_format = hourStart - 12;
+        } else {
+            hour_of_12_hour_format = hourStart;
+        }
+
+
+        CommonMethod.logPrint("start time", "----------------" + hour_of_12_hour_format + ":" + minuteStart + " " + status);
+
+
+
+        int length = String.valueOf(minuteStart).length();
+        Log.e("length", "----" + length);
+        String min;
+        if (length == 1) {
+            Log.e("if", "----call");
+            Log.e("if", "----call-----" + "0" + String.valueOf(minuteStart));
+            min = "0" + String.valueOf(minuteStart);
+        } else {
+            Log.e("else", "----call");
+            min = String.valueOf(minuteStart);
+        }
+
+
+
+        //End Time
+        String status2 = "AM";
+        if (hourEnd > 11) {
+            // If the hour is greater than or equal to 12
+            // Then the current AM PM status is PM
+            status2 = "PM";
+        }
+        // Initialize a new variable to hold 12 hour format hour value
+        int hour_of_12_hour_format2;
+
+        if (hourEnd > 11) {
+
+            // If the hour is greater than or equal to 12
+            // Then we subtract 12 from the hour to make it 12 hour format time
+            hour_of_12_hour_format2 = hourEnd - 12;
+        } else {
+            hour_of_12_hour_format2 = hourEnd;
+        }
+
+
+        if (hour_of_12_hour_format == 0) {
+            hour_of_12_hour_format = 12;
+        }
+
+        if (hour_of_12_hour_format2 == 0) {
+            hour_of_12_hour_format2 = 12;
+        }
+
+        int length2 = String.valueOf(minuteEnd).length();
+        Log.e("length", "----" + length);
+        String min2;
+        if (length2 == 1) {
+            Log.e("if", "----call");
+            Log.e("if", "----call-----" + "0" + String.valueOf(minuteEnd));
+            min2 = "0" + String.valueOf(minuteEnd);
+        } else {
+            Log.e("else", "----call");
+            min2 = String.valueOf(minuteEnd);
+        }
+
+//        e_date.setText(fulldate+" "+hour_of_12_hour_format + ":" + minuteStart + " " + status + "-" + hour_of_12_hour_format2 + ":" + minuteEnd + " " + status2);
+        e_date.setText(fulldate + " " + hour_of_12_hour_format + ":" + min + " " + status);
+        e_time.setText(fulldate + " " + hour_of_12_hour_format2 + ":" + min2 + " " + status2);
+        e_time.setEnabled(false);
+
+    }
+
     private class AddACompetitionCategory extends AsyncTask<String, Void, String> {
         String responseJSON = "";
 
@@ -432,14 +538,14 @@ public class AddCompetitionCategoryActivity extends AppCompatActivity implements
             try {
                 HttpClient httpClient = new DefaultHttpClient();
                 HttpPost httpPost = new HttpPost(CommonURL.Main_url + "competition/addcompetition");
-
                 MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
                 multipartEntity.addPart("Title", new StringBody(params[0]));
                 multipartEntity.addPart("Rules", new StringBody(params[1]));
-                multipartEntity.addPart("Date", new StringBody(params[2]));
-                multipartEntity.addPart("Time", new StringBody(params[3]));
+                multipartEntity.addPart("Start_Time", new StringBody(params[2]));
+                multipartEntity.addPart("End_Time", new StringBody(params[3]));
                 multipartEntity.addPart("Total_question", new StringBody(params[4]));
                 multipartEntity.addPart("Total_minute", new StringBody(params[5]));
+                multipartEntity.addPart("Description", new StringBody(params[6]));
 
                 httpPost.setEntity(multipartEntity);
                 HttpResponse httpResponse = httpClient.execute(httpPost);
@@ -482,6 +588,27 @@ public class AddCompetitionCategoryActivity extends AppCompatActivity implements
             }
             progressDialog.dismiss();
         }
+    }
+
+    public void showCustomDialogTimePicker() {
+
+        // Create an instance of the dialog fragment and show it
+        RangeTimePickerDialog dialog = new RangeTimePickerDialog();
+        dialog.newInstance();
+        dialog.setIs24HourView(false);
+        dialog.setRadiusDialog(20);
+        dialog.setTextTabStart("Start");
+        dialog.setTextTabEnd("End");
+        dialog.setTextBtnPositive("Accept");
+        dialog.setTextBtnNegative("Close");
+        dialog.setValidateRange(false);
+        dialog.setColorBackgroundHeader(R.color.colorPrimary);
+        dialog.setColorBackgroundTimePickerHeader(R.color.colorPrimary);
+        dialog.setColorTextButton(R.color.colorPrimaryDark);
+        dialog.enableMinutes(true);
+        FragmentManager fragmentManager = getFragmentManager();
+        dialog.show(fragmentManager, "");
+
     }
 
 }

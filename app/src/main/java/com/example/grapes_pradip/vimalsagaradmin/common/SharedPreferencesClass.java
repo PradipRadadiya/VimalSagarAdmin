@@ -22,6 +22,7 @@ public class SharedPreferencesClass {
     private static final String Password = "Password";
     private static final String PushNotification = "PushNotification";
     private static final String ActionClick = "ActionClick";
+    private static final String ALERT = "ALERT";
 
 
     @SuppressLint("CommitPrefEdits")
@@ -29,6 +30,19 @@ public class SharedPreferencesClass {
         sharedPreferences = mContext.getSharedPreferences(SHARED, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
     }
+
+
+    //Get and Save User Id
+    public String getAlert() {
+        return sharedPreferences.getString(ALERT, "");
+    }
+
+    public void saveAlert(String id) {
+        editor.putString(ALERT, id);
+        editor.commit();
+    }
+
+
 
 
     //Get and Save User Id
@@ -49,6 +63,7 @@ public class SharedPreferencesClass {
     public void saveFirst_name(String fnm) {
         editor.putString(First_name, fnm);
         editor.commit();
+
     }
 
     //Get and Save Email

@@ -4,8 +4,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
+    android:layout_height="wrap_content"
+    android:layout_margin="5sp"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,7 +21,7 @@
             android:layout_marginTop="1dp"
             android:id="@+id/img_photos"
             android:layout_width="match_parent"
-            android:layout_height="110sp"
+            android:layout_height="175sp"
             android:scaleType="centerCrop"
             tools:ignore="ContentDescription"
             android:adjustViewBounds="true"
@@ -33,6 +34,6 @@
             android:layout_alignParentRight="true"
             tools:ignore="RtlHardcoded" />
 
-
     </RelativeLayout>
+
 </LinearLayout>

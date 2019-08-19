@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.grapes_pradip.vimalsagaradmin.R;
+import com.example.grapes_pradip.vimalsagaradmin.activities.vichar.SplashContent;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
@@ -62,6 +64,16 @@ public class VicharKrantiAdapter extends RecyclerView.Adapter<VicharKrantiAdapte
         holder.txt_vichar.setText(CommonMethod.decodeEmoji(usersItem.getContent()));
         holder.txt_date.setText(CommonMethod.decodeEmoji(usersItem.getDate()));
 
+        holder.txt_resend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent=new Intent(activity,SplashContent.class);
+                intent.putExtra("title",usersItem.getContent());
+                activity.startActivity(intent);
+
+            }
+        });
 
 
         holder.txt_edit.setOnClickListener(new View.OnClickListener() {
@@ -120,13 +132,14 @@ public class VicharKrantiAdapter extends RecyclerView.Adapter<VicharKrantiAdapte
 
         final TextView txt_date;
         final TextView txt_vichar;
-        final TextView txt_edit;
+        final TextView txt_edit,txt_resend;
 
         public ViewHolder(View itemView) {
             super(itemView);
             txt_date = (TextView) itemView.findViewById(R.id.txt_date);
             txt_vichar = (TextView) itemView.findViewById(R.id.txt_vichar);
             txt_edit = (TextView) itemView.findViewById(R.id.txt_edit_name);
+            txt_resend = (TextView) itemView.findViewById(R.id.txt_resend);
 
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);

@@ -11,8 +11,6 @@ public class CommonAPI_Name {
   public static final String deletebanner = "gallery/deletebanner";
   public static final String getallbanner = "gallery/getallbanner";
 
-
-
   //  Path
   public static final String eventimage = "eventimage/";
   public static final String eventvideo = "eventvideo/";

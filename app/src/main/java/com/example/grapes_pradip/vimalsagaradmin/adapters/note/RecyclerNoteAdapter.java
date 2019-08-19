@@ -56,7 +56,6 @@ public class RecyclerNoteAdapter extends RecyclerView.Adapter<RecyclerNoteAdapte
         holder.txt_date.setText(CommonMethod.decodeEmoji(orderItem.getDate()));
         holder.txt_time.setText(CommonMethod.decodeEmoji(orderItem.getTime()));
 
-
         holder.txt_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,13 +68,13 @@ public class RecyclerNoteAdapter extends RecyclerView.Adapter<RecyclerNoteAdapte
                 activity.startActivity(intent);
                 activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
+
         });
 
         holder.txt_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final AlertDialog.Builder alertDialog = new AlertDialog.Builder(activity);
-
                 // Setting Dialog Title
                 alertDialog.setTitle("Confirm Delete...");
 

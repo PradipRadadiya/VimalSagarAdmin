@@ -209,7 +209,6 @@ public class EventFragment extends Fragment implements View.OnClickListener {
                             // Write your code here to invoke YES event
                             Log.e("array delete", "-------------------" + eventid);
                             new DeleteEvent().execute();
-
                         }
                     });
 
@@ -227,7 +226,6 @@ public class EventFragment extends Fragment implements View.OnClickListener {
                 } else {
                     Toast.makeText(getActivity(), "Select Information for delete.", Toast.LENGTH_SHORT).show();
                 }
-
 
                 break;
         }

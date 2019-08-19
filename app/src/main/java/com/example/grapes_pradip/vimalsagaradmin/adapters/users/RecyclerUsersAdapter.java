@@ -171,7 +171,6 @@ public class RecyclerUsersAdapter extends RecyclerView.Adapter<RecyclerUsersAdap
                     @Override
                     public void onClick(View v) {
 
-
                         usersItem.setName(edit_old_pwd.getText().toString());
 //                        notifyDataSetChanged();
                         notifyItemChanged(i);
@@ -181,6 +180,7 @@ public class RecyclerUsersAdapter extends RecyclerView.Adapter<RecyclerUsersAdap
                 });
                 dialog.getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
             }
         });
 

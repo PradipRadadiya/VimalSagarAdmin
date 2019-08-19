@@ -19,7 +19,7 @@
     <color name="textColor1" tools:ignore="UnusedResources">#455a64</color>
     <color name="textColor2" tools:ignore="UnusedResources">#fffffe</color>
     <color name="textColor3" tools:ignore="UnusedResources">#fffffe</color>
-    <color name="green">#22B14C</color>
+    <color name="green">#22b14c</color>
 
     <color name="background">#99CCFF</color>
     <!--<color name="bg">#EEEEEE</color>-->
@@ -42,7 +42,7 @@
     <color name="black">#000000</color>
 
     <color name="indicator">#ffffff</color>
-    <color name="blue">#0000FF</color>
+    <color name="blue">#0000ff</color>
 
     <color name="homepage_back">#E6E7E9</color>
 

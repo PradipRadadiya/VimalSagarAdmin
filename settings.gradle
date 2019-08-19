@@ -1,1 +1,1 @@
-include ':app', ':library', ':jcplayer'
+include ':app', ':library', ':jcplayer', ':rangetimepickerdialog', ':ucrop'

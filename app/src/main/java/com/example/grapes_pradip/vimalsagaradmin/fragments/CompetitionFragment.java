@@ -25,6 +25,8 @@ import android.widget.Toast;
 
 import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.activities.competition.AddCompetitionCategoryActivity;
+import com.example.grapes_pradip.vimalsagaradmin.activities.competition.CompetitionFinalResultHint;
+import com.example.grapes_pradip.vimalsagaradmin.activities.competition.SpecificDateWiseResultDeclareActivity;
 import com.example.grapes_pradip.vimalsagaradmin.adapters.competition.RecyclerCompetitionCategoryAdapter;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
@@ -37,12 +39,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import ch.boye.httpclientandroidlib.NameValuePair;
 import ch.boye.httpclientandroidlib.message.BasicNameValuePair;
 
 import static com.example.grapes_pradip.vimalsagaradmin.adapters.competition.RecyclerCompetitionCategoryAdapter.compcatid;
-
 
 @SuppressWarnings("ALL")
 public class CompetitionFragment extends Fragment implements View.OnClickListener {
@@ -76,6 +78,24 @@ public class CompetitionFragment extends Fragment implements View.OnClickListene
         idClick();
 
 
+        TextView txt_new=rootview.findViewById(R.id.txt_new);
+        txt_new.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getActivity(),SpecificDateWiseResultDeclareActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
+        rootview.findViewById(R.id.img_add).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getActivity(),CompetitionFinalResultHint.class);
+                startActivity(intent);
+            }
+        });
 
         swipe_refresh_information.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -156,6 +176,7 @@ public class CompetitionFragment extends Fragment implements View.OnClickListene
         delete_data.setOnClickListener(this);
     }
 
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -181,6 +202,7 @@ public class CompetitionFragment extends Fragment implements View.OnClickListene
             }
         });
     }
+
 
     @Override
     public void onClick(View v) {
@@ -208,7 +230,6 @@ public class CompetitionFragment extends Fragment implements View.OnClickListene
                     // Setting Positive "Yes" Button
                     alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-
                             // Write your code here to invoke YES event
                             Log.e("array delete", "-------------------" + compcatid);
                             new DeleteCompetitionCategory().execute();
@@ -232,6 +253,7 @@ public class CompetitionFragment extends Fragment implements View.OnClickListene
                 break;
         }
     }
+
 
     private class GetAllCompetitionCategory extends AsyncTask<String, Void, String> {
         String responseJSON = "";
@@ -280,15 +302,15 @@ public class CompetitionFragment extends Fragment implements View.OnClickListene
                         Log.e("id", "---------------" + id);
                         String title = jsonObject1.getString("title");
                         String rules = jsonObject1.getString("rules");
-                        String date = jsonObject1.getString("date");
-                        String time = jsonObject1.getString("time");
+                        String start_time = jsonObject1.getString("start_time");
+                        String end_time = jsonObject1.getString("end_time");
                         String total_question = jsonObject1.getString("total_question");
                         String total_minute = jsonObject1.getString("total_minute");
                         String is_open = jsonObject1.getString("status");
                         String participated_users = jsonObject1.getString("participated_users");
                         String status = jsonObject1.getString("status");
-
-                        competitionItemArrayList.add(new CompetitionItem(id, title, rules, date, time, total_question, total_minute, is_open, participated_users, false,status));
+                        String description = jsonObject1.getString("description");
+                        competitionItemArrayList.add(new CompetitionItem(id, title, rules, start_time, end_time, total_question, total_minute, is_open, participated_users, false,status,description));
 
                     }
 
@@ -302,6 +324,7 @@ public class CompetitionFragment extends Fragment implements View.OnClickListene
 //            if (progressDialog != null) {
 //                progressDialog.dismiss();
 //            }
+
             progress_load.setVisibility(View.GONE);
             recyclerView_comptition_category.setVisibility(View.VISIBLE);
             if (recyclerView_comptition_category != null) {
@@ -319,6 +342,7 @@ public class CompetitionFragment extends Fragment implements View.OnClickListene
         }
     }
 
+
     private class DeleteCompetitionCategory extends AsyncTask<String, Void, String> {
         String responseJSON = "";
 
@@ -333,11 +357,13 @@ public class CompetitionFragment extends Fragment implements View.OnClickListene
 
         @Override
         protected String doInBackground(String... params) {
+
             for (int i = 0; i < compcatid.size(); i++) {
                 String value = compcatid.get(i);
                 responseJSON = JsonParser.getStringResponse(CommonURL.Main_url + CommonAPI_Name.deleteCompetitioncategory + "?cid=" + value);
             }
             return responseJSON;
+
         }
 
         @Override
@@ -363,6 +389,7 @@ public class CompetitionFragment extends Fragment implements View.OnClickListene
         }
     }
 
+
     @Override
     public void onResume() {
         super.onResume();
@@ -381,4 +408,5 @@ public class CompetitionFragment extends Fragment implements View.OnClickListene
         }
 
     }
+
 }

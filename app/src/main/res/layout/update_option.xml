@@ -18,9 +18,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10sp"
         android:background="@drawable/edittext_round"
-        android:inputType="text"
+        android:inputType="textMultiLine"
         android:padding="10sp"
-        android:lines="1"
         android:ellipsize="end"
         tools:ignore="HardcodedText" />
 

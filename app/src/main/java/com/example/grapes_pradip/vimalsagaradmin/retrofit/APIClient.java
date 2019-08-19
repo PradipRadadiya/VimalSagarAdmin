@@ -33,8 +33,7 @@ public class APIClient {
     }
 
 
-    private static OkHttpClient get_HTTPClient(final Map<String, String> headers)
-    {
+    private static OkHttpClient get_HTTPClient(final Map<String, String> headers) {
         final OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addInterceptor(new Interceptor() {
             @Override
@@ -53,7 +52,6 @@ public class APIClient {
 
                 requestBuilder.method(original.method(), original.body());
                 Request request = requestBuilder.build();
-
                 return chain.proceed(request);
 
             }

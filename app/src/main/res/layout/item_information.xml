@@ -19,29 +19,40 @@
             android:layout_height="match_parent"
             android:background="@drawable/corner_round_item"
             android:gravity="center"
-            android:padding="8dp"
+            android:padding="10dp"
             android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5sp"
+                android:layout_marginRight="5sp"
+                >
 
                 <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextViewBold
                     android:id="@+id/txt_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10sp"
                     android:text="Guru Purnima"
                     android:textColor="@color/lable"
-                    android:textSize="16sp"
-                    tools:ignore="HardcodedText" />
+                    android:textSize="17sp"
+                    android:lineSpacingExtra="7sp"
+                    android:layout_centerVertical="true"
+                    tools:ignore="HardcodedText"
+                    android:layout_marginRight="30sp"
+                    />
 
                 <CheckBox
                     android:id="@+id/check_delete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    tools:ignore="RtlHardcoded" />
+                    android:layout_alignParentTop="true"
+                    tools:ignore="RtlHardcoded"
+                    android:button="@drawable/customdrawablecheckbox"
+                    android:padding="8sp"
+                    />
+
             </RelativeLayout>
 
             <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
@@ -49,12 +60,13 @@
                 android:id="@+id/txt_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5sp"
                 android:text="The three types used by an asynchronous task are the following.The three types used by an asynchronous task are the following.The three types used by an asynchronous task are the following"
-                android:textSize="15sp"
-                android:padding="10sp"
+                android:textSize="17sp"
+                android:layout_marginLeft="5sp"
+                android:layout_marginRight="5sp"
+                android:lineSpacingExtra="7sp"
                 tools:ignore="HardcodedText,RtlHardcoded"
-                android:maxLines="2"
+                android:maxLines="3"
                 android:ellipsize="end"
                 />
 
@@ -63,10 +75,13 @@
                 android:id="@+id/txt_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5sp"
                 android:gravity="right"
                 android:text="15/02/2017"
-                android:textSize="12sp"
+                android:textSize="17sp"
+                android:layout_marginLeft="5sp"
+                android:layout_marginRight="5sp"
+                android:layout_marginTop="5sp"
+                android:textColor="@color/colorPrimary"
                 tools:ignore="HardcodedText,RtlHardcoded" />
 
             <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
@@ -74,13 +89,15 @@
                 android:id="@+id/txt_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5sp"
                 android:gravity="right"
                 android:text="Ahmedabad,Gujrat,India"
-                android:textSize="12sp"
+                android:textSize="17sp"
                 android:lines="1"
+                android:textColor="@color/color3"
                 android:ellipsize="end"
-                android:maxLength="25"
+                android:layout_marginLeft="5sp"
+                android:layout_marginRight="5sp"
+                android:layout_marginTop="5sp"
                 tools:ignore="HardcodedText,RtlHardcoded" />
 
             <LinearLayout
@@ -88,6 +105,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:orientation="horizontal"
+                android:layout_marginLeft="5sp"
+                android:layout_marginRight="5sp"
                 tools:ignore="RtlHardcoded">
 
                 <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
@@ -97,16 +116,15 @@
                     android:layout_marginRight="5sp"
                     android:gravity="right"
                     android:text="10120"
-                    android:textSize="12sp"
+                    android:textSize="17sp"
                     tools:ignore="HardcodedText,InconsistentLayout,RtlHardcoded" />
 
                 <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5sp"
                     android:gravity="right"
                     android:text="Views"
-                    android:textSize="12sp"
+                    android:textSize="17sp"
                     tools:ignore="HardcodedText,RtlHardcoded" />
             </LinearLayout>
 
@@ -125,6 +143,7 @@
                     android:gravity="center"
                     android:padding="8sp"
                     android:text="Edit"
+                    android:textSize="18sp"
                     android:textColor="@color/white"
                     tools:ignore="HardcodedText" />
 
@@ -138,6 +157,7 @@
                     android:gravity="center"
                     android:padding="8sp"
                     android:text="Delete"
+                    android:textSize="18sp"
                     android:textColor="@color/white"
                     tools:ignore="HardcodedText" />
             </LinearLayout>

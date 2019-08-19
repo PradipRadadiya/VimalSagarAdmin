@@ -30,6 +30,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.grapes_pradip.vimalsagaradmin.R;
+import com.example.grapes_pradip.vimalsagaradmin.activities.SampleActivity;
+import com.example.grapes_pradip.vimalsagaradmin.activities.SelectPhotoActivity;
 import com.example.grapes_pradip.vimalsagaradmin.adapters.slide.SlideImageAdapter;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonMethod;
@@ -77,6 +79,7 @@ public class SlideImageFragment extends Fragment implements View.OnClickListener
     private Dialog dialog;
     private String textquote;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootview = inflater.inflate(R.layout.fragment_slideimage, container, false);
@@ -107,7 +110,6 @@ public class SlideImageFragment extends Fragment implements View.OnClickListener
     }
 
     private void refreshContent() {
-
         swipe_refresh_information.setRefreshing(false);
         new GetSlideImage().execute();
     }
@@ -150,6 +152,7 @@ public class SlideImageFragment extends Fragment implements View.OnClickListener
                 }
                 return false;
             }
+
         });
     }
 
@@ -157,10 +160,19 @@ public class SlideImageFragment extends Fragment implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.txt_addnew:
+
+                Intent intent = new Intent(getActivity(), SampleActivity.class);
+                startActivity(intent);
+
+             /*
+
                 selectedImage = new ArrayList<>();
                 Intent intent = new Intent(getActivity(), AlbumSelectActivity.class);
                 intent.putExtra(Constants.INTENT_EXTRA_LIMIT, 5);
                 startActivityForResult(intent, Constants.REQUEST_CODE);
+
+             */
+
                 break;
 
             case R.id.txt_addquote:
@@ -182,6 +194,7 @@ public class SlideImageFragment extends Fragment implements View.OnClickListener
                         } else {
                             Toast.makeText(getActivity(), R.string.internet, Toast.LENGTH_SHORT).show();
                         }
+
                     }
 
                 });

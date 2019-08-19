@@ -122,7 +122,6 @@ public class AudioDetailActivity extends AppCompatActivity implements View.OnCli
 //        setContent();
     }
 
-
     private void findID() {
         txt_views = (TextView) findViewById(R.id.txt_views);
         txt_header = (TextView) findViewById(R.id.txt_header);
@@ -200,6 +199,7 @@ public class AudioDetailActivity extends AppCompatActivity implements View.OnCli
                 finish();
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;
+
             case R.id.btn_delete:
                 jcplayer_audio.kill();
                 if (CommonMethod.isInternetConnected(AudioDetailActivity.this)) {

@@ -1,6 +1,7 @@
 package com.example.grapes_pradip.vimalsagaradmin.fcm;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.ActivityManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -13,14 +14,17 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.media.AudioAttributes;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.text.Html;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 
 import com.example.grapes_pradip.vimalsagaradmin.R;
@@ -45,10 +49,10 @@ public class NotificationUtils {
     private static String TAG = NotificationUtils.class.getSimpleName();
 
     private final Context mContext;
-    private String CHANNEL_ID = "id_product";
+//    private String CHANNEL_ID = "id_product";
 
     private NotificationCompat.Builder mBuilder;
-    private static final String NOTIFICATION_CHANNEL_ID = "10001";
+//    private static final String NOTIFICATION_CHANNEL_ID = "10001";
     private NotificationManager mNotificationManager;
 
     public NotificationUtils(Context mContext) {
@@ -58,8 +62,22 @@ public class NotificationUtils {
     @SuppressWarnings("StatementWithEmptyBody")
     public void showNotificationMessage(String title, String message, String timeStamp, Intent intent) {
         showNotificationMessage(title, message, timeStamp, intent, null);
-//        createNotification(title,message);
+        showNotification(mContext,title,message,intent);
 
+
+//        createNotification(title,message);
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            CharSequence name = title;
+//            String description = message;
+//            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+//            NotificationChannel channel = new NotificationChannel("Nayi Soch Sahi Disha", name, importance);
+//            channel.setDescription(description);
+//            // Register the channel with the system; you can't change the importance
+//            // or other notification behaviors after this
+//            NotificationManager notificationManager = mContext.getSystemService(NotificationManager.class);
+//            notificationManager.createNotificationChannel(channel);
+//        }
+//
 
 
     }
@@ -102,15 +120,27 @@ public class NotificationUtils {
             }
         } else {
             showSmallNotification(mBuilder, icon, title, message, timeStamp, resultPendingIntent, alarmSound);
+
             playNotificationSound();
         }
     }
 
 
+    @TargetApi(Build.VERSION_CODES.N)
     private void showSmallNotification(NotificationCompat.Builder mBuilder, int icon, String title, String message, String timeStamp, PendingIntent resultPendingIntent, Uri alarmSound) {
+        NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+        String channelId = "101";
+        String channelName = "Nayi Soch Sahi Disha";
+        int importance = NotificationManager.IMPORTANCE_HIGH;
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            Log.e("notification channle","-------------");
+            NotificationChannel mChannel = new NotificationChannel(
+                    channelId, channelName, importance);
+            notificationManager.createNotificationChannel(mChannel);
+        }
 
         NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
-
         inboxStyle.addLine(message);
 
         Notification notification;
@@ -126,8 +156,7 @@ public class NotificationUtils {
                 .setContentText(message)
                 .build();
 
-
-        NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+        Log.e("notification loading","-------------");
 
         Random random = new Random();
         int randomNumber = random.nextInt(9999 - 1000) + 1000;
@@ -241,43 +270,37 @@ public class NotificationUtils {
         return 0;
     }
 
+    public void showNotification(Context context, String title, String body, Intent intent) {
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-    private void createNotification(String title, String message)
-    {
-        /**Creates an explicit intent for an Activity in your app**/
-        Intent resultIntent = new Intent(mContext , MainActivity.class);
-        resultIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        int notificationId = 1;
+        String channelId = "channel-01";
+        String channelName = "Nayi Soch Sahi Disha";
+        int importance = NotificationManager.IMPORTANCE_HIGH;
 
-        PendingIntent resultPendingIntent = PendingIntent.getActivity(mContext,
-                0 /* Request code */, resultIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
+/*
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            NotificationChannel mChannel = new NotificationChannel(
+                    channelId, channelName, importance);
+            notificationManager.createNotificationChannel(mChannel);
+        }*/
 
-        mBuilder = new NotificationCompat.Builder(mContext);
-        mBuilder.setSmallIcon(R.mipmap.ic_launcher);
-        mBuilder.setContentTitle(title)
-                .setContentText(message)
-                .setAutoCancel(false)
-                .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
-                .setContentIntent(resultPendingIntent);
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, channelId)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle(title)
+                .setContentText(body);
 
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+        stackBuilder.addNextIntent(intent);
+        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(
+                0,
+                PendingIntent.FLAG_UPDATE_CURRENT
+        );
+        mBuilder.setContentIntent(resultPendingIntent);
 
+        notificationManager.notify(notificationId, mBuilder.build());
 
-        mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
-
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O)
-        {
-            int importance = NotificationManager.IMPORTANCE_HIGH;
-            NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "NOTIFICATION_CHANNEL_NAME", importance);
-            notificationChannel.enableLights(true);
-            notificationChannel.setLightColor(Color.RED);
-            notificationChannel.enableVibration(true);
-            notificationChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
-            assert mNotificationManager != null;
-//            mBuilder.setChannelId(NOTIFICATION_CHANNEL_ID);
-            mNotificationManager.createNotificationChannel(notificationChannel);
-        }
-        assert mNotificationManager != null;
-        mNotificationManager.notify(0 /* Request Code */, mBuilder.build());
     }
+
 
 }

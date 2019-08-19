@@ -13,8 +13,9 @@ public class CompetitionItem {
     private String participated_users;
     private boolean isSelected = false;
     private String status;
+    private String description;
 
-    public CompetitionItem(String id, String title, String rules, String date, String time, String total_question, String total_minute, String is_open, String participated_users, boolean isSelected,String status) {
+    public CompetitionItem(String id, String title, String rules, String date, String time, String total_question, String total_minute, String is_open, String participated_users, boolean isSelected,String status,String description) {
         this.id = id;
         this.title = title;
         this.rules = rules;
@@ -26,6 +27,7 @@ public class CompetitionItem {
         this.participated_users = participated_users;
         this.isSelected = isSelected;
         this.status=status;
+        this.description=description;
     }
 
     public String getId() {
@@ -114,5 +116,14 @@ public class CompetitionItem {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

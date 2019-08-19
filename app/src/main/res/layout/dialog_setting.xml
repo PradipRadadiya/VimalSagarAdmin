@@ -72,7 +72,6 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="8"
                 android:text="Push Notification"
-
                 tools:ignore="HardcodedText" />
 
             <ToggleButton

@@ -169,6 +169,36 @@
                 tools:ignore="SmallSp" />
 
             <LinearLayout
+                android:id="@+id/lin_jainism"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10sp"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_latestposts"
+                    tools:ignore="ContentDescription" />
+
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                    style="@style/TextviewStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="Jainism"
+                    tools:ignore="HardcodedText" />
+
+            </LinearLayout>
+
+            <View
+                style="@style/ViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="1sp"
+                tools:ignore="SmallSp" />
+
+            <LinearLayout
                 android:id="@+id/lin_user"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

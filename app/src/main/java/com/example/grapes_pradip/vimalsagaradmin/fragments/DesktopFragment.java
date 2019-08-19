@@ -119,7 +119,7 @@ public class DesktopFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.lin_op:
                 Log.e("lin_op", "------------------" + "click");
-                openOP();
+                openJainism();
                 break;
             case R.id.lin_bypeople:
                 Log.e("lin_bypeople", "------------------" + "click");
@@ -136,6 +136,7 @@ public class DesktopFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.lin_vichar:
                 Intent intent2 = new Intent(getActivity(), SplashContent.class);
+                intent2.putExtra("title","");
                 startActivity(intent2);
                 break;
             case R.id.lin_user:
@@ -265,6 +266,16 @@ public class DesktopFragment extends Fragment implements View.OnClickListener {
     private void openOP() {
         Fragment fr = null;
         fr = new OpinionPollFragment();
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_content, fr);
+//        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
+    private void openJainism() {
+        Fragment fr = null;
+        fr = new JainismFragment();
         FragmentManager fm = getFragmentManager();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.frame_content, fr);

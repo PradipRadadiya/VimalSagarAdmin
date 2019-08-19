@@ -65,15 +65,15 @@ public class AddComptitionQuestion extends AppCompatActivity implements View.OnC
         cid = getIntent().getStringExtra("cid");
         findID();
 
-
+        txt_sel_answer.setVisibility(View.GONE);
         List<String> qtype = new ArrayList<>();
-        qtype.add("yes_no");
+        qtype.add("--Select Question Type--");
         qtype.add("Option");
+        qtype.add("yes_no");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, qtype);
+                android.R.layout.simple_spinner_dropdown_item, qtype);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spiner_qtype.setAdapter(dataAdapter);
-
 
         final List<String> howmanyquestion = new ArrayList<>();
 //        howmanyquestion.add("2");
@@ -96,7 +96,11 @@ public class AddComptitionQuestion extends AppCompatActivity implements View.OnC
                 Log.e("item", "----------------" + item);
                 if (item.equalsIgnoreCase("Option")) {
                     spinner_option.setVisibility(View.VISIBLE);
-                } else {
+                    txt_sel_answer.setVisibility(View.GONE);
+                } else if(item.equalsIgnoreCase("yes_no")){
+                    spinner_option.setVisibility(View.GONE);
+                    txt_sel_answer.setVisibility(View.VISIBLE);
+                }else {
                     removeLine();
                     spinner_option.setVisibility(View.GONE);
                 }
@@ -109,12 +113,12 @@ public class AddComptitionQuestion extends AppCompatActivity implements View.OnC
             }
         });
 
-
         spinner_option.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 String item = spinner_option.getSelectedItem().toString();
+
                 if (item.equalsIgnoreCase("2")) {
                     spinner_q_answer.setVisibility(View.GONE);
                     txt_sel_answer.setVisibility(View.VISIBLE);
@@ -137,25 +141,18 @@ public class AddComptitionQuestion extends AppCompatActivity implements View.OnC
 
         });
 
-
         btn_add.setOnClickListener(this);
 
-
-        txt_sel_answer = (TextView) findViewById(R.id.txt_sel_answer);
         txt_sel_answer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.e("size", "------------------" + allEds.size());
-                String[] arr = {"a", "b", "c", "d"};
+                String[] arr = {"A", "B", "C", "D"};
 
                 if (spiner_qtype.getSelectedItem().toString().equalsIgnoreCase("yes_no")) {
-
-
-
                     strings = new String[2];
                     strings[0] = arr[0] + ") " + "YES";
                     strings[1] = arr[1] + ") " + "NO";
-
 
                     spinner_q_answer.setVisibility(View.VISIBLE);
 
@@ -163,6 +160,7 @@ public class AddComptitionQuestion extends AppCompatActivity implements View.OnC
                     for (int i = 0; i < strings.length; i++) {
                         answerlist.add(strings[i]);
                     }
+
                     ArrayAdapter<String> dataAdapter1 = new ArrayAdapter<>(AddComptitionQuestion.this,
                             android.R.layout.simple_spinner_item, answerlist);
                     dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -230,6 +228,7 @@ public class AddComptitionQuestion extends AppCompatActivity implements View.OnC
 
     @SuppressLint("SetTextI18n")
     private void findID() {
+        txt_sel_answer = (TextView) findViewById(R.id.txt_sel_answer);
         e_title = (EditText) findViewById(R.id.e_title);
         txt_header = (TextView) findViewById(R.id.txt_header);
         img_back = (ImageView) findViewById(R.id.img_back);

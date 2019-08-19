@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.alexandrius.accordionswipelayout.library.SwipeLayout;
 import com.bumptech.glide.Glide;
 import com.example.grapes_pradip.vimalsagaradmin.R;
+import com.example.grapes_pradip.vimalsagaradmin.activities.SampleActivity;
 import com.example.grapes_pradip.vimalsagaradmin.activities.slide.EditSlideImageActivity;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonAPI_Name;
 import com.example.grapes_pradip.vimalsagaradmin.common.CommonURL;
@@ -36,6 +37,7 @@ public class SlideImageAdapter extends RecyclerView.Adapter<SlideImageAdapter.Vi
     private final ArrayList<SlideImageItem> itemArrayList;
     private String id;
     SharedPreferencesClass sharedPreferencesClass;
+    public static String imageId="",hiddenPhoto="";
 
     public SlideImageAdapter(Activity activity, ArrayList<SlideImageItem> itemArrayList) {
         super();
@@ -64,10 +66,17 @@ public class SlideImageAdapter extends RecyclerView.Adapter<SlideImageAdapter.Vi
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(activity, EditSlideImageActivity.class);
-                intent.putExtra("id", slideImageItem.getId());
-                intent.putExtra("photo", slideImageItem.getImage());
+
+                imageId=slideImageItem.getId();
+                hiddenPhoto=slideImageItem.getImage();
+                Intent intent = new Intent(activity, SampleActivity.class);
                 activity.startActivity(intent);
+
+
+//                Intent intent = new Intent(activity, EditSlideImageActivity.class);
+//                intent.putExtra("id", slideImageItem.getId());
+//                intent.putExtra("photo", slideImageItem.getImage());
+//                activity.startActivity(intent);
 
             }
         });

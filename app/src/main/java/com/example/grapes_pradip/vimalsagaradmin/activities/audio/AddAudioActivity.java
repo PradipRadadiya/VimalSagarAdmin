@@ -89,8 +89,8 @@ public class AddAudioActivity extends AppCompatActivity implements View.OnClickL
     private String fulldate;
     String datetimefull;
     private EditText e_description;
-
     private String selectedFilePath;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -302,20 +302,6 @@ public class AddAudioActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void checkPermissionAudio() {
-//        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-//
-//            intent = new Intent(Intent.ACTION_PICK, MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
-//            startActivityForResult(intent, 2);
-//
-////
-////            Intent intent = new Intent()
-////                    .setType("*/*")
-////                    .setAction(Intent.ACTION_GET_CONTENT);
-////
-////            startActivityForResult(Intent.createChooser(intent, "Select a file"), 2);
-//
-//
-//        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!permission.checkPermissionForExternalStorage()) {
                 permission.requestPermissionForExternalStorage();
             } else {
@@ -695,4 +681,5 @@ public class AddAudioActivity extends AppCompatActivity implements View.OnClickL
         }
 
     }
+
 }

@@ -12,6 +12,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -38,6 +40,7 @@ import android.widget.ToggleButton;
 
 import com.example.grapes_pradip.vimalsagaradmin.R;
 import com.example.grapes_pradip.vimalsagaradmin.activities.admin.LoginActivity;
+import com.example.grapes_pradip.vimalsagaradmin.activities.bypeople.ByPeopleDetailActivity;
 import com.example.grapes_pradip.vimalsagaradmin.activities.comment.TablayoutCommentActivity;
 import com.example.grapes_pradip.vimalsagaradmin.activities.competition.AddComptitionQuestion;
 import com.example.grapes_pradip.vimalsagaradmin.activities.vichar.SplashContent;
@@ -55,6 +58,7 @@ import com.example.grapes_pradip.vimalsagaradmin.fragments.DesktopFragment;
 import com.example.grapes_pradip.vimalsagaradmin.fragments.EventCategoryFragment;
 import com.example.grapes_pradip.vimalsagaradmin.fragments.GalleryFragment;
 import com.example.grapes_pradip.vimalsagaradmin.fragments.InformationFragment;
+import com.example.grapes_pradip.vimalsagaradmin.fragments.JainismFragment;
 import com.example.grapes_pradip.vimalsagaradmin.fragments.Notes;
 import com.example.grapes_pradip.vimalsagaradmin.fragments.OpinionPollFragment;
 import com.example.grapes_pradip.vimalsagaradmin.fragments.QuestionAnswerTabbingFragment;
@@ -64,8 +68,12 @@ import com.example.grapes_pradip.vimalsagaradmin.fragments.ThoughtFragment;
 import com.example.grapes_pradip.vimalsagaradmin.fragments.UserFragment;
 import com.example.grapes_pradip.vimalsagaradmin.fragments.VicharKrantiFragment;
 import com.example.grapes_pradip.vimalsagaradmin.fragments.VideoFragment;
+import com.example.grapes_pradip.vimalsagaradmin.retrofit.APIClient;
+import com.example.grapes_pradip.vimalsagaradmin.retrofit.ApiInterface;
 import com.example.grapes_pradip.vimalsagaradmin.util.NetworkChangeReceiver;
+import com.google.firebase.crash.FirebaseCrash;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.gson.JsonObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -74,6 +82,9 @@ import java.util.ArrayList;
 
 import ch.boye.httpclientandroidlib.NameValuePair;
 import ch.boye.httpclientandroidlib.message.BasicNameValuePair;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 @SuppressWarnings("ALL")
 public class
@@ -84,6 +95,7 @@ MainActivity extends AppCompatActivity implements View.OnClickListener, NetworkC
     private LinearLayout lin_slideimage;
     private LinearLayout lin_comment;
     private LinearLayout lin_note;
+    private LinearLayout lin_jainism;
     private LinearLayout lin_home;
     private LinearLayout lin_info;
     private LinearLayout lin_event;
@@ -109,6 +121,42 @@ MainActivity extends AppCompatActivity implements View.OnClickListener, NetworkC
     private ToggleButton pushonoff;
     private NotificationManager mManager;
 
+    /* <android.support.design.widget.BottomNavigationView
+    android:id="@+id/navigation"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:background="?android:attr/windowBackground"
+    app:menu="@menu/navigation" />*/
+
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_user:
+//                    mTextMessage.setText(R.string.title_home);
+//                    Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
+                    openUser();
+                    return true;
+                case R.id.navigation_dashboard:
+//                    mTextMessage.setText(R.string.title_dashboard);
+//                    Toast.makeText(MainActivity.this, "Dashboard", Toast.LENGTH_SHORT).show();
+                    openDesktop();
+                    return true;
+                case R.id.navigation_alert:
+//                    mTextMessage.setText(R.string.title_notifications);
+//                    Toast.makeText(MainActivity.this, "Notification", Toast.LENGTH_SHORT).show();
+                    openNote();
+                    return true;
+            }
+            return false;
+        }
+    };
+
+
     @SuppressWarnings("deprecation")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,7 +164,9 @@ MainActivity extends AppCompatActivity implements View.OnClickListener, NetworkC
         setContentView(R.layout.activity_main);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        FirebaseCrash.log("Activity created");
 
 //        sharedPreferencesClass = new SharedPreferencesClass(MainActivity.this);
 //        Intent intent = getIntent();
@@ -172,7 +222,7 @@ MainActivity extends AppCompatActivity implements View.OnClickListener, NetworkC
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-        // checking for type intent filter
+                // checking for type intent filter
                 if (intent.getAction().equals(Config.REGISTRATION_COMPLETE)) {
                     // gcm successfully registered
                     // now subscribe to `global` topic to receive app wide notifications
@@ -299,6 +349,7 @@ MainActivity extends AppCompatActivity implements View.OnClickListener, NetworkC
         lin_slideimage = (LinearLayout) headerLayout.findViewById(R.id.lin_slideimage);
         lin_comment = (LinearLayout) headerLayout.findViewById(R.id.lin_comment);
         lin_note = (LinearLayout) headerLayout.findViewById(R.id.lin_note);
+        lin_jainism = (LinearLayout) headerLayout.findViewById(R.id.lin_jainism);
         lin_home = (LinearLayout) headerLayout.findViewById(R.id.lin_home);
         lin_info = (LinearLayout) headerLayout.findViewById(R.id.lin_info);
         lin_event = (LinearLayout) headerLayout.findViewById(R.id.lin_event);
@@ -336,6 +387,7 @@ MainActivity extends AppCompatActivity implements View.OnClickListener, NetworkC
         lin_user.setOnClickListener(this);
         lin_setting.setOnClickListener(this);
         lin_note.setOnClickListener(this);
+        lin_jainism.setOnClickListener(this);
 
     }
 
@@ -472,6 +524,11 @@ MainActivity extends AppCompatActivity implements View.OnClickListener, NetworkC
     public void onClick(View v) {
         switch (v.getId()) {
 
+            case R.id.lin_jainism:
+                openJainism();
+                onBackPressed();
+                break;
+
             case R.id.lin_note:
                 openNote();
                 onBackPressed();
@@ -479,6 +536,7 @@ MainActivity extends AppCompatActivity implements View.OnClickListener, NetworkC
 
             case R.id.lin_spcontent:
                 Intent intent2 = new Intent(MainActivity.this, SplashContent.class);
+                intent2.putExtra("title","");
                 startActivity(intent2);
                 onBackPressed();
                 break;
@@ -487,7 +545,6 @@ MainActivity extends AppCompatActivity implements View.OnClickListener, NetworkC
                 openSlide();
                 onBackPressed();
                 break;
-
 
             case R.id.lin_vichar:
                 openVichar();
@@ -498,49 +555,59 @@ MainActivity extends AppCompatActivity implements View.OnClickListener, NetworkC
                 openComment();
                 onBackPressed();
                 break;
+
             case R.id.img_home:
                 openHome();
                 break;
+
             case R.id.lin_home:
                 Log.e("lin_home", "------------------" + "click");
                 openHome();
                 onBackPressed();
                 break;
+
             case R.id.lin_info:
                 Log.e("lin_info", "------------------" + "click");
                 openInformation();
                 onBackPressed();
                 break;
+
             case R.id.lin_event:
                 Log.e("information", "------------------" + "click");
                 openEvent();
                 onBackPressed();
                 break;
+
             case R.id.lin_audio:
                 Log.e("lin_event", "------------------" + "click");
                 openAudio();
                 onBackPressed();
                 break;
+
             case R.id.lin_video:
                 Log.e("lin_video", "------------------" + "click");
                 openVideo();
                 onBackPressed();
                 break;
+
             case R.id.lin_thought:
                 Log.e("lin_thought", "------------------" + "click");
                 openThought();
                 onBackPressed();
                 break;
+
             case R.id.lin_gallery:
                 Log.e("lin_gallery", "------------------" + "click");
                 openGallery();
                 onBackPressed();
                 break;
+
             case R.id.lin_qa:
                 Log.e("lin_qa", "------------------" + "click");
                 openQA();
                 onBackPressed();
                 break;
+
             case R.id.lin_comp:
                 Log.e("lin_comp", "------------------" + "click");
 
@@ -550,23 +617,35 @@ MainActivity extends AppCompatActivity implements View.OnClickListener, NetworkC
 //                openCompition();
 //                onBackPressed();
                 break;
+
             case R.id.lin_op:
                 Log.e("lin_op", "------------------" + "click");
                 openOP();
                 onBackPressed();
                 break;
+
             case R.id.lin_bypeople:
                 Log.e("lin_bypeople", "------------------" + "click");
                 openByPeople();
                 onBackPressed();
                 break;
+
             case R.id.lin_user:
                 Log.e("lin_bypeople", "------------------" + "click");
                 openUser();
                 onBackPressed();
                 break;
+
             case R.id.lin_setting:
+                ArrayList<String> arrayList = new ArrayList<>();
+                arrayList.add("a");
+                arrayList.add("b");
+                arrayList.add("c");
+                arrayList.add("d");
+                arrayList.add("e");
+
                 Intent intent = new Intent(MainActivity.this, SettingActivity.class);
+                intent.putExtra("list", arrayList);
                 startActivity(intent);
                 onBackPressed();
                 /*dialog = new Dialog(MainActivity.this);
@@ -612,6 +691,17 @@ MainActivity extends AppCompatActivity implements View.OnClickListener, NetworkC
         }
     }
 
+
+    private void openJainism() {
+        Fragment fr = null;
+        fr = new JainismFragment();
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_content, fr);
+//        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
     private void openNote() {
         Fragment fr = null;
         fr = new Notes();
@@ -632,7 +722,6 @@ MainActivity extends AppCompatActivity implements View.OnClickListener, NetworkC
         fragmentTransaction.commit();
     }
 
-
     private void openVichar() {
         Fragment fr = null;
         fr = new VicharKrantiFragment();
@@ -652,7 +741,6 @@ MainActivity extends AppCompatActivity implements View.OnClickListener, NetworkC
 //        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
-
 
     private void openSubAdminList() {
         Fragment fr = null;
@@ -845,6 +933,7 @@ MainActivity extends AppCompatActivity implements View.OnClickListener, NetworkC
     @Override
     protected void onResume() {
         super.onResume();
+//        getData();
         dialog = new Dialog(MainActivity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_setting);
@@ -892,5 +981,26 @@ MainActivity extends AppCompatActivity implements View.OnClickListener, NetworkC
         super.onPause();
     }
 
+
+    private void getData() {
+        ApiInterface apiInterface = APIClient.getClient().create(ApiInterface.class);
+        Call<JsonObject> callApi = apiInterface.getResponseData();
+        callApi.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
+                Log.e("reponse", "-----------------" + response.body());
+                if (response.isSuccessful()) {
+
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<JsonObject> call, @NonNull Throwable t) {
+                Log.e("reponse", "-----------------" + t.getMessage());
+            }
+
+        });
+
+    }
 
 }

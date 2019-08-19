@@ -49,7 +49,6 @@ public class RecyclerAudioCategoryAdapter extends RecyclerView.Adapter<RecyclerA
         this.itemArrayList = itemArrayList;
     }
 
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_audio_category, viewGroup, false);

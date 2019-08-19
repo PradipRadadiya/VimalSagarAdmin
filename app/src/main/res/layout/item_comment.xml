@@ -46,7 +46,7 @@
                         android:padding="8sp"
                         android:text="Guru Purnima"
                         android:textColor="@color/lable"
-                        android:textSize="16sp"
+                        android:textSize="18sp"
                         tools:ignore="HardcodedText" />
 
                     <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
@@ -56,6 +56,7 @@
                         android:paddingLeft="10sp"
                         android:paddingRight="10sp"
                         android:text="Commment"
+                        android:textSize="18sp"
                         tools:ignore="HardcodedText" />
 
                     <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
@@ -69,7 +70,7 @@
                         android:paddingLeft="10sp"
                         android:paddingRight="10sp"
                         android:text="15/02/2017"
-                        android:textSize="12sp"
+                        android:textSize="18sp"
                         tools:ignore="HardcodedText,RtlHardcoded" />
 
 

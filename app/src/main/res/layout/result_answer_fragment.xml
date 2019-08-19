@@ -3,9 +3,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/bg"
     android:orientation="vertical"
     tools:ignore="Overdraw">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@drawable/back_gradiant"
+        >
+    <android.support.v7.widget.SearchView
+        android:id="@+id/searchView_results"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:queryHint="Search People"
+        android:clickable="true"
+        app:searchIcon="@drawable/ic_search_black_24dp"
+        app:searchHintIcon="@drawable/ic_search_black_small_24dp"
+        app:closeIcon="@drawable/ic_close_black_24dp"
+        android:theme="@style/WhiteCursorSearchView"/>
+
+
+
+    </RelativeLayout>
+
 
     <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextViewBold
         android:id="@+id/txt_participateuser"
@@ -50,6 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 tools:ignore="InconsistentLayout" />
+
         </RelativeLayout>
 
         <ImageView

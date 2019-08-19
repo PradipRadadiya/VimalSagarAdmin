@@ -12,10 +12,10 @@
         android:layout_height="wrap_content" />
 
     <LinearLayout
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
             android:layout_width="0dp"
@@ -56,7 +56,6 @@
                     android:text="Question"
                     android:textColor="@color/black"
                     android:textSize="18sp"
-
                     tools:ignore="HardcodedText" />
 
                 <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
@@ -79,6 +78,7 @@
                 android:hint="Enter Question"
                 android:inputType="textMultiLine"
                 android:padding="10sp"
+                android:textSize="18sp"
                 android:text=""
                 tools:ignore="HardcodedText" />
 
@@ -94,7 +94,6 @@
                     android:text="Question Type"
                     android:textColor="@color/black"
                     android:textSize="18sp"
-
                     tools:ignore="HardcodedText" />
 
                 <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
@@ -103,8 +102,9 @@
                     android:text="*"
                     android:textColor="@color/color3"
                     android:textSize="18sp"
-
                     tools:ignore="HardcodedText" />
+
+
             </LinearLayout>
 
             <Spinner
@@ -116,10 +116,10 @@
                 android:padding="5sp" />
 
             <LinearLayout
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                     android:layout_width="wrap_content"
@@ -129,23 +129,25 @@
                     android:textSize="18sp"
                     tools:ignore="HardcodedText" />
 
+
                 <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="*"
                     android:textColor="@color/color3"
                     android:textSize="18sp"
-
                     tools:ignore="HardcodedText" />
+
             </LinearLayout>
 
             <Spinner
                 android:id="@+id/spinner_option"
                 android:layout_width="match_parent"
                 android:layout_height="45sp"
-                android:layout_marginTop="5sp"
+                android:layout_marginTop="25sp"
                 android:background="@drawable/spinner"
                 android:padding="5sp" />
+
 
             <LinearLayout
                 android:id="@+id/lin_option"
@@ -156,13 +158,13 @@
             </LinearLayout>
 
             <LinearLayout
-                android:visibility="gone"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Answer"
@@ -176,10 +178,33 @@
                     android:text="*"
                     android:textColor="@color/color3"
                     android:textSize="18sp"
-
                     tools:ignore="HardcodedText" />
+
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25sp"
+                android:orientation="horizontal">
+
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Select Answer"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    tools:ignore="HardcodedText" />
+
+                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    android:textColor="@color/color3"
+                    android:textSize="18sp"
+                    tools:ignore="HardcodedText" />
+
+            </LinearLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -193,26 +218,30 @@
                     android:padding="5sp"
                     tools:ignore="InconsistentLayout" />
 
-                <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
-                    android:id="@+id/txt_sel_answer"
-                    android:layout_width="match_parent"
-                    android:layout_height="45sp"
-                    android:layout_marginTop="5sp"
-                    android:background="@drawable/back_rect"
-                    android:gravity="center"
-                    android:text="Select Answer"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    tools:ignore="HardcodedText" />
 
             </RelativeLayout>
+
+
+
+
+            <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                android:id="@+id/txt_sel_answer"
+                android:layout_width="match_parent"
+                android:layout_height="45sp"
+                android:layout_marginTop="5sp"
+                android:background="@drawable/back_rect"
+                android:gravity="center"
+                android:text="Select Right Answer"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                tools:ignore="HardcodedText" />
 
             <Button
                 android:id="@+id/btn_add"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="20sp"
+                android:layout_marginTop="25sp"
                 android:background="@drawable/round_rect_shapeoneselect"
                 android:text="Submit"
                 android:textColor="@color/white"

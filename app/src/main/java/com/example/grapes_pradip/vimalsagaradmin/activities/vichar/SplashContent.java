@@ -2,6 +2,7 @@ package com.example.grapes_pradip.vimalsagaradmin.activities.vichar;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -41,12 +42,21 @@ public class SplashContent extends AppCompatActivity {
         bindId();
         toolbarClick();
 
-//        Intent intent = getIntent();
-//
-//        final String id = intent.getStringExtra("id");
-//        edit_title.setText(CommonMethod.decodeEmoji(intent.getStringExtra("title")));
 
-        new ContentGet().execute();
+
+        Intent intent = getIntent();
+        String str=intent.getStringExtra("title");
+
+        if (str.equalsIgnoreCase("")){
+            new ContentGet().execute();
+        }else {
+            edit_title.setText(CommonMethod.decodeEmoji(intent.getStringExtra("title")));
+        }
+
+
+
+
+//        new ContentGet().execute();
 
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,7 +165,7 @@ public class SplashContent extends AppCompatActivity {
         protected String doInBackground(String... params) {
             try {
 
-                responseJSON = JsonParser.getStringResponse("http://www.aacharyavimalsagarsuriji.com/vimalsagarji/quote/viewQuote");
+                responseJSON = JsonParser.getStringResponse(CommonURL.Main_url+"quote/viewQuote");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -213,11 +223,10 @@ public class SplashContent extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
 
+            JSONObject jsonObject1 = new JSONObject();
             ArrayList<NameValuePair> nameValuePairs = new ArrayList<>();
             nameValuePairs.add(new BasicNameValuePair("vichar", strings[0]));
             responseJson = JsonParser.postStringResponse(CommonURL.Main_url + "quote/editQuote", nameValuePairs, SplashContent.this);
-
-
             return responseJson;
         }
 

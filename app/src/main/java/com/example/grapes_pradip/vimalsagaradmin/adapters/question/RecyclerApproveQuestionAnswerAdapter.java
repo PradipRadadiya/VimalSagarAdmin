@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.alexandrius.accordionswipelayout.library.SwipeLayout;
@@ -31,6 +33,7 @@ public class RecyclerApproveQuestionAnswerAdapter extends RecyclerView.Adapter<R
 
 
     private final Activity activity;
+    private List<QuestiinItem> list;
     private final List<QuestiinItem> itemArrayList;
     private String id;
     public static final ArrayList<String> questionid = new ArrayList<>();
@@ -53,10 +56,10 @@ public class RecyclerApproveQuestionAnswerAdapter extends RecyclerView.Adapter<R
         final QuestiinItem questiinItem = itemArrayList.get(i);
 
         if (questiinItem.getIsApproved().equalsIgnoreCase("1")) {
-            holder.txt_title.setText(questiinItem.getID()+") "+CommonMethod.decodeEmoji(questiinItem.getQuestion()));
+            holder.txt_title.setText(String.valueOf(itemArrayList.size()-i)+") "+CommonMethod.decodeEmoji(questiinItem.getQuestion()));
             holder.txt_date.setText(CommonMethod.decodeEmoji(questiinItem.getDate()));
             holder.txt_name.setText(CommonMethod.decodeEmoji(questiinItem.getName()));
-            holder.txt_views.setText(CommonMethod.decodeEmoji(questiinItem.getView()));
+            holder.txt_views.setText(CommonMethod.decodeEmoji(questiinItem.getView())+" Views");
             ((SwipeLayout) holder.itemView).setItemState(SwipeLayout.ITEM_STATE_COLLAPSED, true);
             holder.checkbox_question.setChecked(questiinItem.isSelected() ? true : false);
         }else{

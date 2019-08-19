@@ -5,20 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="2sp"
-    android:layout_marginLeft="2sp"
-    android:layout_marginRight="2sp"
-    android:layout_marginTop="2sp"
-
-
-    >
+    android:layout_margin="8sp">
 
     <LinearLayout
+        android:padding="8sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/corner_round_item"
         android:orientation="vertical">
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,13 +20,11 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 tools:ignore="UselessParent">
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -45,16 +37,16 @@
                         android:orientation="horizontal"
                         tools:ignore="UseCompoundDrawables">
 
-                        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
-                            android:id="@+id/txt_index"
+                        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextViewBold
+                            android:id="@+id/txt_index_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Q."
                             android:textColor="@color/lable"
-                            android:textSize="16sp"
+                            android:textSize="18sp"
                             tools:ignore="HardcodedText" />
 
-                        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextViewBold
                             android:id="@+id/txt_title"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -62,7 +54,8 @@
                             android:padding="10sp"
                             android:text="Guru Purnima"
                             android:textColor="@color/lable"
-                            android:textSize="16sp"
+                            android:textSize="18sp"
+                            android:lineSpacingExtra="7sp"
                             tools:ignore="HardcodedText" />
 
                         <ImageView
@@ -96,11 +89,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="end"
-                            android:lineSpacingExtra="10dp"
+                            android:lineSpacingExtra="7sp"
                             android:text=""
                             android:layout_marginLeft="20dp"
                             android:textColor="@color/black"
                             tools:ignore="HardcodedText"
+                            android:textSize="18sp"
                             android:layout_marginStart="20dp" />
 
 
@@ -120,14 +114,15 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
+                        android:orientation="vertical"
                         android:padding="5dp">
 
-                        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextViewBold
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:ellipsize="end"
                             android:lines="1"
+                            android:textSize="18sp"
                             android:text="Your answer : "
                             android:textColor="@color/black"
                             android:textStyle="bold"
@@ -140,8 +135,10 @@
                             android:ellipsize="end"
                             android:lines="1"
                             android:text="Normal"
+                            android:textSize="18sp"
                             android:textColor="@color/black"
                             android:textStyle="bold"
+                            android:lineSpacingExtra="7sp"
                             tools:ignore="HardcodedText" />
 
                     </LinearLayout>
@@ -149,25 +146,27 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
+                        android:orientation="vertical"
                         android:padding="5dp">
 
-                        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
+                        <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextViewBold
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:ellipsize="end"
                             android:lines="1"
+                            android:textSize="18sp"
                             android:text="Correct Answer : "
                             android:textColor="@color/green"
                             tools:ignore="HardcodedText,RtlHardcoded,RtlSymmetry" />
 
                         <com.example.grapes_pradip.vimalsagaradmin.util.CustomTextView
-
                             android:id="@+id/txt_answer"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="end"
                             android:text="Normal"
+                            android:textSize="18sp"
+                            android:lineSpacingExtra="7sp"
                             android:textColor="@color/green"
                             tools:ignore="HardcodedText,InconsistentLayout" />
 

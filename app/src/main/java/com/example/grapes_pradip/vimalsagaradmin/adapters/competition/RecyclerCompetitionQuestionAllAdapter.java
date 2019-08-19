@@ -69,11 +69,11 @@ public class RecyclerCompetitionQuestionAllAdapter extends RecyclerView.Adapter<
 
         String[] options;
         options = null;
-        options = competitionQuestionItem.getOptions().split(",");
+        options = competitionQuestionItem.getOptions().split("\\|");
         holder.txt_option.setText("");
 
         for (int j = 0; j < options.length; j++) {
-            holder.txt_option.append(options[j] + "\n");
+            holder.txt_option.append(options[j] + "\n\n");
         }
 
 
@@ -200,7 +200,7 @@ public class RecyclerCompetitionQuestionAllAdapter extends RecyclerView.Adapter<
 
         public ViewHolder(View itemView) {
             super(itemView);
-            txt_index = (TextView) itemView.findViewById(R.id.txt_index);
+            txt_index = (TextView) itemView.findViewById(R.id.txt_index_count);
             txt_title = (TextView) itemView.findViewById(R.id.txt_title);
             txt_type = (TextView) itemView.findViewById(R.id.txt_type);
             txt_answer = (TextView) itemView.findViewById(R.id.txt_answer);

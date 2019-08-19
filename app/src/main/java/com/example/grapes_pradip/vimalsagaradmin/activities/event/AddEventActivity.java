@@ -654,7 +654,6 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
             String Photo = "no photo";
             String Videolink = "";
 
-
             try {
                 HttpClient httpClient = new DefaultHttpClient();
                 HttpPost httpPost = new HttpPost(CommonURL.Main_url + CommonAPI_Name.addevent);
@@ -690,7 +689,6 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
                 if (audioPath == null) {
                     Log.e("if call", "-----------");
                 } else {
-
                     String[] audioArr = new String[audioarray.size()];
                     for (int i = 0; i < audioarray.size(); i++) {
 
@@ -939,7 +937,6 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
-
     //Video Adapter
     public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> {
 
@@ -1061,6 +1058,5 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
         outFile.close();
 
     }
-
 
 }
